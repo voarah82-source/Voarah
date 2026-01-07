@@ -147,6 +147,9 @@ export default function DemandaPage() {
           <option value="casa">Casa</option>
           <option value="departamento">Departamento</option>
           <option value="terreno">Terreno</option>
+          <option value="ph">P.H.</option>
+          <option value="local">Local</option>
+          <option value="galpón">Galpón</option>
         </select>
 
         <input
