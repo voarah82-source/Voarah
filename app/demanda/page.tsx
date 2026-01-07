@@ -118,7 +118,7 @@ export default function DemandaPage() {
             VOARAH
           </div>
           <h1 style={{ margin: '8px 0', fontSize: 26 }}>
-            Demanda Inmobiliaria
+           Estoy Buscando
           </h1>
           <p style={{ color: '#555', fontSize: 14 }}>
             Contanos qué estás buscando y te ayudamos a encontrarlo.
@@ -141,6 +141,9 @@ export default function DemandaPage() {
           <option value="casa">Casa</option>
           <option value="departamento">Departamento</option>
           <option value="terreno">Terreno</option>
+          <option value="ph">P.H.</option>
+          <option value="local">Local</option>
+          <option value="galpón">Galpón</option>
         </select>
 
         <input
