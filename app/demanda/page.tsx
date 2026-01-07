@@ -132,8 +132,7 @@ export default function DemandaPage() {
 
         <select style={inputStyle} name="tipo_operacion" required onChange={handleChange}>
           <option value="">Tipo de operación</option>
-          <option value="compra">Compra</option>
-          <option value="alquiler">Alquiler</option>
+          <option value="compra">Compra</option>   
         </select>
 
         <select style={inputStyle} name="tipo_propiedad" required onChange={handleChange}>
