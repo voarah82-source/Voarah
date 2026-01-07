@@ -94,7 +94,7 @@ export default function DemandaPage() {
           boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
         }}
       >
-        <h1 style={{ marginBottom: 24 }}>Demanda Inmobiliaria</h1>
+        <h1 style={{ marginBottom: 24 }}Estoy Buscando</h1>
 
         <input
           style={inputStyle}
