@@ -18,32 +18,30 @@ export default function Header() {
         style={{
           maxWidth: 1200,
           margin: '0 auto',
-          padding: '16px 24px', // 👈 padding normal, prolijo
+          padding: '16px 24px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          fontFamily: 'Montserrat, system-ui, sans-serif',
-          position: 'relative' // 👈 para el logo
+          fontFamily: 'Montserrat, system-ui, sans-serif'
         }}
       >
-        {/* LOGO GRANDE, SIN ROMPER ALTURA */}
+        {/* LOGO DENTRO DEL HEADER */}
         <Link
           href="/"
           style={{
             display: 'flex',
             alignItems: 'center',
-            position: 'relative'
+            gap: 12,
+            textDecoration: 'none'
           }}
         >
           <img
             src="https://storage.googleapis.com/msgsndr/JXR7pttzzH9R0mOEMF3S/media/697b69f5e98b489f5b32a200.png"
             alt="Voarah"
             style={{
-              height: 200,          // 👈 logo grande
+              height: 120,   // 👈 grande pero controlado
               width: 'auto',
-              position: 'absolute', // 👈 CLAVE
-              top: -60,             // 👈 ajusta visual
-              left: 0
+              display: 'block'
             }}
           />
         </Link>
