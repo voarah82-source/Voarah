@@ -85,7 +85,7 @@ export default function HomePage() {
       />
 
       <h2 style={{ fontSize: 28, marginBottom: 24 }}>
-        Servicios para tu mudanza
+        Servicios para vos
       </h2>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
