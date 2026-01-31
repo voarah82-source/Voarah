@@ -25,7 +25,7 @@ export default function Header() {
       >
         {/* LOGO */}
         <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <Image
+          <img
             src="https://storage.googleapis.com/msgsndr/JXR7pttzzH9R0mOEMF3S/media/697b69f5e98b489f5b32a200.png"
             alt="Voarah"
             width={140}
