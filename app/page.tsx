@@ -1,8 +1,34 @@
 'use client'
 
+import { useState } from 'react'
 import Header from '../components/Header'
 
 export default function HomePage() {
+  const [open, setOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  async function handleSubmit(e: any) {
+    e.preventDefault()
+    setLoading(true)
+
+    const formData = new FormData(e.target)
+
+    await fetch('/api/lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nombre: formData.get('nombre'),
+        email: formData.get('email'),
+        telefono: formData.get('telefono'),
+        comentario: formData.get('comentario')
+      })
+    })
+
+    setLoading(false)
+    setOpen(false)
+    alert('Datos enviados correctamente. En breve nos contactamos.')
+  }
+
   return (
     <>
       <Header />
@@ -34,6 +60,7 @@ export default function HomePage() {
           </p>
 
           <button
+            onClick={() => setOpen(true)}
             style={{
               padding: '14px 28px',
               background: '#8E24AA',
@@ -65,34 +92,23 @@ export default function HomePage() {
 >
   <div className="slider-track">
     {[
-       // CAMIONES / MUDANZA (HOMBRES LABURANDO)
-   // camión mudanza
-   // hombres cargando cajas
-   // mudanza real
-
-  // LIMPIEZA / MUCAMA 
-   // limpieza hogar
-  'https://images.unsplash.com/photo-1604014237800-1c9102c219da', // mujer limpiando casa
-
-  // CASAS / RESULTADO FINAL
-  'https://images.unsplash.com/photo-1505691938895-1758d7feb511',
-  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c',// living
-   // casa moderna
-  'https://images.unsplash.com/photo-1613490493576-7fde63acd811',  
-  // MUEBLES / EQUIPAMIENTO / TV
-  'https://images.unsplash.com/photo-1615873968403-89e068629265', // muebles
-  'https://images.unsplash.com/photo-1593784991095-a205069470b6', // TV / equipamiento
-
-  // DUPLICADO PARA LOOP
- 
   'https://images.unsplash.com/photo-1604014237800-1c9102c219da',
   'https://images.unsplash.com/photo-1505691938895-1758d7feb511',
-  'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2',
-  
+  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c',
+  'https://images.unsplash.com/photo-1613490493576-7fde63acd811',
   'https://images.unsplash.com/photo-1615873968403-89e068629265',
   'https://images.unsplash.com/photo-1593784991095-a205069470b6',
+  'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2',
   'https://images.unsplash.com/photo-1600121848594-d8644e57abab',
 
+  'https://images.unsplash.com/photo-1604014237800-1c9102c219da',
+  'https://images.unsplash.com/photo-1505691938895-1758d7feb511',
+  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c',
+  'https://images.unsplash.com/photo-1613490493576-7fde63acd811',
+  'https://images.unsplash.com/photo-1615873968403-89e068629265',
+  'https://images.unsplash.com/photo-1593784991095-a205069470b6',
+  'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2',
+  'https://images.unsplash.com/photo-1600121848594-d8644e57abab'
     ].map((src, i) => (
       <img
         key={i}
@@ -118,18 +134,13 @@ export default function HomePage() {
     }
 
     @keyframes slider-marquee {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
   `}</style>
 </section>
 
-
-        {/* SERVICIOS + PRODUCTOS */}
+{/* SERVICIOS + PRODUCTOS */}
 <section
   style={{
     background: '#f7f7f7',
@@ -145,7 +156,6 @@ export default function HomePage() {
       alignItems: 'flex-start'
     }}
   >
-    {/* SERVICIOS */}
     <div style={{ flex: 1 }}>
       <h2 style={{ fontSize: 28, marginBottom: 24 }}>
         Servicios para vos
@@ -174,7 +184,6 @@ export default function HomePage() {
       </div>
     </div>
 
-    {/* PRODUCTOS */}
     <div style={{ flex: 1 }}>
       <h2 style={{ fontSize: 28, marginBottom: 24 }}>
         Productos para equipar tu casa
@@ -205,45 +214,86 @@ export default function HomePage() {
   </div>
 </section>
 
-       
-        {/* COMO FUNCIONA */}
-        <section
-          id="como-funciona"
-          style={{
-            padding: '80px 24px',
-            maxWidth: 1100,
-            margin: '0 auto'
-          }}
-        >
-          <h2 style={{ fontSize: 28, marginBottom: 24 }}>
-            ¿Cómo funciona Voarah?
-          </h2>
+{/* COMO FUNCIONA */}
+<section
+  id="como-funciona"
+  style={{
+    padding: '80px 24px',
+    maxWidth: 1100,
+    margin: '0 auto'
+  }}
+>
+  <h2 style={{ fontSize: 28, marginBottom: 24 }}>
+    ¿Cómo funciona Voarah?
+  </h2>
 
-          <p style={{ fontSize: 16, color: '#555', maxWidth: 720, marginBottom: 16 }}>
-            A través de inmobiliarias que trabajan con Voarah, los compradores
-            acceden a un ecosistema de servicios y productos diseñados para
-            reducir fricciones y simplificar la mudanza.
-          </p>
+  <p style={{ fontSize: 16, color: '#555', maxWidth: 720, marginBottom: 16 }}>
+    A través de inmobiliarias que trabajan con Voarah, los compradores
+    acceden a un ecosistema de servicios y productos diseñados para
+    reducir fricciones y simplificar la mudanza.
+  </p>
 
-          <p style={{ fontSize: 16, color: '#555', maxWidth: 720 }}>
-            Voarah coordina, valida y conecta con partners estratégicos,
-            asegurando una experiencia ordenada y trazable.
-          </p>
-        </section>
+  <p style={{ fontSize: 16, color: '#555', maxWidth: 720 }}>
+    Voarah coordina, valida y conecta con partners estratégicos,
+    asegurando una experiencia ordenada y trazable.
+  </p>
+</section>
 
-        {/* FOOTER */}
-        <footer
-          style={{
-            borderTop: '1px solid #eee',
-            padding: '32px 24px',
-            textAlign: 'center',
-            fontSize: 12,
-            color: '#777'
-          }}
-        >
-          © {new Date().getFullYear()} Voarah — Todos los derechos reservados
-        </footer>
-      </main>
-    </>
-  )
+{/* FOOTER */}
+<footer
+  style={{
+    borderTop: '1px solid #eee',
+    padding: '32px 24px',
+    textAlign: 'center',
+    fontSize: 12,
+    color: '#777'
+  }}
+>
+  © {new Date().getFullYear()} Voarah — Todos los derechos reservados
+</footer>
+</main>
+
+{/* MODAL */}
+{open && (
+  <div
+    style={{
+      position: 'fixed',
+      inset: 0,
+      background: 'rgba(0,0,0,0.5)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 2000
+    }}
+  >
+    <div
+      style={{
+        background: '#fff',
+        padding: 32,
+        borderRadius: 12,
+        width: 420
+      }}
+    >
+      <h2>Activar beneficios Voarah</h2>
+      <p>Dejanos tus datos y te contactamos.</p>
+
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <input name="nombre" placeholder="Nombre" required />
+        <input name="email" type="email" placeholder="Email" required />
+        <input name="telefono" placeholder="Teléfono" required />
+        <textarea name="comentario" placeholder="Comentario (opcional)" />
+
+        <button type="submit" disabled={loading}>
+          {loading ? 'Enviando…' : 'Enviar'}
+        </button>
+      </form>
+
+      <button onClick={() => setOpen(false)} style={{ marginTop: 12 }}>
+        Cancelar
+      </button>
+    </div>
+  </div>
+)}
+</>
+)
 }
