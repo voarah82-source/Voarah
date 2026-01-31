@@ -24,14 +24,14 @@ export default function HomePage() {
           }}
         >
           <h1 style={{ fontSize: 42, lineHeight: 1.2, marginBottom: 16 }}>
-            Compraste una casa.
+            Empieza la mudanza.
             <br />
-            Ahora empieza lo importante.
+            Simplificala.
           </h1>
 
           <p style={{ fontSize: 18, color: '#555', maxWidth: 640, marginBottom: 32 }}>
-            Voarah te acompaña en todo lo que viene después de la compra:
-            mudanza, acondicionamiento y soluciones para tu nuevo hogar,
+            Voarah te acompaña en todo lo que viene ahora:
+            mudanza, acondicionamiento y equipamiento para tu nuevo hogar,
             con beneficios a través de nuestros partners.
           </p>
 
