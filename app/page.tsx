@@ -75,9 +75,10 @@ export default function HomePage() {
   'https://images.unsplash.com/photo-1604014237800-1c9102c219da', // mujer limpiando casa
 
   // CASAS / RESULTADO FINAL
-  'https://images.unsplash.com/photo-1505691938895-1758d7feb511', // living
+  'https://images.unsplash.com/photo-1505691938895-1758d7feb511',
+  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c',// living
    // casa moderna
-
+  'https://images.unsplash.com/photo-1613490493576-7fde63acd811',  
   // MUEBLES / EQUIPAMIENTO / TV
   'https://images.unsplash.com/photo-1615873968403-89e068629265', // muebles
   'https://images.unsplash.com/photo-1593784991095-a205069470b6', // TV / equipamiento
@@ -86,9 +87,11 @@ export default function HomePage() {
  
   'https://images.unsplash.com/photo-1604014237800-1c9102c219da',
   'https://images.unsplash.com/photo-1505691938895-1758d7feb511',
+  'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2',
   
   'https://images.unsplash.com/photo-1615873968403-89e068629265',
-  'https://images.unsplash.com/photo-1593784991095-a205069470b6'
+  'https://images.unsplash.com/photo-1593784991095-a205069470b6',
+  'https://images.unsplash.com/photo-1600121848594-d8644e57abab',
 
     ].map((src, i) => (
       <img
