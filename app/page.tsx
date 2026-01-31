@@ -56,105 +56,130 @@ export default function HomePage() {
           </p>
         </section>
 
-        {/* SERVICIOS + PRODUCTOS LADO A LADO */}
-        <section
-          style={{
-            background: '#f7f7f7',
-            padding: '64px 24px'
-          }}
-        >
+       {/* SERVICIOS + PRODUCTOS (OPCIÓN B: IMAGEN ANCLA POR COLUMNA) */}
+<section
+  style={{
+    background: '#f7f7f7',
+    padding: '64px 24px'
+  }}
+>
+  <div
+    style={{
+      maxWidth: 1100,
+      margin: '0 auto',
+      display: 'flex',
+      gap: 48,
+      alignItems: 'flex-start'
+    }}
+  >
+    {/* COLUMNA SERVICIOS */}
+    <div style={{ flex: 1 }}>
+      <img
+        src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
+        alt="Servicios de mudanza"
+        style={{
+          width: '100%',
+          height: 260,
+          objectFit: 'cover',
+          borderRadius: 16,
+          marginBottom: 24
+        }}
+      />
+
+      <h2 style={{ fontSize: 28, marginBottom: 24 }}>
+        Servicios para tu mudanza
+      </h2>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        {[
+          {
+            title: 'Mudanza & Logística',
+            desc: 'Traslados, fletes y coordinación'
+          },
+          {
+            title: 'Limpieza',
+            desc: 'Puesta a punto de tu nueva casa'
+          },
+          {
+            title: 'Pintura',
+            desc: 'Acondicionamiento interior y exterior'
+          },
+          {
+            title: 'Descarte y vaciado',
+            desc: 'Gestión de objetos y espacios'
+          }
+        ].map((item) => (
           <div
+            key={item.title}
             style={{
-              maxWidth: 1100,
-              margin: '0 auto',
-              display: 'flex',
-              gap: 48,
-              alignItems: 'flex-start'
+              background: '#ffffff',
+              padding: 24,
+              borderRadius: 12,
+              boxShadow: '0 8px 24px rgba(0,0,0,0.06)'
             }}
           >
-            {/* SERVICIOS */}
-            <div style={{ flex: 1 }}>
-              <h2 style={{ fontSize: 28, marginBottom: 24 }}>
-                Servicios para tu mudanza
-              </h2>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                {[
-                  {
-                    title: 'Mudanza & Logística',
-                    desc: 'Traslados, fletes y coordinación'
-                  },
-                  {
-                    title: 'Limpieza',
-                    desc: 'Puesta a punto de tu nueva casa'
-                  },
-                  {
-                    title: 'Pintura',
-                    desc: 'Acondicionamiento interior y exterior'
-                  },
-                  {
-                    title: 'Descarte y vaciado',
-                    desc: 'Gestión de objetos y espacios'
-                  }
-                ].map((item) => (
-                  <div
-                    key={item.title}
-                    style={{
-                      background: '#fff',
-                      padding: 24,
-                      borderRadius: 12,
-                      boxShadow: '0 8px 24px rgba(0,0,0,0.06)'
-                    }}
-                  >
-                    <h3 style={{ marginBottom: 8 }}>{item.title}</h3>
-                    <p style={{ color: '#666', fontSize: 14 }}>{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* PRODUCTOS */}
-            <div style={{ flex: 1 }}>
-              <h2 style={{ fontSize: 28, marginBottom: 24 }}>
-                Productos para equipar tu casa
-              </h2>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                {[
-                  {
-                    title: 'Muebles',
-                    desc: 'Soluciones funcionales para cada ambiente'
-                  },
-                  {
-                    title: 'Equipamiento',
-                    desc: 'Todo lo necesario para tu nuevo hogar'
-                  },
-                  {
-                    title: 'Decoración',
-                    desc: 'Personalizá tus espacios'
-                  },
-                  {
-                    title: 'Soluciones extendidas',
-                    desc: 'Complementos y servicios adicionales'
-                  }
-                ].map((item) => (
-                  <div
-                    key={item.title}
-                    style={{
-                      background: '#fff',
-                      padding: 24,
-                      borderRadius: 12,
-                      boxShadow: '0 8px 24px rgba(0,0,0,0.06)'
-                    }}
-                  >
-                    <h3 style={{ marginBottom: 8 }}>{item.title}</h3>
-                    <p style={{ color: '#666', fontSize: 14 }}>{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <h3 style={{ marginBottom: 6 }}>{item.title}</h3>
+            <p style={{ color: '#666', fontSize: 14 }}>{item.desc}</p>
           </div>
-        </section>
+        ))}
+      </div>
+    </div>
+
+    {/* COLUMNA PRODUCTOS */}
+    <div style={{ flex: 1 }}>
+      <img
+        src="https://images.unsplash.com/photo-1505691938895-1758d7feb511"
+        alt="Productos para el hogar"
+        style={{
+          width: '100%',
+          height: 260,
+          objectFit: 'cover',
+          borderRadius: 16,
+          marginBottom: 24
+        }}
+      />
+
+      <h2 style={{ fontSize: 28, marginBottom: 24 }}>
+        Productos para equipar tu casa
+      </h2>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        {[
+          {
+            title: 'Muebles',
+            desc: 'Soluciones funcionales para cada ambiente'
+          },
+          {
+            title: 'Equipamiento',
+            desc: 'Todo lo necesario para tu nuevo hogar'
+          },
+          {
+            title: 'Decoración',
+            desc: 'Personalizá tus espacios'
+          },
+          {
+            title: 'Soluciones extendidas',
+            desc: 'Complementos y servicios adicionales'
+          }
+        ].map((item) => (
+          <div
+            key={item.title}
+            style={{
+              background: '#ffffff',
+              padding: 24,
+              borderRadius: 12,
+              boxShadow: '0 8px 24px rgba(0,0,0,0.06)'
+            }}
+          >
+            <h3 style={{ marginBottom: 6 }}>{item.title}</h3>
+            <p style={{ color: '#666', fontSize: 14 }}>{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
 
         {/* COMO FUNCIONA */}
         <section
