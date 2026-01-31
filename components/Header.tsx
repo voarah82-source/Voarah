@@ -6,31 +6,44 @@ export default function Header() {
   return (
     <header
       style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 1000,
         width: '100%',
-        borderBottom: '1px solid #e5e5e5',
-        background: '#ffffff'
+        background: '#ffffff',
+        borderBottom: '1px solid #e5e5e5'
       }}
     >
       <div
         style={{
           maxWidth: 1200,
           margin: '0 auto',
-          padding: '32px 24px', // más aire vertical
+          padding: '16px 24px', // 👈 padding normal, prolijo
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          fontFamily: 'Montserrat, system-ui, sans-serif'
+          fontFamily: 'Montserrat, system-ui, sans-serif',
+          position: 'relative' // 👈 para el logo
         }}
       >
-        {/* LOGO GRANDE */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
+        {/* LOGO GRANDE, SIN ROMPER ALTURA */}
+        <Link
+          href="/"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            position: 'relative'
+          }}
+        >
           <img
             src="https://storage.googleapis.com/msgsndr/JXR7pttzzH9R0mOEMF3S/media/697b69f5e98b489f5b32a200.png"
             alt="Voarah"
             style={{
-              height: 200,        // 🔥 5× MÁS GRANDE
+              height: 200,          // 👈 logo grande
               width: 'auto',
-              display: 'block'
+              position: 'absolute', // 👈 CLAVE
+              top: -60,             // 👈 ajusta visual
+              left: 0
             }}
           />
         </Link>
@@ -60,10 +73,10 @@ export default function Header() {
           <a
             href="#activar"
             style={{
-              padding: '12px 22px',
+              padding: '10px 18px',
               background: '#8E24AA',
               color: '#ffffff',
-              borderRadius: 8,
+              borderRadius: 6,
               fontWeight: 600,
               textDecoration: 'none'
             }}
