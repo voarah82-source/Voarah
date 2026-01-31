@@ -65,37 +65,34 @@ export default function HomePage() {
 >
   <div className="slider-track">
     {[
-      // MUDANZA / LOGÍSTICA
-      'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b',
-      'https://images.unsplash.com/photo-1590496793929-36417d3117f2',
+       // CAMIONES / MUDANZA (HOMBRES LABURANDO)
+  'https://images.unsplash.com/photo-1600369672772-985fd30004eb', // camión mudanza
+  'https://images.unsplash.com/photo-1600891964599-f61ba0e24092', // hombres cargando cajas
+  'https://images.unsplash.com/photo-1586864387789-628af9feed72', // mudanza real
 
-      // LIMPIEZA / HOGAR
-      'https://images.unsplash.com/photo-1581578731548-c64695cc6952',
+  // LIMPIEZA / MUCAMA (SIN MÁSCARAS)
+  'https://images.unsplash.com/photo-1592928303611-8dbe5c41a39d', // limpieza hogar
+  'https://images.unsplash.com/photo-1604014237800-1c9102c219da', // mujer limpiando casa
 
-      // PINTURA / OBRA
-      'https://images.unsplash.com/photo-1581092919534-0f82a4f4e2f9',
+  // CASAS / RESULTADO FINAL
+  'https://images.unsplash.com/photo-1505691938895-1758d7feb511', // living
+  'https://images.unsplash.com/photo-1600585154154-712dba64a9e3', // casa moderna
 
-      // CASAS / RESULTADO
-      'https://images.unsplash.com/photo-1505691938895-1758d7feb511',
+  // MUEBLES / EQUIPAMIENTO / TV
+  'https://images.unsplash.com/photo-1615873968403-89e068629265', // muebles
+  'https://images.unsplash.com/photo-1593784991095-a205069470b6', // TV / equipamiento
 
-      // MUEBLES
-      'https://images.unsplash.com/photo-1615873968403-89e068629265',
+  // DUPLICADO PARA LOOP
+  'https://images.unsplash.com/photo-1600369672772-985fd30004eb',
+  'https://images.unsplash.com/photo-1600891964599-f61ba0e24092',
+  'https://images.unsplash.com/photo-1586864387789-628af9feed72',
+  'https://images.unsplash.com/photo-1592928303611-8dbe5c41a39d',
+  'https://images.unsplash.com/photo-1604014237800-1c9102c219da',
+  'https://images.unsplash.com/photo-1505691938895-1758d7feb511',
+  'https://images.unsplash.com/photo-1600585154154-712dba64a9e3',
+  'https://images.unsplash.com/photo-1615873968403-89e068629265',
+  'https://images.unsplash.com/photo-1593784991095-a205069470b6'
 
-      // TV / EQUIPAMIENTO
-      'https://images.unsplash.com/photo-1593784991095-a205069470b6',
-
-      // JARDINERÍA / EXTERIOR
-      'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
-
-      // DUPLICADO PARA LOOP
-      'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b',
-      'https://images.unsplash.com/photo-1590496793929-36417d3117f2',
-      'https://images.unsplash.com/photo-1581578731548-c64695cc6952',
-      'https://images.unsplash.com/photo-1581092919534-0f82a4f4e2f9',
-      'https://images.unsplash.com/photo-1505691938895-1758d7feb511',
-      'https://images.unsplash.com/photo-1615873968403-89e068629265',
-      'https://images.unsplash.com/photo-1593784991095-a205069470b6',
-      'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62'
     ].map((src, i) => (
       <img
         key={i}
