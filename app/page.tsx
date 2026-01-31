@@ -54,7 +54,61 @@ export default function HomePage() {
           </p>
         </section>
 
-       {/* SERVICIOS + PRODUCTOS (OPCIÓN B: IMAGEN ANCLA POR COLUMNA) */}
+
+        {/* SLIDER VISUAL – ECOSISTEMA VOARAH */}
+<section
+  style={{
+    width: '100%',
+    overflow: 'hidden',
+    background: '#ffffff',
+    padding: '40px 0'
+  }}
+>
+  <div
+    style={{
+      display: 'flex',
+      gap: 24,
+      animation: 'scroll 40s linear infinite'
+    }}
+  >
+    {[
+      'https://images.unsplash.com/photo-1581578731548-c64695cc6952', // limpieza
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c', // mudanza
+      'https://images.unsplash.com/photo-1581091012184-7c54b29f37f2', // pintura
+      'https://images.unsplash.com/photo-1592928303611-8dbe5c41a39d', // jardinería
+      'https://images.unsplash.com/photo-1505691938895-1758d7feb511', // living
+      'https://images.unsplash.com/photo-1600121848594-d8644e57abab', // muebles
+      'https://images.unsplash.com/photo-1600585154154-712dba64a9e3', // cocina
+      'https://images.unsplash.com/photo-1581578731548-c64695cc6952'  // loop
+    ].map((src, i) => (
+      <img
+        key={i}
+        src={src}
+        alt="Servicios Voarah"
+        style={{
+          height: 220,
+          width: 320,
+          objectFit: 'cover',
+          borderRadius: 16,
+          flexShrink: 0
+        }}
+      />
+    ))}
+  </div>
+
+  <style jsx>{`
+    @keyframes scroll {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+  `}</style>
+</section>
+
+        {/* SERVICIOS + PRODUCTOS */}
 <section
   style={{
     background: '#f7f7f7',
@@ -70,42 +124,18 @@ export default function HomePage() {
       alignItems: 'flex-start'
     }}
   >
-    {/* COLUMNA SERVICIOS */}
+    {/* SERVICIOS */}
     <div style={{ flex: 1 }}>
-      <img
-        src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
-        alt="Servicios de mudanza"
-        style={{
-          width: '100%',
-          height: 260,
-          objectFit: 'cover',
-          borderRadius: 16,
-          marginBottom: 24
-        }}
-      />
-
       <h2 style={{ fontSize: 28, marginBottom: 24 }}>
         Servicios para vos
       </h2>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
         {[
-          {
-            title: 'Mudanza & Logística',
-            desc: 'Traslados, fletes y coordinación'
-          },
-          {
-            title: 'Limpieza',
-            desc: 'Puesta a punto de tu nueva casa'
-          },
-          {
-            title: 'Pintura',
-            desc: 'Acondicionamiento interior y exterior'
-          },
-          {
-            title: 'Descarte y vaciado',
-            desc: 'Gestión de objetos y espacios'
-          }
+          { title: 'Mudanza & Logística', desc: 'Traslados, fletes y coordinación' },
+          { title: 'Limpieza', desc: 'Puesta a punto de tu nueva casa' },
+          { title: 'Pintura', desc: 'Acondicionamiento interior y exterior' },
+          { title: 'Descarte y vaciado', desc: 'Gestión de objetos y espacios' }
         ].map((item) => (
           <div
             key={item.title}
@@ -123,42 +153,18 @@ export default function HomePage() {
       </div>
     </div>
 
-    {/* COLUMNA PRODUCTOS */}
+    {/* PRODUCTOS */}
     <div style={{ flex: 1 }}>
-      <img
-        src="https://images.unsplash.com/photo-1505691938895-1758d7feb511"
-        alt="Productos para el hogar"
-        style={{
-          width: '100%',
-          height: 260,
-          objectFit: 'cover',
-          borderRadius: 16,
-          marginBottom: 24
-        }}
-      />
-
       <h2 style={{ fontSize: 28, marginBottom: 24 }}>
         Productos para equipar tu casa
       </h2>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
         {[
-          {
-            title: 'Muebles',
-            desc: 'Soluciones funcionales para cada ambiente'
-          },
-          {
-            title: 'Equipamiento',
-            desc: 'Todo lo necesario para tu nuevo hogar'
-          },
-          {
-            title: 'Decoración',
-            desc: 'Personalizá tus espacios'
-          },
-          {
-            title: 'Soluciones extendidas',
-            desc: 'Complementos y servicios adicionales'
-          }
+          { title: 'Muebles', desc: 'Soluciones funcionales para cada ambiente' },
+          { title: 'Equipamiento', desc: 'Todo lo necesario para tu nuevo hogar' },
+          { title: 'Decoración', desc: 'Personalizá tus espacios' },
+          { title: 'Soluciones extendidas', desc: 'Complementos y servicios adicionales' }
         ].map((item) => (
           <div
             key={item.title}
@@ -178,7 +184,7 @@ export default function HomePage() {
   </div>
 </section>
 
-
+       
         {/* COMO FUNCIONA */}
         <section
           id="como-funciona"
