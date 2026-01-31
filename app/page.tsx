@@ -51,7 +51,7 @@ export default function HomePage() {
           </button>
 
           <p style={{ marginTop: 12, fontSize: 12, color: '#777' }}>
-            Beneficios disponibles para compradores de propiedades a través de
+            Beneficios para clientes de
             inmobiliarias adheridas.
           </p>
         </section>
