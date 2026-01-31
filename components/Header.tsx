@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Header() {
@@ -28,9 +27,11 @@ export default function Header() {
           <img
             src="https://storage.googleapis.com/msgsndr/JXR7pttzzH9R0mOEMF3S/media/697b69f5e98b489f5b32a200.png"
             alt="Voarah"
-            width={140}
-            height={40}
-            priority
+            style={{
+              height: 40,
+              width: 'auto',
+              display: 'block'
+            }}
           />
         </Link>
 
@@ -44,30 +45,20 @@ export default function Header() {
             fontWeight: 500
           }}
         >
-          <Link
-            href="/#servicios"
-            style={{ textDecoration: 'none', color: '#424242' }}
-          >
+          <a href="#servicios" style={{ color: '#424242', textDecoration: 'none' }}>
             Servicios
-          </Link>
+          </a>
 
-          <Link
-            href="/#productos"
-            style={{ textDecoration: 'none', color: '#424242' }}
-          >
+          <a href="#productos" style={{ color: '#424242', textDecoration: 'none' }}>
             Productos
-          </Link>
+          </a>
 
-          <Link
-            href="/#como-funciona"
-            style={{ textDecoration: 'none', color: '#424242' }}
-          >
+          <a href="#como-funciona" style={{ color: '#424242', textDecoration: 'none' }}>
             Cómo funciona
-          </Link>
+          </a>
 
-          {/* CTA */}
-          <Link
-            href="/#activar"
+          <a
+            href="#activar"
             style={{
               padding: '10px 18px',
               background: '#8E24AA',
@@ -78,7 +69,7 @@ export default function Header() {
             }}
           >
             Activar beneficios
-          </Link>
+          </a>
         </nav>
       </div>
     </header>
