@@ -66,30 +66,27 @@ export default function HomePage() {
   <div className="slider-track">
     {[
        // CAMIONES / MUDANZA (HOMBRES LABURANDO)
-  'https://images.unsplash.com/photo-1600369672772-985fd30004eb', // camión mudanza
-  'https://images.unsplash.com/photo-1600891964599-f61ba0e24092', // hombres cargando cajas
-  'https://images.unsplash.com/photo-1586864387789-628af9feed72', // mudanza real
+   // camión mudanza
+   // hombres cargando cajas
+   // mudanza real
 
-  // LIMPIEZA / MUCAMA (SIN MÁSCARAS)
-  'https://images.unsplash.com/photo-1592928303611-8dbe5c41a39d', // limpieza hogar
+  // LIMPIEZA / MUCAMA 
+   // limpieza hogar
   'https://images.unsplash.com/photo-1604014237800-1c9102c219da', // mujer limpiando casa
 
   // CASAS / RESULTADO FINAL
   'https://images.unsplash.com/photo-1505691938895-1758d7feb511', // living
-  'https://images.unsplash.com/photo-1600585154154-712dba64a9e3', // casa moderna
+   // casa moderna
 
   // MUEBLES / EQUIPAMIENTO / TV
   'https://images.unsplash.com/photo-1615873968403-89e068629265', // muebles
   'https://images.unsplash.com/photo-1593784991095-a205069470b6', // TV / equipamiento
 
   // DUPLICADO PARA LOOP
-  'https://images.unsplash.com/photo-1600369672772-985fd30004eb',
-  'https://images.unsplash.com/photo-1600891964599-f61ba0e24092',
-  'https://images.unsplash.com/photo-1586864387789-628af9feed72',
-  'https://images.unsplash.com/photo-1592928303611-8dbe5c41a39d',
+ 
   'https://images.unsplash.com/photo-1604014237800-1c9102c219da',
   'https://images.unsplash.com/photo-1505691938895-1758d7feb511',
-  'https://images.unsplash.com/photo-1600585154154-712dba64a9e3',
+  
   'https://images.unsplash.com/photo-1615873968403-89e068629265',
   'https://images.unsplash.com/photo-1593784991095-a205069470b6'
 
