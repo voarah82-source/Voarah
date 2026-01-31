@@ -54,32 +54,47 @@ export default function HomePage() {
           </p>
         </section>
 
-
-        {/* SLIDER VISUAL – ECOSISTEMA VOARAH */}
+{/* SLIDER VISUAL VOARAH */}
 <section
   style={{
     width: '100%',
     overflow: 'hidden',
     background: '#ffffff',
-    padding: '40px 0'
+    padding: '32px 0'
   }}
 >
   <div
     style={{
       display: 'flex',
-      gap: 24,
-      animation: 'scroll 40s linear infinite'
+      width: 'max-content',
+      animation: 'marquee 35s linear infinite'
     }}
   >
     {[
-      'https://images.unsplash.com/photo-1581578731548-c64695cc6952', // limpieza
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c', // mudanza
-      'https://images.unsplash.com/photo-1581091012184-7c54b29f37f2', // pintura
-      'https://images.unsplash.com/photo-1592928303611-8dbe5c41a39d', // jardinería
-      'https://images.unsplash.com/photo-1505691938895-1758d7feb511', // living
-      'https://images.unsplash.com/photo-1600121848594-d8644e57abab', // muebles
-      'https://images.unsplash.com/photo-1600585154154-712dba64a9e3', // cocina
-      'https://images.unsplash.com/photo-1581578731548-c64695cc6952'  // loop
+      // mudanza / logística
+      'https://images.unsplash.com/photo-1600585154154-712dba64a9e3',
+      'https://images.unsplash.com/photo-1599423300746-b62533397364',
+      // casas / resultado final
+      'https://images.unsplash.com/photo-1505691938895-1758d7feb511',
+      'https://images.unsplash.com/photo-1600121848594-d8644e57abab',
+      // jardinería / exterior
+      'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
+      // muebles / interior
+      'https://images.unsplash.com/photo-1615873968403-89e068629265',
+      // pintura / obra
+      'https://images.unsplash.com/photo-1581092919534-0f82a4f4e2f9',
+      // depósito / logística
+      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d',
+
+      // DUPLICADO PARA LOOP PERFECTO
+      'https://images.unsplash.com/photo-1600585154154-712dba64a9e3',
+      'https://images.unsplash.com/photo-1599423300746-b62533397364',
+      'https://images.unsplash.com/photo-1505691938895-1758d7feb511',
+      'https://images.unsplash.com/photo-1600121848594-d8644e57abab',
+      'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
+      'https://images.unsplash.com/photo-1615873968403-89e068629265',
+      'https://images.unsplash.com/photo-1581092919534-0f82a4f4e2f9',
+      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d'
     ].map((src, i) => (
       <img
         key={i}
@@ -87,26 +102,27 @@ export default function HomePage() {
         alt="Servicios Voarah"
         style={{
           height: 220,
-          width: 320,
+          width: 340,
           objectFit: 'cover',
-          borderRadius: 16,
-          flexShrink: 0
+          marginRight: 16,
+          borderRadius: 14
         }}
       />
     ))}
   </div>
 
   <style jsx>{`
-    @keyframes scroll {
-      from {
+    @keyframes marquee {
+      0% {
         transform: translateX(0);
       }
-      to {
+      100% {
         transform: translateX(-50%);
       }
     }
   `}</style>
 </section>
+
 
         {/* SERVICIOS + PRODUCTOS */}
 <section
