@@ -259,41 +259,110 @@ export default function HomePage() {
     style={{
       position: 'fixed',
       inset: 0,
-      background: 'rgba(0,0,0,0.5)',
+      background: 'rgba(20, 20, 20, 0.55)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      zIndex: 2000
+      zIndex: 2000,
+      backdropFilter: 'blur(4px)'
     }}
   >
     <div
       style={{
-        background: '#fff',
-        padding: 32,
-        borderRadius: 12,
-        width: 420
+        background: '#ffffff',
+        padding: '36px 40px',
+        borderRadius: 16,
+        width: 440,
+        boxShadow: '0 30px 80px rgba(0,0,0,0.25)',
+        fontFamily: 'Montserrat, system-ui, sans-serif'
       }}
     >
-      <h2>Activar beneficios Voarah</h2>
-      <p>Dejanos tus datos y te contactamos.</p>
+      <h2
+        style={{
+          fontSize: 24,
+          marginBottom: 8,
+          fontWeight: 700
+        }}
+      >
+        Activar beneficios Voarah
+      </h2>
 
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        <input name="nombre" placeholder="Nombre" required />
-        <input name="email" type="email" placeholder="Email" required />
-        <input name="telefono" placeholder="Teléfono" required />
-        <textarea name="comentario" placeholder="Comentario (opcional)" />
+      <p
+        style={{
+          fontSize: 14,
+          color: '#666',
+          marginBottom: 24
+        }}
+      >
+        Dejanos tus datos y te contactamos.
+      </p>
 
-        <button type="submit" disabled={loading}>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 14
+        }}
+      >
+        <input
+          name="nombre"
+          placeholder="Nombre"
+          required
+          style={inputStyle}
+        />
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          required
+          style={inputStyle}
+        />
+        <input
+          name="telefono"
+          placeholder="Teléfono"
+          required
+          style={inputStyle}
+        />
+        <textarea
+          name="comentario"
+          placeholder="Comentario (opcional)"
+          rows={3}
+          style={{ ...inputStyle, resize: 'none' }}
+        />
+
+        <button
+          type="submit"
+          disabled={loading}
+          style={{
+            marginTop: 8,
+            padding: '14px',
+            background: '#8E24AA',
+            color: '#ffffff',
+            border: 'none',
+            borderRadius: 10,
+            fontSize: 15,
+            fontWeight: 600,
+            cursor: 'pointer'
+          }}
+        >
           {loading ? 'Enviando…' : 'Enviar'}
         </button>
       </form>
 
-      <button onClick={() => setOpen(false)} style={{ marginTop: 12 }}>
+      <button
+        onClick={() => setOpen(false)}
+        style={{
+          marginTop: 16,
+          background: 'transparent',
+          border: 'none',
+          color: '#999',
+          fontSize: 13,
+          cursor: 'pointer'
+        }}
+      >
         Cancelar
       </button>
     </div>
   </div>
 )}
-</>
-)
-}
