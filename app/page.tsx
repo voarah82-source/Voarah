@@ -24,9 +24,7 @@ export default function HomePage() {
           }}
         >
           <h1 style={{ fontSize: 42, lineHeight: 1.2, marginBottom: 16 }}>
-            Empieza la mudanza.
-            <br />
-            Simplificala.
+            Empieza tu mudanza. Simplificala.
           </h1>
 
           <p style={{ fontSize: 18, color: '#555', maxWidth: 640, marginBottom: 32 }}>
