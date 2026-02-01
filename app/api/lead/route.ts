@@ -39,8 +39,11 @@ export async function POST(req: Request) {
       from: `"Voarah" <${process.env.MAIL_FROM}>`,
       to: [
         process.env.MAIL_FROM,   // vos
-        // acá podés agregar partners fijos
-        // "partner@empresa.com"
+        //   agregar partners fijos
+        lucas.rosello@gmail.com,
+        aedevincenzi@gmail.com,
+        martinezmuerza@gmail.com,
+        juancho12oddone@gmail.com,
       ].join(","),
 
       replyTo: email, // 👈 responderle al cliente
