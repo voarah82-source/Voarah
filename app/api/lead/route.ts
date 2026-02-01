@@ -4,18 +4,19 @@ import { NextResponse } from "next/server";
 const PROVIDERS: Record<string, string[]> = {
   proveedor1: [
     "lucas.rosello@gmail.com",
-    "ventas@proveedor1.com",
-    "operaciones@proveedor1.com",
+    "martinezmuerza@gmail.com",
+    //"ventas@proveedor1.com",
+   // "operaciones@proveedor1.com",
   ],
   proveedor2: [
     "aedevincenzi@gmail.com",
-    "contacto@proveedor2.com",
+    "juancho12oddone@gmail.com",
+   // "contacto@proveedor2.com",
   ],
   proveedor3: [
-    "info@proveedor3.com",
-    "ventas@proveedor3.com",
-    "admin@proveedor3.com",
-    "backoffice@proveedor3.com",
+   // "martinezmuerza@gmail.com",
+  //  "admin@proveedor3.com",
+  //  "backoffice@proveedor3.com",
   ],
 };
 
