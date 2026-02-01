@@ -39,7 +39,7 @@ export default function HomePage() {
 })
 
       })
-    })
+    
 
     setLoading(false)
     setOpen(false)
