@@ -22,24 +22,18 @@ export default function HomePage() {
 
     const formData = new FormData(e.target)
 
-    await fetch('/api/lead', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        nombre: formData.get('nombre'),
-        email: formData.get('email'),
-        telefono: formData.get('telefono'),
-        comentario: formData.get('comentario')
-        body: JSON.stringify({
-  nombre: formData.get('nombre'),
-  email: formData.get('email'),
-  telefono: formData.get('telefono'),
-  comentario: formData.get('comentario'),
-  interes // 👈 CLAVE
+ await fetch('/api/lead', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    nombre: formData.get('nombre'),
+    email: formData.get('email'),
+    telefono: formData.get('telefono'),
+    comentario: formData.get('comentario'),
+    interes // 👈 ESTE ES EL DATO CLAVE PARA ENRUTAR EL MAIL
+  })
 })
 
-      })
-    
 
     setLoading(false)
     setOpen(false)
