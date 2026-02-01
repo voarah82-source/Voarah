@@ -302,7 +302,7 @@ export default function HomePage() {
           marginBottom: 24
         }}
       >
-        Dejanos tus datos y te contactamos.
+        Dejanos tus y un asesor te contactará a la brevedad.
       </p>
 
       <form
