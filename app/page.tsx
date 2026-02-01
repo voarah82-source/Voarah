@@ -6,6 +6,14 @@ import Header from '../components/Header'
 export default function HomePage() {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+  const inputStyle = {
+  padding: '12px 14px',
+  borderRadius: 10,
+  border: '1px solid #ddd',
+  fontSize: 14,
+  fontFamily: 'Montserrat, system-ui, sans-serif'
+}
+
 
   async function handleSubmit(e: any) {
     e.preventDefault()
