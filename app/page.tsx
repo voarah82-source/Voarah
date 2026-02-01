@@ -334,7 +334,7 @@ export default function HomePage() {
         />
         <textarea
           name="comentario"
-          placeholder="Comentario (opcional)"
+          placeholder="Comentario (opcional, podés aprovechar para informar fecha de tu mudanza y qué necesitás en detalle.)"
           rows={3}
           style={{ ...inputStyle, resize: 'none' }}
         />
