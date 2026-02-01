@@ -35,4 +35,3 @@ Mensaje: ${body.message}
     return NextResponse.json({ ok: false }, { status: 500 });
   }
 }
-
