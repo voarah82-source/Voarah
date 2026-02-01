@@ -87,19 +87,63 @@ export async function POST(req: Request) {
       },
     });
 
-    await transporter.sendMail({
-      from: `"Voarah" <${process.env.MAIL_FROM}>`,
-      to: recipients, // 👈 acá está la lógica clave
-      replyTo: email,
-      subject: "Nuevo contacto desde Voarah",
-      html: `
-        <h3>Nuevo contacto</h3>
-        <p><b>Nombre:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Interés:</b> ${interes || "no especificado"}</p>
-        <p><b>Mensaje:</b><br/>${message}</p>
-      `,
-    });
+   // 📞 teléfono del cliente (defensivo)
+const phoneRaw =
+  body.telefono ||
+  body.phone ||
+  body.celular ||
+  "";
+
+// limpiamos todo lo que no sea número
+const cleanPhone = phoneRaw.replace(/\D/g, "");
+
+// link whatsapp (Argentina por defecto, ajustá si querés)
+const whatsappLink = cleanPhone
+  ? `https://wa.me/54${cleanPhone}`
+  : null;
+
+await transporter.sendMail({
+  from: `"Voarah" <${process.env.MAIL_FROM}>`,
+  to: recipients, // vos + proveedores según interés
+  replyTo: email,
+  subject: "Nuevo contacto desde Voarah",
+  html: `
+    <h3>Nuevo contacto</h3>
+
+    <p><b>Nombre:</b> ${name}</p>
+    <p><b>Email:</b> ${email}</p>
+    <p><b>Teléfono:</b> ${phoneRaw || "No informado"}</p>
+    <p><b>Interés:</b> ${interes || "no especificado"}</p>
+
+    <p><b>Mensaje:</b><br/>${message}</p>
+
+    ${
+      whatsappLink
+        ? `
+          <hr/>
+          <a
+            href="${whatsappLink}"
+            target="_blank"
+            style="
+              display:inline-block;
+              margin-top:16px;
+              padding:12px 20px;
+              background:#25D366;
+              color:#ffffff;
+              text-decoration:none;
+              border-radius:6px;
+              font-weight:bold;
+              font-family:Arial,sans-serif;
+            "
+          >
+            💬 Escribir al cliente por WhatsApp
+          </a>
+        `
+        : ""
+    }
+  `,
+});
+
 
     return NextResponse.json({ ok: true });
   } catch (err) {
