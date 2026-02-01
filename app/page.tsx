@@ -333,7 +333,7 @@ export default function HomePage() {
 
   <input
     name="telefono"
-    placeholder="Teléfono"
+    placeholder="Teléfono (ej: 5491112345678)"
     required
     style={inputStyle}
   />
