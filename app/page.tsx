@@ -35,7 +35,7 @@ export default function HomePage() {
     setLoading(false)
     setOpen(false)
     alert('Datos enviados correctamente. En breve nos contactamos.')
-  
+  }  
 
   return (
     <>
