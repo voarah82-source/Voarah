@@ -85,6 +85,12 @@ export async function POST(req: Request) {
       );
     }
 
+await supabase
+  .from("origenes_comerciales")
+  .update({ last_used_at: new Date().toISOString() })
+  .eq("id", origen.id);
+
+    
     // =========================
     // EMAIL
     // =========================
