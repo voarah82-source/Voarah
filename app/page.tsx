@@ -25,28 +25,33 @@ export default function HomePage() {
   const origen = params?.get('origen') || ''
 
   async function handleSubmit(e: any) {
-    e.preventDefault()
-    setLoading(true)
+  e.preventDefault()
+  setLoading(true)
 
-    const formData = new FormData(e.target)
+  const formData = new FormData(e.target)
 
-    await fetch('/api/lead', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        nombre: formData.get('nombre'),
-        email: formData.get('email'),
-        telefono: formData.get('telefono'),
-        comentario: formData.get('comentario'),
-        interes,   // 👈 VIENE DEL STATE
-        origen     // 👈 ID COMERCIAL (CÓDIGO)
-      })
+  //  ACÁ VA ESTO interes
+  const interesFromForm =
+    formData.get('interes') || 'servicios'
+
+  await fetch('/api/lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      nombre: formData.get('nombre'),
+      email: formData.get('email'),
+      telefono: formData.get('telefono'),
+      comentario: formData.get('comentario'),
+      interes: interesFromForm, // 👈 USAMOS ESTE
+      origen
     })
+  })
 
-    setLoading(false)
-    setOpen(false)
-    alert('Datos enviados correctamente. En breve nos contactamos.')
-  }
+  setLoading(false)
+  setOpen(false)
+  alert('Datos enviados correctamente. En breve nos contactamos.')
+}
+
 
   return (
     <>
