@@ -321,7 +321,7 @@ export default function HomePage() {
         Dejanos tus y un asesor te contactará a la brevedad.
       </p>
 
-     <form
+  <form
   onSubmit={handleSubmit}
   style={{
     display: 'flex',
@@ -365,17 +365,30 @@ export default function HomePage() {
     </span>
 
     <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-      <input type="radio" name="interes" value="servicios" required />
+      <input
+        type="radio"
+        name="interes"
+        value="servicios"
+        required
+      />
       Servicios (mudanza, limpieza, pintura, etc.)
     </label>
 
     <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-      <input type="radio" name="interes" value="productos" />
+      <input
+        type="radio"
+        name="interes"
+        value="productos"
+      />
       Productos (muebles, equipamiento, decoración)
     </label>
 
     <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-      <input type="radio" name="interes" value="ambos" />
+      <input
+        type="radio"
+        name="interes"
+        value="ambos"
+      />
       Ambos
     </label>
   </div>
@@ -405,6 +418,7 @@ export default function HomePage() {
     {loading ? 'Enviando…' : 'Enviar'}
   </button>
 </form>
+
 
       <button
         onClick={() => setOpen(false)}
