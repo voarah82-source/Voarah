@@ -25,6 +25,23 @@ export async function POST(req: Request) {
       );
     }
 
+    const PROVIDERS: Record<string, string[]> = {
+  servicios: [
+    "lucas.rosello@gmail.com",
+    "martinezmuerza@gmail.com",
+  ],
+  productos: [
+    "aedevincenzi@gmail.com",
+    "juancho12oddone@gmail.com",
+  ],
+  ambos: [
+    "lucas.rosello@gmail.com",
+    "martinezmuerza@gmail.com",
+    "aedevincenzi@gmail.com",
+    "juancho12oddone@gmail.com",
+  ],
+};
+
     // =========================
     // SUPABASE (RUNTIME ONLY)
     // =========================
