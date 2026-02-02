@@ -1,55 +1,32 @@
-//app/api/lead/route.ts
+// app/api/lead/route.ts
 export const runtime = "nodejs";
+
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
-
-
-const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
-const PROVIDERS: Record<string, string[]> = {
-  servicios: [
-    "lucas.rosello@gmail.com",
-    "martinezmuerza@gmail.com",
-  ],
-  productos: [
-    "aedevincenzi@gmail.com",
-    "juancho12oddone@gmail.com",
-  ],
-  ambos: [
-    "lucas.rosello@gmail.com",
-    "martinezmuerza@gmail.com",
-    "aedevincenzi@gmail.com",
-    "juancho12oddone@gmail.com",
-  ],
-};
+import { createClient } from "@supabase/supabase-js";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    // 🔒 Datos defensivos
-    const nombre = body.nombre || body.name || "Contacto Web";
+    const nombre = body.nombre;
     const email = body.email;
-    const telefono = body.telefono || "";
-    const comentario = body.comentario || body.message || "";
-    const interes = body.interes || "";
+    const telefono = body.telefono;
+    const comentario = body.comentario || "";
+    const interes = body.interes || "no_especificado";
     const origenCodigo = body.origen || "";
 
-    if (!email) {
+    if (!nombre || !email || !telefono) {
       return NextResponse.json(
-        { error: "Email requerido" },
+        { error: "Datos incompletos" },
         { status: 400 }
       );
     }
 
-
-     // =========================
-    //  SUPABASE (RUNTIME SAFE)
     // =========================
-      const SUPABASE_URL = process.env.SUPABASE_URL;
+    // SUPABASE (runtime safe)
+    // =========================
+    const SUPABASE_URL = process.env.SUPABASE_URL;
     const SUPABASE_SERVICE_ROLE_KEY =
       process.env.SUPABASE_SERVICE_ROLE_KEY;
 
@@ -65,61 +42,44 @@ export async function POST(req: Request) {
       SUPABASE_URL,
       SUPABASE_SERVICE_ROLE_KEY
     );
-    
-    // 🔎 1) BUSCAR ORIGEN
-    let origen_id: string | null = null;
 
-    if (origenCodigo) {
-      const { data: origen, error } = await supabase
-        .from("origenes_comerciales")
-        .select("id")
-        .eq("codigo", origenCodigo)
-        .single();
+    // 🔎 Buscar origen
+    const { data: origen, error: origenError } = await supabase
+      .from("origenes_comerciales")
+      .select("id")
+      .eq("codigo", origenCodigo)
+      .single();
 
-      if (!error && origen) {
-        origen_id = origen.id;
-      }
-    }
-
-    // fallback opcional (si querés bloquear sin origen, avisame)
-    if (!origen_id) {
+    if (origenError || !origen) {
       return NextResponse.json(
-        { error: "Origen inválido o inexistente" },
+        { error: "Origen inválido" },
         { status: 400 }
       );
     }
 
-    // 🧾 2) INSERT LEAD
-    const { data: lead, error: leadError } = await supabase
+    // 🧾 Insert lead
+    const { error: leadError } = await supabase
       .from("leads")
       .insert({
         nombre,
         email,
         telefono,
         comentario,
-        intencion: interes || "no_especificado",
-        origen_id,
-      })
-      .select()
-      .single();
+        intencion: interes,
+        origen_id: origen.id,
+      });
 
     if (leadError) {
-      console.error("Error insert lead:", leadError);
+      console.error("❌ Insert lead error:", leadError);
       return NextResponse.json(
         { error: "Error guardando lead" },
         { status: 500 }
       );
     }
 
-    // 📬 MAIL
-    const ADMIN = process.env.MAIL_FROM || "hola@voarah.com";
-
-    let recipients: string[] = [ADMIN];
-    if (interes && PROVIDERS[interes]) {
-      recipients.push(...PROVIDERS[interes]);
-    }
-    recipients = Array.from(new Set(recipients));
-
+    // =========================
+    // EMAIL
+    // =========================
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: Number(process.env.SMTP_PORT),
@@ -131,9 +91,8 @@ export async function POST(req: Request) {
     });
 
     await transporter.sendMail({
-      from: `"Voarah" <${ADMIN}>`,
-      to: recipients,
-      bcc: ADMIN,
+      from: `"Voarah" <${process.env.MAIL_FROM}>`,
+      to: process.env.MAIL_FROM,
       replyTo: email,
       subject: "Nuevo contacto desde Voarah",
       html: `
@@ -147,10 +106,13 @@ export async function POST(req: Request) {
       `,
     });
 
-    return NextResponse.json({ ok: true, lead_id: lead.id });
+    return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error(err);
-    return NextResponse.json({ ok: false }, { status: 500 });
+    console.error("❌ API error:", err);
+    return NextResponse.json(
+      { error: "Error interno" },
+      { status: 500 }
+    );
   }
 }
 
