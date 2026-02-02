@@ -2,7 +2,7 @@
 export const runtime = "nodejs";
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
