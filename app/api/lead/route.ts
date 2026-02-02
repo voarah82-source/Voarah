@@ -1,31 +1,14 @@
-//app/api/lead/route.ts
+// app/api/lead/route.ts
 export const runtime = "nodejs";
 
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
-export async function POST(req: Request) {
-  try {
-    const body = await req.json();
-
-    const {
-      nombre,
-      email,
-      telefono,
-      comentario,
-      interes,
-      origen: origenCodigo,
-    } = body;
-
-    if (!email || !telefono || !nombre) {
-      return NextResponse.json(
-        { error: "Datos incompletos" },
-        { status: 400 }
-      );
-    }
-
-    const PROVIDERS: Record<string, string[]> = {
+// =========================
+// PROVEEDORES POR INTERÉS
+// =========================
+const PROVIDERS: Record<string, string[]> = {
   servicios: [
     "lucas.rosello@gmail.com",
     "martinezmuerza@gmail.com",
@@ -42,8 +25,31 @@ export async function POST(req: Request) {
   ],
 };
 
+export async function POST(req: Request) {
+  try {
     // =========================
-    // SUPABASE (RUNTIME ONLY)
+    // BODY
+    // =========================
+    const body = await req.json();
+
+    const {
+      nombre,
+      email,
+      telefono,
+      comentario,
+      interes,
+      origen: origenCodigo,
+    } = body;
+
+    if (!nombre || !email || !telefono) {
+      return NextResponse.json(
+        { error: "Datos incompletos" },
+        { status: 400 }
+      );
+    }
+
+    // =========================
+    // SUPABASE (SERVER ONLY)
     // =========================
     const SUPABASE_URL = process.env.SUPABASE_URL;
     const SUPABASE_SERVICE_ROLE_KEY =
@@ -102,12 +108,27 @@ export async function POST(req: Request) {
       );
     }
 
-await supabase
-  .from("origenes_comerciales")
-  .update({ last_used_at: new Date().toISOString() })
-  .eq("id", origen.id);
+    // =========================
+    // UPDATE ORIGEN (LAST USED)
+    // =========================
+    await supabase
+      .from("origenes_comerciales")
+      .update({ last_used_at: new Date().toISOString() })
+      .eq("id", origen.id);
 
-    
+    // =========================
+    // EMAIL DESTINATARIOS
+    // =========================
+    const ADMIN = process.env.MAIL_FROM!;
+    const providerRecipients =
+      PROVIDERS[interes] || [];
+
+    const recipients = [
+      ADMIN,               // vos
+      ...providerRecipients,
+      email,               // cliente
+    ];
+
     // =========================
     // EMAIL
     // =========================
@@ -122,9 +143,10 @@ await supabase
     });
 
     await transporter.sendMail({
-      from: `"Voarah" <${process.env.MAIL_FROM}>`,
-      to: process.env.MAIL_FROM,
-      subject: "Nuevo lead registrado",
+      from: `"Voarah" <${ADMIN}>`,
+      to: recipients,
+      replyTo: email,
+      subject: "Nuevo contacto desde Voarah",
       html: `
         <h3>Nuevo lead</h3>
         <p><b>Nombre:</b> ${nombre}</p>
