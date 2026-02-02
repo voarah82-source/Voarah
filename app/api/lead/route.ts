@@ -1,5 +1,11 @@
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
 
 const PROVIDERS: Record<string, string[]> = {
   servicios: [
@@ -22,36 +28,13 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    // 🔒 Mapeo defensivo de datos
+    // 🔒 Datos defensivos
+    const nombre = body.nombre || body.name || "Contacto Web";
     const email = body.email;
-    const name =
-      body.name ||
-      body.nombre ||
-      body.fullName ||
-      "Contacto Web";
-
-    const message =
-      body.message ||
-      body.mensaje ||
-      body.comentario ||
-      "Sin mensaje";
-
-    const interes: string = body.interes || "";
-
-    // 📞 Teléfono (defensivo)
-    const phoneRaw =
-      body.telefono ||
-      body.phone ||
-      body.celular ||
-      "";
-
-    const cleanPhone = phoneRaw.replace(/\D/g, "");
-
-    // WhatsApp link (sin duplicar país)
-    const whatsappLink =
-      cleanPhone.length >= 10
-        ? `https://wa.me/${cleanPhone}`
-        : null;
+    const telefono = body.telefono || "";
+    const comentario = body.comentario || body.message || "";
+    const interes = body.interes || "";
+    const origenCodigo = body.origen || "";
 
     if (!email) {
       return NextResponse.json(
@@ -60,17 +43,58 @@ export async function POST(req: Request) {
       );
     }
 
-    // 📬 ADMIN (siempre)
+    // 🔎 1) BUSCAR ORIGEN
+    let origen_id: string | null = null;
+
+    if (origenCodigo) {
+      const { data: origen, error } = await supabase
+        .from("origenes_comerciales")
+        .select("id")
+        .eq("codigo", origenCodigo)
+        .single();
+
+      if (!error && origen) {
+        origen_id = origen.id;
+      }
+    }
+
+    // fallback opcional (si querés bloquear sin origen, avisame)
+    if (!origen_id) {
+      return NextResponse.json(
+        { error: "Origen inválido o inexistente" },
+        { status: 400 }
+      );
+    }
+
+    // 🧾 2) INSERT LEAD
+    const { data: lead, error: leadError } = await supabase
+      .from("leads")
+      .insert({
+        nombre,
+        email,
+        telefono,
+        comentario,
+        intencion: interes || "no_especificado",
+        origen_id,
+      })
+      .select()
+      .single();
+
+    if (leadError) {
+      console.error("Error insert lead:", leadError);
+      return NextResponse.json(
+        { error: "Error guardando lead" },
+        { status: 500 }
+      );
+    }
+
+    // 📬 MAIL
     const ADMIN = process.env.MAIL_FROM || "hola@voarah.com";
 
-    // 🎯 Destinatarios (nunca vacío)
     let recipients: string[] = [ADMIN];
-
     if (interes && PROVIDERS[interes]) {
       recipients.push(...PROVIDERS[interes]);
     }
-
-    // 🧠 deduplicamos mails
     recipients = Array.from(new Set(recipients));
 
     const transporter = nodemailer.createTransport({
@@ -86,48 +110,24 @@ export async function POST(req: Request) {
     await transporter.sendMail({
       from: `"Voarah" <${ADMIN}>`,
       to: recipients,
+      bcc: ADMIN,
       replyTo: email,
       subject: "Nuevo contacto desde Voarah",
       html: `
         <h3>Nuevo contacto</h3>
-
-        <p><b>Nombre:</b> ${name}</p>
+        <p><b>Nombre:</b> ${nombre}</p>
         <p><b>Email:</b> ${email}</p>
-        <p><b>Teléfono:</b> ${phoneRaw || "No informado"}</p>
-        <p><b>Interés:</b> ${interes || "no especificado"}</p>
-
-        <p><b>Mensaje:</b><br/>${message}</p>
-
-        ${
-          whatsappLink
-            ? `
-              <hr/>
-              <a
-                href="${whatsappLink}"
-                target="_blank"
-                style="
-                  display:inline-block;
-                  margin-top:16px;
-                  padding:12px 20px;
-                  background:#25D366;
-                  color:#ffffff;
-                  text-decoration:none;
-                  border-radius:6px;
-                  font-weight:bold;
-                  font-family:Arial,sans-serif;
-                "
-              >
-                💬 Escribir al cliente por WhatsApp
-              </a>
-            `
-            : ""
-        }
+        <p><b>Teléfono:</b> ${telefono}</p>
+        <p><b>Interés:</b> ${interes}</p>
+        <p><b>Origen:</b> ${origenCodigo}</p>
+        <p><b>Mensaje:</b><br/>${comentario}</p>
       `,
     });
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, lead_id: lead.id });
   } catch (err) {
     console.error(err);
     return NextResponse.json({ ok: false }, { status: 500 });
   }
 }
+
