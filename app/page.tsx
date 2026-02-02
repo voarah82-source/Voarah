@@ -7,14 +7,22 @@ export default function HomePage() {
   const [open, setOpen] = useState(false)
   const [interes, setInteres] = useState<'servicios' | 'productos' | 'ambos' | ''>('')
   const [loading, setLoading] = useState(false)
-  const inputStyle = {
-  padding: '12px 14px',
-  borderRadius: 10,
-  border: '1px solid #ddd',
-  fontSize: 14,
-  fontFamily: 'Montserrat, system-ui, sans-serif'
-}
 
+  const inputStyle = {
+    padding: '12px 14px',
+    borderRadius: 10,
+    border: '1px solid #ddd',
+    fontSize: 14,
+    fontFamily: 'Montserrat, system-ui, sans-serif'
+  }
+
+  // 👉 LEEMOS EL ORIGEN DESDE LA URL (QR / LINK)
+  const params =
+    typeof window !== 'undefined'
+      ? new URLSearchParams(window.location.search)
+      : null
+
+  const origen = params?.get('origen') || ''
 
   async function handleSubmit(e: any) {
     e.preventDefault()
@@ -22,23 +30,23 @@ export default function HomePage() {
 
     const formData = new FormData(e.target)
 
- await fetch('/api/lead', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    nombre: formData.get('nombre'),
-    email: formData.get('email'),
-    telefono: formData.get('telefono'),
-    comentario: formData.get('comentario'),
-    interes // 👈 ESTE ES EL DATO CLAVE PARA ENRUTAR EL MAIL
-  })
-})
-
+    await fetch('/api/lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nombre: formData.get('nombre'),
+        email: formData.get('email'),
+        telefono: formData.get('telefono'),
+        comentario: formData.get('comentario'),
+        interes,   // 👈 VIENE DEL STATE
+        origen     // 👈 ID COMERCIAL (CÓDIGO)
+      })
+    })
 
     setLoading(false)
     setOpen(false)
     alert('Datos enviados correctamente. En breve nos contactamos.')
-  }  
+  }
 
   return (
     <>
