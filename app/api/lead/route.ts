@@ -129,36 +129,89 @@ export async function POST(req: Request) {
       email,               // cliente
     ];
 
-    // =========================
-    // EMAIL
-    // =========================
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      secure: true,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+ // =========================
+// EMAIL
+// =========================
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT),
+  secure: true,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
 
-    await transporter.sendMail({
-      from: `"Voarah" <${ADMIN}>`,
-      to: recipients,
-      replyTo: email,
-      subject: "Nuevo contacto desde Voarah",
-      html: `
-        <h3>Nuevo lead</h3>
-        <p><b>Nombre:</b> ${nombre}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Teléfono:</b> ${telefono}</p>
-        <p><b>Interés:</b> ${interes}</p>
-        <p><b>Origen:</b> ${origenCodigo}</p>
-        <p><b>Comentario:</b><br/>${comentario}</p>
-      `,
-    });
+// WhatsApp (solo para partners)
+const phoneClean = telefono.replace(/\D/g, "");
+const whatsappLink = phoneClean
+  ? `https://wa.me/${phoneClean}`
+  : null;
 
-    return NextResponse.json({ ok: true, leadId: lead.id });
+// =========================
+// MAIL A PARTNERS / PROVIDERS (+ vos)
+// =========================
+await transporter.sendMail({
+  from: `"Voarah" <${ADMIN}>`,
+  to: [ADMIN, ...providerRecipients],
+  replyTo: email,
+  subject: "Nuevo contacto desde Voarah",
+  html: `
+    <h3>Nuevo lead</h3>
+    <p><b>Nombre:</b> ${nombre}</p>
+    <p><b>Email:</b> ${email}</p>
+    <p><b>Teléfono:</b> ${telefono}</p>
+    <p><b>Interés:</b> ${interes}</p>
+    <p><b>Origen:</b> ${origenCodigo}</p>
+    <p><b>Comentario:</b><br/>${comentario}</p>
+
+    ${
+      whatsappLink
+        ? `
+        <hr/>
+        <a
+          href="${whatsappLink}"
+          target="_blank"
+          style="
+            display:inline-block;
+            margin-top:16px;
+            padding:12px 20px;
+            background:#25D366;
+            color:#ffffff;
+            text-decoration:none;
+            border-radius:6px;
+            font-weight:bold;
+            font-family:Arial,sans-serif;
+          "
+        >
+          💬 Escribir al lead por WhatsApp
+        </a>
+        `
+        : ""
+    }
+  `,
+});
+
+// =========================
+// MAIL AL CLIENTE (SIN WHATSAPP)
+// =========================
+await transporter.sendMail({
+  from: `"Voarah" <${ADMIN}>`,
+  to: email,
+  subject: "Recibimos tu contacto en Voarah",
+  html: `
+    <h3>Gracias por contactarte con Voarah</h3>
+    <p>Recibimos tu solicitud y un partner se va a comunicar con vos.</p>
+
+    <p><b>Nombre:</b> ${nombre}</p>
+    <p><b>Email:</b> ${email}</p>
+    <p><b>Teléfono:</b> ${telefono}</p>
+    <p><b>Interés:</b> ${interes}</p>
+  `,
+});
+
+return NextResponse.json({ ok: true, leadId: lead.id });
+
   } catch (err) {
     console.error("❌ API error:", err);
     return NextResponse.json(
