@@ -1,5 +1,4 @@
-// app/layout.tsx
-import Footer from '@/components/Footer'
+import Footer from './components/Footer'
 
 export const metadata = {
   title: 'Voarah',
@@ -13,7 +12,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body>
+      <body
+        style={{
+          margin: 0,
+          fontFamily: 'Montserrat, system-ui, sans-serif'
+        }}
+      >
         {children}
         <Footer />
       </body>
