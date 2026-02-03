@@ -48,41 +48,68 @@ export default function Header() {
         </Link>
 
         {/* NAV */}
-        <nav
-          style={{
-            display: 'flex',
-            gap: 32,
-            alignItems: 'center',
-            fontSize: 15,
-            fontWeight: 500
-          }}
-        >
-          <a href="#servicios" style={{ color: '#424242', textDecoration: 'none' }}>
-            Servicios
-          </a>
+       <nav
+  style={{
+    display: 'flex',
+    gap: 32,
+    alignItems: 'center',
+    fontSize: 15,
+    fontWeight: 500
+  }}
+>
+  <button
+    onClick={() =>
+      document
+        .getElementById('servicios')
+        ?.scrollIntoView({ behavior: 'smooth' })
+    }
+    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#424242' }}
+  >
+    Servicios
+  </button>
 
-          <a href="#productos" style={{ color: '#424242', textDecoration: 'none' }}>
-            Productos
-          </a>
+  <button
+    onClick={() =>
+      document
+        .getElementById('servicios')
+        ?.scrollIntoView({ behavior: 'smooth' })
+    }
+    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#424242' }}
+  >
+    Productos
+  </button>
 
-          <a href="#como-funciona" style={{ color: '#424242', textDecoration: 'none' }}>
-            Cómo funciona
-          </a>
+  <button
+    onClick={() =>
+      document
+        .getElementById('como-funciona')
+        ?.scrollIntoView({ behavior: 'smooth' })
+    }
+    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#424242' }}
+  >
+    Cómo funciona
+  </button>
 
-          <a
-            href="#activar"
-            style={{
-              padding: '10px 18px',
-              background: '#8E24AA',
-              color: '#ffffff',
-              borderRadius: 6,
-              fontWeight: 600,
-              textDecoration: 'none'
-            }}
-          >
-            Activar beneficios
-          </a>
-        </nav>
+  <button
+    onClick={() =>
+      document
+        .getElementById('activar')
+        ?.scrollIntoView({ behavior: 'smooth' })
+    }
+    style={{
+      padding: '10px 18px',
+      background: '#8E24AA',
+      color: '#ffffff',
+      borderRadius: 6,
+      fontWeight: 600,
+      border: 'none',
+      cursor: 'pointer'
+    }}
+  >
+    Activar beneficios
+  </button>
+</nav>
+
       </div>
     </header>
   )
