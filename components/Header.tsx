@@ -47,8 +47,8 @@ export default function Header() {
           />
         </Link>
 
-        {/* NAV */}
-       <nav
+    {/* NAV */}
+<nav
   style={{
     display: 'flex',
     gap: 32,
@@ -63,7 +63,12 @@ export default function Header() {
         .getElementById('servicios')
         ?.scrollIntoView({ behavior: 'smooth' })
     }
-    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#424242' }}
+    style={{
+      background: 'none',
+      border: 'none',
+      cursor: 'pointer',
+      color: '#424242'
+    }}
   >
     Servicios
   </button>
@@ -74,7 +79,12 @@ export default function Header() {
         .getElementById('servicios')
         ?.scrollIntoView({ behavior: 'smooth' })
     }
-    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#424242' }}
+    style={{
+      background: 'none',
+      border: 'none',
+      cursor: 'pointer',
+      color: '#424242'
+    }}
   >
     Productos
   </button>
@@ -85,17 +95,18 @@ export default function Header() {
         .getElementById('como-funciona')
         ?.scrollIntoView({ behavior: 'smooth' })
     }
-    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#424242' }}
+    style={{
+      background: 'none',
+      border: 'none',
+      cursor: 'pointer',
+      color: '#424242'
+    }}
   >
     Cómo funciona
   </button>
 
   <button
-    onClick={() =>
-      document
-        .getElementById('activar')
-        ?.scrollIntoView({ behavior: 'smooth' })
-    }
+    onClick={() => setOpen(true)} // 👈 ABRE MODAL
     style={{
       padding: '10px 18px',
       background: '#8E24AA',
@@ -110,6 +121,153 @@ export default function Header() {
   </button>
 </nav>
 
+{/* MODAL */}
+{open && (
+  <div
+    onClick={() => setOpen(false)}
+    style={{
+      position: 'fixed',
+      inset: 0,
+      background: 'rgba(20, 20, 20, 0.55)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 2000,
+      backdropFilter: 'blur(4px)'
+    }}
+  >
+    <div
+      onClick={(e) => e.stopPropagation()}
+      style={{
+        background: '#ffffff',
+        padding: '36px 40px',
+        borderRadius: 16,
+        width: 440,
+        boxShadow: '0 30px 80px rgba(0,0,0,0.25)',
+        fontFamily: 'Montserrat, system-ui, sans-serif'
+      }}
+    >
+      <h2
+        style={{
+          fontSize: 24,
+          marginBottom: 8,
+          fontWeight: 700
+        }}
+      >
+        Activar beneficios Voarah
+      </h2>
+
+      <p
+        style={{
+          fontSize: 14,
+          color: '#666',
+          marginBottom: 24
+        }}
+      >
+        Dejanos tus datos y un asesor te contactará a la brevedad.
+      </p>
+
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 14
+        }}
+      >
+        <input
+          name="nombre"
+          placeholder="Nombre"
+          required
+          style={inputStyle}
+        />
+
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          required
+          style={inputStyle}
+        />
+
+        <input
+          name="telefono"
+          placeholder="Teléfono (ej: 5491112345678)"
+          required
+          style={inputStyle}
+        />
+
+        {/* INTERÉS */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 8,
+            marginTop: 4
+          }}
+        >
+          <span style={{ fontSize: 13, color: '#555', fontWeight: 500 }}>
+            ¿Qué estás buscando?
+          </span>
+
+          <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
+            <input type="radio" name="interes" value="servicios" required />
+            Servicios
+          </label>
+
+          <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
+            <input type="radio" name="interes" value="productos" />
+            Productos
+          </label>
+
+          <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
+            <input type="radio" name="interes" value="ambos" />
+            Ambos
+          </label>
+        </div>
+
+        <textarea
+          name="comentario"
+          placeholder="Comentario (opcional)"
+          rows={3}
+          style={{ ...inputStyle, resize: 'none' }}
+        />
+
+        <button
+          type="submit"
+          disabled={loading}
+          style={{
+            marginTop: 8,
+            padding: '14px',
+            background: '#8E24AA',
+            color: '#ffffff',
+            border: 'none',
+            borderRadius: 10,
+            fontSize: 15,
+            fontWeight: 600,
+            cursor: 'pointer'
+          }}
+        >
+          {loading ? 'Enviando…' : 'Enviar'}
+        </button>
+      </form>
+
+      <button
+        onClick={() => setOpen(false)}
+        style={{
+          marginTop: 16,
+          background: 'transparent',
+          border: 'none',
+          color: '#999',
+          fontSize: 13,
+          cursor: 'pointer'
+        }}
+      >
+        Cancelar
+      </button>
+    </div>
+  </div>
+)}
       </div>
     </header>
   )
