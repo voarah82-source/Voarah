@@ -2,11 +2,11 @@ import Footer from './components/Footer'
 
 export const metadata = {
   title: 'Voarah',
-  description: 'Formulario de demanda inmobiliaria'
+  description: 'Formulario de demanda inmobiliaria',
 }
 
 export default function RootLayout({
-  children
+  children,
 }: {
   children: React.ReactNode
 }) {
@@ -15,7 +15,7 @@ export default function RootLayout({
       <body
         style={{
           margin: 0,
-          fontFamily: 'Montserrat, system-ui, sans-serif'
+          fontFamily: 'Montserrat, system-ui, sans-serif',
         }}
       >
         {children}
