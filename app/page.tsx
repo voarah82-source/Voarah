@@ -123,7 +123,7 @@ export default function HomePage() {
           }}
         >
           <h2 style={{ textAlign: 'center', fontSize: 28, marginBottom: 24 }}>
-  Productos y servicios para que ahorres mudándote
+  Un sistema. Todas las soluciones.
 </h2>
 
          <div className="slider-track">
