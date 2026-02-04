@@ -71,18 +71,11 @@ export async function POST(req: Request) {
     // =========================
     // BUSCAR ORIGEN
     // =========================
-    const { data: origen, error: origenError } = await supabase
-      .from("origenes_comerciales")
-      .select("id")
-      .eq("codigo", origenCodigo)
-      .single();
-
-    if (origenError || !origen) {
-      return NextResponse.json(
-        { error: "Origen inválido" },
-        { status: 400 }
-      );
-    }
+ const { data: origen } = await supabase
+  .from("origenes_comerciales")
+  .select("id")
+  .eq("codigo", origenCodigo)
+  .maybeSingle();
 
     // =========================
     // INSERT LEAD
@@ -95,7 +88,7 @@ export async function POST(req: Request) {
         telefono,
         comentario,
         intencion: interes || "no_especificado",
-        origen_id: origen.id,
+        origen_id: origen ? origen.id : null,
       })
       .select()
       .single();
@@ -111,10 +104,12 @@ export async function POST(req: Request) {
     // =========================
     // UPDATE ORIGEN (LAST USED)
     // =========================
-    await supabase
-      .from("origenes_comerciales")
-      .update({ last_used_at: new Date().toISOString() })
-      .eq("id", origen.id);
+   if (origen) {
+  await supabase
+    .from("origenes_comerciales")
+    .update({ last_used_at: new Date().toISOString() })
+    .eq("id", origen.id);
+}
 
     // =========================
     // EMAIL DESTINATARIOS
