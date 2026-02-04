@@ -166,6 +166,7 @@ export default function HomePage() {
 
 {/* SERVICIOS + PRODUCTOS */}
 <section
+  id="servicios"
   style={{
     background: '#f7f7f7',
     padding: '64px 24px'
@@ -237,6 +238,7 @@ export default function HomePage() {
     </div>
   </div>
 </section>
+
 
 {/* COMO FUNCIONA */}
 <section
