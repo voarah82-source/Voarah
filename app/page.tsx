@@ -91,9 +91,8 @@ export default function HomePage() {
       margin: '0 auto 32px'
     }}
   >
-    VOARAH te acompaña en todo lo que viene ahora:
-    mudanza, acondicionamiento y equipamiento para tu nuevo hogar,
-    con beneficios a través de nuestros partners.
+    Ecosistema de servicios integrados para cada operación inmobiliaria</ br> 
+    todo en uno.
   </p>
 
   <button
