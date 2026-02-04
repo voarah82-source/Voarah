@@ -77,7 +77,7 @@ export default function HomePage() {
           </h1>
 
           <p style={{ fontSize: 18, color: '#555', maxWidth: 640, marginBottom: 32 }}>
-            Voarah te acompaña en todo lo que viene ahora:
+            VOARAH te acompaña en todo lo que viene ahora:
             mudanza, acondicionamiento y equipamiento para tu nuevo hogar,
             con beneficios a través de nuestros partners.
           </p>
