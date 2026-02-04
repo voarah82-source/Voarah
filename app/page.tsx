@@ -265,18 +265,6 @@ export default function HomePage() {
   </p>
 </section>
 
-{/* FOOTER */}
-<footer
-  style={{
-    borderTop: '1px solid #eee',
-    padding: '32px 24px',
-    textAlign: 'center',
-    fontSize: 12,
-    color: '#777'
-  }}
->
-  © {new Date().getFullYear()} Voarah — Todos los derechos reservados
-</footer>
 </main>
 
 {/* MODAL */}
