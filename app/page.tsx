@@ -122,23 +122,6 @@ export default function HomePage() {
           'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/mudanza%20y%20logistica.png',
           'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/pintura.png',
           'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/titulo%20sobre%20las%20imagenes.png',
-              'https://images.unsplash.com/photo-1604014237800-1c9102c219da',
-              'https://images.unsplash.com/photo-1505691938895-1758d7feb511',
-              'https://images.unsplash.com/photo-1600585154340-be6161a56a0c',
-              'https://images.unsplash.com/photo-1613490493576-7fde63acd811',
-              'https://images.unsplash.com/photo-1615873968403-89e068629265',
-              'https://images.unsplash.com/photo-1593784991095-a205069470b6',
-              'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2',
-              'https://images.unsplash.com/photo-1600121848594-d8644e57abab',
-
-              'https://images.unsplash.com/photo-1604014237800-1c9102c219da',
-              'https://images.unsplash.com/photo-1505691938895-1758d7feb511',
-              'https://images.unsplash.com/photo-1600585154340-be6161a56a0c',
-              'https://images.unsplash.com/photo-1613490493576-7fde63acd811',
-              'https://images.unsplash.com/photo-1615873968403-89e068629265',
-              'https://images.unsplash.com/photo-1593784991095-a205069470b6',
-              'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2',
-              'https://images.unsplash.com/photo-1600121848594-d8644e57abab'
             ].map((src, i) => (
               <img
                 key={i}
