@@ -280,6 +280,7 @@ export default function HomePage() {
 {/* MODAL */}
 {open && (
   <div
+    onClick={() => setOpen(false)}
     style={{
       position: 'fixed',
       inset: 0,
@@ -292,6 +293,7 @@ export default function HomePage() {
     }}
   >
     <div
+      onClick={(e) => e.stopPropagation()}
       style={{
         background: '#ffffff',
         padding: '36px 40px',
@@ -318,107 +320,112 @@ export default function HomePage() {
           marginBottom: 24
         }}
       >
-        Dejanos tus y un asesor te contactará a la brevedad.
+        Dejanos tus datos y un asesor te contactará a la brevedad.
       </p>
 
-  <form
-  onSubmit={handleSubmit}
-  style={{
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 14
-  }}
->
-  <input
-    name="nombre"
-    placeholder="Nombre"
-    required
-    style={inputStyle}
-  />
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 14
+        }}
+      >
+        <input
+          name="nombre"
+          placeholder="Nombre"
+          required
+          style={inputStyle}
+        />
 
-  <input
-    name="email"
-    type="email"
-    placeholder="Email"
-    required
-    style={inputStyle}
-  />
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          required
+          style={inputStyle}
+        />
 
-  <input
-    name="telefono"
-    placeholder="Teléfono (ej: 5491112345678)"
-    required
-    style={inputStyle}
-  />
+        <input
+          name="telefono"
+          placeholder="Teléfono (ej: 5491112345678)"
+          required
+          style={inputStyle}
+        />
 
-  {/* INTENCIÓN DEL USUARIO */}
-  <div
-    style={{
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 8,
-      marginTop: 4
-    }}
-  >
-    <span style={{ fontSize: 13, color: '#555', fontWeight: 500 }}>
-      ¿Qué estás buscando?
-    </span>
+        {/* INTERÉS */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 8,
+            marginTop: 4
+          }}
+        >
+          <span style={{ fontSize: 13, color: '#555', fontWeight: 500 }}>
+            ¿Qué estás buscando?
+          </span>
 
-    <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-      <input
-        type="radio"
-        name="interes"
-        value="servicios"
-        required
-      />
-      Servicios (mudanza, limpieza, pintura, etc.)
-    </label>
+          <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
+            <input
+              type="radio"
+              name="interes"
+              value="servicios"
+              checked={interes === 'servicios'}
+              onChange={() => setInteres('servicios')}
+              required
+            />
+            Servicios
+          </label>
 
-    <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-      <input
-        type="radio"
-        name="interes"
-        value="productos"
-      />
-      Productos (muebles, equipamiento, decoración)
-    </label>
+          <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
+            <input
+              type="radio"
+              name="interes"
+              value="productos"
+              checked={interes === 'productos'}
+              onChange={() => setInteres('productos')}
+            />
+            Productos
+          </label>
 
-    <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-      <input
-        type="radio"
-        name="interes"
-        value="ambos"
-      />
-      Ambos
-    </label>
-  </div>
+          <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
+            <input
+              type="radio"
+              name="interes"
+              value="ambos"
+              checked={interes === 'ambos'}
+              onChange={() => setInteres('ambos')}
+            />
+            Ambos
+          </label>
+        </div>
 
-  <textarea
-    name="comentario"
-    placeholder="Comentario (opcional, podés aprovechar para informar fecha de tu mudanza y qué necesitás en detalle.)"
-    rows={3}
-    style={{ ...inputStyle, resize: 'none' }}
-  />
+        <textarea
+          name="comentario"
+          placeholder="Comentario (opcional)"
+          rows={3}
+          style={{ ...inputStyle, resize: 'none' }}
+        />
 
-  <button
-    type="submit"
-    disabled={loading}
-    style={{
-      marginTop: 8,
-      padding: '14px',
-      background: '#8E24AA',
-      color: '#ffffff',
-      border: 'none',
-      borderRadius: 10,
-      fontSize: 15,
-      fontWeight: 600,
-      cursor: 'pointer'
-    }}
-  >
-    {loading ? 'Enviando…' : 'Enviar'}
-  </button>
-</form>
-
+        <button
+          type="submit"
+          disabled={loading}
+          style={{
+            marginTop: 8,
+            padding: '14px',
+            background: '#8E24AA',
+            color: '#ffffff',
+            border: 'none',
+            borderRadius: 10,
+            fontSize: 15,
+            fontWeight: 600,
+            cursor: 'pointer'
+          }}
+        >
+          {loading ? 'Enviando…' : 'Enviar'}
+        </button>
+      </form>
 
       <button
         onClick={() => setOpen(false)}
@@ -435,7 +442,8 @@ export default function HomePage() {
       </button>
     </div>
   </div>
-    )}
+)}
+
     </>
   )
 }
