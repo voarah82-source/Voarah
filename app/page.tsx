@@ -61,7 +61,6 @@ export default function HomePage() {
   }
 
 //===================hendler inmobs======================//
-  
 async function handleSubmitInmobiliaria(
   e: React.FormEvent<HTMLFormElement>
 ) {
@@ -77,12 +76,14 @@ async function handleSubmitInmobiliaria(
       body: JSON.stringify({
         inmobiliaria_nombre: formData.get('inmobiliaria_nombre'),
         contacto_nombre: formData.get('contacto_nombre'),
-        cargo: formData.get('cargo'),
+        contacto_cargo: formData.get('cargo'),
         email: formData.get('email'),
         telefono: formData.get('telefono'),
-        ciudad: formData.get('ciudad'),
+        ciudad_zona: formData.get('ciudad'),
+
         operaciones_mensuales: formData.get('operaciones_mensuales'),
         tipo_operaciones: formData.get('tipo_operaciones'),
+
         interes_diferenciacion: formData.get('interes_diferenciacion') === 'on',
         interes_ingresos: formData.get('interes_ingresos') === 'on',
         interes_experiencia: formData.get('interes_experiencia') === 'on',
@@ -102,6 +103,7 @@ async function handleSubmitInmobiliaria(
     setLoadingInmo(false)
   }
 }
+
 
 
   //===========handler proveedores=================
