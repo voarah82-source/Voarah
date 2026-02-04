@@ -63,42 +63,57 @@ export default function HomePage() {
           color: '#1a1a1a'
         }}
       >
-        {/* HERO */}
-        <section
-          id="activar"
-          style={{
-            padding: '96px 24px 64px',
-            maxWidth: 1100,
-            margin: '0 auto'
-          }}
-        >
-          <h1 style={{ fontSize: 42, lineHeight: 1.2, marginBottom: 16 }}>
-            Más confiable. Más rápido. Más simple.
-          </h1>
+{/* HERO */}
+<section
+  id="activar"
+  style={{
+    padding: '96px 24px 64px',
+    maxWidth: 1100,
+    margin: '0 auto',
+    textAlign: 'center'
+  }}
+>
+  <h1
+    style={{
+      fontSize: 42,
+      lineHeight: 1.2,
+      marginBottom: 16
+    }}
+  >
+    Más confiable. Más rápido. Más simple.
+  </h1>
 
-          <p style={{ fontSize: 18, color: '#555', maxWidth: 640, marginBottom: 32 }}>
-            VOARAH te acompaña en todo lo que viene ahora:
-            mudanza, acondicionamiento y equipamiento para tu nuevo hogar,
-            con beneficios a través de nuestros partners.
-          </p>
+  <p
+    style={{
+      fontSize: 18,
+      color: '#555',
+      maxWidth: 640,
+      margin: '0 auto 32px'
+    }}
+  >
+    VOARAH te acompaña en todo lo que viene ahora:
+    mudanza, acondicionamiento y equipamiento para tu nuevo hogar,
+    con beneficios a través de nuestros partners.
+  </p>
 
-          <button
-            onClick={() => setOpen(true)}
-            style={{
-              padding: '14px 28px',
-              background: '#8E24AA',
-              color: '#fff',
-              border: 'none',
-              borderRadius: 8,
-              fontSize: 16,
-              fontWeight: 600,
-              cursor: 'pointer'
-            }}
-          >
-            Activar mis beneficios
-          </button>
-        </section>
+  <button
+    onClick={() => setOpen(true)}
+    style={{
+      padding: '14px 28px',
+      background: '#8E24AA',
+      color: '#fff',
+      border: 'none',
+      borderRadius: 8,
+      fontSize: 16,
+      fontWeight: 600,
+      cursor: 'pointer'
+    }}
+  >
+    Activar mis beneficios
+  </button>
+</section>
 
+        
         {/* SLIDER ECOSISTEMA VOARAH */}
         <section
           style={{
