@@ -283,7 +283,6 @@ export default function HomePage() {
   </p>
 </section>
 
-        
 {/* COMO FUNCIONA */}
 <section
   id="como-funciona"
@@ -314,6 +313,7 @@ export default function HomePage() {
     </p>
   </div>
 </section>
+        
 
 {/* MODAL */}
 {open && (
