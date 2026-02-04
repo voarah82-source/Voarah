@@ -282,6 +282,21 @@ export default function HomePage() {
       para que todo funcione de manera rápida y ordenada.
     </p>
   </div>
+    <button
+    onClick={() => setOpen(true)}
+    style={{
+      padding: '14px 28px',
+      background: '#8E24AA',
+      color: '#fff',
+      border: 'none',
+      borderRadius: 8,
+      fontSize: 16,
+      fontWeight: 600,
+      cursor: 'pointer'
+    }}
+  >
+    Activar mis beneficios
+  </button>
 </section>
 
 
