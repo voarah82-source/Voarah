@@ -91,8 +91,8 @@ export default function HomePage() {
       margin: '0 auto 32px'
     }}
   >
-    Ecosistema de servicios integrados para cada operación inmobiliaria</ br> 
-    todo en uno.
+    Ecosistema de servicios integrados para cada operación inmobiliaria
+    todo en un solo lugar.
   </p>
 
   <button
