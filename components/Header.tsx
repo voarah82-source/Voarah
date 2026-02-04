@@ -39,6 +39,15 @@ export default function Header({ onOpenModal }: HeaderProps) {
         </Link>
 
         <nav style={{ display: 'flex', gap: 32 }}>
+      
+          <button
+  onClick={() =>
+    document.getElementById('partners')?.scrollIntoView({ behavior: 'smooth' })
+  }
+>
+  Partners
+</button>
+
           <button
             onClick={() =>
               document.getElementById('servicios')?.scrollIntoView({ behavior: 'smooth' })
