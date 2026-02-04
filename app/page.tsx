@@ -284,21 +284,23 @@ export default function HomePage() {
   </div>
   
   <div style={{ display: 'flex', justifyContent: 'center' }}>
-    <button
-    onClick={() => setOpen(true)}
-    style={{
-      padding: '14px 28px',
-      background: '#8E24AA',
-      color: '#fff',
-      border: 'none',
-      borderRadius: 8,
-      fontSize: 16,
-      fontWeight: 600,
-      cursor: 'pointer'
-    }}
-  >
-    Activar mis beneficios
-  </button>
+   <button
+  onClick={() => setOpen(true)}
+  style={{
+    display: 'block',
+    margin: '32px auto 0',
+    padding: '14px 28px',
+    background: '#8E24AA',
+    color: '#fff',
+    border: 'none',
+    borderRadius: 8,
+    fontSize: 16,
+    fontWeight: 600,
+    cursor: 'pointer'
+  }}
+>
+  Activar mis beneficios
+</button>
 </section>
 
 
