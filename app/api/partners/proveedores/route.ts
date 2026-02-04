@@ -8,7 +8,6 @@ export async function POST(req: Request) {
     const {
       empresa_nombre,
       contacto_nombre,
-      contacto_cargo,
       email,
       telefono,
       ciudad_zona,
@@ -20,13 +19,7 @@ export async function POST(req: Request) {
       servicio_compra_objetos,
       servicio_mantenimiento,
       servicio_otros,
-
-      tipo_equipo,
-      coordina_plazos,
-      seguro_responsabilidad,
-      emite_factura,
-      sitio_web,
-      motivacion
+      servicio_otros_texto
     } = body
 
     const supabase = createClient(
@@ -39,7 +32,6 @@ export async function POST(req: Request) {
       .insert({
         empresa_nombre,
         contacto_nombre,
-        contacto_cargo,
         email,
         telefono,
         ciudad_zona,
@@ -51,13 +43,7 @@ export async function POST(req: Request) {
         servicio_compra_objetos: !!servicio_compra_objetos,
         servicio_mantenimiento: !!servicio_mantenimiento,
         servicio_otros: !!servicio_otros,
-
-        tipo_equipo,
-        coordina_plazos,
-        seguro_responsabilidad,
-        emite_factura,
-        sitio_web,
-        motivacion
+        servicio_otros_texto
       })
 
     if (error) {
