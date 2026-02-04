@@ -283,36 +283,37 @@ export default function HomePage() {
         </p>
       </section>
 
-      {/* COMO FUNCIONA */}
-      <section
-        id="como-funciona"
-        style={{
-          background: '#f7f7f7',
-          padding: '80px 24px'
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1100,
-            margin: '0 auto'
-          }}
-        >
-          <h2 style={{ fontSize: 28, marginBottom: 24 }}>
-            ¿Cómo funciona Voarah?
-          </h2>
+    {/* COMO FUNCIONA */}
+<section
+  id="como-funciona"
+  style={{
+    background: '#f7f7f7',
+    padding: '80px 24px'
+  }}
+>
+  <div
+    style={{
+      maxWidth: 1100,
+      margin: '0 auto'
+    }}
+  >
+    <h2 style={{ fontSize: 28, marginBottom: 24 }}>
+      ¿Cómo funciona Voarah?
+    </h2>
 
-          <p style={{ fontSize: 16, color: '#555', maxWidth: 720, marginBottom: 16 }}>
-            A través de inmobiliarias que trabajan con Voarah, los compradores
-            acceden a un ecosistema de servicios y productos diseñados para
-            reducir fricciones y simplificar la mudanza.
-          </p>
+    <p style={{ fontSize: 16, color: '#555', maxWidth: 720, marginBottom: 16 }}>
+      A través de inmobiliarias que trabajan con Voarah, los compradores
+      acceden a un ecosistema de servicios y productos diseñados para
+      reducir fricciones y simplificar la mudanza.
+    </p>
 
-          <p style={{ fontSize: 16, color: '#555', maxWidth: 720 }}>
-            Voarah coordina, valida y conecta con partners estratégicos,
-            asegurando una experiencia ordenada y trazable.
-          </p>
-        </div>
-      </section>
+    <p style={{ fontSize: 16, color: '#555', maxWidth: 720 }}>
+      Voarah coordina, valida y conecta con partners estratégicos,
+      asegurando una experiencia ordenada y trazable.
+    </p>
+  </div>
+</section>
+
 
         
 
