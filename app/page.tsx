@@ -10,6 +10,9 @@ export default function HomePage() {
   const [openProveedorModal, setOpenProveedorModal] = useState(false)
   const [interes, setInteres] = useState<'servicios' | 'productos' | 'ambos' | ''>('')
   const [loading, setLoading] = useState(false)
+  const [loadingInmo, setLoadingInmo] = useState(false)
+  const [loadingProveedor, setLoadingProveedor] = useState(false)
+
 
 
   const inputStyle = {
