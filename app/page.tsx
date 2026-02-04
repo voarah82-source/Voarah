@@ -361,20 +361,21 @@ export default function HomePage() {
           clientes y diferenciarte, hablemos.
         </p>
 
-        <a
-          href="/form-inmobiliarias"
-          style={{
-            display: 'inline-block',
-            padding: '14px 22px',
-            background: '#8E24AA',
-            color: '#ffffff',
-            borderRadius: 8,
-            fontWeight: 600,
-            textDecoration: 'none'
-          }}
-        >
-          Quiero sumar mi inmobiliaria
-        </a>
+     <button
+  onClick={() => setOpenInmoModal(true)}
+  style={{
+    padding: '14px 22px',
+    background: '#8E24AA',
+    color: '#ffffff',
+    borderRadius: 8,
+    fontWeight: 600,
+    border: 'none',
+    cursor: 'pointer'
+  }}
+>
+  Quiero sumar mi inmobiliaria
+</button>
+
       </div>
 
       {/* PROVEEDORES */}
@@ -402,20 +403,21 @@ export default function HomePage() {
           oportunidades de trabajo a través de nuestra red de inmobiliarias.
         </p>
 
-        <a
-          href="/form-proveedores"
-          style={{
-            display: 'inline-block',
-            padding: '14px 22px',
-            background: '#8E24AA',
-            color: '#ffffff',
-            borderRadius: 8,
-            fontWeight: 600,
-            textDecoration: 'none'
-          }}
-        >
-          Quiero ser partner de Voarah
-        </a>
+       <button
+  onClick={() => setOpenProveedorModal(true)}
+  style={{
+    padding: '14px 22px',
+    background: '#8E24AA',
+    color: '#ffffff',
+    borderRadius: 8,
+    fontWeight: 600,
+    border: 'none',
+    cursor: 'pointer'
+  }}
+>
+  Quiero ser partner de Voarah
+</button>
+
       </div>
     </div>
   </div>
