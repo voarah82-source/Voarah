@@ -134,7 +134,7 @@ export default function HomePage() {
     'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/deshacete%20de%20tus%20articulos.png',
     'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/mudanza%20y%20logistica.png',
     'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/pintura.png',
-    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/titulo%20sobre%20las%20imagenes.png',
+    
 
     // DUPLICADO PARA LOOP INFINITO
     'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Decoracion.PNG',
