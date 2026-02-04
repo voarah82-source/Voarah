@@ -239,7 +239,51 @@ export default function HomePage() {
   </div>
 </section>
 
+{/* QUIÉNES SOMOS */}
+<section
+  id="quienes-somos"
+  style={{
+    padding: '80px 24px',
+    maxWidth: 1100,
+    margin: '0 auto'
+  }}
+>
+  <h2
+    style={{
+      fontSize: 28,
+      marginBottom: 24
+    }}
+  >
+    ¿Quiénes somos?
+  </h2>
 
+  <p
+    style={{
+      fontSize: 16,
+      color: '#555',
+      maxWidth: 760,
+      marginBottom: 16
+    }}
+  >
+    Voarah nace para simplificar uno de los momentos más importantes:
+    el cambio de hogar. Conectamos personas, servicios y productos en un
+    ecosistema diseñado para reducir fricciones y ahorrar tiempo.
+  </p>
+
+  <p
+    style={{
+      fontSize: 16,
+      color: '#555',
+      maxWidth: 760
+    }}
+  >
+    Trabajamos junto a inmobiliarias y partners estratégicos para ofrecer
+    soluciones confiables, coordinadas y pensadas para acompañarte antes,
+    durante y después de tu mudanza.
+  </p>
+</section>
+
+        
 {/* COMO FUNCIONA */}
 <section
   id="como-funciona"
