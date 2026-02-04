@@ -338,7 +338,7 @@ export default function HomePage() {
         flexWrap: 'wrap'
       }}
     >
-      {/* INMOBILIARIAS */}
+        {/* INMOBILIARIAS */}
       <div
         style={{
           flex: 1,
@@ -365,21 +365,20 @@ export default function HomePage() {
           clientes y diferenciarte, hablemos.
         </p>
 
-     <button
-  onClick={() => setOpenInmoModal(true)}
-  style={{
-    padding: '14px 22px',
-    background: '#8E24AA',
-    color: '#ffffff',
-    borderRadius: 8,
-    fontWeight: 600,
-    border: 'none',
-    cursor: 'pointer'
-  }}
->
-  Quiero sumar mi inmobiliaria
-</button>
-
+        <button
+          onClick={() => setOpenInmoModal(true)}
+          style={{
+            padding: '14px 22px',
+            background: '#8E24AA',
+            color: '#ffffff',
+            borderRadius: 8,
+            fontWeight: 600,
+            border: 'none',
+            cursor: 'pointer'
+          }}
+        >
+          Quiero sumar mi inmobiliaria
+        </button>
       </div>
 
       {/* PROVEEDORES */}
@@ -407,199 +406,192 @@ export default function HomePage() {
           oportunidades de trabajo a través de nuestra red de inmobiliarias.
         </p>
 
-       <button
-  onClick={() => setOpenProveedorModal(true)}
-  style={{
-    padding: '14px 22px',
-    background: '#8E24AA',
-    color: '#ffffff',
-    borderRadius: 8,
-    fontWeight: 600,
-    border: 'none',
-    cursor: 'pointer'
-  }}
->
-  Quiero ser partner de Voarah
-</button>
-
+        <button
+          onClick={() => setOpenProveedorModal(true)}
+          style={{
+            padding: '14px 22px',
+            background: '#8E24AA',
+            color: '#ffffff',
+            borderRadius: 8,
+            fontWeight: 600,
+            border: 'none',
+            cursor: 'pointer'
+          }}
+        >
+          Quiero ser partner de Voarah
+        </button>
       </div>
     </div>
   </div>
 </section>
 
+{/* MODAL CTAs */}
+{open && (
+  <div
+    onClick={() => setOpen(false)}
+    style={{
+      position: 'fixed',
+      inset: 0,
+      background: 'rgba(20, 20, 20, 0.55)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 2000,
+      backdropFilter: 'blur(4px)'
+    }}
+  >
+    <div
+      onClick={(e) => e.stopPropagation()}
+      style={{
+        background: '#ffffff',
+        padding: '36px 40px',
+        borderRadius: 16,
+        width: 440,
+        boxShadow: '0 30px 80px rgba(0,0,0,0.25)',
+        fontFamily: 'Montserrat, system-ui, sans-serif'
+      }}
+    >
+      <h2
+        style={{
+          fontSize: 24,
+          marginBottom: 8,
+          fontWeight: 700
+        }}
+      >
+        Activar beneficios Voarah
+      </h2>
 
+      <p
+        style={{
+          fontSize: 14,
+          color: '#666',
+          marginBottom: 24
+        }}
+      >
+        Dejanos tus datos y un asesor te contactará a la brevedad.
+      </p>
 
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 14
+        }}
+      >
+        <input
+          name="nombre"
+          placeholder="Nombre"
+          required
+          style={inputStyle}
+        />
 
-        {/* MODAL CTAs */}
-        {open && (
-          <div
-            onClick={() => setOpen(false)}
-            style={{
-              position: 'fixed',
-              inset: 0,
-              background: 'rgba(20, 20, 20, 0.55)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              zIndex: 2000,
-              backdropFilter: 'blur(4px)'
-            }}
-          >
-            <div
-              onClick={(e) => e.stopPropagation()}
-              style={{
-                background: '#ffffff',
-                padding: '36px 40px',
-                borderRadius: 16,
-                width: 440,
-                boxShadow: '0 30px 80px rgba(0,0,0,0.25)',
-                fontFamily: 'Montserrat, system-ui, sans-serif'
-              }}
-            >
-              <h2
-                style={{
-                  fontSize: 24,
-                  marginBottom: 8,
-                  fontWeight: 700
-                }}
-              >
-                Activar beneficios Voarah
-              </h2>
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          required
+          style={inputStyle}
+        />
 
-              <p
-                style={{
-                  fontSize: 14,
-                  color: '#666',
-                  marginBottom: 24
-                }}
-              >
-                Dejanos tus datos y un asesor te contactará a la brevedad.
-              </p>
+        <input
+          name="telefono"
+          placeholder="Teléfono (ej: 5491112345678)"
+          required
+          style={inputStyle}
+        />
 
-              <form
-                onSubmit={handleSubmit}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 14
-                }}
-              >
-                <input
-                  name="nombre"
-                  placeholder="Nombre"
-                  required
-                  style={inputStyle}
-                />
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 8,
+            marginTop: 4
+          }}
+        >
+          <span style={{ fontSize: 13, color: '#555', fontWeight: 500 }}>
+            ¿Qué estás buscando?
+          </span>
 
-                <input
-                  name="email"
-                  type="email"
-                  placeholder="Email"
-                  required
-                  style={inputStyle}
-                />
+          <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
+            <input
+              type="radio"
+              name="interes"
+              value="servicios"
+              checked={interes === 'servicios'}
+              onChange={() => setInteres('servicios')}
+              required
+            />
+            Servicios
+          </label>
 
-                <input
-                  name="telefono"
-                  placeholder="Teléfono (ej: 5491112345678)"
-                  required
-                  style={inputStyle}
-                />
+          <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
+            <input
+              type="radio"
+              name="interes"
+              value="productos"
+              checked={interes === 'productos'}
+              onChange={() => setInteres('productos')}
+            />
+            Productos
+          </label>
 
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 8,
-                    marginTop: 4
-                  }}
-                >
-                  <span style={{ fontSize: 13, color: '#555', fontWeight: 500 }}>
-                    ¿Qué estás buscando?
-                  </span>
+          <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
+            <input
+              type="radio"
+              name="interes"
+              value="ambos"
+              checked={interes === 'ambos'}
+              onChange={() => setInteres('ambos')}
+            />
+            Ambos
+          </label>
+        </div>
 
-                  <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-                    <input
-                      type="radio"
-                      name="interes"
-                      value="servicios"
-                      checked={interes === 'servicios'}
-                      onChange={() => setInteres('servicios')}
-                      required
-                    />
-                    Servicios
-                  </label>
+        <textarea
+          name="comentario"
+          placeholder="Comentario (opcional)"
+          rows={3}
+          style={{ ...inputStyle, resize: 'none' }}
+        />
 
-                  <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-                    <input
-                      type="radio"
-                      name="interes"
-                      value="productos"
-                      checked={interes === 'productos'}
-                      onChange={() => setInteres('productos')}
-                    />
-                    Productos
-                  </label>
+        <button
+          type="submit"
+          disabled={loading}
+          style={{
+            marginTop: 8,
+            padding: '14px',
+            background: '#8E24AA',
+            color: '#ffffff',
+            border: 'none',
+            borderRadius: 10,
+            fontSize: 15,
+            fontWeight: 600,
+            cursor: 'pointer'
+          }}
+        >
+          {loading ? 'Enviando…' : 'Enviar'}
+        </button>
+      </form>
 
-                  <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-                    <input
-                      type="radio"
-                      name="interes"
-                      value="ambos"
-                      checked={interes === 'ambos'}
-                      onChange={() => setInteres('ambos')}
-                    />
-                    Ambos
-                  </label>
-                </div>
+      <button
+        onClick={() => setOpen(false)}
+        style={{
+          marginTop: 16,
+          background: 'transparent',
+          border: 'none',
+          color: '#999',
+          fontSize: 13,
+          cursor: 'pointer'
+        }}
+      >
+        Cancelar
+      </button>
+    </div>
+  </div>
+)}
 
-                <textarea
-                  name="comentario"
-                  placeholder="Comentario (opcional)"
-                  rows={3}
-                  style={{ ...inputStyle, resize: 'none' }}
-                />
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  style={{
-                    marginTop: 8,
-                    padding: '14px',
-                    background: '#8E24AA',
-                    color: '#ffffff',
-                    border: 'none',
-                    borderRadius: 10,
-                    fontSize: 15,
-                    fontWeight: 600,
-                    cursor: 'pointer'
-                  }}
-                >
-                  {loading ? 'Enviando…' : 'Enviar'}
-                </button>
-              </form>
-
-              <button
-                onClick={() => setOpen(false)}
-                style={{
-                  marginTop: 16,
-                  background: 'transparent',
-                  border: 'none',
-                  color: '#999',
-                  fontSize: 13,
-                  cursor: 'pointer'
-                }}
-              >
-                Cancelar
-              </button>
-            </div>
-          </div>
-        )}
-      </main>
-    </>
-  )
-}
-
+{/* MODAL INMOBILIARIAS */}
 {openInmoModal && (
   <div
     onClick={() => setOpenInmoModal(false)}
@@ -679,6 +671,7 @@ export default function HomePage() {
   </div>
 )}
 
+{/* MODAL PROVEEDORES */}
 {openProveedorModal && (
   <div
     onClick={() => setOpenProveedorModal(false)}
@@ -769,6 +762,10 @@ export default function HomePage() {
   </div>
 )}
 
+      </main>
+    </>
+  )
+}
 
 const radioStyle = {
   display: 'flex',
