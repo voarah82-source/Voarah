@@ -8,22 +8,26 @@ export async function POST(req: Request) {
     const {
       empresa_nombre,
       contacto_nombre,
-      cargo,
+      contacto_cargo,
       email,
       telefono,
-      ciudad,
-      servicio_mudanza,
-      servicio_limpieza,
-      servicio_pintura,
-      servicio_decoracion,
-      servicio_mantenimiento,
-      servicio_otros,
+      ciudad_zona,
+
+      servicio_mudanza = false,
+      servicio_limpieza = false,
+      servicio_pintura = false,
+      servicio_decoracion = false,
+      servicio_compra_objetos = false,
+      servicio_mantenimiento = false,
+      servicio_otros = false,
+
       tipo_equipo,
-      plazos,
-      tiene_seguro,
+      coordina_plazos,
+      seguro_responsabilidad,
       emite_factura,
-      web,
-      mensaje
+
+      sitio_web,
+      motivacion
     } = body
 
     const supabase = createClient(
@@ -36,32 +40,34 @@ export async function POST(req: Request) {
       .insert({
         empresa_nombre,
         contacto_nombre,
-        cargo,
+        contacto_cargo,
         email,
         telefono,
-        ciudad,
+        ciudad_zona,
+
         servicio_mudanza,
         servicio_limpieza,
         servicio_pintura,
         servicio_decoracion,
+        servicio_compra_objetos,
         servicio_mantenimiento,
         servicio_otros,
+
         tipo_equipo,
-        plazos,
-        tiene_seguro,
+        coordina_plazos,
+        seguro_responsabilidad,
         emite_factura,
-        web,
-        mensaje
+
+        sitio_web,
+        motivacion
       })
 
     if (error) {
-      console.error('PROVEEDOR INSERT ERROR:', error)
       return NextResponse.json({ error: 'DB error' }, { status: 500 })
     }
 
     return NextResponse.json({ ok: true })
-  } catch (err) {
-    console.error('PROVEEDOR API ERROR:', err)
+  } catch {
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
   }
 }
