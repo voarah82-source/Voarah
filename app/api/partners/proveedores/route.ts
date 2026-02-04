@@ -13,19 +13,18 @@ export async function POST(req: Request) {
       telefono,
       ciudad_zona,
 
-      servicio_mudanza = false,
-      servicio_limpieza = false,
-      servicio_pintura = false,
-      servicio_decoracion = false,
-      servicio_compra_objetos = false,
-      servicio_mantenimiento = false,
-      servicio_otros = false,
+      servicio_mudanza,
+      servicio_limpieza,
+      servicio_pintura,
+      servicio_decoracion,
+      servicio_compra_objetos,
+      servicio_mantenimiento,
+      servicio_otros,
 
       tipo_equipo,
       coordina_plazos,
       seguro_responsabilidad,
       emite_factura,
-
       sitio_web,
       motivacion
     } = body
@@ -45,24 +44,24 @@ export async function POST(req: Request) {
         telefono,
         ciudad_zona,
 
-        servicio_mudanza,
-        servicio_limpieza,
-        servicio_pintura,
-        servicio_decoracion,
-        servicio_compra_objetos,
-        servicio_mantenimiento,
-        servicio_otros,
+        servicio_mudanza: !!servicio_mudanza,
+        servicio_limpieza: !!servicio_limpieza,
+        servicio_pintura: !!servicio_pintura,
+        servicio_decoracion: !!servicio_decoracion,
+        servicio_compra_objetos: !!servicio_compra_objetos,
+        servicio_mantenimiento: !!servicio_mantenimiento,
+        servicio_otros: !!servicio_otros,
 
         tipo_equipo,
         coordina_plazos,
         seguro_responsabilidad,
         emite_factura,
-
         sitio_web,
         motivacion
       })
 
     if (error) {
+      console.error(error)
       return NextResponse.json({ error: 'DB error' }, { status: 500 })
     }
 
