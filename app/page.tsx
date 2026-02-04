@@ -301,15 +301,22 @@ export default function HomePage() {
             </h2>
 
             <p style={{ fontSize: 16, color: '#555', maxWidth: 720, marginBottom: 16 }}>
-              A través de inmobiliarias que trabajan con Voarah, los compradores
-              acceden a un ecosistema de servicios y productos diseñados para
-              reducir fricciones y simplificar la mudanza.
+            VOARAH ofrece tranquilidad en uno de los momentos más estresantes en la vida de las personas.
+            Organiza y coordina los servicios necesarios alrededor de una operación inmobiliaria, integrándolos en un sistema simple, 
+            claro y confiable.
             </p>
 
             <p style={{ fontSize: 16, color: '#555', maxWidth: 720 }}>
-              Voarah coordina, valida y conecta con partners estratégicos,
-              asegurando una experiencia ordenada y trazable.
+             A través de nuestra infraestructura, cualquier persona pueden resolver en un mismo entorno 
+              soluciones que habitualmente están dispersas, evitando la búsqueda individual, 
+              la falta de coordinación y la incertidumbre.
             </p>
+
+             <p style={{ fontSize: 16, color: '#555', maxWidth: 720 }}>
+               Cada servicio es brindado por especialistas seleccionados у validados por VOARAH, b
+               ajo estándares definidos de calidad y experiencia, 
+               para que todo funcione de manera rápida y ordenada.
+             </p>
           </div>
         </section>
 
