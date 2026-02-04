@@ -8,17 +8,9 @@ export async function POST(req: Request) {
     const {
       inmobiliaria_nombre,
       contacto_nombre,
-      contacto_cargo,
       email,
       telefono,
-      ciudad_zona,
-      operaciones_mensuales,
-      tipo_operaciones,
-      interes_diferenciacion = false,
-      interes_ingresos = false,
-      interes_experiencia = false,
-      interes_fidelizacion = false,
-      interes_todo = false
+      ciudad_zona
     } = body
 
     const supabase = createClient(
@@ -31,20 +23,13 @@ export async function POST(req: Request) {
       .insert({
         inmobiliaria_nombre,
         contacto_nombre,
-        contacto_cargo,
         email,
         telefono,
-        ciudad_zona,
-        operaciones_mensuales,
-        tipo_operaciones,
-        interes_diferenciacion,
-        interes_ingresos,
-        interes_experiencia,
-        interes_fidelizacion,
-        interes_todo
+        ciudad_zona
       })
 
     if (error) {
+      console.error(error)
       return NextResponse.json({ error: 'DB error' }, { status: 500 })
     }
 
@@ -53,3 +38,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
   }
 }
+
