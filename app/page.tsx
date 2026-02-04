@@ -50,6 +50,7 @@ export default function HomePage() {
         origen
       })
     })
+    
 
     setLoading(false)
     setOpen(false)
