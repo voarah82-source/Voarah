@@ -56,6 +56,103 @@ export default function HomePage() {
     alert('Datos enviados correctamente. En breve nos contactamos.')
   }
 
+//===================hendler inmobs======================//
+  
+async function handleSubmitInmobiliaria(
+  e: React.FormEvent<HTMLFormElement>
+) {
+  e.preventDefault()
+  setLoadingInmo(true)
+
+  const formData = new FormData(e.currentTarget)
+
+  try {
+    const res = await fetch('/api/partners/inmobiliarias', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        inmobiliaria_nombre: formData.get('inmobiliaria_nombre'),
+        contacto_nombre: formData.get('contacto_nombre'),
+        cargo: formData.get('cargo'),
+        email: formData.get('email'),
+        telefono: formData.get('telefono'),
+        ciudad: formData.get('ciudad'),
+        operaciones_mensuales: formData.get('operaciones_mensuales'),
+        tipo_operaciones: formData.get('tipo_operaciones'),
+        interes_diferenciacion: formData.get('interes_diferenciacion') === 'on',
+        interes_ingresos: formData.get('interes_ingresos') === 'on',
+        interes_experiencia: formData.get('interes_experiencia') === 'on',
+        interes_fidelizacion: formData.get('interes_fidelizacion') === 'on',
+        interes_todo: formData.get('interes_todo') === 'on'
+      })
+    })
+
+    if (!res.ok) throw new Error('Error API inmobiliarias')
+
+    setOpenInmoModal(false)
+    e.currentTarget.reset()
+  } catch (err) {
+    console.error(err)
+    alert('Error enviando formulario de inmobiliarias')
+  } finally {
+    setLoadingInmo(false)
+  }
+}
+
+
+  //===========handler proveedores=================
+  async function handleSubmitProveedor(
+  e: React.FormEvent<HTMLFormElement>
+) {
+  e.preventDefault()
+  setLoadingProveedor(true)
+
+  const formData = new FormData(e.currentTarget)
+
+  try {
+    const res = await fetch('/api/partners/proveedores', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        empresa_nombre: formData.get('empresa_nombre'),
+        contacto_nombre: formData.get('contacto_nombre'),
+        cargo: formData.get('cargo'),
+        email: formData.get('email'),
+        telefono: formData.get('telefono'),
+        ciudad: formData.get('ciudad'),
+
+        servicio_mudanza: formData.get('servicio_mudanza') === 'on',
+        servicio_limpieza: formData.get('servicio_limpieza') === 'on',
+        servicio_pintura: formData.get('servicio_pintura') === 'on',
+        servicio_decoracion: formData.get('servicio_decoracion') === 'on',
+        servicio_mantenimiento: formData.get('servicio_mantenimiento') === 'on',
+        servicio_otros: formData.get('servicio_otros') === 'on',
+
+        tipo_equipo: formData.get('tipo_equipo'),
+        plazos: formData.get('plazos'),
+
+        tiene_seguro: formData.get('tiene_seguro') === 'on',
+        emite_factura: formData.get('emite_factura') === 'on',
+
+        web: formData.get('web'),
+        mensaje: formData.get('mensaje')
+      })
+    })
+
+    if (!res.ok) throw new Error('Error API proveedores')
+
+    setOpenProveedorModal(false)
+    e.currentTarget.reset()
+  } catch (err) {
+    console.error(err)
+    alert('Error enviando formulario de proveedores')
+  } finally {
+    setLoadingProveedor(false)
+  }
+}
+
+
+  
   return (
     <>
       <Header onOpenModal={() => setOpen(true)} />
@@ -621,52 +718,54 @@ export default function HomePage() {
         ¡Quiero sumar mi inmobiliaria a Voarah!
       </h2>
 
-      <form
-        onSubmit={(e) => e.preventDefault()}
-        style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
-      >
-        <input placeholder="Nombre de la inmobiliaria" required />
-        <input placeholder="Nombre y apellido del contacto" required />
-        <input placeholder="Cargo (Dueño / Director / Asesor / Otro)" required />
-        <input type="email" placeholder="Email" required />
-        <input placeholder="Teléfono / WhatsApp" required />
-        <input placeholder="Ciudad / zona donde opera" required />
+<form
+  onSubmit={handleSubmitInmobiliaria}
+  style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+>
+  <input name="inmobiliaria_nombre" placeholder="Nombre de la inmobiliaria" required />
+  <input name="contacto_nombre" placeholder="Nombre y apellido del contacto" required />
+  <input name="cargo" placeholder="Cargo (Dueño / Director / Asesor / Otro)" required />
+  <input name="email" type="email" placeholder="Email" required />
+  <input name="telefono" placeholder="Teléfono / WhatsApp" required />
+  <input name="ciudad" placeholder="Ciudad / zona donde opera" required />
 
-        <select required>
-          <option value="">Operaciones mensuales</option>
-          <option>1–5</option>
-          <option>6–15</option>
-          <option>15+</option>
-        </select>
+  <select name="operaciones_mensuales" required>
+    <option value="">Operaciones mensuales</option>
+    <option value="1-5">1–5</option>
+    <option value="6-15">6–15</option>
+    <option value="15+">15+</option>
+  </select>
 
-        <select required>
-          <option value="">Tipo de operaciones</option>
-          <option>Ventas</option>
-          <option>Alquileres</option>
-          <option>Ambas</option>
-        </select>
+  <select name="tipo_operaciones" required>
+    <option value="">Tipo de operaciones</option>
+    <option value="ventas">Ventas</option>
+    <option value="alquileres">Alquileres</option>
+    <option value="ambas">Ambas</option>
+  </select>
 
-        <strong>¿Qué te interesa mejorar?</strong>
-        <label><input type="checkbox" /> Diferenciación</label>
-        <label><input type="checkbox" /> Ingresos adicionales</label>
-        <label><input type="checkbox" /> Experiencia del cliente</label>
-        <label><input type="checkbox" /> Fidelización</label>
-        <label><input type="checkbox" /> Todo lo anterior</label>
+  <strong>¿Qué te interesa mejorar?</strong>
+  <label><input type="checkbox" name="interes_diferenciacion" /> Diferenciación</label>
+  <label><input type="checkbox" name="interes_ingresos" /> Ingresos adicionales</label>
+  <label><input type="checkbox" name="interes_experiencia" /> Experiencia del cliente</label>
+  <label><input type="checkbox" name="interes_fidelizacion" /> Fidelización</label>
+  <label><input type="checkbox" name="interes_todo" /> Todo lo anterior</label>
 
-        <button
-          style={{
-            marginTop: 12,
-            padding: 14,
-            background: '#8E24AA',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 8,
-            fontWeight: 600
-          }}
-        >
-          Quiero que me contacten
-        </button>
-      </form>
+  <button
+    type="submit"
+    style={{
+      marginTop: 12,
+      padding: 14,
+      background: '#8E24AA',
+      color: '#fff',
+      border: 'none',
+      borderRadius: 8,
+      fontWeight: 600
+    }}
+  >
+    Quiero que me contacten
+  </button>
+</form>
+
     </div>
   </div>
 )}
@@ -701,63 +800,65 @@ export default function HomePage() {
         Quiero ser partner de servicios de Voarah
       </h2>
 
-      <form
-        onSubmit={(e) => e.preventDefault()}
-        style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
-      >
-        <input placeholder="Nombre de la empresa" required />
-        <input placeholder="Nombre y apellido del contacto" required />
-        <input placeholder="Cargo" required />
-        <input type="email" placeholder="Email" required />
-        <input placeholder="Teléfono / WhatsApp" required />
-        <input placeholder="Ciudad / zonas donde opera" required />
+   <form
+  onSubmit={handleSubmitProveedor}
+  style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+>
+  <input name="empresa_nombre" placeholder="Nombre de la empresa" required />
+  <input name="contacto_nombre" placeholder="Nombre y apellido del contacto" required />
+  <input name="cargo" placeholder="Cargo" required />
+  <input name="email" type="email" placeholder="Email" required />
+  <input name="telefono" placeholder="Teléfono / WhatsApp" required />
+  <input name="ciudad" placeholder="Ciudad / zonas donde opera" required />
 
-        <strong>Servicios que ofrecen</strong>
-        <label><input type="checkbox" /> Mudanza</label>
-        <label><input type="checkbox" /> Limpieza</label>
-        <label><input type="checkbox" /> Pintura</label>
-        <label><input type="checkbox" /> Decoración</label>
-        <label><input type="checkbox" /> Mantenimiento</label>
-        <label><input type="checkbox" /> Otros</label>
+  <strong>Servicios que ofrecen</strong>
+  <label><input type="checkbox" name="servicio_mudanza" /> Mudanza</label>
+  <label><input type="checkbox" name="servicio_limpieza" /> Limpieza</label>
+  <label><input type="checkbox" name="servicio_pintura" /> Pintura</label>
+  <label><input type="checkbox" name="servicio_decoracion" /> Decoración</label>
+  <label><input type="checkbox" name="servicio_mantenimiento" /> Mantenimiento</label>
+  <label><input type="checkbox" name="servicio_otros" /> Otros</label>
 
-        <select required>
-          <option value="">Tipo de equipo</option>
-          <option>Propio</option>
-          <option>Mixto</option>
-          <option>Tercerizado</option>
-        </select>
+  <select name="tipo_equipo" required>
+    <option value="">Tipo de equipo</option>
+    <option value="propio">Propio</option>
+    <option value="mixto">Mixto</option>
+    <option value="tercerizado">Tercerizado</option>
+  </select>
 
-        <select required>
-          <option value="">¿Coordinan trabajos en plazos ajustados?</option>
-          <option>Sí</option>
-          <option>No</option>
-          <option>Depende del volumen</option>
-        </select>
+  <select name="plazos" required>
+    <option value="">¿Coordinan trabajos en plazos ajustados?</option>
+    <option value="si">Sí</option>
+    <option value="no">No</option>
+    <option value="depende">Depende del volumen</option>
+  </select>
 
-        <label>
-          <input type="checkbox" /> Tengo seguro de responsabilidad civil
-        </label>
-        <label>
-          <input type="checkbox" /> Emito factura
-        </label>
+  <label>
+    <input type="checkbox" name="tiene_seguro" /> Tengo seguro de responsabilidad civil
+  </label>
+  <label>
+    <input type="checkbox" name="emite_factura" /> Emito factura
+  </label>
 
-        <input placeholder="Sitio web o redes sociales" />
-        <textarea placeholder="¿Por qué te gustaría trabajar con Voarah?" rows={3} />
+  <input name="web" placeholder="Sitio web o redes sociales" />
+  <textarea name="mensaje" placeholder="¿Por qué te gustaría trabajar con Voarah?" rows={3} />
 
-        <button
-          style={{
-            marginTop: 12,
-            padding: 14,
-            background: '#8E24AA',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 8,
-            fontWeight: 600
-          }}
-        >
-          Quiero ser partner de Voarah
-        </button>
-      </form>
+  <button
+    type="submit"
+    style={{
+      marginTop: 12,
+      padding: 14,
+      background: '#8E24AA',
+      color: '#fff',
+      border: 'none',
+      borderRadius: 8,
+      fontWeight: 600
+    }}
+  >
+    Quiero ser partner de Voarah
+  </button>
+</form>
+
     </div>
   </div>
 )}
