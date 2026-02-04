@@ -105,7 +105,7 @@ async function handleSubmitInmobiliaria(
 
 
   //===========handler proveedores=================
-  async function handleSubmitProveedor(
+async function handleSubmitProveedor(
   e: React.FormEvent<HTMLFormElement>
 ) {
   e.preventDefault()
@@ -120,26 +120,27 @@ async function handleSubmitInmobiliaria(
       body: JSON.stringify({
         empresa_nombre: formData.get('empresa_nombre'),
         contacto_nombre: formData.get('contacto_nombre'),
-        cargo: formData.get('cargo'),
+        contacto_cargo: formData.get('cargo'),
         email: formData.get('email'),
         telefono: formData.get('telefono'),
-        ciudad: formData.get('ciudad'),
+        ciudad_zona: formData.get('ciudad'),
 
         servicio_mudanza: formData.get('servicio_mudanza') === 'on',
         servicio_limpieza: formData.get('servicio_limpieza') === 'on',
         servicio_pintura: formData.get('servicio_pintura') === 'on',
         servicio_decoracion: formData.get('servicio_decoracion') === 'on',
+        servicio_compra_objetos: false,
         servicio_mantenimiento: formData.get('servicio_mantenimiento') === 'on',
         servicio_otros: formData.get('servicio_otros') === 'on',
 
         tipo_equipo: formData.get('tipo_equipo'),
-        plazos: formData.get('plazos'),
+        coordina_plazos: formData.get('plazos'),
 
-        tiene_seguro: formData.get('tiene_seguro') === 'on',
+        seguro_responsabilidad: formData.get('tiene_seguro') === 'on',
         emite_factura: formData.get('emite_factura') === 'on',
 
-        web: formData.get('web'),
-        mensaje: formData.get('mensaje')
+        sitio_web: formData.get('web'),
+        motivacion: formData.get('mensaje')
       })
     })
 
@@ -154,6 +155,7 @@ async function handleSubmitInmobiliaria(
     setLoadingProveedor(false)
   }
 }
+
 
 
   
