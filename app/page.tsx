@@ -92,7 +92,7 @@ export default function HomePage() {
     }}
   >
     Ecosistema de servicios integrados para cada operación inmobiliaria.<br />
-    todo en un solo lugar.
+    Todo en un solo lugar.
   </p>
 
   <button
