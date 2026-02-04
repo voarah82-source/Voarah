@@ -454,7 +454,7 @@ async function handleSubmitProveedor(
         }}
       >
         <h3 style={{ fontSize: 22, marginBottom: 16 }}>
-          Para Inmobiliarias
+           Inmobiliarias
         </h3>
 
         <p style={{ fontSize: 15, color: '#555', marginBottom: 16 }}>
@@ -497,7 +497,7 @@ async function handleSubmitProveedor(
         }}
       >
         <h3 style={{ fontSize: 22, marginBottom: 16 }}>
-          Para Proveedores de servicios
+           Proveedores de servicios
         </h3>
 
         <p style={{ fontSize: 15, color: '#555', marginBottom: 16 }}>
