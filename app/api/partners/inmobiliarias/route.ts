@@ -8,17 +8,17 @@ export async function POST(req: Request) {
     const {
       inmobiliaria_nombre,
       contacto_nombre,
-      cargo,
+      contacto_cargo,
       email,
       telefono,
-      ciudad,
+      ciudad_zona,
       operaciones_mensuales,
       tipo_operaciones,
-      interes_diferenciacion,
-      interes_ingresos,
-      interes_experiencia,
-      interes_fidelizacion,
-      interes_todo
+      interes_diferenciacion = false,
+      interes_ingresos = false,
+      interes_experiencia = false,
+      interes_fidelizacion = false,
+      interes_todo = false
     } = body
 
     const supabase = createClient(
@@ -31,10 +31,10 @@ export async function POST(req: Request) {
       .insert({
         inmobiliaria_nombre,
         contacto_nombre,
-        cargo,
+        contacto_cargo,
         email,
         telefono,
-        ciudad,
+        ciudad_zona,
         operaciones_mensuales,
         tipo_operaciones,
         interes_diferenciacion,
@@ -45,13 +45,11 @@ export async function POST(req: Request) {
       })
 
     if (error) {
-      console.error('INMO INSERT ERROR:', error)
       return NextResponse.json({ error: 'DB error' }, { status: 500 })
     }
 
     return NextResponse.json({ ok: true })
-  } catch (err) {
-    console.error('INMO API ERROR:', err)
+  } catch {
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
   }
 }
