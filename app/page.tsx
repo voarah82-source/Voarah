@@ -282,6 +282,8 @@ export default function HomePage() {
       para que todo funcione de manera rápida y ordenada.
     </p>
   </div>
+  
+  <div style={{ display: 'flex', justifyContent: 'center' }}>
     <button
     onClick={() => setOpen(true)}
     style={{
