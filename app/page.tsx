@@ -97,11 +97,6 @@ export default function HomePage() {
           >
             Activar mis beneficios
           </button>
-
-          <p style={{ marginTop: 12, fontSize: 12, color: '#777' }}>
-            Beneficios para clientes de
-            inmobiliarias adheridas.
-          </p>
         </section>
 
         {/* SLIDER ECOSISTEMA VOARAH */}
