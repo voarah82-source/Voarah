@@ -113,31 +113,41 @@ export default function HomePage() {
             padding: '32px 0'
           }}
         >
-          <div className="slider-track">
-            {[
-          'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Decoracion.PNG',
-          'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Limpieza%20y%20puesta%20a%20punto.PMG',
-          'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Soluciones%20extendidas.png',
-          'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/deshacete%20de%20tus%20articulos.png',
-          'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/mudanza%20y%20logistica.png',
-          'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/pintura.png',
-          'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/titulo%20sobre%20las%20imagenes.png',
-            ].map((src, i) => (
-              <img
-                key={i}
-                src={src}
-                alt="Servicios Voarah"
-                style={{
-                  height: 220,
-                  width: 320,
-                  objectFit: 'cover',
-                  borderRadius: 12,
-                  marginRight: 12,
-                  flexShrink: 0
-                }}
-              />
-            ))}
-          </div>
+         <div className="slider-track">
+  {[
+    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Decoracion.PNG',
+    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Limpieza%20y%20puesta%20a%20punto.PMG',
+    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Soluciones%20extendidas.png',
+    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/deshacete%20de%20tus%20articulos.png',
+    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/mudanza%20y%20logistica.png',
+    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/pintura.png',
+    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/titulo%20sobre%20las%20imagenes.png',
+
+    // DUPLICADO PARA LOOP INFINITO
+    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Decoracion.PNG',
+    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Limpieza%20y%20puesta%20a%20punto.PMG',
+    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Soluciones%20extendidas.png',
+    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/deshacete%20de%20tus%20articulos.png',
+    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/mudanza%20y%20logistica.png',
+    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/pintura.png',
+    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/titulo%20sobre%20las%20imagenes.png',
+  ].map((src, i) => (
+    <img
+      key={i}
+      src={src}
+      alt="Servicios Voarah"
+      style={{
+        height: 220,
+        width: 320,
+        objectFit: 'cover',
+        borderRadius: 12,
+        marginRight: 12,
+        flexShrink: 0
+      }}
+    />
+  ))}
+</div>
+
 
           <style jsx>{`
             .slider-track {
