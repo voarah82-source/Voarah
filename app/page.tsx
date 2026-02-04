@@ -596,6 +596,176 @@ export default function HomePage() {
   )
 }
 
+{openInmoModal && (
+  <div
+    onClick={() => setOpenInmoModal(false)}
+    style={{
+      position: 'fixed',
+      inset: 0,
+      background: 'rgba(20,20,20,0.55)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 3000
+    }}
+  >
+    <div
+      onClick={(e) => e.stopPropagation()}
+      style={{
+        background: '#fff',
+        padding: 36,
+        borderRadius: 16,
+        width: 480,
+        maxHeight: '90vh',
+        overflowY: 'auto',
+        fontFamily: 'Montserrat, system-ui, sans-serif'
+      }}
+    >
+      <h2 style={{ marginBottom: 16 }}>
+        ¡Quiero sumar mi inmobiliaria a Voarah!
+      </h2>
+
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+      >
+        <input placeholder="Nombre de la inmobiliaria" required />
+        <input placeholder="Nombre y apellido del contacto" required />
+        <input placeholder="Cargo (Dueño / Director / Asesor / Otro)" required />
+        <input type="email" placeholder="Email" required />
+        <input placeholder="Teléfono / WhatsApp" required />
+        <input placeholder="Ciudad / zona donde opera" required />
+
+        <select required>
+          <option value="">Operaciones mensuales</option>
+          <option>1–5</option>
+          <option>6–15</option>
+          <option>15+</option>
+        </select>
+
+        <select required>
+          <option value="">Tipo de operaciones</option>
+          <option>Ventas</option>
+          <option>Alquileres</option>
+          <option>Ambas</option>
+        </select>
+
+        <strong>¿Qué te interesa mejorar?</strong>
+        <label><input type="checkbox" /> Diferenciación</label>
+        <label><input type="checkbox" /> Ingresos adicionales</label>
+        <label><input type="checkbox" /> Experiencia del cliente</label>
+        <label><input type="checkbox" /> Fidelización</label>
+        <label><input type="checkbox" /> Todo lo anterior</label>
+
+        <button
+          style={{
+            marginTop: 12,
+            padding: 14,
+            background: '#8E24AA',
+            color: '#fff',
+            border: 'none',
+            borderRadius: 8,
+            fontWeight: 600
+          }}
+        >
+          Quiero que me contacten
+        </button>
+      </form>
+    </div>
+  </div>
+)}
+
+{openProveedorModal && (
+  <div
+    onClick={() => setOpenProveedorModal(false)}
+    style={{
+      position: 'fixed',
+      inset: 0,
+      background: 'rgba(20,20,20,0.55)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 3000
+    }}
+  >
+    <div
+      onClick={(e) => e.stopPropagation()}
+      style={{
+        background: '#fff',
+        padding: 36,
+        borderRadius: 16,
+        width: 520,
+        maxHeight: '90vh',
+        overflowY: 'auto',
+        fontFamily: 'Montserrat, system-ui, sans-serif'
+      }}
+    >
+      <h2 style={{ marginBottom: 16 }}>
+        Quiero ser partner de servicios de Voarah
+      </h2>
+
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+      >
+        <input placeholder="Nombre de la empresa" required />
+        <input placeholder="Nombre y apellido del contacto" required />
+        <input placeholder="Cargo" required />
+        <input type="email" placeholder="Email" required />
+        <input placeholder="Teléfono / WhatsApp" required />
+        <input placeholder="Ciudad / zonas donde opera" required />
+
+        <strong>Servicios que ofrecen</strong>
+        <label><input type="checkbox" /> Mudanza</label>
+        <label><input type="checkbox" /> Limpieza</label>
+        <label><input type="checkbox" /> Pintura</label>
+        <label><input type="checkbox" /> Decoración</label>
+        <label><input type="checkbox" /> Mantenimiento</label>
+        <label><input type="checkbox" /> Otros</label>
+
+        <select required>
+          <option value="">Tipo de equipo</option>
+          <option>Propio</option>
+          <option>Mixto</option>
+          <option>Tercerizado</option>
+        </select>
+
+        <select required>
+          <option value="">¿Coordinan trabajos en plazos ajustados?</option>
+          <option>Sí</option>
+          <option>No</option>
+          <option>Depende del volumen</option>
+        </select>
+
+        <label>
+          <input type="checkbox" /> Tengo seguro de responsabilidad civil
+        </label>
+        <label>
+          <input type="checkbox" /> Emito factura
+        </label>
+
+        <input placeholder="Sitio web o redes sociales" />
+        <textarea placeholder="¿Por qué te gustaría trabajar con Voarah?" rows={3} />
+
+        <button
+          style={{
+            marginTop: 12,
+            padding: 14,
+            background: '#8E24AA',
+            color: '#fff',
+            border: 'none',
+            borderRadius: 8,
+            fontWeight: 600
+          }}
+        >
+          Quiero ser partner de Voarah
+        </button>
+      </form>
+    </div>
+  </div>
+)}
+
+
 const radioStyle = {
   display: 'flex',
   alignItems: 'center',
