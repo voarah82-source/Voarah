@@ -55,7 +55,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Header />
+      <Header onOpenModal={() => setOpen(true)} />
 
       <main
         style={{
