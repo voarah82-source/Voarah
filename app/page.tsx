@@ -429,7 +429,7 @@ export default function HomePage() {
 
 
 
-        {/* MODAL */}
+        {/* MODAL CTAs */}
         {open && (
           <div
             onClick={() => setOpen(false)}
