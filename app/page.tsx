@@ -204,9 +204,11 @@ export default function HomePage() {
       margin: '0 auto 16px'
     }}
   >
-    Voarah nace para simplificar uno de los momentos más importantes:
-    el cambio de hogar. Conectamos personas, servicios y productos en un
-    ecosistema diseñado para reducir fricciones y ahorrar tiempo.
+    En VOARAH conectamos a personas que están por mudarse o entrar en una vivienda con proveedores de servicios confiables: 
+    mudanzas, limpieza, mantenimiento, reformas, compra venta de artículos usados, etc.
+    Trabajamos con inmobiliarias para que sus clientes resuelvan todo lo que necesitan para su nuevo hogar, de forma simple, rápida y sin costo para ellos.
+    Nosotros coordinamos, el cliente elige, y los servicios suceden.
+
   </p>
 
   <p
