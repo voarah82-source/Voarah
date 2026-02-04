@@ -224,7 +224,7 @@ export default function HomePage() {
 </section>
 
 
-        {/* COMO FUNCIONA */}
+      {/* COMO FUNCIONA */}
 <section
   id="como-funciona"
   style={{
@@ -274,34 +274,34 @@ export default function HomePage() {
         fontSize: 16,
         color: '#555',
         maxWidth: 720,
-        margin: '0 auto'
+        margin: '0 auto 32px'
       }}
     >
       Cada servicio es brindado por especialistas seleccionados y validados por VOARAH,
       bajo estándares definidos de calidad y experiencia,
       para que todo funcione de manera rápida y ordenada.
     </p>
+
+    <button
+      onClick={() => setOpen(true)}
+      style={{
+        display: 'block',
+        margin: '0 auto',
+        padding: '14px 28px',
+        background: '#8E24AA',
+        color: '#fff',
+        border: 'none',
+        borderRadius: 8,
+        fontSize: 16,
+        fontWeight: 600,
+        cursor: 'pointer'
+      }}
+    >
+      Activar mis beneficios
+    </button>
   </div>
-  
-  <div style={{ display: 'flex', justifyContent: 'center' }}>
-   <button
-  onClick={() => setOpen(true)}
-  style={{
-    display: 'block',
-    margin: '32px auto 0',
-    padding: '14px 28px',
-    background: '#8E24AA',
-    color: '#fff',
-    border: 'none',
-    borderRadius: 8,
-    fontSize: 16,
-    fontWeight: 600,
-    cursor: 'pointer'
-  }}
->
-  Activar mis beneficios
-</button>
 </section>
+
 
 
         {/* MODAL */}
