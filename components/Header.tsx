@@ -63,6 +63,14 @@ export default function Header({ onOpenModal }: HeaderProps) {
             Cómo funciona
           </button>
 
+           <button
+    onClick={() =>
+      document.getElementById('quienes-somos')?.scrollIntoView({ behavior: 'smooth' })
+    }
+  >
+    Quiénes somos
+  </button>
+
           <button
             onClick={onOpenModal}
             style={{
