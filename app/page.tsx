@@ -7,6 +7,9 @@ export default function HomePage() {
   const [open, setOpen] = useState(false)
   const [interes, setInteres] = useState<'servicios' | 'productos' | 'ambos' | ''>('')
   const [loading, setLoading] = useState(false)
+  const [openInmoModal, setOpenInmoModal] = useState(false)
+  const [openProveedorModal, setOpenProveedorModal] = useState(false)
+
 
   const inputStyle = {
     padding: '12px 14px',
