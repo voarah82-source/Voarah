@@ -303,6 +303,124 @@ export default function HomePage() {
     </button>
   </div>
 </section>
+        {/* PARTNERS VOARAH */}
+<section
+  id="partners"
+  style={{
+    background: '#ffffff',
+    padding: '80px 24px'
+  }}
+>
+  <div
+    style={{
+      maxWidth: 1100,
+      margin: '0 auto'
+    }}
+  >
+    <h2
+      style={{
+        fontSize: 28,
+        marginBottom: 40,
+        textAlign: 'center'
+      }}
+    >
+      Sumate como partner de Voarah
+    </h2>
+
+    <div
+      style={{
+        display: 'flex',
+        gap: 32,
+        flexWrap: 'wrap'
+      }}
+    >
+      {/* INMOBILIARIAS */}
+      <div
+        style={{
+          flex: 1,
+          minWidth: 280,
+          background: '#f7f7f7',
+          padding: 32,
+          borderRadius: 16
+        }}
+      >
+        <h3 style={{ fontSize: 22, marginBottom: 16 }}>
+          Para Inmobiliarias
+        </h3>
+
+        <p style={{ fontSize: 15, color: '#555', marginBottom: 16 }}>
+          En VOARAH ayudamos a las inmobiliarias a ofrecer un valor añadido real
+          a sus clientes. A través de nuestra plataforma, sus inquilinos o
+          compradores acceden fácilmente a servicios clave para su mudanza y
+          puesta a punto de la vivienda.
+        </p>
+
+        <p style={{ fontSize: 15, color: '#555', marginBottom: 24 }}>
+          Sin gestión extra para tu equipo, sin coste para tus clientes y con
+          proveedores verificados. Si quieres mejorar la experiencia de tus
+          clientes y diferenciarte, hablemos.
+        </p>
+
+        <a
+          href="/form-inmobiliarias"
+          style={{
+            display: 'inline-block',
+            padding: '14px 22px',
+            background: '#8E24AA',
+            color: '#ffffff',
+            borderRadius: 8,
+            fontWeight: 600,
+            textDecoration: 'none'
+          }}
+        >
+          Quiero sumar mi inmobiliaria
+        </a>
+      </div>
+
+      {/* PROVEEDORES */}
+      <div
+        style={{
+          flex: 1,
+          minWidth: 280,
+          background: '#f7f7f7',
+          padding: 32,
+          borderRadius: 16
+        }}
+      >
+        <h3 style={{ fontSize: 22, marginBottom: 16 }}>
+          Para Proveedores de servicios
+        </h3>
+
+        <p style={{ fontSize: 15, color: '#555', marginBottom: 16 }}>
+          En VOARAH conectamos tu servicio con clientes que realmente lo
+          necesitan, en el momento justo: cuando entran a una nueva vivienda.
+        </p>
+
+        <p style={{ fontSize: 15, color: '#555', marginBottom: 24 }}>
+          Colaboramos con profesionales de mudanzas, limpieza, mantenimiento,
+          reformas y todo tipo de servicios que quieran recibir nuevas
+          oportunidades de trabajo a través de nuestra red de inmobiliarias.
+        </p>
+
+        <a
+          href="/form-proveedores"
+          style={{
+            display: 'inline-block',
+            padding: '14px 22px',
+            background: '#8E24AA',
+            color: '#ffffff',
+            borderRadius: 8,
+            fontWeight: 600,
+            textDecoration: 'none'
+          }}
+        >
+          Quiero ser partner de Voarah
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 
 
