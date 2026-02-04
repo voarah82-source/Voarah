@@ -115,6 +115,10 @@ export default function HomePage() {
         >
           <div className="slider-track">
             {[
+          'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Decoracion',
+          'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Limpieza%20y%20puesta%20a%20punto',
+          'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Soluciones%20extendidas',
+          'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/deshacete%20de%20tus%20articulos.png',
               'https://images.unsplash.com/photo-1604014237800-1c9102c219da',
               'https://images.unsplash.com/photo-1505691938895-1758d7feb511',
               'https://images.unsplash.com/photo-1600585154340-be6161a56a0c',
