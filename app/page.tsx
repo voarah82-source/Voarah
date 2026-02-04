@@ -116,6 +116,7 @@ export default function HomePage() {
           <div className="slider-track">
             {[
               'https://images.unsplash.com/photo-1604014237800-1c9102c219da',
+          'https://drive.google.com/drive/folders/1U6Q9LDcO44KwCpuCQXzyEacPgopMrvig',
               'https://images.unsplash.com/photo-1505691938895-1758d7feb511',
               'https://images.unsplash.com/photo-1600585154340-be6161a56a0c',
               'https://images.unsplash.com/photo-1613490493576-7fde63acd811',
