@@ -76,19 +76,9 @@ async function handleSubmitInmobiliaria(
       body: JSON.stringify({
         inmobiliaria_nombre: formData.get('inmobiliaria_nombre'),
         contacto_nombre: formData.get('contacto_nombre'),
-        contacto_cargo: formData.get('cargo'),
         email: formData.get('email'),
         telefono: formData.get('telefono'),
-        ciudad_zona: formData.get('ciudad'),
-
-        operaciones_mensuales: formData.get('operaciones_mensuales'),
-        tipo_operaciones: formData.get('tipo_operaciones'),
-
-        interes_diferenciacion: formData.get('interes_diferenciacion') === 'on',
-        interes_ingresos: formData.get('interes_ingresos') === 'on',
-        interes_experiencia: formData.get('interes_experiencia') === 'on',
-        interes_fidelizacion: formData.get('interes_fidelizacion') === 'on',
-        interes_todo: formData.get('interes_todo') === 'on'
+        ciudad_zona: formData.get('ciudad')
       })
     })
 
@@ -122,7 +112,6 @@ async function handleSubmitProveedor(
       body: JSON.stringify({
         empresa_nombre: formData.get('empresa_nombre'),
         contacto_nombre: formData.get('contacto_nombre'),
-        contacto_cargo: formData.get('cargo'),
         email: formData.get('email'),
         telefono: formData.get('telefono'),
         ciudad_zona: formData.get('ciudad'),
@@ -134,15 +123,7 @@ async function handleSubmitProveedor(
         servicio_compra_objetos: false,
         servicio_mantenimiento: formData.get('servicio_mantenimiento') === 'on',
         servicio_otros: formData.get('servicio_otros') === 'on',
-
-        tipo_equipo: formData.get('tipo_equipo'),
-        coordina_plazos: formData.get('plazos'),
-
-        seguro_responsabilidad: formData.get('tiene_seguro') === 'on',
-        emite_factura: formData.get('emite_factura') === 'on',
-
-        sitio_web: formData.get('web'),
-        motivacion: formData.get('mensaje')
+        servicio_otros_texto: formData.get('servicio_otros_texto')
       })
     })
 
@@ -157,7 +138,6 @@ async function handleSubmitProveedor(
     setLoadingProveedor(false)
   }
 }
-
 
 
   
@@ -732,47 +712,13 @@ async function handleSubmitProveedor(
 >
   <input name="inmobiliaria_nombre" placeholder="Nombre de la inmobiliaria" required />
   <input name="contacto_nombre" placeholder="Nombre y apellido del contacto" required />
-  <input name="cargo" placeholder="Cargo (Dueño / Director / Asesor / Otro)" required />
   <input name="email" type="email" placeholder="Email" required />
   <input name="telefono" placeholder="Teléfono / WhatsApp" required />
   <input name="ciudad" placeholder="Ciudad / zona donde opera" required />
 
-  <select name="operaciones_mensuales" required>
-    <option value="">Operaciones mensuales</option>
-    <option value="1-5">1–5</option>
-    <option value="6-15">6–15</option>
-    <option value="15+">15+</option>
-  </select>
-
-  <select name="tipo_operaciones" required>
-    <option value="">Tipo de operaciones</option>
-    <option value="ventas">Ventas</option>
-    <option value="alquileres">Alquileres</option>
-    <option value="ambas">Ambas</option>
-  </select>
-
-  <strong>¿Qué te interesa mejorar?</strong>
-  <label><input type="checkbox" name="interes_diferenciacion" /> Diferenciación</label>
-  <label><input type="checkbox" name="interes_ingresos" /> Ingresos adicionales</label>
-  <label><input type="checkbox" name="interes_experiencia" /> Experiencia del cliente</label>
-  <label><input type="checkbox" name="interes_fidelizacion" /> Fidelización</label>
-  <label><input type="checkbox" name="interes_todo" /> Todo lo anterior</label>
-
-  <button
-    type="submit"
-    style={{
-      marginTop: 12,
-      padding: 14,
-      background: '#8E24AA',
-      color: '#fff',
-      border: 'none',
-      borderRadius: 8,
-      fontWeight: 600
-    }}
-  >
-    Quiero que me contacten
-  </button>
+  <button type="submit">Quiero que me contacten</button>
 </form>
+
 
     </div>
   </div>
@@ -808,13 +754,12 @@ async function handleSubmitProveedor(
         Quiero ser partner de servicios de Voarah
       </h2>
 
-   <form
+  <form
   onSubmit={handleSubmitProveedor}
   style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
 >
   <input name="empresa_nombre" placeholder="Nombre de la empresa" required />
   <input name="contacto_nombre" placeholder="Nombre y apellido del contacto" required />
-  <input name="cargo" placeholder="Cargo" required />
   <input name="email" type="email" placeholder="Email" required />
   <input name="telefono" placeholder="Teléfono / WhatsApp" required />
   <input name="ciudad" placeholder="Ciudad / zonas donde opera" required />
@@ -827,45 +772,14 @@ async function handleSubmitProveedor(
   <label><input type="checkbox" name="servicio_mantenimiento" /> Mantenimiento</label>
   <label><input type="checkbox" name="servicio_otros" /> Otros</label>
 
-  <select name="tipo_equipo" required>
-    <option value="">Tipo de equipo</option>
-    <option value="propio">Propio</option>
-    <option value="mixto">Mixto</option>
-    <option value="tercerizado">Tercerizado</option>
-  </select>
+  <input
+    name="servicio_otros_texto"
+    placeholder="Si marcaste otros, especificá el servicio"
+  />
 
-  <select name="plazos" required>
-    <option value="">¿Coordinan trabajos en plazos ajustados?</option>
-    <option value="si">Sí</option>
-    <option value="no">No</option>
-    <option value="depende">Depende del volumen</option>
-  </select>
-
-  <label>
-    <input type="checkbox" name="tiene_seguro" /> Tengo seguro de responsabilidad civil
-  </label>
-  <label>
-    <input type="checkbox" name="emite_factura" /> Emito factura
-  </label>
-
-  <input name="web" placeholder="Sitio web o redes sociales" />
-  <textarea name="mensaje" placeholder="¿Por qué te gustaría trabajar con Voarah?" rows={3} />
-
-  <button
-    type="submit"
-    style={{
-      marginTop: 12,
-      padding: 14,
-      background: '#8E24AA',
-      color: '#fff',
-      border: 'none',
-      borderRadius: 8,
-      fontWeight: 600
-    }}
-  >
-    Quiero ser partner de Voarah
-  </button>
+  <button type="submit">Quiero ser partner de Voarah</button>
 </form>
+
 
     </div>
   </div>
