@@ -178,87 +178,113 @@ export default function HomePage() {
         </section>
 
 
-        {/* QUIÉNES SOMOS */}
-        <section
-          id="quienes-somos"
-          style={{
-            padding: '80px 24px',
-            maxWidth: 1100,
-            margin: '0 auto'
-          }}
-        >
-          <h2
-            style={{
-              fontSize: 28,
-              marginBottom: 24
-            }}
-          >
-            ¿Quiénes somos?
-          </h2>
+    {/* QUIÉNES SOMOS */}
+<section
+  id="quienes-somos"
+  style={{
+    padding: '80px 24px',
+    maxWidth: 1100,
+    margin: '0 auto',
+    textAlign: 'center'
+  }}
+>
+  <h2
+    style={{
+      fontSize: 28,
+      marginBottom: 24
+    }}
+  >
+    ¿Quiénes somos?
+  </h2>
 
-          <p
-            style={{
-              fontSize: 16,
-              color: '#555',
-              maxWidth: 760,
-              marginBottom: 16
-            }}
-          >
-            Voarah nace para simplificar uno de los momentos más importantes:
-            el cambio de hogar. Conectamos personas, servicios y productos en un
-            ecosistema diseñado para reducir fricciones y ahorrar tiempo.
-          </p>
+  <p
+    style={{
+      fontSize: 16,
+      color: '#555',
+      maxWidth: 760,
+      margin: '0 auto 16px'
+    }}
+  >
+    Voarah nace para simplificar uno de los momentos más importantes:
+    el cambio de hogar. Conectamos personas, servicios y productos en un
+    ecosistema diseñado para reducir fricciones y ahorrar tiempo.
+  </p>
 
-          <p
-            style={{
-              fontSize: 16,
-              color: '#555',
-              maxWidth: 760
-            }}
-          >
-            Trabajamos junto a inmobiliarias y partners estratégicos para ofrecer
-            soluciones confiables, coordinadas y pensadas para acompañarte antes,
-            durante y después de tu mudanza.
-          </p>
-        </section>
+  <p
+    style={{
+      fontSize: 16,
+      color: '#555',
+      maxWidth: 760,
+      margin: '0 auto'
+    }}
+  >
+    Trabajamos junto a inmobiliarias y partners estratégicos para ofrecer
+    soluciones confiables, coordinadas y pensadas para acompañarte antes,
+    durante y después de tu mudanza.
+  </p>
+</section>
+
 
         {/* COMO FUNCIONA */}
-        <section
-          id="como-funciona"
-          style={{
-            background: '#f7f7f7',
-            padding: '80px 24px'
-          }}
-        >
-          <div
-            style={{
-              maxWidth: 1100,
-              margin: '0 auto'
-            }}
-          >
-            <h2 style={{ fontSize: 28, marginBottom: 24 }}>
-              ¿Cómo funciona Voarah?
-            </h2>
+<section
+  id="como-funciona"
+  style={{
+    background: '#f7f7f7',
+    padding: '80px 24px'
+  }}
+>
+  <div
+    style={{
+      maxWidth: 1100,
+      margin: '0 auto',
+      textAlign: 'center'
+    }}
+  >
+    <h2 style={{ fontSize: 28, marginBottom: 24 }}>
+      ¿Cómo funciona Voarah?
+    </h2>
 
-            <p style={{ fontSize: 16, color: '#555', maxWidth: 720, marginBottom: 16 }}>
-            VOARAH ofrece tranquilidad en uno de los momentos más estresantes en la vida de las personas.
-            Organiza y coordina los servicios necesarios alrededor de una operación inmobiliaria, integrándolos en un sistema simple, 
-            claro y confiable.
-            </p>
+    <p
+      style={{
+        fontSize: 16,
+        color: '#555',
+        maxWidth: 720,
+        margin: '0 auto 16px'
+      }}
+    >
+      VOARAH ofrece tranquilidad en uno de los momentos más estresantes en la vida de las personas.
+      Organiza y coordina los servicios necesarios alrededor de una operación inmobiliaria,
+      integrándolos en un sistema simple, claro y confiable.
+    </p>
 
-            <p style={{ fontSize: 16, color: '#555', maxWidth: 720 }}>
-             A través de nuestra infraestructura, cualquier persona pueden resolver en un mismo entorno 
-              soluciones que habitualmente están dispersas, evitando la búsqueda individual, 
-              la falta de coordinación y la incertidumbre.
-            </p>
+    <p
+      style={{
+        fontSize: 16,
+        color: '#555',
+        maxWidth: 720,
+        margin: '0 auto 16px'
+      }}
+    >
+      A través de nuestra infraestructura, cualquier persona puede resolver en un mismo entorno
+      soluciones que habitualmente están dispersas, evitando la búsqueda individual,
+      la falta de coordinación y la incertidumbre.
+    </p>
 
-             <p style={{ fontSize: 16, color: '#555', maxWidth: 720 }}>
-               Cada servicio es brindado por especialistas seleccionados у validados por VOARAH, b
-               ajo estándares definidos de calidad y experiencia, 
-               para que todo funcione de manera rápida y ordenada.
-             </p>
-          </div>
-        </section>
+    <p
+      style={{
+        fontSize: 16,
+        color: '#555',
+        maxWidth: 720,
+        margin: '0 auto'
+      }}
+    >
+      Cada servicio es brindado por especialistas seleccionados y validados por VOARAH,
+      bajo estándares definidos de calidad y experiencia,
+      para que todo funcione de manera rápida y ordenada.
+    </p>
+  </div>
+</section>
+
 
         {/* MODAL */}
         {open && (
