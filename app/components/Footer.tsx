@@ -11,7 +11,7 @@ export default function Footer() {
       }}
     >
       <p style={{ marginBottom: 8 }}>
-        © {new Date().getFullYear()} Voarah · Alma Spain LLC
+        © {new Date().getFullYear()} Voarah 
       </p>
 
       <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
