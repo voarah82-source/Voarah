@@ -1,4 +1,5 @@
 import Footer from './components/Footer'
+import CookieBanner from './components/CookieBanner'
 
 export const metadata = {
   title: 'Voarah',
@@ -19,7 +20,9 @@ export default function RootLayout({
         }}
       >
         {children}
+
         <Footer />
+        <CookieBanner />
       </body>
     </html>
   )
