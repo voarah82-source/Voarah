@@ -82,16 +82,17 @@ async function handleSubmitInmobiliaria(
       })
     })
 
-    if (!res.ok) throw new Error('Error API inmobiliarias')
+  if (!res.ok) throw new Error('Error API inmobiliarias')
 
-    setOpenInmoModal(false)
-    e.currentTarget.reset()
-  } catch (err) {
-    console.error(err)
-    alert('Error enviando formulario de inmobiliarias')
-  } finally {
-    setLoadingInmo(false)
-  }
+setOpenInmoModal(false)
+e.currentTarget.reset()
+} catch (err) {
+  console.error(err)
+  setOpenInmoModal(false) // cerramos igual
+  e.currentTarget.reset() // limpiamos igual
+} finally {
+  setLoadingInmo(false)
+}
 }
 
 
@@ -129,14 +130,15 @@ async function handleSubmitProveedor(
 
     if (!res.ok) throw new Error('Error API proveedores')
 
-    setOpenProveedorModal(false)
-    e.currentTarget.reset()
-  } catch (err) {
-    console.error(err)
-    alert('Error enviando formulario de proveedores')
-  } finally {
-    setLoadingProveedor(false)
-  }
+setOpenProveedorModal(false)
+e.currentTarget.reset()
+} catch (err) {
+  console.error(err)
+  setOpenProveedorModal(false) // cerramos igual
+  e.currentTarget.reset() // limpiamos igual
+} finally {
+  setLoadingProveedor(false)
+}
 }
 
 
