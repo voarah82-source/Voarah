@@ -329,7 +329,7 @@ async function handleSubmitProveedor(
     }}
   >
     <h2 style={{ fontSize: 28, marginBottom: 24 }}>
-      ¿Cómo funciona Voarah?
+      ¿Cómo funciona VOARAH?
     </h2>
 
     <p
@@ -411,7 +411,7 @@ async function handleSubmitProveedor(
         textAlign: 'center'
       }}
     >
-      Sumate como partner de Voarah
+      Sumate como partner de VOARAH
     </h2>
 
     <div
