@@ -1,3 +1,4 @@
+// app/layout.tsx
 import Footer from './components/Footer'
 import CookieBanner from './components/CookieBanner'
 
@@ -20,9 +21,8 @@ export default function RootLayout({
         }}
       >
         {children}
-
-        <Footer />
         <CookieBanner />
+        <Footer />
       </body>
     </html>
   )
