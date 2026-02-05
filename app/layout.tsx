@@ -4,7 +4,7 @@ import CookieBanner from './components/CookieBanner'
 
 export const metadata = {
   title: 'Voarah',
-  description: 'Formulario de demanda inmobiliaria',
+  description: 'Más confiable. Más rápido. Más simple',
 }
 
 export default function RootLayout({
