@@ -111,29 +111,11 @@ export async function POST(req: Request) {
     .eq("id", origen.id);
 }
 
-    // =========================
-    // EMAIL DESTINATARIOS
-    // =========================
+   // =========================
+// EMAIL DESTINATARIOS
+// =========================
 
 const ADMIN = process.env.MAIL_FROM!;
-
-// Providers por interés (ya lo tenías)
-const PROVIDERS: Record<string, string[]> = {
-  servicios: [
-    "lucas.rosello@gmail.com",
-    "martinezmuerza@gmail.com",
-  ],
-  productos: [
-    "aedevincenzi@gmail.com",
-    "juancho12oddone@gmail.com",
-  ],
-  ambos: [
-    "lucas.rosello@gmail.com",
-    "martinezmuerza@gmail.com",
-    "aedevincenzi@gmail.com",
-    "juancho12oddone@gmail.com",
-  ],
-};
 
 // BCC según interés (fallback defensivo)
 const bccRecipients =
@@ -159,9 +141,9 @@ const whatsappLink = phoneClean
 
 await transporter.sendMail({
   from: `"Voarah" <${ADMIN}>`,
-  to: ADMIN,                 // 👈 SOLO VOS
-  bcc: bccRecipients,        // 👈 PROVIDERS EN COPIA OCULTA
-  replyTo: email,            // 👈 RESPONDE AL CLIENTE
+  to: ADMIN,          // 👈 SOLO VOS
+  bcc: bccRecipients, // 👈 PROVIDERS EN COPIA OCULTA
+  replyTo: email,     // 👈 RESPONDE AL CLIENTE
   subject: "Nuevo contacto desde Voarah",
   html: `
     <h3>Nuevo lead</h3>
@@ -197,6 +179,7 @@ await transporter.sendMail({
     }
   `,
 });
+
 
 
  // =========================
