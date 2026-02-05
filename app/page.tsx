@@ -210,9 +210,9 @@ async function handleSubmitProveedor(
             padding: '32px 0'
           }}
         >
-          <h2 style={{ textAlign: 'center', fontSize: 28, marginBottom: 24 }}>
+          <h1 style={{ textAlign: 'center', fontSize: 28, marginBottom: 24 }}>
   Un sistema. Todas las soluciones.
-</h2>
+</h1>
 
          <div className="slider-track">
   {[
