@@ -12,8 +12,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(false)
   const [loadingInmo, setLoadingInmo] = useState(false)
   const [loadingProveedor, setLoadingProveedor] = useState(false)
-
-
+  const [showSuccess, setShowSuccess] = useState(false)
 
   const inputStyle = {
     padding: '12px 14px',
@@ -82,10 +81,11 @@ async function handleSubmitInmobiliaria(
       })
     })
 
-  if (!res.ok) throw new Error('Error API inmobiliarias')
+if (!res.ok) throw new Error('Error API inmobiliarias')
 
 setOpenInmoModal(false)
 e.currentTarget.reset()
+setShowSuccess(true) // 👈 MOSTRAMOS MODAL DE ÉXITO
 } catch (err) {
   console.error(err)
   setOpenInmoModal(false) // cerramos igual
@@ -93,6 +93,7 @@ e.currentTarget.reset()
 } finally {
   setLoadingInmo(false)
 }
+
 }
 
 
@@ -128,10 +129,11 @@ async function handleSubmitProveedor(
       })
     })
 
-    if (!res.ok) throw new Error('Error API proveedores')
+if (!res.ok) throw new Error('Error API proveedores')
 
 setOpenProveedorModal(false)
 e.currentTarget.reset()
+setShowSuccess(true) // 👈 MOSTRAMOS MODAL DE ÉXITO
 } catch (err) {
   console.error(err)
   setOpenProveedorModal(false) // cerramos igual
@@ -139,6 +141,7 @@ e.currentTarget.reset()
 } finally {
   setLoadingProveedor(false)
 }
+
 }
 
 
@@ -818,6 +821,55 @@ e.currentTarget.reset()
     Quiero ser partner de Voarah
   </button>
 </form>
+{showSuccess && (
+  <div
+    style={{
+      position: 'fixed',
+      inset: 0,
+      background: 'rgba(20,20,20,0.55)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 3000
+    }}
+  >
+    <div
+      style={{
+        background: '#fff',
+        padding: '32px 36px',
+        borderRadius: 14,
+        width: 420,
+        textAlign: 'center',
+        boxShadow: '0 30px 80px rgba(0,0,0,0.25)',
+        fontFamily: 'Montserrat, system-ui, sans-serif'
+      }}
+    >
+      <h3 style={{ fontSize: 22, marginBottom: 12 }}>
+        ¡Datos enviados!
+      </h3>
+
+      <p style={{ fontSize: 15, color: '#555', marginBottom: 24 }}>
+        Hemos ingresado tus datos y nos pondremos en contacto a la brevedad.
+      </p>
+
+      <button
+        onClick={() => setShowSuccess(false)}
+        style={{
+          padding: '12px 22px',
+          background: '#8E24AA',
+          color: '#fff',
+          border: 'none',
+          borderRadius: 8,
+          fontSize: 15,
+          fontWeight: 600,
+          cursor: 'pointer'
+        }}
+      >
+        Cerrar
+      </button>
+    </div>
+  </div>
+)}
 
 
 
