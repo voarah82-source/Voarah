@@ -292,10 +292,9 @@ async function handleSubmitProveedor(
       margin: '0 auto 16px'
     }}
   >
-    En VOARAH conectamos a personas que están por mudarse o entrar en una vivienda con proveedores de servicios confiables: 
-    mudanzas, limpieza, mantenimiento, reformas, compra venta de artículos usados, etc.
-    Trabajamos con inmobiliarias para que sus clientes resuelvan todo lo que necesitan para su nuevo hogar, de forma simple, rápida y sin costo para ellos.
-    Nosotros coordinamos, el cliente elige, y los servicios suceden.
+   VOARAH nace con una idea simple: los momentos importantes de la vida no deberían estar llenos de estrés, desorden ni decisiones improvisadas.
+   Creamos una infraestructura que integra soluciones que normalmente están dispersas, transformándolas en una experiencia coordinada, clara y confiable.
+   Somos un ecosistema que organiza y respalda cada etapa alrededor de una operación inmobiliaria, para que toda la experiencia del cliente sea fluida y fácil.
 
   </p>
 
