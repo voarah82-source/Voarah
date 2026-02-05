@@ -708,14 +708,38 @@ async function handleSubmitProveedor(
   onSubmit={handleSubmitInmobiliaria}
   style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
 >
-  <input name="inmobiliaria_nombre" placeholder="Nombre de la inmobiliaria" required />
-  <input name="contacto_nombre" placeholder="Nombre y apellido del contacto" required />
+  <input
+    name="inmobiliaria_nombre"
+    placeholder="Nombre de la inmobiliaria"
+    required
+  />
+  <input
+    name="contacto_nombre"
+    placeholder="Nombre y apellido del contacto"
+    required
+  />
   <input name="email" type="email" placeholder="Email" required />
   <input name="telefono" placeholder="Teléfono / WhatsApp" required />
   <input name="ciudad" placeholder="Ciudad / zona donde opera" required />
 
-  <button type="submit">Quiero que me contacten</button>
+  <button
+    type="submit"
+    style={{
+      marginTop: 12,
+      padding: '14px 28px',
+      background: '#8E24AA',
+      color: '#fff',
+      border: 'none',
+      borderRadius: 8,
+      fontSize: 16,
+      fontWeight: 600,
+      cursor: 'pointer'
+    }}
+  >
+    Quiero que me contacten
+  </button>
 </form>
+
 
 
     </div>
@@ -775,8 +799,24 @@ async function handleSubmitProveedor(
     placeholder="Si marcaste otros, especificá el servicio"
   />
 
-  <button type="submit">Quiero ser partner de Voarah</button>
+  <button
+    type="submit"
+    style={{
+      marginTop: 12,
+      padding: '14px 28px',
+      background: '#8E24AA',
+      color: '#fff',
+      border: 'none',
+      borderRadius: 8,
+      fontSize: 16,
+      fontWeight: 600,
+      cursor: 'pointer'
+    }}
+  >
+    Quiero ser partner de Voarah
+  </button>
 </form>
+
 
 
     </div>
