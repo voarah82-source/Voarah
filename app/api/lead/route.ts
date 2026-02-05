@@ -157,7 +157,6 @@ await transporter.sendMail({
     <p><b>Email:</b> ${email}</p>
     <p><b>Teléfono:</b> ${telefono}</p>
     <p><b>Interés:</b> ${interes}</p>
-    <p><b>Origen:</b> ${origenCodigo}</p>
     <p><b>Comentario:</b><br/>${comentario}</p>
 
     ${
