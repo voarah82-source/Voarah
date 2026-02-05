@@ -114,15 +114,90 @@ export async function POST(req: Request) {
     // =========================
     // EMAIL DESTINATARIOS
     // =========================
-    const ADMIN = process.env.MAIL_FROM!;
-    const providerRecipients =
-      PROVIDERS[interes] || [];
 
-    const recipients = [
-      ADMIN,               // vos
-      ...providerRecipients,
-      email,               // cliente
-    ];
+const ADMIN = process.env.MAIL_FROM!;
+
+// Providers por interés (ya lo tenías)
+const PROVIDERS: Record<string, string[]> = {
+  servicios: [
+    "lucas.rosello@gmail.com",
+    "martinezmuerza@gmail.com",
+  ],
+  productos: [
+    "aedevincenzi@gmail.com",
+    "juancho12oddone@gmail.com",
+  ],
+  ambos: [
+    "lucas.rosello@gmail.com",
+    "martinezmuerza@gmail.com",
+    "aedevincenzi@gmail.com",
+    "juancho12oddone@gmail.com",
+  ],
+};
+
+// BCC según interés (fallback defensivo)
+const bccRecipients =
+  PROVIDERS[interes] && PROVIDERS[interes].length > 0
+    ? PROVIDERS[interes]
+    : [];
+
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT),
+  secure: true,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
+
+// WhatsApp (solo para providers)
+const phoneClean = telefono.replace(/\D/g, "");
+const whatsappLink = phoneClean
+  ? `https://wa.me/${phoneClean}`
+  : null;
+
+await transporter.sendMail({
+  from: `"Voarah" <${ADMIN}>`,
+  to: ADMIN,                 // 👈 SOLO VOS
+  bcc: bccRecipients,        // 👈 PROVIDERS EN COPIA OCULTA
+  replyTo: email,            // 👈 RESPONDE AL CLIENTE
+  subject: "Nuevo contacto desde Voarah",
+  html: `
+    <h3>Nuevo lead</h3>
+    <p><b>Nombre:</b> ${nombre}</p>
+    <p><b>Email:</b> ${email}</p>
+    <p><b>Teléfono:</b> ${telefono}</p>
+    <p><b>Interés:</b> ${interes}</p>
+    <p><b>Mensaje:</b><br/>${comentario || "—"}</p>
+
+    ${
+      whatsappLink
+        ? `
+          <hr/>
+          <a
+            href="${whatsappLink}"
+            target="_blank"
+            style="
+              display:inline-block;
+              margin-top:16px;
+              padding:12px 20px;
+              background:#25D366;
+              color:#ffffff;
+              text-decoration:none;
+              border-radius:6px;
+              font-weight:bold;
+              font-family:Arial,sans-serif;
+            "
+          >
+            💬 Escribir al cliente por WhatsApp
+          </a>
+        `
+        : ""
+    }
+  `,
+});
+
 
  // =========================
 // EMAIL
