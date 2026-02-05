@@ -51,17 +51,9 @@ export async function POST(req: Request) {
     // =========================
     // SUPABASE (SERVER ONLY)
     // =========================
-    const SUPABASE_URL = process.env.SUPABASE_URL;
+    const SUPABASE_URL = process.env.SUPABASE_URL!;
     const SUPABASE_SERVICE_ROLE_KEY =
-      process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-    if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
-      console.error("❌ Supabase env vars missing");
-      return NextResponse.json(
-        { error: "Configuración del servidor incompleta" },
-        { status: 500 }
-      );
-    }
+      process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
     const supabase = createClient(
       SUPABASE_URL,
@@ -71,11 +63,11 @@ export async function POST(req: Request) {
     // =========================
     // BUSCAR ORIGEN
     // =========================
- const { data: origen } = await supabase
-  .from("origenes_comerciales")
-  .select("id")
-  .eq("codigo", origenCodigo)
-  .maybeSingle();
+    const { data: origen } = await supabase
+      .from("origenes_comerciales")
+      .select("id")
+      .eq("codigo", origenCodigo)
+      .maybeSingle();
 
     // =========================
     // INSERT LEAD
@@ -104,166 +96,99 @@ export async function POST(req: Request) {
     // =========================
     // UPDATE ORIGEN (LAST USED)
     // =========================
-   if (origen) {
-  await supabase
-    .from("origenes_comerciales")
-    .update({ last_used_at: new Date().toISOString() })
-    .eq("id", origen.id);
-}
-
-   // =========================
-// EMAIL DESTINATARIOS
-// =========================
-
-const ADMIN = process.env.MAIL_FROM!;
-
-// BCC según interés (fallback defensivo)
-const bccRecipients =
-  PROVIDERS[interes] && PROVIDERS[interes].length > 0
-    ? PROVIDERS[interes]
-    : [];
-
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
-  secure: true,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
-
-// WhatsApp (solo para providers)
-const phoneClean = telefono.replace(/\D/g, "");
-const whatsappLink = phoneClean
-  ? `https://wa.me/${phoneClean}`
-  : null;
-
-await transporter.sendMail({
-  from: `"Voarah" <${ADMIN}>`,
-  to: ADMIN,          // 👈 SOLO VOS
-  bcc: bccRecipients, // 👈 PROVIDERS EN COPIA OCULTA
-  replyTo: email,     // 👈 RESPONDE AL CLIENTE
-  subject: "Nuevo contacto desde Voarah",
-  html: `
-    <h3>Nuevo lead</h3>
-    <p><b>Nombre:</b> ${nombre}</p>
-    <p><b>Email:</b> ${email}</p>
-    <p><b>Teléfono:</b> ${telefono}</p>
-    <p><b>Interés:</b> ${interes}</p>
-    <p><b>Mensaje:</b><br/>${comentario || "—"}</p>
-
-    ${
-      whatsappLink
-        ? `
-          <hr/>
-          <a
-            href="${whatsappLink}"
-            target="_blank"
-            style="
-              display:inline-block;
-              margin-top:16px;
-              padding:12px 20px;
-              background:#25D366;
-              color:#ffffff;
-              text-decoration:none;
-              border-radius:6px;
-              font-weight:bold;
-              font-family:Arial,sans-serif;
-            "
-          >
-            💬 Escribir al cliente por WhatsApp
-          </a>
-        `
-        : ""
+    if (origen) {
+      await supabase
+        .from("origenes_comerciales")
+        .update({ last_used_at: new Date().toISOString() })
+        .eq("id", origen.id);
     }
-  `,
-});
 
+    // =========================
+    // EMAIL (UN SOLO MAIL A VOS + BCC)
+    // =========================
+    const ADMIN = process.env.MAIL_FROM!;
 
+    const bccRecipients =
+      PROVIDERS[interes] && PROVIDERS[interes].length > 0
+        ? PROVIDERS[interes]
+        : [];
 
- // =========================
-// EMAIL
-// =========================
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
-  secure: true,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
+      secure: true,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    });
 
-// WhatsApp (solo para partners)
-const phoneClean = telefono.replace(/\D/g, "");
-const whatsappLink = phoneClean
-  ? `https://wa.me/${phoneClean}`
-  : null;
+    // WhatsApp (solo para providers)
+    const phoneClean = telefono.replace(/\D/g, "");
+    const whatsappLink = phoneClean
+      ? `https://wa.me/${phoneClean}`
+      : null;
 
-// =========================
-// MAIL A PARTNERS / PROVIDERS (+ nosotros)
-// =========================
-await transporter.sendMail({
-  from: `"Voarah" <${ADMIN}>`,
-  to: [ADMIN, ...providerRecipients],
-  replyTo: email,
-  subject: "Nuevo contacto desde Voarah",
-  html: `
-    <h3>Nuevo lead</h3>
-    <p><b>Nombre:</b> ${nombre}</p>
-    <p><b>Email:</b> ${email}</p>
-    <p><b>Teléfono:</b> ${telefono}</p>
-    <p><b>Interés:</b> ${interes}</p>
-    <p><b>Comentario:</b><br/>${comentario}</p>
+    await transporter.sendMail({
+      from: `"Voarah" <${ADMIN}>`,
+      to: ADMIN,
+      bcc: bccRecipients,
+      replyTo: email,
+      subject: "Nuevo contacto desde Voarah",
+      html: `
+        <h3>Nuevo lead</h3>
+        <p><b>Nombre:</b> ${nombre}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Teléfono:</b> ${telefono}</p>
+        <p><b>Interés:</b> ${interes}</p>
+        <p><b>Mensaje:</b><br/>${comentario || "—"}</p>
 
-    ${
-      whatsappLink
-        ? `
-        <hr/>
-        <a
-          href="${whatsappLink}"
-          target="_blank"
-          style="
-            display:inline-block;
-            margin-top:16px;
-            padding:12px 20px;
-            background:#25D366;
-            color:#ffffff;
-            text-decoration:none;
-            border-radius:6px;
-            font-weight:bold;
-            font-family:Arial,sans-serif;
-          "
-        >
-          💬 Escribir al lead por WhatsApp
-        </a>
-        `
-        : ""
-    }
-  `,
-});
+        ${
+          whatsappLink
+            ? `
+              <hr/>
+              <a
+                href="${whatsappLink}"
+                target="_blank"
+                style="
+                  display:inline-block;
+                  margin-top:16px;
+                  padding:12px 20px;
+                  background:#25D366;
+                  color:#ffffff;
+                  text-decoration:none;
+                  border-radius:6px;
+                  font-weight:bold;
+                  font-family:Arial,sans-serif;
+                "
+              >
+                💬 Escribir al cliente por WhatsApp
+              </a>
+            `
+            : ""
+        }
+      `,
+    });
 
-// =========================
-// MAIL AL CLIENTE (SIN WHATSAPP)
-// =========================
-await transporter.sendMail({
-  from: `"Voarah" <${ADMIN}>`,
-  to: email,
-  subject: "Recibimos tu contacto en Voarah",
-  html: `
-    <h3>Gracias por contactarte con Voarah</h3>
-    <p>Recibimos tu solicitud y un partner se va a comunicar con vos.</p>
+    // =========================
+    // MAIL AL CLIENTE (SIN WHATSAPP)
+    // =========================
+    await transporter.sendMail({
+      from: `"Voarah" <${ADMIN}>`,
+      to: email,
+      subject: "Recibimos tu contacto en Voarah",
+      html: `
+        <h3>Gracias por contactarte con Voarah</h3>
+        <p>Recibimos tu solicitud y un partner se va a comunicar con vos.</p>
 
-    <p><b>Nombre:</b> ${nombre}</p>
-    <p><b>Email:</b> ${email}</p>
-    <p><b>Teléfono:</b> ${telefono}</p>
-    <p><b>Interés:</b> ${interes}</p>
-  `,
-});
+        <p><b>Nombre:</b> ${nombre}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Teléfono:</b> ${telefono}</p>
+        <p><b>Interés:</b> ${interes}</p>
+      `,
+    });
 
-return NextResponse.json({ ok: true, leadId: lead.id });
-
+    return NextResponse.json({ ok: true, leadId: lead.id });
   } catch (err) {
     console.error("❌ API error:", err);
     return NextResponse.json(
@@ -272,4 +197,3 @@ return NextResponse.json({ ok: true, leadId: lead.id });
     );
   }
 }
-
