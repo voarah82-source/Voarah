@@ -10,7 +10,7 @@ import { createClient } from "@supabase/supabase-js";
 // =========================
 const PROVIDERS: Record<string, string[]> = {
   servicios: [
-    "lucas.rosello@gmail.com",
+    "lucas.rossello@gmail.com",
     "martinezmuerza@gmail.com",
   ],
   productos: [
@@ -18,7 +18,7 @@ const PROVIDERS: Record<string, string[]> = {
     "juancho12oddone@gmail.com",
   ],
   ambos: [
-    "lucas.rosello@gmail.com",
+    "lucas.rossello@gmail.com",
     "martinezmuerza@gmail.com",
     "aedevincenzi@gmail.com",
     "juancho12oddone@gmail.com",
