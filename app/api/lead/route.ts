@@ -219,7 +219,7 @@ const whatsappLink = phoneClean
   : null;
 
 // =========================
-// MAIL A PARTNERS / PROVIDERS (+ vos)
+// MAIL A PARTNERS / PROVIDERS (+ nosotros)
 // =========================
 await transporter.sendMail({
   from: `"Voarah" <${ADMIN}>`,
