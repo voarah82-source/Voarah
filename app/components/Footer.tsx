@@ -18,8 +18,9 @@ export default function Footer() {
       <div
         style={{
           display: 'flex',
-          gap: 16,
-          justifyContent: 'center',
+          flexDirection: 'column',
+          gap: 8,
+          alignItems: 'center',
           marginBottom: 16
         }}
       >
@@ -46,3 +47,4 @@ export default function Footer() {
     </footer>
   )
 }
+
