@@ -180,8 +180,7 @@ async function handleSubmitProveedor(
       margin: '0 auto 32px'
     }}
   >
-    Ecosistema de servicios integrados para cada operación inmobiliaria.<br />
-    Todo en un solo lugar.
+    VOARAH es un ecosistema que integra y coordina los servicios que rodean la operación inmobiliaria.<br />
   </p>
 
   <button
