@@ -54,10 +54,10 @@ export default function Header({ onOpenModal }: HeaderProps) {
             alignItems: 'center',
             gap: 28
           }}
-        >
+        >       
+          {/*<button onClick={() => scrollTo('servicios')}>Servicios</button>
+          <button onClick={() => scrollTo('servicios')}>Productos</button>*/}
           <button onClick={() => scrollTo('partners')}>Partners</button>
-          <button onClick={() => scrollTo('servicios')}>Servicios</button>
-          <button onClick={() => scrollTo('servicios')}>Productos</button>
           <button onClick={() => scrollTo('como-funciona')}>Cómo funciona</button>
           <button onClick={() => scrollTo('quienes-somos')}>Quiénes somos</button>
 
