@@ -297,10 +297,9 @@ setShowSuccess(true) // 👈 MOSTRAMOS MODAL DE ÉXITO
       margin: '0 auto 16px'
     }}
   >
-   VOARAH nace con una idea simple: los momentos importantes de la vida no deberían estar llenos de estrés, desorden ni decisiones improvisadas.
-   Creamos una infraestructura que integra soluciones que normalmente están dispersas, transformándolas en una experiencia coordinada, clara y confiable.
-   Somos un ecosistema que organiza y respalda cada etapa alrededor de una operación inmobiliaria, para que toda la experiencia del cliente sea fluida y fácil.
-
+  VOARAH nace de una idea simple: los momentos importantes de la vida no deberían estar llenos de estrés ni desorden.
+Creamos una infraestructura que integra soluciones que normalmente están dispersas, transformándolas en una experiencia coordinada, clara y confiable.
+Organizamos cada etapa alrededor de una operación inmobiliaria para que todo fluya de forma simple.
   </p>
 
   <p
@@ -311,9 +310,7 @@ setShowSuccess(true) // 👈 MOSTRAMOS MODAL DE ÉXITO
       margin: '0 auto'
     }}
   >
-    Trabajamos junto a inmobiliarias y partners estratégicos para ofrecer
-    soluciones confiables, coordinadas y pensadas para acompañarte antes,
-    durante y después de tu mudanza.
+    
   </p>
 </section>
 
@@ -358,9 +355,9 @@ setShowSuccess(true) // 👈 MOSTRAMOS MODAL DE ÉXITO
         margin: '0 auto 16px'
       }}
     >
-      A través de nuestra infraestructura, cualquier persona puede resolver en un mismo entorno
-      soluciones que habitualmente están dispersas, evitando la búsqueda individual,
-      la falta de coordinación y la incertidumbre.
+     VOARAH organiza y coordina los servicios necesarios alrededor de una operación inmobiliaria, integrándolos en un sistema simple, claro y confiable.
+Desde un mismo entorno, las personas acceden a soluciones que antes estaban dispersas, evitando la búsqueda individual, la falta de coordinación y la incertidumbre.
+Cada servicio es brindado por especialistas seleccionados y validados por VOARAH, bajo estándares definidos de calidad y experiencia.
     </p>
 
     <p
@@ -371,9 +368,9 @@ setShowSuccess(true) // 👈 MOSTRAMOS MODAL DE ÉXITO
         margin: '0 auto 32px'
       }}
     >
-      Cada servicio es brindado por especialistas seleccionados y validados por VOARAH,
+      {/* Cada servicio es brindado por especialistas seleccionados y validados por VOARAH,
       bajo estándares definidos de calidad y experiencia,
-      para que todo funcione de manera rápida y ordenada.
+      para que todo funcione de manera rápida y ordenada.*/}
     </p>
 
     <button
@@ -441,16 +438,16 @@ setShowSuccess(true) // 👈 MOSTRAMOS MODAL DE ÉXITO
         </h3>
 
         <p style={{ fontSize: 15, color: '#555', marginBottom: 16 }}>
-          En VOARAH ayudamos a las inmobiliarias a ofrecer un valor añadido real
-          a sus clientes. A través de nuestra plataforma, sus inquilinos o
-          compradores acceden fácilmente a servicios clave para su mudanza y
-          puesta a punto de la vivienda.
+        En VOARAH ayudamos a las inmobiliarias a diferenciarse ofreciendo una experiencia más completa en cada operación.
+A través de nuestra infraestructura, tus clientes acceden a soluciones confiables y coordinadas, sin gestión adicional para tu equipo, fortaleciendo tu posicionamiento y tu capacidad de atraer y cerrar más operaciones.
+
+Además, al sumarte accedés a beneficios exclusivos que fortalecen tu negocio; te lo contamos al contactarte.
         </p>
 
         <p style={{ fontSize: 15, color: '#555', marginBottom: 24 }}>
-          Sin gestión extra para tu equipo, sin coste para tus clientes y con
+          {/* Sin gestión extra para tu equipo, sin coste para tus clientes y con
           proveedores verificados. Si quieres mejorar la experiencia de tus
-          clientes y diferenciarte, hablemos.
+          clientes y diferenciarte, hablemos.*/}
         </p>
 
         <button
