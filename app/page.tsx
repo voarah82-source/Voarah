@@ -297,7 +297,8 @@ setShowSuccess(true) // 👈 MOSTRAMOS MODAL DE ÉXITO
       margin: '0 auto 16px'
     }}
   >
-  VOARAH nace de una idea simple: los momentos importantes de la vida no deberían estar llenos de estrés ni desorden.
+  VOARAH nace de una idea simple: los momentos importantes de la vida no deberían estar llenos de estrés ni desorden.< br/>
+    
 Creamos una infraestructura que integra soluciones que normalmente están dispersas, transformándolas en una experiencia coordinada, clara y confiable.
 Organizamos cada etapa alrededor de una operación inmobiliaria para que todo fluya de forma simple.
   </p>
@@ -440,14 +441,11 @@ Cada servicio es brindado por especialistas seleccionados y validados por VOARAH
         <p style={{ fontSize: 15, color: '#555', marginBottom: 16 }}>
         En VOARAH ayudamos a las inmobiliarias a diferenciarse ofreciendo una experiencia más completa en cada operación.
 A través de nuestra infraestructura, tus clientes acceden a soluciones confiables y coordinadas, sin gestión adicional para tu equipo, fortaleciendo tu posicionamiento y tu capacidad de atraer y cerrar más operaciones.
-
-Además, al sumarte accedés a beneficios exclusivos que fortalecen tu negocio; te lo contamos al contactarte.
         </p>
 
         <p style={{ fontSize: 15, color: '#555', marginBottom: 24 }}>
-          {/* Sin gestión extra para tu equipo, sin coste para tus clientes y con
-          proveedores verificados. Si quieres mejorar la experiencia de tus
-          clientes y diferenciarte, hablemos.*/}
+          Además, al sumarte accedés a beneficios exclusivos que fortalecen tu negocio; te lo contamos al contactarte.
+
         </p>
 
         <button
