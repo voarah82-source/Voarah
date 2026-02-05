@@ -13,9 +13,7 @@ export default function ContactoPage() {
         <a href="mailto:hola@voarah.com">hola@voarah.com</a>
       </p>
 
-      <p>
-        Voarah es un servicio operado por <strong>Alma Spain LLC</strong>.
-      </p>
+
     </main>
   );
 }
