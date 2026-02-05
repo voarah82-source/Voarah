@@ -342,9 +342,9 @@ Organizamos cada etapa alrededor de una operación inmobiliaria para que todo fl
         margin: '0 auto 16px'
       }}
     >
-      VOARAH ofrece tranquilidad en uno de los momentos más estresantes en la vida de las personas.
-      Organiza y coordina los servicios necesarios alrededor de una operación inmobiliaria,
-      integrándolos en un sistema simple, claro y confiable.
+     VOARAH organiza y coordina los servicios necesarios alrededor de una operación inmobiliaria, integrándolos en un sistema simple, claro y confiable.
+Desde un mismo entorno, las personas acceden a soluciones que antes estaban dispersas, evitando la búsqueda individual, la falta de coordinación y la incertidumbre.
+Cada servicio es brindado por especialistas seleccionados y validados por VOARAH, bajo estándares definidos de calidad y experiencia.
     </p>
 
     <p
@@ -355,9 +355,9 @@ Organizamos cada etapa alrededor de una operación inmobiliaria para que todo fl
         margin: '0 auto 16px'
       }}
     >
-     VOARAH organiza y coordina los servicios necesarios alrededor de una operación inmobiliaria, integrándolos en un sistema simple, claro y confiable.
+      {/*VOARAH organiza y coordina los servicios necesarios alrededor de una operación inmobiliaria, integrándolos en un sistema simple, claro y confiable.
 Desde un mismo entorno, las personas acceden a soluciones que antes estaban dispersas, evitando la búsqueda individual, la falta de coordinación y la incertidumbre.
-Cada servicio es brindado por especialistas seleccionados y validados por VOARAH, bajo estándares definidos de calidad y experiencia.
+Cada servicio es brindado por especialistas seleccionados y validados por VOARAH, bajo estándares definidos de calidad y experiencia.*/}
     </p>
 
     <p
