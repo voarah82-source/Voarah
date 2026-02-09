@@ -188,6 +188,11 @@ setShowSuccess(true) // 👈 MOSTRAMOS MODAL DE ÉXITO
     VOARAH es un ecosistema que integra y coordina los servicios que rodean la operación inmobiliaria.<br />
   </p>
 
+ <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+  <span style={{ fontSize: 14, fontWeight: 500 }}>
+    Soy Particular
+  </span>
+
   <button
     onClick={() => setOpen(true)}
     style={{
@@ -203,6 +208,8 @@ setShowSuccess(true) // 👈 MOSTRAMOS MODAL DE ÉXITO
   >
     Activar mis beneficios
   </button>
+</div>
+
 </section>
 
         
