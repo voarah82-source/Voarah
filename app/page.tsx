@@ -548,7 +548,7 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
           fontWeight: 700
         }}
       >
-        Activar beneficios Voarah
+        Activar beneficios VOARAH
       </h2>
 
       <p
