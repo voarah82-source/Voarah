@@ -460,7 +460,7 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
             cursor: 'pointer'
           }}
         >
-          Quiero sumar mi inmobiliaria
+          Quiero sumarme a VOARAH
         </button>
       </div>
 
@@ -501,7 +501,7 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
             cursor: 'pointer'
           }}
         >
-          Quiero ser partner de Voarah
+          Quiero sumarme a VOARAH
         </button>
       </div>
     </div>
