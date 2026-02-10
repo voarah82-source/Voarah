@@ -87,19 +87,19 @@ export async function POST(req: Request) {
 // =========================
 // BUSCAR ORIGEN (OBLIGATORIO)
 // =========================
-const { data: origen, error: origenError } = await supabase
+const { data: origen } = await supabase
   .from("origenes_comerciales")
   .select("id")
   .eq("codigo", origenCodigo)
   .single();
 
-if (origenError || !origen) {
-  console.error("❌ Origen inválido:", origenError);
+if (!origen) {
   return NextResponse.json(
     { error: "Origen inválido" },
     { status: 400 }
   );
 }
+
 
 // =========================
 // INSERT LEAD
@@ -134,17 +134,20 @@ await supabase
   .eq("id", origen.id);
   }
 
-    // =========================
-    // DESTINATARIOS (BCC)
-    // =========================
-    const bccSet = new Set<string>();
+  // =========================
+// DESTINATARIOS (BCC)
+// =========================
+const bccSet = new Set<string>();
 
-    servicios.forEach((s) => {
-      const key = s.startsWith("otros") ? "otros" : s;
-      PROVIDERS_BY_SERVICE[key]?.forEach((mail) => bccSet.add(mail));
-    });
+servicios.forEach((s) => {
+  const key = s.startsWith("otros") ? "otros" : s;
+  PROVIDERS_BY_SERVICE[key]?.forEach((mail) => {
+    bccSet.add(mail);
+  });
+});
 
-    const bccRecipients = Array.from(bccSet);
+const bccRecipients = Array.from(bccSet);
+
 
     // =========================
     // EMAIL
