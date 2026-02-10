@@ -13,6 +13,7 @@ export async function POST(req: Request) {
       ciudad_zona,
 
       servicio_mudanza,
+      servicio_guardamuebles,
       servicio_limpieza,
       servicio_pintura,
       servicio_decoracion,
@@ -37,6 +38,7 @@ export async function POST(req: Request) {
         ciudad_zona,
 
         servicio_mudanza: !!servicio_mudanza,
+        servicio_guardamuebles: !!servicio_guardamuebles,
         servicio_limpieza: !!servicio_limpieza,
         servicio_pintura: !!servicio_pintura,
         servicio_decoracion: !!servicio_decoracion,
