@@ -33,16 +33,17 @@ export default function Header({ onOpenModal }: HeaderProps) {
         borderBottom: '1px solid #e5e5e5'
       }}
     >
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: '0 auto',
-          padding: '12px 16px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between'
-        }}
-      >
+     <div
+  style={{
+    maxWidth: 1200,
+    margin: '0 auto',
+    padding: '6px 16px', // 👈 SOLO ESTO CAMBIA
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  }}
+>
+
         <Link href="/">
           <img
             src="https://storage.googleapis.com/msgsndr/JXR7pttzzH9R0mOEMF3S/media/697b69f5e98b489f5b32a200.png"
