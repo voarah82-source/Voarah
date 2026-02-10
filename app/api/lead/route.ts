@@ -220,7 +220,7 @@ await supabase
     });
 
     return NextResponse.json({ ok: true, leadId: lead.id });
-  } catch (err) {
+    catch (err) {
     console.error("❌ API error:", err);
     return NextResponse.json(
       { error: "Error interno" },
