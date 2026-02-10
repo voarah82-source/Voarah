@@ -6,18 +6,16 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
 // =========================
-// PROVEEDORES POR INTERÉS
+// PROVEEDORES POR SERVICIO
 // =========================
-const PROVIDERS: Record<string, string[]> = {
-  servicios: [
-    "lucas.rossello@gmail.com",
-    "martinezmuerza@gmail.com",
-  ],
-  productos: [
-    "aedevincenzi@gmail.com",
-    "juancho12oddone@gmail.com",
-  ],
-  ambos: [
+const PROVIDERS_BY_SERVICE: Record<string, string[]> = {
+  mudanza: ["lucas.rossello@gmail.com"],
+  guardamuebles: ["lucas.rossello@gmail.com"],
+  limpieza: ["martinezmuerza@gmail.com"],
+  pintura: ["aedevincenzi@gmail.com"],
+  decoracion: ["aedevincenzi@gmail.com"],
+  mantenimiento: ["juancho12oddone@gmail.com"],
+  otros: [
     "lucas.rossello@gmail.com",
     "martinezmuerza@gmail.com",
     "aedevincenzi@gmail.com",
@@ -37,8 +35,16 @@ export async function POST(req: Request) {
       email,
       telefono,
       comentario,
-      interes,
       origen: origenCodigo,
+
+      servicio_mudanza,
+      servicio_guardamuebles,
+      servicio_limpieza,
+      servicio_pintura,
+      servicio_decoracion,
+      servicio_mantenimiento,
+      servicio_otros,
+      servicio_otros_texto,
     } = body;
 
     if (!nombre || !email || !telefono) {
@@ -49,15 +55,33 @@ export async function POST(req: Request) {
     }
 
     // =========================
-    // SUPABASE (SERVER ONLY)
+    // ARMAR INTENCION
     // =========================
-    const SUPABASE_URL = process.env.SUPABASE_URL!;
-    const SUPABASE_SERVICE_ROLE_KEY =
-      process.env.SUPABASE_SERVICE_ROLE_KEY!;
+    const servicios: string[] = [];
 
+    if (servicio_mudanza) servicios.push("mudanza");
+    if (servicio_guardamuebles) servicios.push("guardamuebles");
+    if (servicio_limpieza) servicios.push("limpieza");
+    if (servicio_pintura) servicios.push("pintura");
+    if (servicio_decoracion) servicios.push("decoracion");
+    if (servicio_mantenimiento) servicios.push("mantenimiento");
+    if (servicio_otros) {
+      servicios.push(
+        servicio_otros_texto
+          ? `otros: ${servicio_otros_texto}`
+          : "otros"
+      );
+    }
+
+    const intencion =
+      servicios.length > 0 ? servicios.join(", ") : "no_especificado";
+
+    // =========================
+    // SUPABASE
+    // =========================
     const supabase = createClient(
-      SUPABASE_URL,
-      SUPABASE_SERVICE_ROLE_KEY
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
     );
 
     // =========================
@@ -79,7 +103,7 @@ export async function POST(req: Request) {
         email,
         telefono,
         comentario,
-        intencion: interes || "no_especificado",
+        intencion,
         origen_id: origen ? origen.id : null,
       })
       .select()
@@ -94,7 +118,7 @@ export async function POST(req: Request) {
     }
 
     // =========================
-    // UPDATE ORIGEN (LAST USED)
+    // UPDATE ORIGEN
     // =========================
     if (origen) {
       await supabase
@@ -104,14 +128,21 @@ export async function POST(req: Request) {
     }
 
     // =========================
-    // EMAIL (UN SOLO MAIL A VOS + BCC)
+    // DESTINATARIOS (BCC)
     // =========================
-    const ADMIN = process.env.MAIL_FROM!;
+    const bccSet = new Set<string>();
 
-    const bccRecipients =
-      PROVIDERS[interes] && PROVIDERS[interes].length > 0
-        ? PROVIDERS[interes]
-        : [];
+    servicios.forEach((s) => {
+      const key = s.startsWith("otros") ? "otros" : s;
+      PROVIDERS_BY_SERVICE[key]?.forEach((mail) => bccSet.add(mail));
+    });
+
+    const bccRecipients = Array.from(bccSet);
+
+    // =========================
+    // EMAIL
+    // =========================
+    const ADMIN = "hola@voarah.com";
 
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
@@ -123,7 +154,6 @@ export async function POST(req: Request) {
       },
     });
 
-    // WhatsApp (solo para providers)
     const phoneClean = telefono.replace(/\D/g, "");
     const whatsappLink = phoneClean
       ? `https://wa.me/${phoneClean}`
@@ -140,7 +170,7 @@ export async function POST(req: Request) {
         <p><b>Nombre:</b> ${nombre}</p>
         <p><b>Email:</b> ${email}</p>
         <p><b>Teléfono:</b> ${telefono}</p>
-        <p><b>Interés:</b> ${interes}</p>
+        <p><b>Servicios solicitados:</b> ${intencion}</p>
         <p><b>Mensaje:</b><br/>${comentario || "—"}</p>
 
         ${
@@ -159,7 +189,6 @@ export async function POST(req: Request) {
                   text-decoration:none;
                   border-radius:6px;
                   font-weight:bold;
-                  font-family:Arial,sans-serif;
                 "
               >
                 💬 Escribir al cliente por WhatsApp
@@ -171,7 +200,7 @@ export async function POST(req: Request) {
     });
 
     // =========================
-    // MAIL AL CLIENTE (SIN WHATSAPP)
+    // MAIL AL CLIENTE
     // =========================
     await transporter.sendMail({
       from: `"Voarah" <${ADMIN}>`,
@@ -180,11 +209,6 @@ export async function POST(req: Request) {
       html: `
         <h3>Gracias por contactarte con Voarah</h3>
         <p>Recibimos tu solicitud y un partner se va a comunicar con vos.</p>
-
-        <p><b>Nombre:</b> ${nombre}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Teléfono:</b> ${telefono}</p>
-        <p><b>Interés:</b> ${interes}</p>
       `,
     });
 
@@ -197,3 +221,4 @@ export async function POST(req: Request) {
     );
   }
 }
+
