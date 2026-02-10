@@ -212,70 +212,98 @@ setShowSuccess(true) // 👈 MOSTRAMOS MODAL DE ÉXITO
 
 </section>
 
-        
-        {/* SLIDER ECOSISTEMA VOARAH */}
-        <section
+{/* SLIDER ECOSISTEMA VOARAH */}
+<section
+  style={{
+    width: '100%',
+    overflow: 'hidden',
+    background: '#ffffff',
+    padding: '32px 0'
+  }}
+>
+  <h1
+    style={{
+      textAlign: 'center',
+      fontSize: 28,
+      marginBottom: 24,
+      padding: '0 16px'
+    }}
+  >
+    Un sistema. Todas las soluciones.
+  </h1>
+
+  {/* WRAPPER PARA EVITAR OVERFLOW GLOBAL */}
+  <div
+    style={{
+      width: '100%',
+      overflow: 'hidden'
+    }}
+  >
+    <div className="slider-track">
+      {[
+        'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Decoracion.PNG',
+        'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Limpieza%20y%20puesta%20a%20punto.PMG',
+        'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Soluciones%20extendidas.png',
+        'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/deshacete%20de%20tus%20articulos.png',
+        'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/mudanza%20y%20logistica.png',
+        'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/pintura.png',
+
+        // DUPLICADO PARA LOOP INFINITO
+        'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Decoracion.PNG',
+        'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Limpieza%20y%20puesta%20a%20punto.PMG',
+        'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Soluciones%20extendidas.png',
+        'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/deshacete%20de%20tus%20articulos.png',
+        'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/mudanza%20y%20logistica.png',
+        'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/pintura.png',
+        'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/titulo%20sobre%20las%20imagenes.png',
+      ].map((src, i) => (
+        <img
+          key={i}
+          src={src}
+          alt="Servicios Voarah"
           style={{
-            width: '100%',
-            overflow: 'hidden',
-            background: '#ffffff',
-            padding: '32px 0'
+            height: 220,
+            width: 320,
+            objectFit: 'cover',
+            borderRadius: 12,
+            marginRight: 12,
+            flexShrink: 0
           }}
-        >
-          <h1 style={{ textAlign: 'center', fontSize: 28, marginBottom: 24 }}>
-  Un sistema. Todas las soluciones.
-</h1>
+        />
+      ))}
+    </div>
+  </div>
 
-         <div className="slider-track">
-  {[
-    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Decoracion.PNG',
-    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Limpieza%20y%20puesta%20a%20punto.PMG',
-    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Soluciones%20extendidas.png',
-    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/deshacete%20de%20tus%20articulos.png',
-    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/mudanza%20y%20logistica.png',
-    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/pintura.png',
-    
+  <style jsx>{`
+    .slider-track {
+      display: flex;
+      width: max-content;
+      animation: slider-marquee 30s linear infinite;
+      will-change: transform;
+    }
 
-    // DUPLICADO PARA LOOP INFINITO
-    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Decoracion.PNG',
-    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Limpieza%20y%20puesta%20a%20punto.PMG',
-    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/Soluciones%20extendidas.png',
-    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/deshacete%20de%20tus%20articulos.png',
-    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/mudanza%20y%20logistica.png',
-    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/pintura.png',
-    'https://pub-9dfc71df9bad42b19366c96dcbca6cd0.r2.dev/titulo%20sobre%20las%20imagenes.png',
-  ].map((src, i) => (
-    <img
-      key={i}
-      src={src}
-      alt="Servicios Voarah"
-      style={{
-        height: 220,
-        width: 320,
-        objectFit: 'cover',
-        borderRadius: 12,
-        marginRight: 12,
-        flexShrink: 0
-      }}
-    />
-  ))}
-</div>
+    @keyframes slider-marquee {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
 
+    /* ===== MOBILE FIX ===== */
+    @media (max-width: 768px) {
+      .slider-track img {
+        width: 240px;
+        height: 160px;
+      }
 
-          <style jsx>{`
-            .slider-track {
-              display: flex;
-              width: max-content;
-              animation: slider-marquee 30s linear infinite;
-            }
-
-            @keyframes slider-marquee {
-              0% { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-          `}</style>
-        </section>
-
+      .slider-track {
+        animation-duration: 40s;
+      }
+    }
+  `}</style>
+</section>
 
     {/* QUIÉNES SOMOS */}
 <section
