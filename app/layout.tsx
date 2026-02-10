@@ -18,8 +18,6 @@ export default function RootLayout({
         style={{
           margin: 0,
           fontFamily: 'Montserrat, system-ui, sans-serif',
-    margin: 0,
-    fontFamily: 'Montserrat, system-ui, sans-serif',
     overflowX: 'hidden'
   }}
       >
