@@ -119,6 +119,7 @@ async function handleSubmitProveedor(
         ciudad_zona: formData.get('ciudad'),
 
         servicio_mudanza: formData.get('servicio_mudanza') === 'on',
+        servicio_mudanza: formData.get('servicio_guardamuebles') === 'on',
         servicio_limpieza: formData.get('servicio_limpieza') === 'on',
         servicio_pintura: formData.get('servicio_pintura') === 'on',
         servicio_decoracion: formData.get('servicio_decoracion') === 'on',
@@ -133,7 +134,7 @@ if (!res.ok) throw new Error('Error API proveedores')
 
 setOpenProveedorModal(false)
 e.currentTarget.reset()
-setShowSuccess(true) // 👈 MOSTRAMOS MODAL DE ÉXITO
+setShowSuccess(true) //  MOSTRAMOS MODAL DE ÉXITO
 } catch (err) {
   console.error(err)
   setOpenProveedorModal(false) // cerramos igual
@@ -145,7 +146,6 @@ setShowSuccess(true) // 👈 MOSTRAMOS MODAL DE ÉXITO
 }
 
 
-  
   return (
     <>
       <Header onOpenModal={() => setOpen(true)} />
