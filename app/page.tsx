@@ -119,7 +119,7 @@ async function handleSubmitProveedor(
         ciudad_zona: formData.get('ciudad'),
 
         servicio_mudanza: formData.get('servicio_mudanza') === 'on',
-        servicio_mudanza: formData.get('servicio_guardamuebles') === 'on',
+        servicio_guardamuebles: formData.get('servicio_guardamuebles') === 'on',
         servicio_limpieza: formData.get('servicio_limpieza') === 'on',
         servicio_pintura: formData.get('servicio_pintura') === 'on',
         servicio_decoracion: formData.get('servicio_decoracion') === 'on',
