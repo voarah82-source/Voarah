@@ -84,70 +84,67 @@ export async function POST(req: Request) {
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     );
 
-// =========================
-// BUSCAR ORIGEN (OBLIGATORIO)
-// =========================
-const { data: origen } = await supabase
-  .from("origenes_comerciales")
-  .select("id")
-  .eq("codigo", origenCodigo)
-  .single();
+    // =========================
+    // BUSCAR ORIGEN (OBLIGATORIO)
+    // =========================
+    const { data: origen } = await supabase
+      .from("origenes_comerciales")
+      .select("id")
+      .eq("codigo", origenCodigo)
+      .single();
 
-if (!origen) {
-  return NextResponse.json(
-    { error: "Origen inválido" },
-    { status: 400 }
-  );
-}
+    if (!origen) {
+      return NextResponse.json(
+        { error: "Origen inválido" },
+        { status: 400 }
+      );
+    }
 
+    // =========================
+    // INSERT LEAD
+    // =========================
+    const { data: lead, error: leadError } = await supabase
+      .from("leads")
+      .insert({
+        nombre,
+        email,
+        telefono,
+        comentario,
+        intencion,
+        origen_id: origen.id,
+      })
+      .select()
+      .single();
 
-// =========================
-// INSERT LEAD
-// =========================
-const { data: lead, error: leadError } = await supabase
-  .from("leads")
-  .insert({
-    nombre,
-    email,
-    telefono,
-    comentario,
-    intencion,
-    origen_id: origen.id, // 🔒 NUNCA NULL
-  })
-  .select()
-  .single();
+    if (leadError) {
+      console.error("❌ Lead insert error:", leadError);
+      return NextResponse.json(
+        { error: "Error guardando lead" },
+        { status: 500 }
+      );
+    }
 
-if (leadError) {
-  console.error("❌ Lead insert error:", leadError);
-  return NextResponse.json(
-    { error: "Error guardando lead" },
-    { status: 500 }
-  );
-}
+    // =========================
+    // UPDATE ORIGEN (LAST USED)
+    // =========================
+    await supabase
+      .from("origenes_comerciales")
+      .update({ last_used_at: new Date().toISOString() })
+      .eq("id", origen.id);
 
-// =========================
-// UPDATE ORIGEN (LAST USED)
-// =========================
-await supabase
-  .from("origenes_comerciales")
-  .update({ last_used_at: new Date().toISOString() })
-  .eq("id", origen.id);
-  }
+    // =========================
+    // DESTINATARIOS (BCC)
+    // =========================
+    const bccSet = new Set<string>();
 
-  // =========================
-// DESTINATARIOS (BCC)
-// =========================
-const bccSet = new Set<string>();
+    servicios.forEach((s) => {
+      const key = s.startsWith("otros") ? "otros" : s;
+      PROVIDERS_BY_SERVICE[key]?.forEach((mail) => {
+        bccSet.add(mail);
+      });
+    });
 
-servicios.forEach((s) => {
-  const key = s.startsWith("otros") ? "otros" : s;
-  PROVIDERS_BY_SERVICE[key]?.forEach((mail) => {
-    bccSet.add(mail);
-  });
-});
-
-const bccRecipients = Array.from(bccSet);
-
+    const bccRecipients = Array.from(bccSet);
 
     // =========================
     // EMAIL
@@ -223,7 +220,7 @@ const bccRecipients = Array.from(bccSet);
     });
 
     return NextResponse.json({ ok: true, leadId: lead.id });
-    catch (err) {
+  } catch (err) {
     console.error("❌ API error:", err);
     return NextResponse.json(
       { error: "Error interno" },
@@ -231,4 +228,3 @@ const bccRecipients = Array.from(bccSet);
     );
   }
 }
-
