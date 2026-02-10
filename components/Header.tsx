@@ -45,13 +45,25 @@ export default function Header({ onOpenModal }: HeaderProps) {
   }}
 >
 
-        <Link href="/">
-          <img
-            src="https://storage.googleapis.com/msgsndr/JXR7pttzzH9R0mOEMF3S/media/697b69f5e98b489f5b32a200.png"
-            alt="Voarah"
-            style={{ height: isMobile ? 48 : 120 }}
-          />
-        </Link>
+        <Link href="/" style={{ textDecoration: 'none' }}>
+  <div
+    style={{
+      height: 56,            // ALTURA DEL HEADER
+      display: 'flex',
+      alignItems: 'center',
+      overflow: 'hidden'
+    }}
+  >
+    <img
+      src="https://storage.googleapis.com/msgsndr/JXR7pttzzH9R0mOEMF3S/media/697b69f5e98b489f5b32a200.png"
+      alt="Voarah"
+      style={{
+        height: '100%',
+        width: 'auto'
+      }}
+    />
+  </div>
+</Link>
 
         {/* DESKTOP NAV */}
         {!isMobile && (
