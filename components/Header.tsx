@@ -37,7 +37,8 @@ export default function Header({ onOpenModal }: HeaderProps) {
   style={{
     maxWidth: 1200,
     margin: '0 auto',
-    padding: '6px 16px', // 👈 SOLO ESTO CAMBIA
+    padding: '6px 16px', //altura header
+    minHeight: 64,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between'
