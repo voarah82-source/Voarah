@@ -48,7 +48,7 @@ export default function Header({ onOpenModal }: HeaderProps) {
         <Link href="/" style={{ textDecoration: 'none' }}>
   <div
     style={{
-      height: 86,            // ALTURA DEL HEADER
+      height: 86,            // ALTURA DEL logo
       display: 'flex',
       alignItems: 'center',
       overflow: 'hidden'
@@ -108,7 +108,7 @@ export default function Header({ onOpenModal }: HeaderProps) {
           style={{
             background: '#fff',
             borderTop: '1px solid #e5e5e5',
-            padding: 16,
+            padding: 12,
             display: 'flex',
             flexDirection: 'column',
             gap: 16
