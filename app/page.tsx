@@ -668,7 +668,7 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
 
         <textarea
           name="comentario"
-          placeholder="Comentario (opcional)"
+          placeholder="Dejale toda la info que puedas a tu proveedor, como fecha de mudanza, detalles, etc."
           rows={3}
           style={{ ...inputStyle, resize: 'none' }}
         />
@@ -736,7 +736,7 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
       }}
     >
       <h2 style={{ marginBottom: 16 }}>
-        ¡Quiero sumar mi inmobiliaria a Voarah!
+        Quiero sumar mi inmobiliaria a VOARAH
       </h2>
 
 <form
@@ -775,8 +775,6 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
   </button>
 </form>
 
-
-
     </div>
   </div>
 )}
@@ -808,7 +806,7 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
       }}
     >
       <h2 style={{ marginBottom: 16 }}>
-        Quiero ser partner de servicios de Voarah
+        Quiero ser partner de servicios de VOARAH
       </h2>
 
   <form
@@ -823,6 +821,7 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
 
   <strong>Servicios que ofrecen</strong>
   <label><input type="checkbox" name="servicio_mudanza" /> Mudanza</label>
+  <label><input type="checkbox" name="servicio_guardamuebles" /> Guardamuebles</label>
   <label><input type="checkbox" name="servicio_limpieza" /> Limpieza</label>
   <label><input type="checkbox" name="servicio_pintura" /> Pintura</label>
   <label><input type="checkbox" name="servicio_decoracion" /> Decoración</label>
