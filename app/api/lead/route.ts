@@ -84,48 +84,55 @@ export async function POST(req: Request) {
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     );
 
-    // =========================
-    // BUSCAR ORIGEN
-    // =========================
-    const { data: origen } = await supabase
-      .from("origenes_comerciales")
-      .select("id")
-      .eq("codigo", origenCodigo)
-      .maybeSingle();
+// =========================
+// BUSCAR ORIGEN (OBLIGATORIO)
+// =========================
+const { data: origen, error: origenError } = await supabase
+  .from("origenes_comerciales")
+  .select("id")
+  .eq("codigo", origenCodigo)
+  .single();
 
-    // =========================
-    // INSERT LEAD
-    // =========================
-    const { data: lead, error: leadError } = await supabase
-      .from("leads")
-      .insert({
-        nombre,
-        email,
-        telefono,
-        comentario,
-        intencion,
-        origen_id: origen ? origen.id : null,
-      })
-      .select()
-      .single();
+if (origenError || !origen) {
+  console.error("❌ Origen inválido:", origenError);
+  return NextResponse.json(
+    { error: "Origen inválido" },
+    { status: 400 }
+  );
+}
 
-    if (leadError) {
-      console.error("❌ Lead insert error:", leadError);
-      return NextResponse.json(
-        { error: "Error guardando lead" },
-        { status: 500 }
-      );
-    }
+// =========================
+// INSERT LEAD
+// =========================
+const { data: lead, error: leadError } = await supabase
+  .from("leads")
+  .insert({
+    nombre,
+    email,
+    telefono,
+    comentario,
+    intencion,
+    origen_id: origen.id, // 🔒 NUNCA NULL
+  })
+  .select()
+  .single();
 
-    // =========================
-    // UPDATE ORIGEN
-    // =========================
-    if (origen) {
-      await supabase
-        .from("origenes_comerciales")
-        .update({ last_used_at: new Date().toISOString() })
-        .eq("id", origen.id);
-    }
+if (leadError) {
+  console.error("❌ Lead insert error:", leadError);
+  return NextResponse.json(
+    { error: "Error guardando lead" },
+    { status: 500 }
+  );
+}
+
+// =========================
+// UPDATE ORIGEN (LAST USED)
+// =========================
+await supabase
+  .from("origenes_comerciales")
+  .update({ last_used_at: new Date().toISOString() })
+  .eq("id", origen.id);
+  }
 
     // =========================
     // DESTINATARIOS (BCC)
