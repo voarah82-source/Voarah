@@ -48,7 +48,7 @@ export default function Header({ onOpenModal }: HeaderProps) {
         <Link href="/" style={{ textDecoration: 'none' }}>
   <div
     style={{
-      height: 56,            // ALTURA DEL HEADER
+      height: 86,            // ALTURA DEL HEADER
       display: 'flex',
       alignItems: 'center',
       overflow: 'hidden'
