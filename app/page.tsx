@@ -632,39 +632,53 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
             ¿Qué estás buscando?
           </span>
 
-          <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-            <input
-              type="radio"
-              name="interes"
-              value="servicios"
-              checked={interes === 'servicios'}
-              onChange={() => setInteres('servicios')}
-              required
-            />
-            Servicios
-          </label>
+         
+<label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
+  <input type="checkbox" name="servicio_mudanza" />
+  Mudanza
+</label>
 
-          <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-            <input
-              type="radio"
-              name="interes"
-              value="productos"
-              checked={interes === 'productos'}
-              onChange={() => setInteres('productos')}
-            />
-            Productos
-          </label>
+<label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
+  <input type="checkbox" name="servicio_guardamuebles" />
+  Guardamuebles
+</label>
 
-          <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-            <input
-              type="radio"
-              name="interes"
-              value="ambos"
-              checked={interes === 'ambos'}
-              onChange={() => setInteres('ambos')}
-            />
-            Ambos
-          </label>
+<label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
+  <input type="checkbox" name="servicio_limpieza" />
+  Limpieza
+</label>
+
+<label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
+  <input type="checkbox" name="servicio_pintura" />
+  Pintura
+</label>
+
+<label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
+  <input type="checkbox" name="servicio_decoracion" />
+  Decoración
+</label>
+
+<label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
+  <input type="checkbox" name="servicio_mantenimiento" />
+  Mantenimiento
+</label>
+
+<label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
+  <input type="checkbox" name="servicio_otros" />
+  Otros
+</label>
+
+<input
+  name="servicio_otros_texto"
+  placeholder="Si marcaste otros, especificá el servicio"
+  style={{
+    marginTop: 6,
+    padding: '10px 12px',
+    borderRadius: 8,
+    border: '1px solid #ddd',
+    fontSize: 14
+  }}
+/>
         </div>
 
         <textarea
