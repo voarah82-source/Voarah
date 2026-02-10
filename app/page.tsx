@@ -543,8 +543,7 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
   </div>
 </section>
 
-        
-{/* MODAL CTAs */}
+        {/* MODAL CTAs */}
 {open && (
   <div
     onClick={() => setOpen(false)}
@@ -556,7 +555,7 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
       alignItems: 'center',
       justifyContent: 'center',
       zIndex: 2000,
-      backdropFilter: 'blur(4px)'
+      backdropFilter: 'blur(4px)',
     }}
   >
     <div
@@ -567,14 +566,14 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
         borderRadius: 16,
         width: 440,
         boxShadow: '0 30px 80px rgba(0,0,0,0.25)',
-        fontFamily: 'Montserrat, system-ui, sans-serif'
+        fontFamily: 'Montserrat, system-ui, sans-serif',
       }}
     >
       <h2
         style={{
           fontSize: 24,
           marginBottom: 8,
-          fontWeight: 700
+          fontWeight: 700,
         }}
       >
         Activar beneficios VOARAH
@@ -584,26 +583,72 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
         style={{
           fontSize: 14,
           color: '#666',
-          marginBottom: 24
+          marginBottom: 24,
         }}
       >
         Dejanos tus datos y un asesor te contactará a la brevedad.
       </p>
 
       <form
-        onSubmit={handleSubmit}
+        onSubmit={async (e) => {
+          e.preventDefault();
+          setLoading(true);
+
+          const formData = new FormData(e.currentTarget);
+
+          try {
+            const res = await fetch('/api/lead', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                nombre: formData.get('nombre'),
+                email: formData.get('email'),
+                telefono: formData.get('telefono'),
+                comentario: formData.get('comentario'),
+
+                servicio_mudanza: formData.get('servicio_mudanza') === 'on',
+                servicio_guardamuebles:
+                  formData.get('servicio_guardamuebles') === 'on',
+                servicio_limpieza: formData.get('servicio_limpieza') === 'on',
+                servicio_pintura: formData.get('servicio_pintura') === 'on',
+                servicio_decoracion:
+                  formData.get('servicio_decoracion') === 'on',
+                servicio_mantenimiento:
+                  formData.get('servicio_mantenimiento') === 'on',
+                servicio_otros: formData.get('servicio_otros') === 'on',
+                servicio_otros_texto: formData.get(
+                  'servicio_otros_texto'
+                ),
+
+                // 🔴 ESTO ES LO QUE FALTABA
+                origen: new URLSearchParams(
+                  window.location.search
+                ).get('origen'),
+              }),
+            });
+
+            if (!res.ok) {
+              throw new Error('Error API lead');
+            }
+
+            setOpen(false);
+            e.currentTarget.reset();
+            setShowSuccess(true);
+          } catch (err) {
+            console.error(err);
+            setOpen(false);
+            e.currentTarget.reset();
+          } finally {
+            setLoading(false);
+          }
+        }}
         style={{
           display: 'flex',
           flexDirection: 'column',
-          gap: 14
+          gap: 14,
         }}
       >
-        <input
-          name="nombre"
-          placeholder="Nombre"
-          required
-          style={inputStyle}
-        />
+        <input name="nombre" placeholder="Nombre" required style={inputStyle} />
 
         <input
           name="email"
@@ -625,60 +670,52 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
             display: 'flex',
             flexDirection: 'column',
             gap: 8,
-            marginTop: 4
+            marginTop: 4,
           }}
         >
           <span style={{ fontSize: 13, color: '#555', fontWeight: 500 }}>
             ¿Qué estás buscando?
           </span>
 
-         
-<label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-  <input type="checkbox" name="servicio_mudanza" />
-  Mudanza
-</label>
+          <label style={{ display: 'flex', gap: 8, fontSize: 14 }}>
+            <input type="checkbox" name="servicio_mudanza" /> Mudanza
+          </label>
 
-<label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-  <input type="checkbox" name="servicio_guardamuebles" />
-  Guardamuebles
-</label>
+          <label style={{ display: 'flex', gap: 8, fontSize: 14 }}>
+            <input type="checkbox" name="servicio_guardamuebles" /> Guardamuebles
+          </label>
 
-<label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-  <input type="checkbox" name="servicio_limpieza" />
-  Limpieza
-</label>
+          <label style={{ display: 'flex', gap: 8, fontSize: 14 }}>
+            <input type="checkbox" name="servicio_limpieza" /> Limpieza
+          </label>
 
-<label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-  <input type="checkbox" name="servicio_pintura" />
-  Pintura
-</label>
+          <label style={{ display: 'flex', gap: 8, fontSize: 14 }}>
+            <input type="checkbox" name="servicio_pintura" /> Pintura
+          </label>
 
-<label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-  <input type="checkbox" name="servicio_decoracion" />
-  Decoración
-</label>
+          <label style={{ display: 'flex', gap: 8, fontSize: 14 }}>
+            <input type="checkbox" name="servicio_decoracion" /> Decoración
+          </label>
 
-<label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-  <input type="checkbox" name="servicio_mantenimiento" />
-  Mantenimiento
-</label>
+          <label style={{ display: 'flex', gap: 8, fontSize: 14 }}>
+            <input type="checkbox" name="servicio_mantenimiento" /> Mantenimiento
+          </label>
 
-<label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 14 }}>
-  <input type="checkbox" name="servicio_otros" />
-  Otros
-</label>
+          <label style={{ display: 'flex', gap: 8, fontSize: 14 }}>
+            <input type="checkbox" name="servicio_otros" /> Otros
+          </label>
 
-<input
-  name="servicio_otros_texto"
-  placeholder="Si marcaste otros, especificá el servicio"
-  style={{
-    marginTop: 6,
-    padding: '10px 12px',
-    borderRadius: 8,
-    border: '1px solid #ddd',
-    fontSize: 14
-  }}
-/>
+          <input
+            name="servicio_otros_texto"
+            placeholder="Si marcaste otros, especificá el servicio"
+            style={{
+              marginTop: 6,
+              padding: '10px 12px',
+              borderRadius: 8,
+              border: '1px solid #ddd',
+              fontSize: 14,
+            }}
+          />
         </div>
 
         <textarea
@@ -700,29 +737,16 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
             borderRadius: 10,
             fontSize: 15,
             fontWeight: 600,
-            cursor: 'pointer'
+            cursor: 'pointer',
           }}
         >
           {loading ? 'Enviando…' : 'Enviar'}
         </button>
       </form>
-
-      <button
-        onClick={() => setOpen(false)}
-        style={{
-          marginTop: 16,
-          background: 'transparent',
-          border: 'none',
-          color: '#999',
-          fontSize: 13,
-          cursor: 'pointer'
-        }}
-      >
-        Cancelar
-      </button>
     </div>
   </div>
 )}
+
 
 {/* MODAL INMOBILIARIAS */}
 {openInmoModal && (
