@@ -13,43 +13,45 @@ export default function AuthCallback() {
   )
 
   useEffect(() => {
-    const handleAuth = async () => {
 
-      const { data, error } = await supabase.auth.getUser()
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
 
-      if (error || !data.user) {
-        router.replace('/?error=auth')
-        return
-      }
-
-      const pending = localStorage.getItem('pendingLead')
-
-      if (!pending) {
-        router.replace('/?error=nopayload')
-        return
-      }
-
-      try {
-        const res = await fetch('/api/lead', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: pending
-        })
-
-        if (!res.ok) {
-          router.replace('/?error=lead')
+        if (event !== 'SIGNED_IN' || !session) {
           return
         }
 
-        localStorage.removeItem('pendingLead')
-        router.replace('/?success=1')
+        const pending = localStorage.getItem('pendingLead')
 
-      } catch {
-        router.replace('/?error=lead')
+        if (!pending) {
+          router.replace('/?error=nopayload')
+          return
+        }
+
+        try {
+          const res = await fetch('/api/lead', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: pending
+          })
+
+          if (res.ok) {
+            localStorage.removeItem('pendingLead')
+            router.replace('/?success=1')
+          } else {
+            router.replace('/?error=lead')
+          }
+
+        } catch {
+          router.replace('/?error=lead')
+        }
       }
+    )
+
+    return () => {
+      listener.subscription.unsubscribe()
     }
 
-    handleAuth()
   }, [])
 
   return (
