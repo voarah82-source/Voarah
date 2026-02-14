@@ -617,64 +617,8 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
         Dejanos tus datos y un asesor te contactará a la brevedad.
       </p>
 
-     <form
-  onSubmit={handleSubmit}
-  style={{
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 14,
-  }}
->
-
-
-          const formData = new FormData(e.currentTarget);
-
-          try {
-            const res = await fetch('/api/lead', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                nombre: formData.get('nombre'),
-                email: formData.get('email'),
-                telefono: formData.get('telefono'),
-                comentario: formData.get('comentario'),
-
-                servicio_mudanza: formData.get('servicio_mudanza') === 'on',
-                servicio_guardamuebles:
-                  formData.get('servicio_guardamuebles') === 'on',
-                servicio_limpieza: formData.get('servicio_limpieza') === 'on',
-                servicio_pintura: formData.get('servicio_pintura') === 'on',
-                servicio_decoracion:
-                  formData.get('servicio_decoracion') === 'on',
-                servicio_mantenimiento:
-                  formData.get('servicio_mantenimiento') === 'on',
-                servicio_otros: formData.get('servicio_otros') === 'on',
-                servicio_otros_texto: formData.get(
-                  'servicio_otros_texto'
-                ),
-
-                // 🔴 ESTO ES LO QUE FALTABA
-                origen: new URLSearchParams(
-                  window.location.search
-                ).get('origen'),
-              }),
-            });
-
-            if (!res.ok) {
-              throw new Error('Error API lead');
-            }
-
-            setOpen(false);
-            e.currentTarget.reset();
-            setShowSuccess(true);
-          } catch (err) {
-            console.error(err);
-            setOpen(false);
-            e.currentTarget.reset();
-          } finally {
-            setLoading(false);
-          }
-        }}
+      <form
+        onSubmit={handleSubmit}
         style={{
           display: 'flex',
           flexDirection: 'column',
