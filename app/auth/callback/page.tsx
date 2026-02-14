@@ -15,12 +15,10 @@ export default function AuthCallback() {
   useEffect(() => {
     const handleAuth = async () => {
 
-      // 🔥 Esperar a que Supabase procese el hash del magic link
-      const { data, error } = await supabase.auth.exchangeCodeForSession(
-        window.location.href
-      )
+      // 🔥 Dejar que Supabase procese el hash automáticamente
+      const { data: { session } } = await supabase.auth.getSession()
 
-      if (error || !data.session) {
+      if (!session) {
         router.replace('/?error=auth')
         return
       }
@@ -51,7 +49,9 @@ export default function AuthCallback() {
       }
     }
 
-    handleAuth()
+    // 🔥 Esperar 500ms para que Supabase hidrate sesión
+    setTimeout(handleAuth, 500)
+
   }, [])
 
   return (
