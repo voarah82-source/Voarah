@@ -3,8 +3,35 @@
 
 import { useState } from 'react'
 import Header from '../components/Header'
+import { useEffect } from "react"
+import { createClient } from "@supabase/supabase-js"
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
+
 
 export default function HomePage() {
+  useEffect(() => {
+  supabase.auth.getSession().then(({ data }) => {
+    if (data.session) {
+      const pending = localStorage.getItem("pendingLead")
+
+      if (pending) {
+        fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: pending
+        }).then(() => {
+          localStorage.removeItem("pendingLead")
+          alert("Datos enviados correctamente.")
+        })
+      }
+    }
+  })
+}, [])
+
   const [open, setOpen] = useState(false)
   const [openInmoModal, setOpenInmoModal] = useState(false)
   const [openProveedorModal, setOpenProveedorModal] = useState(false)
@@ -31,33 +58,35 @@ export default function HomePage() {
   const origen = params?.get('origen') || ''
 
   async function handleSubmit(e: any) {
-    e.preventDefault()
-    setLoading(true)
+  e.preventDefault()
+  setLoading(true)
 
-    const formData = new FormData(e.target)
+  const formData = new FormData(e.target)
 
-    //  ACÁ VA ESTO interes
-    const interesFromForm =
-      formData.get('interes') || 'servicios'
-
-    await fetch('/api/lead', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        nombre: formData.get('nombre'),
-        email: formData.get('email'),
-        telefono: formData.get('telefono'),
-        comentario: formData.get('comentario'),
-        interes: interesFromForm, // 👈 USAMOS ESTE
-        origen
-      })
-    })
-    
-
-    setLoading(false)
-    setOpen(false)
-    alert('Datos enviados correctamente. En breve nos contactamos.')
+  const payload = {
+    nombre: formData.get('nombre'),
+    email: formData.get('email'),
+    telefono: formData.get('telefono'),
+    comentario: formData.get('comentario'),
+    interes: formData.get('interes') || 'servicios',
+    origen
   }
+
+  // Guardamos temporalmente en localStorage
+  localStorage.setItem("pendingLead", JSON.stringify(payload))
+
+  // Mandamos magic link
+  await supabase.auth.signInWithOtp({
+    email: payload.email as string,
+    options: {
+      emailRedirectTo: "https://www.voarah.com/auth/callback"
+    }
+  })
+
+  setLoading(false)
+  alert("Te enviamos un link a tu email para confirmar.")
+}
+
 
 //===================hendler inmobs======================//
 async function handleSubmitInmobiliaria(
