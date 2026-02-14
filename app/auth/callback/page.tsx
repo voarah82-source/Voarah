@@ -15,12 +15,10 @@ export default function AuthCallback() {
   useEffect(() => {
     const handleAuth = async () => {
 
-      // 🔥 ESTA ES LA PARTE CLAVE
-      const { data, error } = await supabase.auth.exchangeCodeForSession(
-        window.location.href
-      )
+      // 🔥 ESTA LÍNEA ES LA CLAVE
+      const { data, error } = await supabase.auth.exchangeCodeForSession(window.location.href)
 
-      if (error || !data.session) {
+      if (error) {
         router.replace('/?error=auth')
         return
       }
