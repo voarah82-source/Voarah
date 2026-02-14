@@ -635,7 +635,7 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
       </p>
 
       <form
-        onSubmit={async (e) => {
+       <form onSubmit={handleSubmit}
           e.preventDefault();
           setLoading(true);
 
