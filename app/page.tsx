@@ -15,7 +15,6 @@ export default function HomePage() {
   const [loadingProveedor, setLoadingProveedor] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
 
-  // ⚠️ MUY IMPORTANTE: crear cliente dentro del componente
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -29,7 +28,6 @@ export default function HomePage() {
     fontFamily: 'Montserrat, system-ui, sans-serif'
   }
 
-  // 👉 LEEMOS ORIGEN DESDE QR
   const [origen, setOrigen] = useState('')
 
   useEffect(() => {
@@ -38,9 +36,6 @@ export default function HomePage() {
     setOrigen(origenParam)
   }, [])
 
-  // ===============================
-  // 🔹 Detectar login y enviar lead
-  // ===============================
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       if (data.session) {
@@ -62,9 +57,6 @@ export default function HomePage() {
     })
   }, [])
 
-  // ===============================
-  // 🔹 SUBMIT CLIENTE (MAGIC LINK)
-  // ===============================
   async function handleSubmit(e: any) {
     e.preventDefault()
     setLoading(true)
@@ -77,7 +69,6 @@ export default function HomePage() {
       telefono: formData.get('telefono'),
       comentario: formData.get('comentario'),
       origen,
-
       servicio_mudanza: formData.get('servicio_mudanza') === 'on',
       servicio_guardamuebles: formData.get('servicio_guardamuebles') === 'on',
       servicio_limpieza: formData.get('servicio_limpieza') === 'on',
@@ -88,10 +79,8 @@ export default function HomePage() {
       servicio_otros_texto: formData.get('servicio_otros_texto')
     }
 
-    // Guardamos temporalmente
     localStorage.setItem("pendingLead", JSON.stringify(payload))
 
-    // Mandamos magic link
     await supabase.auth.signInWithOtp({
       email: payload.email as string,
       options: {
@@ -103,92 +92,84 @@ export default function HomePage() {
     alert("Te enviamos un link a tu email para confirmar.")
   }
 
-//===================hendler inmobs======================//
-async function handleSubmitInmobiliaria(
-  e: React.FormEvent<HTMLFormElement>
-) {
-  e.preventDefault()
-  setLoadingInmo(true)
+  async function handleSubmitInmobiliaria(
+    e: React.FormEvent<HTMLFormElement>
+  ) {
+    e.preventDefault()
+    setLoadingInmo(true)
 
-  const formData = new FormData(e.currentTarget)
+    const formData = new FormData(e.currentTarget)
 
-  try {
-    const res = await fetch('/api/partners/inmobiliarias', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        inmobiliaria_nombre: formData.get('inmobiliaria_nombre'),
-        contacto_nombre: formData.get('contacto_nombre'),
-        email: formData.get('email'),
-        telefono: formData.get('telefono'),
-        ciudad_zona: formData.get('ciudad')
+    try {
+      const res = await fetch('/api/partners/inmobiliarias', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          inmobiliaria_nombre: formData.get('inmobiliaria_nombre'),
+          contacto_nombre: formData.get('contacto_nombre'),
+          email: formData.get('email'),
+          telefono: formData.get('telefono'),
+          ciudad_zona: formData.get('ciudad')
+        })
       })
-    })
 
-if (!res.ok) throw new Error('Error API inmobiliarias')
+      if (!res.ok) throw new Error('Error API inmobiliarias')
 
-setOpenInmoModal(false)
-e.currentTarget.reset()
-setShowSuccess(true) // 👈 MOSTRAMOS MODAL DE ÉXITO
-} catch (err) {
-  console.error(err)
-  setOpenInmoModal(false) // cerramos igual
-  e.currentTarget.reset() // limpiamos igual
-} finally {
-  setLoadingInmo(false)
-}
+      setOpenInmoModal(false)
+      e.currentTarget.reset()
+      setShowSuccess(true)
+    } catch (err) {
+      console.error(err)
+      setOpenInmoModal(false)
+      e.currentTarget.reset()
+    } finally {
+      setLoadingInmo(false)
+    }
+  }
 
-}
+  async function handleSubmitProveedor(
+    e: React.FormEvent<HTMLFormElement>
+  ) {
+    e.preventDefault()
+    setLoadingProveedor(true)
 
+    const formData = new FormData(e.currentTarget)
 
-
-  //===========handler proveedores=================
-async function handleSubmitProveedor(
-  e: React.FormEvent<HTMLFormElement>
-) {
-  e.preventDefault()
-  setLoadingProveedor(true)
-
-  const formData = new FormData(e.currentTarget)
-
-  try {
-    const res = await fetch('/api/partners/proveedores', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        empresa_nombre: formData.get('empresa_nombre'),
-        contacto_nombre: formData.get('contacto_nombre'),
-        email: formData.get('email'),
-        telefono: formData.get('telefono'),
-        ciudad_zona: formData.get('ciudad'),
-
-        servicio_mudanza: formData.get('servicio_mudanza') === 'on',
-        servicio_guardamuebles: formData.get('servicio_guardamuebles') === 'on',
-        servicio_limpieza: formData.get('servicio_limpieza') === 'on',
-        servicio_pintura: formData.get('servicio_pintura') === 'on',
-        servicio_decoracion: formData.get('servicio_decoracion') === 'on',
-        servicio_compra_objetos: false,
-        servicio_mantenimiento: formData.get('servicio_mantenimiento') === 'on',
-        servicio_otros: formData.get('servicio_otros') === 'on',
-        servicio_otros_texto: formData.get('servicio_otros_texto')
+    try {
+      const res = await fetch('/api/partners/proveedores', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          empresa_nombre: formData.get('empresa_nombre'),
+          contacto_nombre: formData.get('contacto_nombre'),
+          email: formData.get('email'),
+          telefono: formData.get('telefono'),
+          ciudad_zona: formData.get('ciudad'),
+          servicio_mudanza: formData.get('servicio_mudanza') === 'on',
+          servicio_guardamuebles: formData.get('servicio_guardamuebles') === 'on',
+          servicio_limpieza: formData.get('servicio_limpieza') === 'on',
+          servicio_pintura: formData.get('servicio_pintura') === 'on',
+          servicio_decoracion: formData.get('servicio_decoracion') === 'on',
+          servicio_compra_objetos: false,
+          servicio_mantenimiento: formData.get('servicio_mantenimiento') === 'on',
+          servicio_otros: formData.get('servicio_otros') === 'on',
+          servicio_otros_texto: formData.get('servicio_otros_texto')
+        })
       })
-    })
 
-if (!res.ok) throw new Error('Error API proveedores')
+      if (!res.ok) throw new Error('Error API proveedores')
 
-setOpenProveedorModal(false)
-e.currentTarget.reset()
-setShowSuccess(true) //  MOSTRAMOS MODAL DE ÉXITO
-} catch (err) {
-  console.error(err)
-  setOpenProveedorModal(false) // cerramos igual
-  e.currentTarget.reset() // limpiamos igual
-} finally {
-  setLoadingProveedor(false)
-}
-
-}
-
+      setOpenProveedorModal(false)
+      e.currentTarget.reset()
+      setShowSuccess(true)
+    } catch (err) {
+      console.error(err)
+      setOpenProveedorModal(false)
+      e.currentTarget.reset()
+    } finally {
+      setLoadingProveedor(false)
+    }
+  }
 
   return (
     <>
@@ -201,6 +182,7 @@ setShowSuccess(true) //  MOSTRAMOS MODAL DE ÉXITO
           color: '#1a1a1a'
         }}
       >
+
 {/* HERO */}
 <section
   id="activar"
@@ -255,6 +237,7 @@ setShowSuccess(true) //  MOSTRAMOS MODAL DE ÉXITO
 </div>
 
 </section>
+
 
 {/* SLIDER ECOSISTEMA VOARAH */}
 <section
