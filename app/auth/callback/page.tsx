@@ -14,22 +14,37 @@ export default function AuthCallback() {
 
   useEffect(() => {
     const handleAuth = async () => {
-      // Esto procesa el token del hash
-      await supabase.auth.getSession()
+      const { data } = await supabase.auth.getSession()
+
+      if (!data.session) {
+        router.replace('/')
+        return
+      }
 
       const pending = localStorage.getItem('pendingLead')
 
-      if (pending) {
-        await fetch('/api/lead', {
+      if (!pending) {
+        router.replace('/')
+        return
+      }
+
+      try {
+        const res = await fetch('/api/lead', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: pending
         })
 
-        localStorage.removeItem('pendingLead')
+        if (!res.ok) {
+          console.error('Error enviando lead')
+        } else {
+          localStorage.removeItem('pendingLead')
+        }
+
+      } catch (err) {
+        console.error('Error real:', err)
       }
 
-      // Redirigimos al home con flag de éxito
       router.replace('/?success=1')
     }
 
@@ -42,3 +57,4 @@ export default function AuthCallback() {
     </div>
   )
 }
+
