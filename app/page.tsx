@@ -1,45 +1,25 @@
-//app/page.tsx
 'use client'
 
 import { useState, useEffect } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import Header from '../components/Header'
 
-
 export default function HomePage() {
-const [session, setSession] = useState<any>(null)
 
-  const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
-  useEffect(() => {
-  supabase.auth.getSession().then(({ data }) => {
-    if (data.session) {
-      const pending = localStorage.getItem("pendingLead")
-
-      if (pending) {
-        fetch('/api/lead', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: pending
-        }).then(() => {
-          localStorage.removeItem("pendingLead")
-          alert("Datos enviados correctamente.")
-        })
-      }
-    }
-  })
-}, [])
-
+  const [session, setSession] = useState<any>(null)
   const [open, setOpen] = useState(false)
   const [openInmoModal, setOpenInmoModal] = useState(false)
   const [openProveedorModal, setOpenProveedorModal] = useState(false)
-  const [interes, setInteres] = useState<'servicios' | 'productos' | 'ambos' | ''>('')
   const [loading, setLoading] = useState(false)
   const [loadingInmo, setLoadingInmo] = useState(false)
   const [loadingProveedor, setLoadingProveedor] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
+
+  // ⚠️ MUY IMPORTANTE: crear cliente dentro del componente
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
 
   const inputStyle = {
     padding: '12px 14px',
@@ -49,44 +29,79 @@ const [session, setSession] = useState<any>(null)
     fontFamily: 'Montserrat, system-ui, sans-serif'
   }
 
-  // 👉 LEEMOS EL ORIGEN DESDE LA URL (QR / LINK)
-  const params =
-    typeof window !== 'undefined'
-      ? new URLSearchParams(window.location.search)
-      : null
+  // 👉 LEEMOS ORIGEN DESDE QR
+  const [origen, setOrigen] = useState('')
 
-  const origen = params?.get('origen') || ''
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const origenParam = params.get('origen') || ''
+    setOrigen(origenParam)
+  }, [])
 
+  // ===============================
+  // 🔹 Detectar login y enviar lead
+  // ===============================
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session) {
+        setSession(data.session)
+
+        const pending = localStorage.getItem("pendingLead")
+
+        if (pending) {
+          fetch('/api/lead', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: pending
+          }).then(() => {
+            localStorage.removeItem("pendingLead")
+            alert("Datos enviados correctamente.")
+          })
+        }
+      }
+    })
+  }, [])
+
+  // ===============================
+  // 🔹 SUBMIT CLIENTE (MAGIC LINK)
+  // ===============================
   async function handleSubmit(e: any) {
-  e.preventDefault()
-  setLoading(true)
+    e.preventDefault()
+    setLoading(true)
 
-  const formData = new FormData(e.target)
+    const formData = new FormData(e.target)
 
-  const payload = {
-    nombre: formData.get('nombre'),
-    email: formData.get('email'),
-    telefono: formData.get('telefono'),
-    comentario: formData.get('comentario'),
-    interes: formData.get('interes') || 'servicios',
-    origen
-  }
+    const payload = {
+      nombre: formData.get('nombre'),
+      email: formData.get('email'),
+      telefono: formData.get('telefono'),
+      comentario: formData.get('comentario'),
+      origen,
 
-  // Guardamos temporalmente en localStorage
-  localStorage.setItem("pendingLead", JSON.stringify(payload))
-
-  // Mandamos magic link
-  await supabase.auth.signInWithOtp({
-    email: payload.email as string,
-    options: {
-      emailRedirectTo: "https://www.voarah.com/auth/callback"
+      servicio_mudanza: formData.get('servicio_mudanza') === 'on',
+      servicio_guardamuebles: formData.get('servicio_guardamuebles') === 'on',
+      servicio_limpieza: formData.get('servicio_limpieza') === 'on',
+      servicio_pintura: formData.get('servicio_pintura') === 'on',
+      servicio_decoracion: formData.get('servicio_decoracion') === 'on',
+      servicio_mantenimiento: formData.get('servicio_mantenimiento') === 'on',
+      servicio_otros: formData.get('servicio_otros') === 'on',
+      servicio_otros_texto: formData.get('servicio_otros_texto')
     }
-  })
 
-  setLoading(false)
-  alert("Te enviamos un link a tu email para confirmar.")
-}
+    // Guardamos temporalmente
+    localStorage.setItem("pendingLead", JSON.stringify(payload))
 
+    // Mandamos magic link
+    await supabase.auth.signInWithOtp({
+      email: payload.email as string,
+      options: {
+        emailRedirectTo: "https://www.voarah.com/auth/callback"
+      }
+    })
+
+    setLoading(false)
+    alert("Te enviamos un link a tu email para confirmar.")
+  }
 
 //===================hendler inmobs======================//
 async function handleSubmitInmobiliaria(
