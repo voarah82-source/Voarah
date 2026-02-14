@@ -12,53 +12,55 @@ export default function AuthCallback() {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   )
 
- 
   useEffect(() => {
-  const handleAuth = async () => {
-    // 🔥 Esto es lo correcto para magic link
-    const { data, error } = await supabase.auth.getUser()
+    const handleAuth = async () => {
 
-    if (error || !data.user) {
-      router.replace('/')
-      return
-    }
+      // 🔥 Obtener sesión real después del magic link
+      const { data: { session }, error } = await supabase.auth.getSession()
 
-    const pending = localStorage.getItem('pendingLead')
-
-    if (!pending) {
-      router.replace('/?success=1')
-      return
-    }
-
-    try {
-      const res = await fetch('/api/lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: pending
-      })
-
-      if (res.ok) {
-        localStorage.removeItem('pendingLead')
-        router.replace('/?success=1')
-      } else {
-        console.error('Error enviando lead')
+      if (error || !session) {
         router.replace('/?error=1')
+        return
       }
 
-    } catch (err) {
-      console.error('Error real:', err)
-      router.replace('/?error=1')
+      const pending = localStorage.getItem('pendingLead')
+
+      if (!pending) {
+        router.replace('/?success=1')
+        return
+      }
+
+      try {
+        const res = await fetch('/api/lead', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            // 🔥 ESTO ERA LO QUE FALTABA
+            Authorization: `Bearer ${session.access_token}`
+          },
+          body: pending
+        })
+
+        if (res.ok) {
+          localStorage.removeItem('pendingLead')
+          router.replace('/?success=1')
+        } else {
+          console.error('Error enviando lead')
+          router.replace('/?error=1')
+        }
+
+      } catch (err) {
+        console.error('Error real:', err)
+        router.replace('/?error=1')
+      }
     }
-  }
 
-  handleAuth()
-}, [])
+    handleAuth()
+  }, [])
 
-  
   return (
     <div style={{ padding: 40, textAlign: 'center' }}>
       Confirmando email...
     </div>
   )
 }
-
