@@ -30,11 +30,19 @@ export default function HomePage() {
 
   const [origen, setOrigen] = useState('')
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    const origenParam = params.get('origen') || ''
-    setOrigen(origenParam)
-  }, [])
+ useEffect(() => {
+  const params = new URLSearchParams(window.location.search)
+  const origenParam = params.get('origen') || ''
+  setOrigen(origenParam)
+}, [])
+
+useEffect(() => {
+  const params = new URLSearchParams(window.location.search)
+  if (params.get('success') === '1') {
+    alert('Datos enviados correctamente. Te contactaremos pronto.')
+  }
+}, [])
+
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
