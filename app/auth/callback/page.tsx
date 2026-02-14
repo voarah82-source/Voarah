@@ -13,44 +13,45 @@ export default function AuthCallback() {
   )
 
   useEffect(() => {
-    const { data: listener } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+    const handleAuth = async () => {
+      // 🔥 ESTA ES LA CLAVE
+      const { data, error } = await supabase.auth.exchangeCodeForSession(
+        window.location.href
+      )
 
-        if (event === 'SIGNED_IN' && session) {
-
-          const pending = localStorage.getItem('pendingLead')
-
-          if (!pending) {
-            router.replace('/?success=1')
-            return
-          }
-
-          try {
-            const res = await fetch('/api/lead', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: pending
-            })
-
-            if (res.ok) {
-              localStorage.removeItem('pendingLead')
-              router.replace('/?success=1')
-            } else {
-              console.error('Error enviando lead')
-              router.replace('/?error=1')
-            }
-
-          } catch (err) {
-            console.error('Error real:', err)
-            router.replace('/?error=1')
-          }
-        }
+      if (error || !data.session) {
+        router.replace('/?error=auth')
+        return
       }
-    )
 
-    return () => {
-      listener.subscription.unsubscribe()
+      const pending = localStorage.getItem('pendingLead')
+
+      if (!pending) {
+        router.replace('/?success=1')
+        return
+      }
+
+      try {
+        const res = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: pending
+        })
+
+        if (!res.ok) {
+          router.replace('/?error=lead')
+          return
+        }
+
+        localStorage.removeItem('pendingLead')
+        router.replace('/?success=1')
+
+      } catch (err) {
+        router.replace('/?error=network')
+      }
     }
+
+    handleAuth()
   }, [])
 
   return (
@@ -59,4 +60,3 @@ export default function AuthCallback() {
     </div>
   )
 }
-
