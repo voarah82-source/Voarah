@@ -14,6 +14,10 @@ export default function AuthCallback() {
 
   useEffect(() => {
     const handleAuth = async () => {
+
+      // 🔥 ESTA LÍNEA ES LA CLAVE
+      await supabase.auth.exchangeCodeForSession(window.location.href)
+
       const { data } = await supabase.auth.getSession()
 
       if (!data.session) {
