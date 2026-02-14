@@ -66,39 +66,58 @@ useEffect(() => {
   }, [])
 
   async function handleSubmit(e: any) {
-    e.preventDefault()
-    setLoading(true)
+  e.preventDefault()
+  setLoading(true)
 
-    const formData = new FormData(e.target)
+  const formData = new FormData(e.target)
 
-    const payload = {
-      nombre: formData.get('nombre'),
-      email: formData.get('email'),
-      telefono: formData.get('telefono'),
-      comentario: formData.get('comentario'),
-      origen,
-      servicio_mudanza: formData.get('servicio_mudanza') === 'on',
-      servicio_guardamuebles: formData.get('servicio_guardamuebles') === 'on',
-      servicio_limpieza: formData.get('servicio_limpieza') === 'on',
-      servicio_pintura: formData.get('servicio_pintura') === 'on',
-      servicio_decoracion: formData.get('servicio_decoracion') === 'on',
-      servicio_mantenimiento: formData.get('servicio_mantenimiento') === 'on',
-      servicio_otros: formData.get('servicio_otros') === 'on',
-      servicio_otros_texto: formData.get('servicio_otros_texto')
-    }
+  const payload = {
+    nombre: formData.get('nombre'),
+    email: formData.get('email'),
+    telefono: formData.get('telefono'),
+    comentario: formData.get('comentario'),
+    origen,
+    servicio_mudanza: formData.get('servicio_mudanza') === 'on',
+    servicio_guardamuebles: formData.get('servicio_guardamuebles') === 'on',
+    servicio_limpieza: formData.get('servicio_limpieza') === 'on',
+    servicio_pintura: formData.get('servicio_pintura') === 'on',
+    servicio_decoracion: formData.get('servicio_decoracion') === 'on',
+    servicio_mantenimiento: formData.get('servicio_mantenimiento') === 'on',
+    servicio_otros: formData.get('servicio_otros') === 'on',
+    servicio_otros_texto: formData.get('servicio_otros_texto')
+  }
 
+  try {
+    // guardamos lead pendiente
     localStorage.setItem("pendingLead", JSON.stringify(payload))
 
-    await supabase.auth.signInWithOtp({
+    const { data, error } = await supabase.auth.signInWithOtp({
       email: payload.email as string,
       options: {
         emailRedirectTo: "https://www.voarah.com/auth/callback"
       }
     })
 
-    setLoading(false)
+    console.log("OTP DATA:", data)
+    console.log("OTP ERROR:", error)
+
+    if (error) {
+      console.error("Error enviando OTP:", error.message)
+      alert("Hubo un problema enviando el email. Intentá nuevamente.")
+      localStorage.removeItem("pendingLead")
+      return
+    }
+
     alert("Te enviamos un link a tu email para confirmar.")
+
+  } catch (err) {
+    console.error("Error real:", err)
+    alert("Error inesperado. Intentá nuevamente.")
+    localStorage.removeItem("pendingLead")
+  } finally {
+    setLoading(false)
   }
+
 
   async function handleSubmitInmobiliaria(
     e: React.FormEvent<HTMLFormElement>
