@@ -634,10 +634,15 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
         Dejanos tus datos y un asesor te contactará a la brevedad.
       </p>
 
-      <form
-       <form onSubmit={handleSubmit}
-          e.preventDefault();
-          setLoading(true);
+     <form
+  onSubmit={handleSubmit}
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 14,
+  }}
+>
+
 
           const formData = new FormData(e.currentTarget);
 
