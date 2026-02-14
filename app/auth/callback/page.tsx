@@ -13,49 +13,44 @@ export default function AuthCallback() {
   )
 
   useEffect(() => {
-    const handleAuth = async () => {
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
 
-      // 🔥 Obtener sesión real después del magic link
-      const { data: { session }, error } = await supabase.auth.getSession()
+        if (event === 'SIGNED_IN' && session) {
 
-      if (error || !session) {
-        router.replace('/?error=1')
-        return
-      }
+          const pending = localStorage.getItem('pendingLead')
 
-      const pending = localStorage.getItem('pendingLead')
+          if (!pending) {
+            router.replace('/?success=1')
+            return
+          }
 
-      if (!pending) {
-        router.replace('/?success=1')
-        return
-      }
+          try {
+            const res = await fetch('/api/lead', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: pending
+            })
 
-      try {
-        const res = await fetch('/api/lead', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            // 🔥 ESTO ERA LO QUE FALTABA
-            Authorization: `Bearer ${session.access_token}`
-          },
-          body: pending
-        })
+            if (res.ok) {
+              localStorage.removeItem('pendingLead')
+              router.replace('/?success=1')
+            } else {
+              console.error('Error enviando lead')
+              router.replace('/?error=1')
+            }
 
-        if (res.ok) {
-          localStorage.removeItem('pendingLead')
-          router.replace('/?success=1')
-        } else {
-          console.error('Error enviando lead')
-          router.replace('/?error=1')
+          } catch (err) {
+            console.error('Error real:', err)
+            router.replace('/?error=1')
+          }
         }
-
-      } catch (err) {
-        console.error('Error real:', err)
-        router.replace('/?error=1')
       }
-    }
+    )
 
-    handleAuth()
+    return () => {
+      listener.subscription.unsubscribe()
+    }
   }, [])
 
   return (
@@ -64,3 +59,4 @@ export default function AuthCallback() {
     </div>
   )
 }
+
