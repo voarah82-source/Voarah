@@ -13,12 +13,12 @@ export default function AuthCallback() {
   )
 
   useEffect(() => {
-    const handleAuth = async () => {
+    const run = async () => {
 
-      // 🔥 ESTA LÍNEA ES LA CLAVE
-      const { data, error } = await supabase.auth.exchangeCodeForSession(window.location.href)
+      // 🔥 Fuerza validación real del usuario
+      const { data, error } = await supabase.auth.getUser()
 
-      if (error) {
+      if (error || !data.user) {
         router.replace('/?error=auth')
         return
       }
@@ -30,27 +30,21 @@ export default function AuthCallback() {
         return
       }
 
-      try {
-        const res = await fetch('/api/lead', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: pending
-        })
+      const res = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: pending
+      })
 
-        if (!res.ok) {
-          router.replace('/?error=lead')
-          return
-        }
-
+      if (res.ok) {
         localStorage.removeItem('pendingLead')
         router.replace('/?success=1')
-
-      } catch {
+      } else {
         router.replace('/?error=lead')
       }
     }
 
-    handleAuth()
+    run()
   }, [])
 
   return (
@@ -59,3 +53,4 @@ export default function AuthCallback() {
     </div>
   )
 }
+
