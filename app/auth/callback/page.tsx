@@ -15,12 +15,9 @@ export default function AuthCallback() {
   useEffect(() => {
     const handleAuth = async () => {
 
-      // 🔥 Esto procesa el hash del magic link
-      const { data, error } = await supabase.auth.exchangeCodeForSession(
-        window.location.href
-      )
+      const { data, error } = await supabase.auth.getUser()
 
-      if (error || !data.session) {
+      if (error || !data.user) {
         router.replace('/?error=auth')
         return
       }
@@ -28,7 +25,7 @@ export default function AuthCallback() {
       const pending = localStorage.getItem('pendingLead')
 
       if (!pending) {
-        router.replace('/?success=1')
+        router.replace('/?error=nopayload')
         return
       }
 
@@ -39,12 +36,13 @@ export default function AuthCallback() {
           body: pending
         })
 
-        if (res.ok) {
-          localStorage.removeItem('pendingLead')
-          router.replace('/?success=1')
-        } else {
+        if (!res.ok) {
           router.replace('/?error=lead')
+          return
         }
+
+        localStorage.removeItem('pendingLead')
+        router.replace('/?success=1')
 
       } catch {
         router.replace('/?error=lead')
