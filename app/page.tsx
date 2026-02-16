@@ -167,49 +167,62 @@ async function handleSubmit(e: any) {
     }
   }
 
-  async function handleSubmitProveedor(
-    e: React.FormEvent<HTMLFormElement>
-  ) {
-    e.preventDefault()
-    setLoadingProveedor(true)
+async function handleSubmitProveedor(
+  e: React.FormEvent<HTMLFormElement>
+) {
+  e.preventDefault()
+  setLoadingProveedor(true)
 
-    const formData = new FormData(e.currentTarget)
+  const formData = new FormData(e.currentTarget)
 
-    try {
-      const res = await fetch('/api/partners/proveedores', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          empresa_nombre: formData.get('empresa_nombre'),
-          contacto_nombre: formData.get('contacto_nombre'),
-          email: formData.get('email'),
-          telefono: formData.get('telefono'),
-          ciudad_zona: formData.get('ciudad'),
-          servicio_mudanza: formData.get('servicio_mudanza') === 'on',
-          servicio_guardamuebles: formData.get('servicio_guardamuebles') === 'on',
-          servicio_limpieza: formData.get('servicio_limpieza') === 'on',
-          servicio_pintura: formData.get('servicio_pintura') === 'on',
-          servicio_decoracion: formData.get('servicio_decoracion') === 'on',
-          servicio_compra_objetos: false,
-          servicio_mantenimiento: formData.get('servicio_mantenimiento') === 'on',
-          servicio_otros: formData.get('servicio_otros') === 'on',
-          servicio_otros_texto: formData.get('servicio_otros_texto')
-        })
+  try {
+    const res = await fetch('/api/partners/proveedores', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        empresa_nombre: formData.get('empresa_nombre'),
+        contacto_nombre: formData.get('contacto_nombre'),
+        email: formData.get('email'),
+        telefono: formData.get('telefono'),
+        ciudad_zona: formData.get('ciudad'),
+
+        // SERVICIOS
+        servicio_mudanza: formData.get('servicio_mudanza') === 'on',
+        servicio_guardamuebles: formData.get('servicio_guardamuebles') === 'on',
+        servicio_limpieza: formData.get('servicio_limpieza') === 'on',
+        servicio_pintura: formData.get('servicio_pintura') === 'on',
+        servicio_decoracion: formData.get('servicio_decoracion') === 'on',
+        servicio_mantenimiento: formData.get('servicio_mantenimiento') === 'on',
+        servicio_otros: formData.get('servicio_otros') === 'on',
+        servicio_otros_texto: formData.get('servicio_otros_texto'),
+
+        // PRODUCTOS
+        producto_pintura: formData.get('producto_pintura') === 'on',
+        producto_materiales_obra: formData.get('producto_materiales_obra') === 'on',
+        producto_electricidad_plomeria: formData.get('producto_electricidad_plomeria') === 'on',
+        producto_herramientas: formData.get('producto_herramientas') === 'on',
+        producto_electrodomesticos: formData.get('producto_electrodomesticos') === 'on',
+        producto_muebles: formData.get('producto_muebles') === 'on',
+        producto_otros: formData.get('producto_otros') === 'on',
+        producto_otros_texto: formData.get('producto_otros_texto')
       })
+    })
 
-      if (!res.ok) throw new Error('Error API proveedores')
+    if (!res.ok) throw new Error('Error API proveedores')
 
-      setOpenProveedorModal(false)
-      e.currentTarget.reset()
-      setShowSuccess(true)
-    } catch (err) {
-      console.error(err)
-      setOpenProveedorModal(false)
-      e.currentTarget.reset()
-    } finally {
-      setLoadingProveedor(false)
-    }
+    setOpenProveedorModal(false)
+    e.currentTarget.reset()
+    setShowSuccess(true)
+
+  } catch (err) {
+    console.error(err)
+    setOpenProveedorModal(false)
+    e.currentTarget.reset()
+  } finally {
+    setLoadingProveedor(false)
   }
+}
+
 
   return (
     <>
@@ -929,47 +942,62 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
         Quiero ser partner de servicios de VOARAH
       </h2>
 
-  <form
-  onSubmit={handleSubmitProveedor}
-  style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
->
-  <input name="empresa_nombre" placeholder="Nombre de la empresa" required />
-  <input name="contacto_nombre" placeholder="Nombre y apellido del contacto" required />
-  <input name="email" type="email" placeholder="Email" required />
-  <input name="telefono" placeholder="Teléfono / WhatsApp" required />
-  <input name="ciudad" placeholder="Ciudad / zonas donde opera" required />
+      <form
+        onSubmit={handleSubmitProveedor}
+        style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+      >
+        <input name="empresa_nombre" placeholder="Nombre de la empresa" required />
+        <input name="contacto_nombre" placeholder="Nombre y apellido del contacto" required />
+        <input name="email" type="email" placeholder="Email" required />
+        <input name="telefono" placeholder="Teléfono / WhatsApp" required />
+        <input name="ciudad" placeholder="Ciudad / zonas donde opera" required />
 
-  <strong>Servicios que ofrecen</strong>
-  <label><input type="checkbox" name="servicio_mudanza" /> Mudanza</label>
-  <label><input type="checkbox" name="servicio_guardamuebles" /> Guardamuebles</label>
-  <label><input type="checkbox" name="servicio_limpieza" /> Limpieza</label>
-  <label><input type="checkbox" name="servicio_pintura" /> Pintura</label>
-  <label><input type="checkbox" name="servicio_decoracion" /> Decoración</label>
-  <label><input type="checkbox" name="servicio_mantenimiento" /> Mantenimiento</label>
-  <label><input type="checkbox" name="servicio_otros" /> Otros</label>
+        <strong>Servicios que ofrecen</strong>
+        <label><input type="checkbox" name="servicio_mudanza" /> Mudanza</label>
+        <label><input type="checkbox" name="servicio_guardamuebles" /> Guardamuebles</label>
+        <label><input type="checkbox" name="servicio_limpieza" /> Limpieza</label>
+        <label><input type="checkbox" name="servicio_pintura" /> Pintura</label>
+        <label><input type="checkbox" name="servicio_decoracion" /> Decoración</label>
+        <label><input type="checkbox" name="servicio_mantenimiento" /> Mantenimiento</label>
+        <label><input type="checkbox" name="servicio_otros" /> Otros</label>
 
-  <input
-    name="servicio_otros_texto"
-    placeholder="Si marcaste otros, especificá el servicio"
-  />
+        <input
+          name="servicio_otros_texto"
+          placeholder="Si marcaste otros, especificá el servicio"
+        />
 
-  <button
-    type="submit"
-    style={{
-      marginTop: 12,
-      padding: '14px 28px',
-      background: '#8E24AA',
-      color: '#fff',
-      border: 'none',
-      borderRadius: 8,
-      fontSize: 16,
-      fontWeight: 600,
-      cursor: 'pointer'
-    }}
-  >
-    Quiero ser partner de Voarah
-  </button>
-</form>
+        <strong style={{ marginTop: 12 }}>Productos que ofrecen</strong>
+        <label><input type="checkbox" name="producto_pintura" /> Pintura</label>
+        <label><input type="checkbox" name="producto_materiales_obra" /> Materiales de obra</label>
+        <label><input type="checkbox" name="producto_electricidad_plomeria" /> Electricidad y Plomería</label>
+        <label><input type="checkbox" name="producto_herramientas" /> Herramientas</label>
+        <label><input type="checkbox" name="producto_electrodomesticos" /> Electrodomésticos</label>
+        <label><input type="checkbox" name="producto_muebles" /> Muebles</label>
+        <label><input type="checkbox" name="producto_otros" /> Otros</label>
+
+        <input
+          name="producto_otros_texto"
+          placeholder="Si marcaste otros, especificá el producto"
+        />
+
+        <button
+          type="submit"
+          style={{
+            marginTop: 12,
+            padding: '14px 28px',
+            background: '#8E24AA',
+            color: '#fff',
+            border: 'none',
+            borderRadius: 8,
+            fontSize: 16,
+            fontWeight: 600,
+            cursor: 'pointer'
+          }}
+        >
+          Quiero ser partner de Voarah
+        </button>
+      </form>
+
 {showSuccess && (
   <div
     style={{
