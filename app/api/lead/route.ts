@@ -54,27 +54,46 @@ export async function POST(req: Request) {
       );
     }
 
-    // =========================
-    // ARMAR INTENCION
-    // =========================
-    const servicios: string[] = [];
+   // =========================
+// ARMAR INTENCION
+// =========================
+const servicios: string[] = [];
 
-    if (servicio_mudanza) servicios.push("mudanza");
-    if (servicio_guardamuebles) servicios.push("guardamuebles");
-    if (servicio_limpieza) servicios.push("limpieza");
-    if (servicio_pintura) servicios.push("pintura");
-    if (servicio_decoracion) servicios.push("decoracion");
-    if (servicio_mantenimiento) servicios.push("mantenimiento");
-    if (servicio_otros) {
-      servicios.push(
-        servicio_otros_texto
-          ? `otros: ${servicio_otros_texto}`
-          : "otros"
-      );
-    }
+if (servicio_mudanza) servicios.push("mudanza");
+if (servicio_guardamuebles) servicios.push("guardamuebles");
+if (servicio_limpieza) servicios.push("limpieza");
+if (servicio_pintura) servicios.push("pintura");
+if (servicio_decoracion) servicios.push("decoracion");
+if (servicio_mantenimiento) servicios.push("mantenimiento");
 
-    const intencion =
-      servicios.length > 0 ? servicios.join(", ") : "no_especificado";
+if (servicio_otros) {
+  servicios.push(
+    servicio_otros_texto
+      ? `otros servicio: ${servicio_otros_texto}`
+      : "otros servicio"
+  );
+}
+
+// ================= PRODUCTOS =================
+
+if (producto_materiales_obra) servicios.push("materiales de obra");
+if (producto_pinturas) servicios.push("pinturas");
+if (producto_herramientas) servicios.push("herramientas");
+if (producto_muebles) servicios.push("muebles");
+if (producto_electrodomesticos) servicios.push("electrodomesticos");
+if (producto_iluminacion) servicios.push("iluminacion");
+
+if (producto_otros) {
+  servicios.push(
+    producto_otros_texto
+      ? `otros producto: ${producto_otros_texto}`
+      : "otros producto"
+  );
+}
+
+const intencion =
+  servicios.length > 0 ? servicios.join(", ") : "no_especificado";
+
 
     // =========================
     // SUPABASE
