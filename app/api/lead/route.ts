@@ -167,92 +167,125 @@ const intencion =
       .update({ last_used_at: new Date().toISOString() })
       .eq("id", origen.id);
 
-    // =========================
-    // DESTINATARIOS (BCC)
-    // =========================
-    const bccSet = new Set<string>();
+  // =========================
+// DESTINATARIOS POR SERVICIO
+// =========================
+const providerSet = new Set<string>();
 
-    servicios.forEach((s) => {
-      const key = s.startsWith("otros") ? "otros" : s;
-      PROVIDERS_BY_SERVICE[key]?.forEach((mail) => {
-        bccSet.add(mail);
-      });
+servicios.forEach((s) => {
+  const key = s.startsWith("servicio otros") ? "otros"
+            : s.startsWith("mudanza") ? "mudanza"
+            : s.startsWith("guardamuebles") ? "guardamuebles"
+            : s.startsWith("limpieza") ? "limpieza"
+            : s.startsWith("pintura") ? "pintura"
+            : s.startsWith("decoracion") ? "decoracion"
+            : s.startsWith("mantenimiento") ? "mantenimiento"
+            : null;
+
+  if (key && PROVIDERS_BY_SERVICE[key]) {
+    PROVIDERS_BY_SERVICE[key].forEach((mail) => {
+      providerSet.add(mail);
     });
+  }
+});
 
-    const bccRecipients = Array.from(bccSet);
+const providerRecipients = Array.from(providerSet);
 
-    // =========================
-    // EMAIL
-    // =========================
-    const ADMIN = "hola@voarah.com";
+// =========================
+// EMAIL SETUP
+// =========================
+const ADMIN = "hola@voarah.com";
 
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      secure: true,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT),
+  secure: true,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
 
-    const phoneClean = telefono.replace(/\D/g, "");
-    const whatsappLink = phoneClean
-      ? `https://wa.me/${phoneClean}`
-      : null;
+const phoneClean = telefono.replace(/\D/g, "");
+const whatsappLink = phoneClean
+  ? `https://wa.me/${phoneClean}`
+  : null;
 
-    await transporter.sendMail({
-      from: `"Voarah" <${ADMIN}>`,
-      to: ADMIN,
-      bcc: bccRecipients,
-      replyTo: email,
-      subject: "Nuevo contacto desde Voarah",
-      html: `
-        <h3>Nuevo lead</h3>
-        <p><b>Nombre:</b> ${nombre}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Teléfono:</b> ${telefono}</p>
-        <p><b>Servicios solicitados:</b> ${intencion}</p>
-        <p><b>Mensaje:</b><br/>${comentario || "—"}</p>
+// =========================
+// 1️⃣ MAIL A VOARAH
+// =========================
+await transporter.sendMail({
+  from: `"Voarah" <${ADMIN}>`,
+  to: ADMIN,
+  subject: "🔔 Nuevo cliente en VOARAH",
+  html: `
+    <h2>Nuevo Lead</h2>
+    <p><b>Nombre:</b> ${nombre}</p>
+    <p><b>Email:</b> ${email}</p>
+    <p><b>Teléfono:</b> ${telefono}</p>
+    <p><b>Intención:</b> ${intencion}</p>
+    <p><b>Mensaje:</b><br/>${comentario || "—"}</p>
+  `,
+});
 
-        ${
-          whatsappLink
-            ? `
-              <hr/>
-              <a
-                href="${whatsappLink}"
-                target="_blank"
-                style="
-                  display:inline-block;
-                  margin-top:16px;
-                  padding:12px 20px;
-                  background:#25D366;
-                  color:#ffffff;
-                  text-decoration:none;
-                  border-radius:6px;
-                  font-weight:bold;
-                "
-              >
-                💬 Escribir al cliente por WhatsApp
-              </a>
-            `
-            : ""
-        }
-      `,
-    });
+// =========================
+// 2️⃣ MAIL AL CLIENTE
+// =========================
+await transporter.sendMail({
+  from: `"Voarah" <${ADMIN}>`,
+  to: email,
+  subject: "Recibimos tu solicitud en VOARAH",
+  html: `
+    <h2>Gracias por confiar en VOARAH</h2>
+    <p>Recibimos tu solicitud correctamente.</p>
+    <p>Un proveedor se pondrá en contacto con vos a la brevedad.</p>
+  `,
+});
 
-    // =========================
-    // MAIL AL CLIENTE
-    // =========================
-    await transporter.sendMail({
-      from: `"Voarah" <${ADMIN}>`,
-      to: email,
-      subject: "Recibimos tu contacto en Voarah",
-      html: `
-        <h3>Gracias por contactarte con Voarah</h3>
-        <p>Recibimos tu solicitud y un partner se va a comunicar con vos.</p>
-      `,
-    });
+// =========================
+// 3️⃣ MAIL INDIVIDUAL A CADA PROVEEDOR
+// =========================
+for (const providerEmail of providerRecipients) {
+  await transporter.sendMail({
+    from: `"Voarah" <${ADMIN}>`,
+    to: providerEmail,
+    subject: "Nuevo cliente interesado en tu servicio",
+    replyTo: email,
+    html: `
+      <h2>Nuevo cliente</h2>
+      <p><b>Nombre:</b> ${nombre}</p>
+      <p><b>Email:</b> ${email}</p>
+      <p><b>Teléfono:</b> ${telefono}</p>
+      <p><b>Servicios solicitados:</b> ${intencion}</p>
+      <p><b>Mensaje:</b><br/>${comentario || "—"}</p>
+
+      ${
+        whatsappLink
+          ? `
+            <hr/>
+            <a
+              href="${whatsappLink}"
+              target="_blank"
+              style="
+                display:inline-block;
+                margin-top:16px;
+                padding:12px 20px;
+                background:#25D366;
+                color:#ffffff;
+                text-decoration:none;
+                border-radius:6px;
+                font-weight:bold;
+              "
+            >
+              💬 Contactar por WhatsApp
+            </a>
+          `
+          : ""
+      }
+    `,
+  });
+}
+
 
     return NextResponse.json({ ok: true, leadId: lead.id });
   } catch (err) {
