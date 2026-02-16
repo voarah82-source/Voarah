@@ -23,6 +23,25 @@ const PROVIDERS_BY_SERVICE: Record<string, string[]> = {
   ],
 };
 
+// =========================
+// PROVEEDORES POR PRODUCTO
+// =========================
+const PROVIDERS_BY_PRODUCT: Record<string, string[]> = {
+  producto_pintura: ["aedevincenzi@gmail.com"],
+  producto_materiales_obra: ["lucas.rossello@gmail.com"],
+  producto_pisos_revestimientos: ["lucas.rossello@gmail.com"],
+  producto_electricidad_plomeria_banos: ["juancho12oddone@gmail.com"],
+  producto_herramientas: ["lucas.rossello@gmail.com"],
+  producto_electrodomesticos: ["martinezmuerza@gmail.com"],
+  producto_hogar_muebles_jardin: ["aedevincenzi@gmail.com"],
+  producto_otros: [
+    "lucas.rossello@gmail.com",
+    "martinezmuerza@gmail.com",
+    "aedevincenzi@gmail.com",
+    "juancho12oddone@gmail.com",
+  ],
+};
+
 export async function POST(req: Request) {
   try {
     // =========================
@@ -167,29 +186,61 @@ const intencion =
       .update({ last_used_at: new Date().toISOString() })
       .eq("id", origen.id);
 
-  // =========================
-// DESTINATARIOS POR SERVICIO
+// =========================
+// DESTINATARIOS (SERVICIOS + PRODUCTOS)
 // =========================
 const providerSet = new Set<string>();
 
-servicios.forEach((s) => {
-  const key = s.startsWith("servicio otros") ? "otros"
-            : s.startsWith("mudanza") ? "mudanza"
-            : s.startsWith("guardamuebles") ? "guardamuebles"
-            : s.startsWith("limpieza") ? "limpieza"
-            : s.startsWith("pintura") ? "pintura"
-            : s.startsWith("decoracion") ? "decoracion"
-            : s.startsWith("mantenimiento") ? "mantenimiento"
-            : null;
+// ===== SERVICIOS =====
+if (servicio_mudanza)
+  PROVIDERS_BY_SERVICE.mudanza?.forEach(m => providerSet.add(m));
 
-  if (key && PROVIDERS_BY_SERVICE[key]) {
-    PROVIDERS_BY_SERVICE[key].forEach((mail) => {
-      providerSet.add(mail);
-    });
-  }
-});
+if (servicio_guardamuebles)
+  PROVIDERS_BY_SERVICE.guardamuebles?.forEach(m => providerSet.add(m));
+
+if (servicio_limpieza)
+  PROVIDERS_BY_SERVICE.limpieza?.forEach(m => providerSet.add(m));
+
+if (servicio_pintura)
+  PROVIDERS_BY_SERVICE.pintura?.forEach(m => providerSet.add(m));
+
+if (servicio_decoracion)
+  PROVIDERS_BY_SERVICE.decoracion?.forEach(m => providerSet.add(m));
+
+if (servicio_mantenimiento)
+  PROVIDERS_BY_SERVICE.mantenimiento?.forEach(m => providerSet.add(m));
+
+if (servicio_otros)
+  PROVIDERS_BY_SERVICE.otros?.forEach(m => providerSet.add(m));
+
+
+// ===== PRODUCTOS =====
+if (producto_pintura)
+  PROVIDERS_BY_PRODUCT.producto_pintura?.forEach(m => providerSet.add(m));
+
+if (producto_materiales_obra)
+  PROVIDERS_BY_PRODUCT.producto_materiales_obra?.forEach(m => providerSet.add(m));
+
+if (producto_pisos_revestimientos)
+  PROVIDERS_BY_PRODUCT.producto_pisos_revestimientos?.forEach(m => providerSet.add(m));
+
+if (producto_electricidad_plomeria_banos)
+  PROVIDERS_BY_PRODUCT.producto_electricidad_plomeria_banos?.forEach(m => providerSet.add(m));
+
+if (producto_herramientas)
+  PROVIDERS_BY_PRODUCT.producto_herramientas?.forEach(m => providerSet.add(m));
+
+if (producto_electrodomesticos)
+  PROVIDERS_BY_PRODUCT.producto_electrodomesticos?.forEach(m => providerSet.add(m));
+
+if (producto_hogar_muebles_jardin)
+  PROVIDERS_BY_PRODUCT.producto_hogar_muebles_jardin?.forEach(m => providerSet.add(m));
+
+if (producto_otros)
+  PROVIDERS_BY_PRODUCT.producto_otros?.forEach(m => providerSet.add(m));
 
 const providerRecipients = Array.from(providerSet);
+
 
 // =========================
 // EMAIL SETUP
@@ -211,6 +262,7 @@ const whatsappLink = phoneClean
   ? `https://wa.me/${phoneClean}`
   : null;
 
+
 // =========================
 // 1️⃣ MAIL A VOARAH
 // =========================
@@ -228,6 +280,7 @@ await transporter.sendMail({
   `,
 });
 
+
 // =========================
 // 2️⃣ MAIL AL CLIENTE
 // =========================
@@ -242,6 +295,7 @@ await transporter.sendMail({
   `,
 });
 
+
 // =========================
 // 3️⃣ MAIL INDIVIDUAL A CADA PROVEEDOR
 // =========================
@@ -249,14 +303,14 @@ for (const providerEmail of providerRecipients) {
   await transporter.sendMail({
     from: `"Voarah" <${ADMIN}>`,
     to: providerEmail,
-    subject: "Nuevo cliente interesado en tu servicio",
+    subject: "Nuevo cliente interesado en tu servicio / producto",
     replyTo: email,
     html: `
       <h2>Nuevo cliente</h2>
       <p><b>Nombre:</b> ${nombre}</p>
       <p><b>Email:</b> ${email}</p>
       <p><b>Teléfono:</b> ${telefono}</p>
-      <p><b>Servicios solicitados:</b> ${intencion}</p>
+      <p><b>Solicitud:</b> ${intencion}</p>
       <p><b>Mensaje:</b><br/>${comentario || "—"}</p>
 
       ${
