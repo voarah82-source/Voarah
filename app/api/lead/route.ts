@@ -26,39 +26,53 @@ const PROVIDERS_BY_SERVICE: Record<string, string[]> = {
 export async function POST(req: Request) {
   try {
     // =========================
-    // BODY
-    // =========================
-    const body = await req.json();
+// BODY
+// =========================
+const body = await req.json();
 
-    const {
-      nombre,
-      email,
-      telefono,
-      comentario,
-      origen: origenCodigo,
+const {
+  nombre,
+  email,
+  telefono,
+  comentario,
+  origen: origenCodigo,
 
-      servicio_mudanza,
-      servicio_guardamuebles,
-      servicio_limpieza,
-      servicio_pintura,
-      servicio_decoracion,
-      servicio_mantenimiento,
-      servicio_otros,
-      servicio_otros_texto,
-    } = body;
+  // ===== SERVICIOS =====
+  servicio_mudanza,
+  servicio_guardamuebles,
+  servicio_limpieza,
+  servicio_pintura,
+  servicio_decoracion,
+  servicio_mantenimiento,
+  servicio_otros,
+  servicio_otros_texto,
 
-    if (!nombre || !email || !telefono) {
-      return NextResponse.json(
-        { error: "Datos incompletos" },
-        { status: 400 }
-      );
-    }
+  // ===== PRODUCTOS =====
+  producto_pintura,
+  producto_materiales_obra,
+  producto_pisos_revestimientos,
+  producto_electricidad_plomeria_banos,
+  producto_herramientas,
+  producto_electrodomesticos,
+  producto_hogar_muebles_jardin,
+  producto_otros,
+  producto_otros_texto,
+} = body;
+
+if (!nombre || !email || !telefono) {
+  return NextResponse.json(
+    { error: "Datos incompletos" },
+    { status: 400 }
+  );
+}
+
 
    // =========================
 // ARMAR INTENCION
 // =========================
 const servicios: string[] = [];
 
+// ===== SERVICIOS =====
 if (servicio_mudanza) servicios.push("mudanza");
 if (servicio_guardamuebles) servicios.push("guardamuebles");
 if (servicio_limpieza) servicios.push("limpieza");
@@ -69,25 +83,27 @@ if (servicio_mantenimiento) servicios.push("mantenimiento");
 if (servicio_otros) {
   servicios.push(
     servicio_otros_texto
-      ? `otros servicio: ${servicio_otros_texto}`
-      : "otros servicio"
+      ? `servicio otros: ${servicio_otros_texto}`
+      : "servicio otros"
   );
 }
 
-// ================= PRODUCTOS =================
-
-if (producto_materiales_obra) servicios.push("materiales de obra");
-if (producto_pinturas) servicios.push("pinturas");
-if (producto_herramientas) servicios.push("herramientas");
-if (producto_muebles) servicios.push("muebles");
-if (producto_electrodomesticos) servicios.push("electrodomesticos");
-if (producto_iluminacion) servicios.push("iluminacion");
+// ===== PRODUCTOS =====
+if (producto_pintura) servicios.push("producto: pintura");
+if (producto_materiales_obra) servicios.push("producto: materiales de obra");
+if (producto_pisos_revestimientos) servicios.push("producto: pisos y revestimientos");
+if (producto_electricidad_plomeria_banos)
+  servicios.push("producto: electricidad, plomería y baños");
+if (producto_herramientas) servicios.push("producto: herramientas");
+if (producto_electrodomesticos) servicios.push("producto: electrodomésticos");
+if (producto_hogar_muebles_jardin)
+  servicios.push("producto: hogar, muebles y jardín");
 
 if (producto_otros) {
   servicios.push(
     producto_otros_texto
-      ? `otros producto: ${producto_otros_texto}`
-      : "otros producto"
+      ? `producto otros: ${producto_otros_texto}`
+      : "producto otros"
   );
 }
 
