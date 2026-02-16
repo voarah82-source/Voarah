@@ -20,6 +20,7 @@ export default function HomePage() {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   )
 
+  
   const inputStyle = {
     padding: '12px 14px',
     borderRadius: 10,
