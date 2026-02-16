@@ -65,7 +65,7 @@ useEffect(() => {
     })
   }, [])
 
-  async function handleSubmit(e: any) {
+async function handleSubmit(e: any) {
   e.preventDefault()
   setLoading(true)
 
@@ -77,6 +77,8 @@ useEffect(() => {
     telefono: formData.get('telefono'),
     comentario: formData.get('comentario'),
     origen,
+
+    // ================= SERVICIOS =================
     servicio_mudanza: formData.get('servicio_mudanza') === 'on',
     servicio_guardamuebles: formData.get('servicio_guardamuebles') === 'on',
     servicio_limpieza: formData.get('servicio_limpieza') === 'on',
@@ -84,7 +86,17 @@ useEffect(() => {
     servicio_decoracion: formData.get('servicio_decoracion') === 'on',
     servicio_mantenimiento: formData.get('servicio_mantenimiento') === 'on',
     servicio_otros: formData.get('servicio_otros') === 'on',
-    servicio_otros_texto: formData.get('servicio_otros_texto')
+    servicio_otros_texto: formData.get('servicio_otros_texto'),
+
+    // ================= PRODUCTOS =================
+    producto_materiales_obra: formData.get('producto_materiales_obra') === 'on',
+    producto_pinturas: formData.get('producto_pinturas') === 'on',
+    producto_herramientas: formData.get('producto_herramientas') === 'on',
+    producto_muebles: formData.get('producto_muebles') === 'on',
+    producto_electrodomesticos: formData.get('producto_electrodomesticos') === 'on',
+    producto_iluminacion: formData.get('producto_iluminacion') === 'on',
+    producto_otros: formData.get('producto_otros') === 'on',
+    producto_otros_texto: formData.get('producto_otros_texto')
   }
 
   try {
@@ -117,8 +129,7 @@ useEffect(() => {
   } finally {
     setLoading(false)
   }
-  }
-
+}
 
   async function handleSubmitInmobiliaria(
     e: React.FormEvent<HTMLFormElement>
@@ -598,8 +609,7 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
   </div>
 </section>
 
-        
-        {/* MODAL CTAs */}
+{/* MODAL CTAs */}
 {open && (
   <div
     onClick={() => setOpen(false)}
@@ -620,7 +630,9 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
         background: '#ffffff',
         padding: '36px 40px',
         borderRadius: 16,
-        width: 440,
+        width: 900,
+        maxHeight: '90vh',
+        overflowY: 'auto',
         boxShadow: '0 30px 80px rgba(0,0,0,0.25)',
         fontFamily: 'Montserrat, system-ui, sans-serif',
       }}
@@ -650,18 +662,14 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
         style={{
           display: 'flex',
           flexDirection: 'column',
-          gap: 14,
+          gap: 20,
         }}
       >
-        <input name="nombre" placeholder="Nombre" required style={inputStyle} />
-
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          required
-          style={inputStyle}
-        />
+        {/* DATOS BASICOS */}
+        <div style={{ display: 'flex', gap: 16 }}>
+          <input name="nombre" placeholder="Nombre" required style={{ ...inputStyle, flex: 1 }} />
+          <input name="email" type="email" placeholder="Email" required style={{ ...inputStyle, flex: 1 }} />
+        </div>
 
         <input
           name="telefono"
@@ -670,59 +678,112 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
           style={inputStyle}
         />
 
+        {/* === 2 COLUMNAS === */}
         <div
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 8,
-            marginTop: 4,
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 32,
           }}
         >
-          <span style={{ fontSize: 13, color: '#555', fontWeight: 500 }}>
-            ¿Qué estás buscando?
-          </span>
-
-          <label style={{ display: 'flex', gap: 8, fontSize: 14 }}>
-            <input type="checkbox" name="servicio_mudanza" /> Mudanza
-          </label>
-
-          <label style={{ display: 'flex', gap: 8, fontSize: 14 }}>
-            <input type="checkbox" name="servicio_guardamuebles" /> Guardamuebles
-          </label>
-
-          <label style={{ display: 'flex', gap: 8, fontSize: 14 }}>
-            <input type="checkbox" name="servicio_limpieza" /> Limpieza
-          </label>
-
-          <label style={{ display: 'flex', gap: 8, fontSize: 14 }}>
-            <input type="checkbox" name="servicio_pintura" /> Pintura
-          </label>
-
-          <label style={{ display: 'flex', gap: 8, fontSize: 14 }}>
-            <input type="checkbox" name="servicio_decoracion" /> Decoración
-          </label>
-
-          <label style={{ display: 'flex', gap: 8, fontSize: 14 }}>
-            <input type="checkbox" name="servicio_mantenimiento" /> Mantenimiento
-          </label>
-
-          <label style={{ display: 'flex', gap: 8, fontSize: 14 }}>
-            <input type="checkbox" name="servicio_otros" /> Otros
-          </label>
-
-          <input
-            name="servicio_otros_texto"
-            placeholder="Si marcaste otros, especificá el servicio"
+          {/* COLUMNA IZQUIERDA */}
+          <div
             style={{
-              marginTop: 6,
-              padding: '10px 12px',
-              borderRadius: 8,
-              border: '1px solid #ddd',
-              fontSize: 14,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 10,
             }}
-          />
+          >
+            <span style={{ fontSize: 14, fontWeight: 600 }}>
+              ¿Qué estás buscando?
+            </span>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="servicio_mudanza" /> Mudanza
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="servicio_guardamuebles" /> Guardamuebles
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="servicio_limpieza" /> Limpieza
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="servicio_pintura" /> Pintura
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="servicio_decoracion" /> Decoración
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="servicio_mantenimiento" /> Mantenimiento
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="servicio_otros" /> Otros
+            </label>
+
+            <input
+              name="servicio_otros_texto"
+              placeholder="Si marcaste otros, especificá el servicio"
+              style={{
+                marginTop: 8,
+                padding: '10px 12px',
+                borderRadius: 8,
+                border: '1px solid #ddd',
+                fontSize: 14,
+              }}
+            />
+          </div>
+
+          {/* COLUMNA DERECHA (NUEVA) */}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 12,
+            }}
+          >
+            <span style={{ fontSize: 14, fontWeight: 600 }}>
+              Información adicional
+            </span>
+
+            <input
+              name="tipo_operacion"
+              placeholder="Tipo de operación (Venta / Alquiler)"
+              style={inputStyle}
+            />
+
+            <input
+              name="tipo_propiedad"
+              placeholder="Tipo de propiedad (Casa / Depto / Oficina)"
+              style={inputStyle}
+            />
+
+            <input
+              name="fecha_estimada"
+              placeholder="Fecha estimada de mudanza"
+              style={inputStyle}
+            />
+
+            <input
+              name="direccion_origen"
+              placeholder="Dirección origen"
+              style={inputStyle}
+            />
+
+            <input
+              name="direccion_destino"
+              placeholder="Dirección destino"
+              style={inputStyle}
+            />
+          </div>
         </div>
 
+        {/* COMENTARIO */}
         <textarea
           name="comentario"
           placeholder="Dejale toda la info que puedas a tu proveedor, como fecha de mudanza, detalles, etc."
@@ -751,6 +812,7 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
     </div>
   </div>
 )}
+
 
 
 {/* MODAL INMOBILIARIAS */}
