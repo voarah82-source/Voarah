@@ -683,10 +683,10 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
           style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
-            gap: 32,
+            gap: 40,
           }}
         >
-          {/* COLUMNA IZQUIERDA */}
+          {/* COLUMNA IZQUIERDA — SERVICIOS */}
           <div
             style={{
               display: 'flex',
@@ -695,7 +695,7 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
             }}
           >
             <span style={{ fontSize: 14, fontWeight: 600 }}>
-              ¿Qué estás buscando?
+              ¿Qué servicios estás buscando?
             </span>
 
             <label style={{ display: 'flex', gap: 8 }}>
@@ -739,46 +739,60 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
             />
           </div>
 
-          {/* COLUMNA DERECHA (NUEVA) */}
+          {/* COLUMNA DERECHA — PRODUCTOS */}
           <div
             style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: 12,
+              gap: 10,
             }}
           >
             <span style={{ fontSize: 14, fontWeight: 600 }}>
-              Información adicional
+              ¿Qué productos estás buscando?
             </span>
 
-            <input
-              name="tipo_operacion"
-              placeholder="Tipo de operación (Venta / Alquiler)"
-              style={inputStyle}
-            />
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="producto_pintura" /> Pintura
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="producto_materiales_obra" /> Materiales de obra
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="producto_pisos_revestimientos" /> Pisos y revestimientos
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="producto_electricidad_plomeria_banos" /> Electricidad, Plomería y Baños
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="producto_herramientas" /> Herramientas
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="producto_electrodomesticos" /> Electrodomésticos
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="producto_hogar_muebles_jardin" /> Hogar, muebles y jardín
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="producto_otros" /> Otros
+            </label>
 
             <input
-              name="tipo_propiedad"
-              placeholder="Tipo de propiedad (Casa / Depto / Oficina)"
-              style={inputStyle}
-            />
-
-            <input
-              name="fecha_estimada"
-              placeholder="Fecha estimada de mudanza"
-              style={inputStyle}
-            />
-
-            <input
-              name="direccion_origen"
-              placeholder="Dirección origen"
-              style={inputStyle}
-            />
-
-            <input
-              name="direccion_destino"
-              placeholder="Dirección destino"
-              style={inputStyle}
+              name="producto_otros_texto"
+              placeholder="Si marcaste otros, especificá el producto"
+              style={{
+                marginTop: 8,
+                padding: '10px 12px',
+                borderRadius: 8,
+                border: '1px solid #ddd',
+                fontSize: 14,
+              }}
             />
           </div>
         </div>
@@ -786,7 +800,7 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
         {/* COMENTARIO */}
         <textarea
           name="comentario"
-          placeholder="Dejale toda la info que puedas a tu proveedor, como fecha de mudanza, detalles, etc."
+          placeholder="Dejale toda la info que puedas a tu proveedor."
           rows={3}
           style={{ ...inputStyle, resize: 'none' }}
         />
@@ -812,7 +826,6 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
     </div>
   </div>
 )}
-
 
 
 {/* MODAL INMOBILIARIAS */}
