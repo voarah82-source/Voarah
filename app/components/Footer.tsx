@@ -56,11 +56,10 @@ export default function Footer() {
             margin: 0
           }}
         >
-          VOARAH es una plataforma de intermediación que conecta usuarios con
-          proveedores de servicios e inmobiliarias. Cada proveedor o inmobiliaria
-          es responsable de la ejecución, condiciones y garantías de su servicio.
-          VOARAH no presta directamente los servicios ni asume responsabilidad por
-          su realización.
+          VOARAH es una plataforma de intermediación que conecta usuarios con proveedores de servicios e inmobiliarias. 
+          Cada proveedor o inmobiliaria es responsable de la ejecución, condiciones y garantías de su servicio. 
+          VOARAH no presta directamente los servicios ni asume responsabilidad por su realización. 
+          VOARAH no garantiza resultados comerciales, incremento de valor, velocidad de venta o alquiler del inmuebles
         </p>
       </div>
     </footer>
