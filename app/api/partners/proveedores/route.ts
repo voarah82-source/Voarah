@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import nodemailer from 'nodemailer'
 
 export const runtime = "nodejs"
 
@@ -14,7 +15,6 @@ export async function POST(req: Request) {
       telefono,
       ciudad_zona,
 
-      // SERVICIOS
       servicio_mudanza,
       servicio_guardamuebles,
       servicio_limpieza,
@@ -25,7 +25,6 @@ export async function POST(req: Request) {
       servicio_otros,
       servicio_otros_texto,
 
-      // PRODUCTOS
       producto_pintura,
       producto_materiales_obra,
       producto_electricidad_plomeria,
@@ -63,7 +62,6 @@ export async function POST(req: Request) {
         telefono,
         ciudad_zona,
 
-        // SERVICIOS
         servicio_mudanza: !!servicio_mudanza,
         servicio_guardamuebles: !!servicio_guardamuebles,
         servicio_limpieza: !!servicio_limpieza,
@@ -74,7 +72,6 @@ export async function POST(req: Request) {
         servicio_otros: !!servicio_otros,
         servicio_otros_texto,
 
-        // PRODUCTOS
         producto_pintura: !!producto_pintura,
         producto_materiales_obra: !!producto_materiales_obra,
         producto_electricidad_plomeria: !!producto_electricidad_plomeria,
@@ -87,11 +84,54 @@ export async function POST(req: Request) {
 
     if (error) {
       console.error('DB ERROR:', error)
-      return NextResponse.json(
-        { error: 'DB error' },
-        { status: 500 }
-      )
+      return NextResponse.json({ error: 'DB error' }, { status: 500 })
     }
+
+    // =========================
+    // EMAILS
+    // =========================
+
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
+      secure: true,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    })
+
+    const ADMIN = "hola@voarah.com"
+
+    // 📩 MAIL INTERNO (solo a vos)
+    await transporter.sendMail({
+      from: `"Voarah" <${ADMIN}>`,
+      to: ADMIN,
+      subject: "Nueva alta de PROVEEDOR en Voarah",
+      html: `
+        <h2>Nueva alta de proveedor</h2>
+        <p><b>Empresa:</b> ${empresa_nombre}</p>
+        <p><b>Contacto:</b> ${contacto_nombre}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Teléfono:</b> ${telefono}</p>
+        <p><b>Zona:</b> ${ciudad_zona}</p>
+      `,
+    })
+
+    // 📩 MAIL AL PROVEEDOR
+    await transporter.sendMail({
+      from: `"Voarah" <${ADMIN}>`,
+      to: email,
+      subject: "Bienvenido a Voarah",
+      html: `
+        <h2>Bienvenido a Voarah</h2>
+        <p>Hola ${contacto_nombre},</p>
+        <p>Recibimos tu solicitud para sumarte como partner proveedor.</p>
+        <p>En breve nuestro equipo se pondrá en contacto para continuar el proceso.</p>
+        <br/>
+        <p>Equipo Voarah</p>
+      `,
+    })
 
     return NextResponse.json({ ok: true })
 
@@ -103,4 +143,3 @@ export async function POST(req: Request) {
     )
   }
 }
-
