@@ -262,7 +262,6 @@ const whatsappLink = phoneClean
   ? `https://wa.me/${phoneClean}`
   : null;
 
-
 // =========================
 // 1️⃣ MAIL A VOARAH
 // =========================
@@ -276,7 +275,20 @@ await transporter.sendMail({
     <p><b>Email:</b> ${email}</p>
     <p><b>Teléfono:</b> ${telefono}</p>
     <p><b>Intención:</b> ${intencion}</p>
-    <p><b>Mensaje:</b><br/>${comentario || "—"}</p>
+    
+    ${
+      servicio_otros_texto
+        ? `<p><b>Texto libre servicio:</b> ${servicio_otros_texto}</p>`
+        : ""
+    }
+
+    ${
+      producto_otros_texto
+        ? `<p><b>Texto libre producto:</b> ${producto_otros_texto}</p>`
+        : ""
+    }
+
+    <p><b>Mensaje general:</b><br/>${comentario || "—"}</p>
   `,
 });
 
@@ -311,6 +323,7 @@ for (const providerEmail of providerRecipients) {
       <p><b>Email:</b> ${email}</p>
       <p><b>Teléfono:</b> ${telefono}</p>
       <p><b>Solicitud:</b> ${intencion}</p>
+
       <p><b>Mensaje:</b><br/>${comentario || "—"}</p>
 
       ${
