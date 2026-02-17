@@ -103,20 +103,45 @@ export async function POST(req: Request) {
 
     const ADMIN = "hola@voarah.com"
 
-    // 📩 MAIL INTERNO (solo a vos)
-    await transporter.sendMail({
-      from: `"Voarah" <${ADMIN}>`,
-      to: ADMIN,
-      subject: "Nueva alta de PROVEEDOR en Voarah",
-      html: `
-        <h2>Nueva alta de proveedor</h2>
-        <p><b>Empresa:</b> ${empresa_nombre}</p>
-        <p><b>Contacto:</b> ${contacto_nombre}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Teléfono:</b> ${telefono}</p>
-        <p><b>Zona:</b> ${ciudad_zona}</p>
-      `,
-    })
+  // 📩 MAIL INTERNO (solo a vos)
+await transporter.sendMail({
+  from: `"Voarah" <${ADMIN}>`,
+  to: ADMIN,
+  subject: "Nueva alta de PROVEEDOR en Voarah",
+  html: `
+    <h2>Nueva alta de proveedor</h2>
+    <p><b>Empresa:</b> ${empresa_nombre}</p>
+    <p><b>Contacto:</b> ${contacto_nombre}</p>
+    <p><b>Email:</b> ${email}</p>
+    <p><b>Teléfono:</b> ${telefono}</p>
+    <p><b>Zona:</b> ${ciudad_zona}</p>
+
+    <hr/>
+
+    <p><b>Servicios:</b></p>
+    <p>
+      ${servicio_mudanza ? "Mudanza<br/>" : ""}
+      ${servicio_guardamuebles ? "Guardamuebles<br/>" : ""}
+      ${servicio_limpieza ? "Limpieza<br/>" : ""}
+      ${servicio_pintura ? "Pintura<br/>" : ""}
+      ${servicio_decoracion ? "Decoración<br/>" : ""}
+      ${servicio_mantenimiento ? "Mantenimiento<br/>" : ""}
+      ${servicio_otros_texto ? `Otros: ${servicio_otros_texto}<br/>` : ""}
+    </p>
+
+    <p><b>Productos:</b></p>
+    <p>
+      ${producto_pintura ? "Pintura<br/>" : ""}
+      ${producto_materiales_obra ? "Materiales de obra<br/>" : ""}
+      ${producto_electricidad_plomeria ? "Electricidad y Plomería<br/>" : ""}
+      ${producto_herramientas ? "Herramientas<br/>" : ""}
+      ${producto_electrodomesticos ? "Electrodomésticos<br/>" : ""}
+      ${producto_muebles ? "Muebles<br/>" : ""}
+      ${producto_otros_texto ? `Otros: ${producto_otros_texto}<br/>` : ""}
+    </p>
+  `,
+})
+
 
     // 📩 MAIL AL PROVEEDOR
     await transporter.sendMail({
