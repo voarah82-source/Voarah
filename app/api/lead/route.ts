@@ -147,21 +147,26 @@ const intencion =
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     );
 
-    // =========================
-    // BUSCAR ORIGEN (OBLIGATORIO)
-    // =========================
-    const { data: origen } = await supabase
-      .from("origenes_comerciales")
-      .select("id")
-      .eq("codigo", origenCodigo)
-      .single();
+// =========================
+// BUSCAR ORIGEN (QR / ORGANICO)
+// =========================
 
-    if (!origen) {
-      return NextResponse.json(
-        { error: "Origen inválido" },
-        { status: 400 }
-      );
-    }
+const codigoFinal = origenCodigo || "ORGANICO";
+
+const { data: origen, error: origenError } = await supabase
+  .from("origenes_comerciales")
+  .select("id")
+  .eq("codigo", codigoFinal)
+  .single();
+
+if (origenError || !origen) {
+  console.error("❌ Origen no encontrado:", codigoFinal);
+  return NextResponse.json(
+    { error: "Origen inválido" },
+    { status: 400 }
+  );
+}
+
 
     // =========================
     // INSERT LEAD
