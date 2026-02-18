@@ -818,13 +818,13 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
           </div>
         </div>
 
-        {/* COMENTARIO */}
+        {/*
         <textarea
           name="comentario"
           placeholder="Dejale toda la info que puedas a tu proveedor."
           rows={3}
           style={{ ...inputStyle, resize: 'none' }}
-        />
+        /> */}
 
         <button
           type="submit"
