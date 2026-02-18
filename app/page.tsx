@@ -89,6 +89,7 @@ async function handleSubmit(e: any) {
     servicio_otros: formData.get('servicio_otros') === 'on',
     servicio_otros_texto: formData.get('servicio_otros_texto'),
 
+
     // ================= PRODUCTOS =================
     producto_materiales_obra: formData.get('producto_materiales_obra') === 'on',
     producto_pinturas: formData.get('producto_pinturas') === 'on',
@@ -794,9 +795,13 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
             </label>
 
             <label style={{ display: 'flex', gap: 8 }}>
-              <input type="checkbox" name="producto_otros" /> Otros
+            <input type="checkbox" name="servicio_bienes_usados" /> Compra / Venta de bienes usados
             </label>
 
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="producto_otros" /> Otros
+            </label>
+            
             <input
               name="producto_otros_texto"
               placeholder="Si marcaste otros, especificá el producto"
