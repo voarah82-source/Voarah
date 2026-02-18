@@ -34,6 +34,8 @@ const PROVIDERS_BY_PRODUCT: Record<string, string[]> = {
   producto_herramientas: ["lucas.rossello@gmail.com"],
   producto_electrodomesticos: ["martinezmuerza@gmail.com"],
   producto_hogar_muebles_jardin: ["aedevincenzi@gmail.com"],
+  producto_bienes_usados: ["lucas.rossello@gmail.com"],
+
   producto_otros: [
     "lucas.rossello@gmail.com",
     "martinezmuerza@gmail.com",
@@ -74,6 +76,7 @@ const {
   producto_herramientas,
   producto_electrodomesticos,
   producto_hogar_muebles_jardin,
+  producto_bienes_usados,
   producto_otros,
   producto_otros_texto,
 } = body;
@@ -99,7 +102,7 @@ if (servicio_pintura) servicios.push("pintura");
 if (servicio_decoracion) servicios.push("decoracion");
 if (servicio_mantenimiento) servicios.push("mantenimiento");
 if (servicio_pintura) servicios.push("pintores");
-if (servicio_bienes_usados) servicios.push("bienes usados");
+
 
 
 if (servicio_otros) {
@@ -120,6 +123,9 @@ if (producto_herramientas) servicios.push("producto: herramientas");
 if (producto_electrodomesticos) servicios.push("producto: electrodomésticos");
 if (producto_hogar_muebles_jardin)
   servicios.push("producto: hogar, muebles y jardín");
+if (producto_bienes_usados)
+  servicios.push("producto: compra y venta de bienes usados");
+
 
 if (producto_otros) {
   servicios.push(
@@ -238,6 +244,9 @@ if (producto_electrodomesticos)
 
 if (producto_hogar_muebles_jardin)
   PROVIDERS_BY_PRODUCT.producto_hogar_muebles_jardin?.forEach(m => providerSet.add(m));
+   
+if (producto_bienes_usados)
+  PROVIDERS_BY_PRODUCT.producto_bienes_usados?.forEach(m => providerSet.add(m));
 
 if (producto_otros)
   PROVIDERS_BY_PRODUCT.producto_otros?.forEach(m => providerSet.add(m));
