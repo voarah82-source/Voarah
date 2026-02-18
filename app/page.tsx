@@ -727,7 +727,7 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
             </label>
 
             <label style={{ display: 'flex', gap: 8 }}>
-              <input type="checkbox" name="servicio_pintura" /> Pintura
+              <input type="checkbox" name="servicio_pintura" /> Pintores
             </label>
 
             <label style={{ display: 'flex', gap: 8 }}>
