@@ -98,6 +98,7 @@ async function handleSubmit(e: any) {
     producto_electrodomesticos: formData.get('producto_electrodomesticos') === 'on',
     producto_iluminacion: formData.get('producto_iluminacion') === 'on',
     producto_otros: formData.get('producto_otros') === 'on',
+    producto_bienes_usados: formData.get('producto_bienes_usados') === 'on',
     producto_otros_texto: formData.get('producto_otros_texto')
   }
 
@@ -794,9 +795,10 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
               <input type="checkbox" name="producto_hogar_muebles_jardin" /> Hogar, muebles y jardín
             </label>
 
-            <label style={{ display: 'flex', gap: 8 }}>
-            <input type="checkbox" name="servicio_bienes_usados" /> Compra / Venta de bienes usados
+           <label style={{ display: 'flex', gap: 8 }}>
+            <input type="checkbox" name="producto_bienes_usados" /> Compra y venta de bienes usados
             </label>
+
 
             <label style={{ display: 'flex', gap: 8 }}>
               <input type="checkbox" name="producto_otros" /> Otros
