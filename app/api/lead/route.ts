@@ -98,6 +98,9 @@ if (servicio_limpieza) servicios.push("limpieza");
 if (servicio_pintura) servicios.push("pintura");
 if (servicio_decoracion) servicios.push("decoracion");
 if (servicio_mantenimiento) servicios.push("mantenimiento");
+if (servicio_pintura) servicios.push("pintores");
+if (servicio_bienes_usados) servicios.push("bienes usados");
+
 
 if (servicio_otros) {
   servicios.push(
