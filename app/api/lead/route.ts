@@ -17,10 +17,10 @@ const PROVIDERS_BY_SERVICE: Record<string, string[]> = {
   mantenimiento: ["martinzmudanzas@gmail.com", "hola@voarah.com"],
   otros: ["martinzmudanzas@gmail.com", "hola@voarah.com"],
 };
+
 // =========================
 // PROVEEDORES POR PRODUCTO
 // =========================
-const PROVIDERS_BY_PRODUCT: Record<string, string[]> = {
 const PROVIDERS_BY_PRODUCT: Record<string, string[]> = {
   producto_pintura: ["hola@voarah.com"],
   producto_materiales_obra: ["hola@voarah.com"],
@@ -29,12 +29,9 @@ const PROVIDERS_BY_PRODUCT: Record<string, string[]> = {
   producto_herramientas: ["hola@voarah.com"],
   producto_electrodomesticos: ["hola@voarah.com"],
   producto_hogar_muebles_jardin: ["hola@voarah.com"],
-
   producto_bienes_usados: ["hola@flips.ar", "hola@voarah.com"],
-
   producto_otros: ["hola@voarah.com"],
 };
-
 export async function POST(req: Request) {
   try {
     // =========================
@@ -80,7 +77,7 @@ if (!nombre || !email || !telefono) {
 }
 
 
-   // =========================
+// =========================
 // ARMAR INTENCION
 // =========================
 const servicios: string[] = [];
@@ -89,12 +86,9 @@ const servicios: string[] = [];
 if (servicio_mudanza) servicios.push("mudanza");
 if (servicio_guardamuebles) servicios.push("guardamuebles");
 if (servicio_limpieza) servicios.push("limpieza");
-if (servicio_pintura) servicios.push("pintura");
+if (servicio_pintura) servicios.push("pintores"); // ← SOLO pintores
 if (servicio_decoracion) servicios.push("decoracion");
 if (servicio_mantenimiento) servicios.push("mantenimiento");
-if (servicio_pintura) servicios.push("pintores");
-
-
 
 if (servicio_otros) {
   servicios.push(
@@ -107,16 +101,18 @@ if (servicio_otros) {
 // ===== PRODUCTOS =====
 if (producto_pintura) servicios.push("producto: pintura");
 if (producto_materiales_obra) servicios.push("producto: materiales de obra");
-if (producto_pisos_revestimientos) servicios.push("producto: pisos y revestimientos");
+if (producto_pisos_revestimientos)
+  servicios.push("producto: pisos y revestimientos");
 if (producto_electricidad_plomeria_banos)
   servicios.push("producto: electricidad, plomería y baños");
-if (producto_herramientas) servicios.push("producto: herramientas");
-if (producto_electrodomesticos) servicios.push("producto: electrodomésticos");
+if (producto_herramientas)
+  servicios.push("producto: herramientas");
+if (producto_electrodomesticos)
+  servicios.push("producto: electrodomésticos");
 if (producto_hogar_muebles_jardin)
   servicios.push("producto: hogar, muebles y jardín");
 if (producto_bienes_usados)
   servicios.push("producto: compra y venta de bienes usados");
-
 
 if (producto_otros) {
   servicios.push(
@@ -207,7 +203,7 @@ if (servicio_limpieza)
   PROVIDERS_BY_SERVICE.limpieza?.forEach(m => providerSet.add(m));
 
 if (servicio_pintura)
-  PROVIDERS_BY_SERVICE.pintura?.forEach(m => providerSet.add(m));
+  PROVIDERS_BY_SERVICE.pintores?.forEach(m => providerSet.add(m)); // ← CORREGIDO
 
 if (servicio_decoracion)
   PROVIDERS_BY_SERVICE.decoracion?.forEach(m => providerSet.add(m));
@@ -240,7 +236,7 @@ if (producto_electrodomesticos)
 
 if (producto_hogar_muebles_jardin)
   PROVIDERS_BY_PRODUCT.producto_hogar_muebles_jardin?.forEach(m => providerSet.add(m));
-   
+
 if (producto_bienes_usados)
   PROVIDERS_BY_PRODUCT.producto_bienes_usados?.forEach(m => providerSet.add(m));
 
