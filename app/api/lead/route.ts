@@ -9,39 +9,30 @@ import { createClient } from "@supabase/supabase-js";
 // PROVEEDORES POR SERVICIO
 // =========================
 const PROVIDERS_BY_SERVICE: Record<string, string[]> = {
-  mudanza: ["lucas.rossello@gmail.com"],
-  guardamuebles: ["lucas.rossello@gmail.com"],
-  limpieza: ["martinezmuerza@gmail.com"],
-  pintura: ["aedevincenzi@gmail.com"],
-  decoracion: ["aedevincenzi@gmail.com"],
-  mantenimiento: ["juancho12oddone@gmail.com"],
-  otros: [
-    "lucas.rossello@gmail.com",
-    "martinezmuerza@gmail.com",
-    "aedevincenzi@gmail.com",
-    "juancho12oddone@gmail.com",
-  ],
+  mudanza: ["martinzmudanzas@gmail.com", "hola@voarah.com"],
+  guardamuebles: ["martinzmudanzas@gmail.com", "hola@voarah.com"],
+  limpieza: ["martinzmudanzas@gmail.com", "hola@voarah.com"],
+  pintores: ["martinzmudanzas@gmail.com", "hola@voarah.com"],
+  decoracion: ["martinzmudanzas@gmail.com", "hola@voarah.com"],
+  mantenimiento: ["martinzmudanzas@gmail.com", "hola@voarah.com"],
+  otros: ["martinzmudanzas@gmail.com", "hola@voarah.com"],
 };
-
 // =========================
 // PROVEEDORES POR PRODUCTO
 // =========================
 const PROVIDERS_BY_PRODUCT: Record<string, string[]> = {
-  producto_pintura: ["aedevincenzi@gmail.com"],
-  producto_materiales_obra: ["lucas.rossello@gmail.com"],
-  producto_pisos_revestimientos: ["lucas.rossello@gmail.com"],
-  producto_electricidad_plomeria_banos: ["juancho12oddone@gmail.com"],
-  producto_herramientas: ["lucas.rossello@gmail.com"],
-  producto_electrodomesticos: ["martinezmuerza@gmail.com"],
-  producto_hogar_muebles_jardin: ["aedevincenzi@gmail.com"],
-  producto_bienes_usados: ["lucas.rossello@gmail.com"],
+const PROVIDERS_BY_PRODUCT: Record<string, string[]> = {
+  producto_pintura: ["hola@voarah.com"],
+  producto_materiales_obra: ["hola@voarah.com"],
+  producto_pisos_revestimientos: ["hola@voarah.com"],
+  producto_electricidad_plomeria_banos: ["hola@voarah.com"],
+  producto_herramientas: ["hola@voarah.com"],
+  producto_electrodomesticos: ["hola@voarah.com"],
+  producto_hogar_muebles_jardin: ["hola@voarah.com"],
 
-  producto_otros: [
-    "lucas.rossello@gmail.com",
-    "martinezmuerza@gmail.com",
-    "aedevincenzi@gmail.com",
-    "juancho12oddone@gmail.com",
-  ],
+  producto_bienes_usados: ["hola@flips.ar", "hola@voarah.com"],
+
+  producto_otros: ["hola@voarah.com"],
 };
 
 export async function POST(req: Request) {
