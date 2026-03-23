@@ -1,200 +1,204 @@
 'use client'
 
-import { useState } from 'react'
-import Header from '../../components/Header'
+import { useState, useEffect } from 'react'
+import { createClient } from '@supabase/supabase-js'
+import Header from '../components/Header'
 
-const DATA = [
-  {
-    titulo: 'Mudanzas',
-    items: ['Con embalaje', 'Desembalaje', 'Solo transporte']
-  },
-  {
-    titulo: 'Guardamuebles y Self-Storage',
-    items: ['Recogida', 'Entrega', 'Bauleras']
-  },
-  {
-    titulo: 'Limpieza',
-    items: ['Hogares', 'Oficinas', 'Pileta', 'Poda']
-  },
-  {
-    titulo: 'Diseño interior',
-    items: ['Proyectos', 'Planos', 'Certificaciones']
-  },
-  {
-    titulo: 'Mantenimiento',
-    items: ['Pintura', 'Plomería', 'Electricidad']
+export default function HomePage() {
+
+  const [session, setSession] = useState<any>(null)
+  const [open, setOpen] = useState(false)
+  const [openInmoModal, setOpenInmoModal] = useState(false)
+  const [openProveedorModal, setOpenProveedorModal] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [loadingInmo, setLoadingInmo] = useState(false)
+  const [loadingProveedor, setLoadingProveedor] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
+
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
+
+  const inputStyle = {
+    padding: '12px 14px',
+    borderRadius: 10,
+    border: '1px solid #ddd',
+    fontSize: 14,
+    fontFamily: 'Montserrat, system-ui, sans-serif'
   }
-]
 
-export default function Page() {
-  const [open, setOpen] = useState(true)
-  const [active, setActive] = useState(0)
-  const [selected, setSelected] = useState<string[]>([])
+  const [origen, setOrigen] = useState('')
 
-  const toggle = (item: string) => {
-    setSelected(prev =>
-      prev.includes(item)
-        ? prev.filter(i => i !== item)
-        : [...prev, item]
-    )
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const origenParam = params.get('origen') || ''
+    setOrigen(origenParam)
+  }, [])
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('success') === '1') {
+      alert('Datos enviados correctamente. Te contactaremos pronto.')
+    }
+  }, [])
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session) {
+        setSession(data.session)
+
+        const pending = localStorage.getItem("pendingLead")
+
+        if (pending) {
+          fetch('/api/lead', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: pending
+          }).then(() => {
+            localStorage.removeItem("pendingLead")
+            alert("Datos enviados correctamente.")
+          })
+        }
+      }
+    })
+  }, [])
+
+  async function handleSubmit(e: any) {
+    e.preventDefault()
+    setLoading(true)
+
+    const formData = new FormData(e.target)
+
+    const payload = {
+      nombre: formData.get('nombre'),
+      email: formData.get('email'),
+      telefono: formData.get('telefono'),
+      comentario: formData.get('comentario'),
+      origen,
+
+      servicio_mudanza: formData.get('servicio_mudanza') === 'on',
+      servicio_guardamuebles: formData.get('servicio_guardamuebles') === 'on',
+      servicio_limpieza: formData.get('servicio_limpieza') === 'on',
+      servicio_diseno_interior: formData.get('servicio_diseno_interior') === 'on',
+      servicio_mantenimiento: formData.get('servicio_mantenimiento') === 'on',
+      servicio_fotografia: formData.get('servicio_fotografia') === 'on',
+      servicio_juridico: formData.get('servicio_juridico') === 'on',
+      servicio_seguros: formData.get('servicio_seguros') === 'on',
+      servicio_jardineria: formData.get('servicio_jardineria') === 'on',
+      servicio_seguridad: formData.get('servicio_seguridad') === 'on',
+      servicio_otros: formData.get('servicio_otros') === 'on',
+      servicio_otros_texto: formData.get('servicio_otros_texto'),
+
+      producto_materiales_obra: formData.get('producto_materiales_obra') === 'on',
+      producto_pintura: formData.get('producto_pintura') === 'on',
+      producto_pisos_revestimientos: formData.get('producto_pisos_revestimientos') === 'on',
+      producto_electricidad_plomeria_banos: formData.get('producto_electricidad_plomeria_banos') === 'on',
+      producto_herramientas: formData.get('producto_herramientas') === 'on',
+      producto_electrodomesticos: formData.get('producto_electrodomesticos') === 'on',
+      producto_hogar_muebles_jardin: formData.get('producto_hogar_muebles_jardin') === 'on',
+      producto_bienes_usados: formData.get('producto_bienes_usados') === 'on',
+      producto_otros: formData.get('producto_otros') === 'on',
+      producto_otros_texto: formData.get('producto_otros_texto')
+    }
+
+    try {
+      localStorage.setItem("pendingLead", JSON.stringify(payload))
+
+      const { error } = await supabase.auth.signInWithOtp({
+        email: payload.email as string,
+        options: {
+          emailRedirectTo: "https://www.voarah.com/auth/callback"
+        }
+      })
+
+      if (error) {
+        alert("Hubo un problema enviando el email.")
+        localStorage.removeItem("pendingLead")
+        return
+      }
+
+      alert("Te enviamos un link a tu email para confirmar.")
+
+    } catch (err) {
+      alert("Error inesperado.")
+      localStorage.removeItem("pendingLead")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
     <>
       <Header onOpenModal={() => setOpen(true)} />
 
-      {/* CTA REAL */}
-      <div style={{ textAlign: 'center', marginTop: 60 }}>
-        <div
-          onClick={() => setOpen(true)}
-          style={{
-            width: 180,
-            height: 180,
-            borderRadius: '50%',
-            background: 'linear-gradient(135deg,#9c27b0,#7b1fa2)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#fff',
-            fontWeight: 600,
-            margin: '0 auto',
-            cursor: 'pointer'
-          }}
-        >
-          Activar
+      <main style={{ fontFamily: 'Montserrat, system-ui, sans-serif' }}>
+
+{/* MODAL */}
+{open && (
+  <div onClick={() => setOpen(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(20,20,20,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div onClick={(e) => e.stopPropagation()} style={{ background: '#fff', padding: 40, borderRadius: 16, width: 900 }}>
+      
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+
+        <div style={{ display: 'flex', gap: 16 }}>
+          <input name="nombre" placeholder="Nombre" required style={{ ...inputStyle, flex: 1 }} />
+          <input name="email" type="email" placeholder="Email" required style={{ ...inputStyle, flex: 1 }} />
         </div>
-      </div>
 
-      {/* MODAL */}
-      {open && (
-        <div className="overlay" onClick={() => setOpen(false)}>
-          <div className="modal" onClick={e => e.stopPropagation()}>
-            <h2>¿Qué necesitás?</h2>
+        <input name="telefono" placeholder="Teléfono" required style={inputStyle} />
 
-            <div className="box">
-              {/* LEFT */}
-              <div className="left">
-                {DATA.map((row, i) => (
-                  <div
-                    key={i}
-                    onClick={() => setActive(i)}
-                    className={`leftItem ${active === i ? 'active' : ''}`}
-                  >
-                    {row.titulo}
-                  </div>
-                ))}
-              </div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }}>
 
-              {/* RIGHT */}
-              <div className="right">
-                {DATA[active].items.map(item => (
-                  <div
-                    key={item}
-                    onClick={() => toggle(item)}
-                    className={`chip ${
-                      selected.includes(item) ? 'selected' : ''
-                    }`}
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+{/* SERVICIOS */}
+<div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+<span style={{ fontWeight: 600 }}>Servicios</span>
+
+<label><input type="checkbox" name="servicio_mudanza" /> Mudanza</label>
+<label><input type="checkbox" name="servicio_guardamuebles" /> Guardamuebles</label>
+<label><input type="checkbox" name="servicio_limpieza" /> Limpieza</label>
+<label><input type="checkbox" name="servicio_diseno_interior" /> Diseño interior</label>
+<label><input type="checkbox" name="servicio_mantenimiento" /> Mantenimiento</label>
+<label><input type="checkbox" name="servicio_fotografia" /> Foto / video / dron</label>
+<label><input type="checkbox" name="servicio_juridico" /> Jurídicos</label>
+<label><input type="checkbox" name="servicio_seguros" /> Seguros</label>
+<label><input type="checkbox" name="servicio_jardineria" /> Jardinería</label>
+<label><input type="checkbox" name="servicio_seguridad" /> Seguridad</label>
+<label><input type="checkbox" name="servicio_otros" /> Otros</label>
+
+<input name="servicio_otros_texto" placeholder="Otros..." style={inputStyle} />
+</div>
+
+{/* PRODUCTOS */}
+<div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+<span style={{ fontWeight: 600 }}>Productos</span>
+
+<label><input type="checkbox" name="producto_materiales_obra" /> Materiales obra</label>
+<label><input type="checkbox" name="producto_pintura" /> Pintura</label>
+<label><input type="checkbox" name="producto_pisos_revestimientos" /> Pisos</label>
+<label><input type="checkbox" name="producto_electricidad_plomeria_banos" /> Electricidad / plomería</label>
+<label><input type="checkbox" name="producto_herramientas" /> Herramientas</label>
+<label><input type="checkbox" name="producto_electrodomesticos" /> Electrodomésticos</label>
+<label><input type="checkbox" name="producto_hogar_muebles_jardin" /> Muebles / hogar</label>
+<label><input type="checkbox" name="producto_bienes_usados" /> Usados</label>
+<label><input type="checkbox" name="producto_otros" /> Otros</label>
+
+<input name="producto_otros_texto" placeholder="Otros..." style={inputStyle} />
+</div>
+
         </div>
-      )}
 
-      <style jsx>{`
-        .overlay {
-          position: fixed;
-          inset: 0;
-          background: rgba(0, 0, 0, 0.55);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
+        <button type="submit" style={{ padding: 14, background: '#8E24AA', color: '#fff', borderRadius: 10 }}>
+          {loading ? 'Enviando…' : 'Enviar'}
+        </button>
 
-        .modal {
-          width: 900px;
-          max-width: 95%;
-          background: #fff;
-          border-radius: 16px;
-          padding: 30px;
-        }
+      </form>
 
-        h2 {
-          margin-bottom: 20px;
-        }
+    </div>
+  </div>
+)}
 
-        .box {
-          display: grid;
-          grid-template-columns: 280px 1fr;
-          border: 1px solid #ddd;
-          border-radius: 10px;
-          overflow: hidden;
-        }
-
-        .left {
-          background: #e3f2fd;
-          display: flex;
-          flex-direction: column;
-        }
-
-        .leftItem {
-          padding: 16px;
-          cursor: pointer;
-          border-bottom: 1px solid #d0d0d0;
-          font-weight: 500;
-        }
-
-        .leftItem.active {
-          background: #cfe8ff;
-          font-weight: 600;
-        }
-
-        .right {
-          padding: 20px;
-          display: flex;
-          flex-wrap: wrap;
-          gap: 10px;
-          align-content: flex-start;
-        }
-
-        .chip {
-          padding: 10px 14px;
-          background: #f0f0f0;
-          border-radius: 10px;
-          cursor: pointer;
-          transition: 0.2s;
-        }
-
-        .chip:hover {
-          background: #e0e0e0;
-        }
-
-        .chip.selected {
-          background: #8e24aa;
-          color: #fff;
-        }
-
-        /* RESPONSIVE REAL */
-        @media (max-width: 768px) {
-          .box {
-            grid-template-columns: 1fr;
-          }
-
-          .left {
-            flex-direction: row;
-            overflow-x: auto;
-          }
-
-          .leftItem {
-            white-space: nowrap;
-            border-bottom: none;
-            border-right: 1px solid #ddd;
-          }
-        }
-      `}</style>
+      </main>
     </>
   )
 }
