@@ -196,7 +196,7 @@ producto_usado_motos: formData.get('producto_usado_motos') === 'on',
       return
     }
 
-    alert("Te enviamos un link a tu email para confirmar.")
+    alert("Te enviamos un link a tu email para confirmar. Revisa la casilla Spam / correo no deseado")
 
   } catch (err) {
     console.error("Error real:", err)
