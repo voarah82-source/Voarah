@@ -86,19 +86,28 @@ async function handleSubmit(e: any) {
     servicio_pintura: formData.get('servicio_pintura') === 'on',
     servicio_decoracion: formData.get('servicio_decoracion') === 'on',
     servicio_mantenimiento: formData.get('servicio_mantenimiento') === 'on',
+    servicio_diseno_interior: formData.get('servicio_diseno_interior') === 'on',
+    servicio_fotografia_video_dron: formData.get('servicio_fotografia_video_dron') === 'on',
+    servicio_juridicos: formData.get('servicio_juridicos') === 'on',
+    servicio_seguros: formData.get('servicio_seguros') === 'on',
+    servicio_jardinero_piletero: formData.get('servicio_jardinero_piletero') === 'on',
+    servicio_seguridad: formData.get('servicio_seguridad') === 'on',
     servicio_otros: formData.get('servicio_otros') === 'on',
     servicio_otros_texto: formData.get('servicio_otros_texto'),
 
-
     // ================= PRODUCTOS =================
     producto_materiales_obra: formData.get('producto_materiales_obra') === 'on',
-    producto_pinturas: formData.get('producto_pinturas') === 'on',
+    producto_pintura: formData.get('producto_pintura') === 'on',
+    producto_pisos_revestimientos: formData.get('producto_pisos_revestimientos') === 'on',
+    producto_electricidad_plomeria_banos: formData.get('producto_electricidad_plomeria_banos') === 'on',
     producto_herramientas: formData.get('producto_herramientas') === 'on',
-    producto_muebles: formData.get('producto_muebles') === 'on',
     producto_electrodomesticos: formData.get('producto_electrodomesticos') === 'on',
-    producto_iluminacion: formData.get('producto_iluminacion') === 'on',
-    producto_otros: formData.get('producto_otros') === 'on',
+    producto_hogar_muebles_jardin: formData.get('producto_hogar_muebles_jardin') === 'on',
+    producto_muebles_decoracion: formData.get('producto_muebles_decoracion') === 'on',
+    producto_compra_venta_muebles_decoracion_usados: formData.get('producto_compra_venta_muebles_decoracion_usados') === 'on',
     producto_bienes_usados: formData.get('producto_bienes_usados') === 'on',
+    producto_compra_venta_productos_usados: formData.get('producto_compra_venta_productos_usados') === 'on',
+    producto_otros: formData.get('producto_otros') === 'on',
     producto_otros_texto: formData.get('producto_otros_texto')
   }
 
@@ -739,6 +748,30 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
             </label>
 
             <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="servicio_diseno_interior" /> Diseño interior
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="servicio_fotografia_video_dron" /> Fotografía, video y dron
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="servicio_juridicos" /> Servicios jurídicos
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="servicio_seguros" /> Seguros
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="servicio_jardinero_piletero" /> Jardinero y piletero
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="servicio_seguridad" /> Seguridad
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
               <input type="checkbox" name="servicio_otros" /> Otros
             </label>
 
@@ -795,10 +828,21 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
               <input type="checkbox" name="producto_hogar_muebles_jardin" /> Hogar, muebles y jardín
             </label>
 
-           <label style={{ display: 'flex', gap: 8 }}>
-            <input type="checkbox" name="producto_bienes_usados" /> Compra y venta de bienes usados
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="producto_muebles_decoracion" /> Muebles y decoración
             </label>
 
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="producto_compra_venta_muebles_decoracion_usados" /> Compra-Venta muebles y decoración usados
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="producto_bienes_usados" /> Compra y venta de bienes usados
+            </label>
+
+            <label style={{ display: 'flex', gap: 8 }}>
+              <input type="checkbox" name="producto_compra_venta_productos_usados" /> Compra-Venta productos usados
+            </label>
 
             <label style={{ display: 'flex', gap: 8 }}>
               <input type="checkbox" name="producto_otros" /> Otros
@@ -1055,8 +1099,6 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
   </div>
 )}
 
-
-
     </div>
   </div>
 )}
@@ -1073,4 +1115,3 @@ const radioStyle = {
   fontSize: 14,
   cursor: 'pointer'
 }
-
