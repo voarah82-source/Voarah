@@ -1154,7 +1154,7 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
    </main>
   </>
 )
-
+}
 const radioStyle = {
   display: 'flex',
   alignItems: 'center',
