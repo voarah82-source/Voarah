@@ -236,7 +236,7 @@ async function handleSubmitProveedor(
 
   return (
     <>
-      <Header onOpenModal={() => setOpen(true)} />
+      <Header />
 
       <main
         style={{
