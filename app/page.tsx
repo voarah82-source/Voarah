@@ -486,7 +486,7 @@ async function handleSubmitProveedor(
       textAlign: 'center',
     }}
   >
-    ¡Trabajá con nosotros!
+    ¡Sumate a VOARAH!
   </h2>
 
   {/* CARDS */}
