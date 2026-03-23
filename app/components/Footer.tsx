@@ -1,6 +1,7 @@
 export default function Footer() {
   return (
     <footer
+      id="contacto"
       style={{
         marginTop: 48,
         padding: '32px 20px',
