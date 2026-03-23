@@ -596,6 +596,98 @@ async function handleSubmitProveedor(
   </div>
 </section>
 
+{/* FAQ VOARAH */}
+<section
+  style={{
+    padding: '80px 24px',
+    display: 'flex',
+    justifyContent: 'center',
+  }}
+>
+  <div style={{ width: '100%', maxWidth: 800 }}>
+    
+    <h2
+      style={{
+        fontSize: 28,
+        marginBottom: 32,
+        textAlign: 'center',
+      }}
+    >
+      Preguntas frecuentes
+    </h2>
+
+    {[
+      {
+        q: '¿Cómo funciona VOARAH?',
+        a: `Elegís el servicio o producto que necesitás, dejás tus datos y en menos de 60 minutos nuestro equipo se comunica con vos —de lunes a viernes de 9 a 22 hs— para entender bien tu pedido y asignarte al profesional indicado.
+
+Después, en las siguientes 12 horas hábiles, ese profesional te contacta para pasarte el presupuesto y, si estás de acuerdo, coordinar la visita.`,
+      },
+      {
+        q: '¿Por qué usar VOARAH en lugar de buscar por tu cuenta?',
+        a: `Porque ahorrás tiempo, reducís la incertidumbre y accedés a proveedores verificados, sin tener que comparar opciones ni asumir el riesgo de dejar entrar desconocidos a tu casa.
+
+Tu seguridad es lo más importante para nosotros, y es el principal valor que recibís cuando elegís VOARAH.`,
+      },
+      {
+        q: '¿VOARAH tiene algún costo para mí?',
+        a: `No. Solicitar un servicio a través de VOARAH es totalmente gratuito.`,
+      },
+      {
+        q: '¿Tengo que buscar entre distintos prestadores?',
+        a: `No. Nuestro sistema se encarga de identificar y asignarte al profesional correcto para lo que necesitás.`,
+      },
+      {
+        q: '¿Los profesionales están verificados?',
+        a: `Sí. VOARAH selecciona profesionales evaluados en función de su desempeño, cumplimiento y calidad de servicio.`,
+      },
+      {
+        q: '¿Qué pasa si no estoy conforme con el servicio?',
+        a: `Cada proveedor es responsable de garantizar la calidad de los productos y servicios que ofrece.
+
+Podés contactarlo directamente una vez terminado el trabajo.
+
+De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.com para que podamos intervenir y ayudarte.`,
+      },
+    ].map((item, i) => (
+      <details
+        key={i}
+        style={{
+          marginBottom: 16,
+          borderRadius: 16,
+          border: '1px solid rgba(142,36,170,0.25)',
+          overflow: 'hidden',
+          background: '#fff',
+        }}
+      >
+        <summary
+          style={{
+            padding: '18px 20px',
+            cursor: 'pointer',
+            fontWeight: 600,
+            fontSize: 16,
+            listStyle: 'none',
+          }}
+        >
+          {item.q}
+        </summary>
+
+        <div
+          style={{
+            padding: '0 20px 20px',
+            fontSize: 14,
+            lineHeight: 1.6,
+            color: '#555',
+            whiteSpace: 'pre-line',
+          }}
+        >
+          {item.a}
+        </div>
+      </details>
+    ))}
+  </div>
+</section>
+        
 {/* MODAL CTAs */}
 {open && (
   <div
