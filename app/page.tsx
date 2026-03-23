@@ -1150,10 +1150,9 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
   </div>
 )}
 
-      </main>
-    </>
-  )
-}
+   </main>
+  </>
+)
 
 const radioStyle = {
   display: 'flex',
