@@ -266,176 +266,111 @@ async function handleSubmitProveedor(
     Un sitio. Todas las soluciones.
   </h1>
 
-<div
-  style={{
-    marginTop: 24,
-    display: 'flex',
-    justifyContent: 'center',
-  }}
->
   <div
     style={{
+      marginTop: 24,
       display: 'flex',
-      gap: 16,
-      padding: 12,
-      borderRadius: 20,
-      background: 'rgba(142,36,170,0.12)',
+      justifyContent: 'center',
     }}
   >
-    {/* ITEM 1 */}
     <div
       style={{
-        background: '#fff',
-        padding: '16px 20px',
-        borderRadius: 16,
-        boxShadow: '0 10px 25px rgba(0,0,0,0.08)',
-        fontSize: 14,
-        textAlign: 'center',
-        minWidth: 140,
+        display: 'flex',
+        gap: 16,
+        padding: 12,
+        borderRadius: 20,
+        background: 'rgba(142,36,170,0.12)',
       }}
     >
-      Solucioná en menos de 24hs
-    </div>
-
-    {/* ITEM 2 (destacado) */}
-    <div
-      style={{
-        background: '#fff',
-        padding: '16px 20px',
-        borderRadius: 16,
-        boxShadow: '0 14px 30px rgba(0,0,0,0.12)',
-        fontSize: 16,
-        fontWeight: 700,
-        textAlign: 'center',
-        minWidth: 160,
-      }}
-    >
-      Más seguridad
-    </div>
-
-    {/* ITEM 3 */}
-    <div
-      style={{
-        background: '#fff',
-        padding: '16px 20px',
-        borderRadius: 16,
-        boxShadow: '0 10px 25px rgba(0,0,0,0.08)',
-        fontSize: 14,
-        textAlign: 'center',
-        minWidth: 140,
-      }}
-    >
-      Profesionales validados
-    </div>
-  </div>
-</div>
-<section
-  style={{
-    padding: '80px 24px',
-    display: 'flex',
-    justifyContent: 'center',
-  }}
->
-  <div style={{ textAlign: 'center' }}>
-    
-    {/* TITULO */}
-    <h1
-      style={{
-        fontSize: 34,
-        letterSpacing: 2,
-        marginBottom: 32,
-      }}
-    >
-      ¿Qué necesitás?
-    </h1>
-
-    {/* BLOQUE */}
-    <div
-      style={{
-        background: '#f5f5f5',
-        borderRadius: 40,
-        padding: '28px 32px 36px',
-        width: 420,
-        boxShadow: '0 20px 50px rgba(0,0,0,0.15)',
-      }}
-    >
-      {/* OPCIONES */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginBottom: 28,
-        }}
-      >
-        {/* SERVICIOS */}
-        <div
-          style={{
-            flex: 1,
-            textAlign: 'center',
-            cursor: 'pointer',
-          }}
-        >
-          <div style={{ fontSize: 18, fontWeight: 600 }}>
-            Servicios
-          </div>
-
-          <div style={{ fontSize: 48, marginTop: 12 }}>
-            🚚
-          </div>
-        </div>
-
-        {/* DIVISOR */}
-        <div
-          style={{
-            width: 1,
-            height: 80,
-            background: '#ddd',
-          }}
-        />
-
-        {/* PRODUCTOS */}
-        <div
-          style={{
-            flex: 1,
-            textAlign: 'center',
-            cursor: 'pointer',
-          }}
-        >
-          <div style={{ fontSize: 18, fontWeight: 600 }}>
-            Productos
-          </div>
-
-          <div style={{ fontSize: 48, marginTop: 12 }}>
-            🔨
-          </div>
-        </div>
+      <div style={{ background: '#fff', padding: '16px 20px', borderRadius: 16, boxShadow: '0 10px 25px rgba(0,0,0,0.08)', fontSize: 14, textAlign: 'center', minWidth: 140 }}>
+        Solucioná en menos de 24hs
       </div>
 
-      {/* CTA (UN SOLO BOTON) */}
-      <button
-        onClick={() => setOpen(true)}
+      <div style={{ background: '#fff', padding: '16px 20px', borderRadius: 16, boxShadow: '0 14px 30px rgba(0,0,0,0.12)', fontSize: 16, fontWeight: 700, textAlign: 'center', minWidth: 160 }}>
+        Más seguridad
+      </div>
+
+      <div style={{ background: '#fff', padding: '16px 20px', borderRadius: 16, boxShadow: '0 10px 25px rgba(0,0,0,0.08)', fontSize: 14, textAlign: 'center', minWidth: 140 }}>
+        Profesionales validados
+      </div>
+    </div>
+  </div>
+
+  {/* BLOQUE CTA */}
+  <div
+    style={{
+      padding: '80px 24px',
+      display: 'flex',
+      justifyContent: 'center',
+    }}
+  >
+    <div style={{ textAlign: 'center' }}>
+      
+      <h1
         style={{
-          width: '100%',
-          padding: '16px',
-          background: '#e1bee7',
-          border: 'none',
-          borderRadius: 16,
-          fontSize: 22,
-          fontWeight: 700,
-          letterSpacing: 6,
-          cursor: 'pointer',
+          fontSize: 34,
+          letterSpacing: 2,
+          marginBottom: 32,
         }}
       >
-        ¡Elegir!
-      </button>
+        ¿Qué necesitás?
+      </h1>
+
+      <div
+        style={{
+          background: '#f5f5f5',
+          borderRadius: 40,
+          padding: '28px 32px 36px',
+          width: 420,
+          boxShadow: '0 20px 50px rgba(0,0,0,0.15)',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: 28,
+          }}
+        >
+          <div style={{ flex: 1, textAlign: 'center' }}>
+            <div style={{ fontSize: 18, fontWeight: 600 }}>
+              Servicios
+            </div>
+            <div style={{ fontSize: 48, marginTop: 12 }}>🚚</div>
+          </div>
+
+          <div style={{ width: 1, height: 80, background: '#ddd' }} />
+
+          <div style={{ flex: 1, textAlign: 'center' }}>
+            <div style={{ fontSize: 18, fontWeight: 600 }}>
+              Productos
+            </div>
+            <div style={{ fontSize: 48, marginTop: 12 }}>🔨</div>
+          </div>
+        </div>
+
+        <button
+          onClick={() => setOpen(true)}
+          style={{
+            width: '100%',
+            padding: '16px',
+            background: '#e1bee7',
+            border: 'none',
+            borderRadius: 16,
+            fontSize: 22,
+            fontWeight: 700,
+            letterSpacing: 6,
+            cursor: 'pointer',
+          }}
+        >
+          ¡Elegir!
+        </button>
+      </div>
     </div>
   </div>
 </section>
-   
-</div>
 
-</section>
 
     {/* QUIÉNES SOMOS */}
 <section
