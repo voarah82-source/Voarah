@@ -772,21 +772,6 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
               <input type="checkbox" name="servicio_seguridad" /> Seguridad
             </label>
 
-            <label style={{ display: 'flex', gap: 8 }}>
-              <input type="checkbox" name="servicio_otros" /> Otros
-            </label>
-
-            <input
-              name="servicio_otros_texto"
-              placeholder="Si marcaste otros, especificá el servicio"
-              style={{
-                marginTop: 8,
-                padding: '10px 12px',
-                borderRadius: 8,
-                border: '1px solid #ddd',
-                fontSize: 14,
-              }}
-            />
           </div>
 
           {/* COLUMNA DERECHA — PRODUCTOS */}
@@ -845,21 +830,7 @@ A través de nuestra infraestructura, tus clientes acceden a soluciones confiabl
               <input type="checkbox" name="producto_compra_venta_productos_usados" /> Compra-Venta productos usados
             </label>
 
-            <label style={{ display: 'flex', gap: 8 }}>
-              <input type="checkbox" name="producto_otros" /> Otros
-            </label>
-            
-            <input
-              name="producto_otros_texto"
-              placeholder="Si marcaste otros, especificá el producto"
-              style={{
-                marginTop: 8,
-                padding: '10px 12px',
-                borderRadius: 8,
-                border: '1px solid #ddd',
-                fontSize: 14,
-              }}
-            />
+        
           </div>
         </div>
 
