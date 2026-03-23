@@ -33,56 +33,67 @@ export default function Header({ onOpenModal }: HeaderProps) {
         borderBottom: '1px solid #e5e5e5'
       }}
     >
-     <div
-  style={{
-    maxWidth: 1200,
-    margin: '0 auto',
-    padding: '6px 16px', //altura header
-    minHeight: 64,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  }}
->
-
+      <div
+        style={{
+          maxWidth: 1200,
+          margin: '0 auto',
+          padding: '6px 16px',
+          minHeight: 64,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}
+      >
+        {/* LOGO */}
         <Link href="/" style={{ textDecoration: 'none' }}>
-  <div
-    style={{
-      height: 86,            // ALTURA DEL logo
-      display: 'flex',
-      alignItems: 'center',
-      overflow: 'hidden'
-    }}
-  >
-    <img
-      src="https://storage.googleapis.com/msgsndr/JXR7pttzzH9R0mOEMF3S/media/697b69f5e98b489f5b32a200.png"
-      alt="Voarah"
-      style={{
-        height: '100%',
-        width: 'auto'
-      }}
-    />
-  </div>
-</Link>
+          <div
+            style={{
+              height: 86,
+              display: 'flex',
+              alignItems: 'center',
+              overflow: 'hidden'
+            }}
+          >
+            <img
+              src="https://storage.googleapis.com/msgsndr/JXR7pttzzH9R0mOEMF3S/media/697b69f5e98b489f5b32a200.png"
+              alt="Voarah"
+              style={{
+                height: '100%',
+                width: 'auto'
+              }}
+            />
+          </div>
+        </Link>
 
         {/* DESKTOP NAV */}
         {!isMobile && (
-          <nav style={{ display: 'flex', gap: 32, alignItems: 'center' }}>
-            <button onClick={() => scrollTo('partners')}>Partners</button>            
-            <button onClick={() => scrollTo('como-funciona')}>Cómo funciona</button>
-            <button onClick={() => scrollTo('quienes-somos')}>Quiénes somos</button>
+          <nav style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
             <button
-              onClick={onOpenModal}
+              onClick={() => scrollTo('faq')}
               style={{
-                padding: '10px 18px',
-                background: '#8E24AA',
-                color: '#fff',
-                borderRadius: 6,
+                padding: '8px 16px',
+                background: '#e1bee7',
                 border: 'none',
-                fontWeight: 600
+                borderRadius: 8,
+                cursor: 'pointer',
+                fontWeight: 500
               }}
             >
-              Activar beneficios
+              FAQ
+            </button>
+
+            <button
+              onClick={() => scrollTo('contacto')}
+              style={{
+                padding: '8px 16px',
+                background: '#e1bee7',
+                border: 'none',
+                borderRadius: 8,
+                cursor: 'pointer',
+                fontWeight: 500
+              }}
+            >
+              Contacto
             </button>
           </nav>
         )}
@@ -111,30 +122,11 @@ export default function Header({ onOpenModal }: HeaderProps) {
             padding: 12,
             display: 'flex',
             flexDirection: 'column',
-            gap: 16
+            gap: 12
           }}
         >
-          <button onClick={() => scrollTo('partners')}>Partners</button>
-          <button onClick={() => scrollTo('como-funciona')}>Cómo funciona</button>
-          <button onClick={() => scrollTo('quienes-somos')}>Quiénes somos</button>
-
-          <button
-            onClick={() => {
-              setMenuOpen(false)
-              onOpenModal()
-            }}
-            style={{
-              marginTop: 8,
-              padding: '12px',
-              background: '#8E24AA',
-              color: '#fff',
-              borderRadius: 8,
-              border: 'none',
-              fontWeight: 600
-            }}
-          >
-            Activar beneficios
-          </button>
+          <button onClick={() => scrollTo('faq')}>FAQ</button>
+          <button onClick={() => scrollTo('contacto')}>Contacto</button>
         </div>
       )}
     </header>
