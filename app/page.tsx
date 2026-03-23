@@ -93,8 +93,7 @@ async function handleSubmit(e: any) {
     servicio_seguros: formData.get('servicio_seguros') === 'on',
     servicio_jardinero_piletero: formData.get('servicio_jardinero_piletero') === 'on',
     servicio_seguridad: formData.get('servicio_seguridad') === 'on',
-    servicio_otros: formData.get('servicio_otros') === 'on',
-    servicio_otros_texto: formData.get('servicio_otros_texto'),
+    
 
     // ================= PRODUCTOS =================
     producto_materiales_obra: formData.get('producto_materiales_obra') === 'on',
@@ -108,8 +107,7 @@ async function handleSubmit(e: any) {
     producto_compra_venta_muebles_decoracion_usados: formData.get('producto_compra_venta_muebles_decoracion_usados') === 'on',
     producto_bienes_usados: formData.get('producto_bienes_usados') === 'on',
     producto_compra_venta_productos_usados: formData.get('producto_compra_venta_productos_usados') === 'on',
-    producto_otros: formData.get('producto_otros') === 'on',
-    producto_otros_texto: formData.get('producto_otros_texto')
+    
   }
 
   try {
