@@ -329,26 +329,110 @@ async function handleSubmitProveedor(
     </div>
   </div>
 </div>
- <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-  <span style={{ fontSize: 14, fontWeight: 500 }}>
-    Soy Particular
-  </span>
+<section
+  style={{
+    padding: '80px 24px',
+    display: 'flex',
+    justifyContent: 'center',
+  }}
+>
+  <div style={{ textAlign: 'center' }}>
+    
+    {/* TITULO */}
+    <h1
+      style={{
+        fontSize: 34,
+        letterSpacing: 2,
+        marginBottom: 32,
+      }}
+    >
+      ¿Qué necesitás?
+    </h1>
 
-  <button
-    onClick={() => setOpen(true)}
-    style={{
-      padding: '14px 28px',
-      background: '#8E24AA',
-      color: '#fff',
-      border: 'none',
-      borderRadius: 8,
-      fontSize: 16,
-      fontWeight: 600,
-      cursor: 'pointer'
-    }}
-  >
-    Activar mis beneficios
-  </button>
+    {/* BLOQUE */}
+    <div
+      style={{
+        background: '#f5f5f5',
+        borderRadius: 40,
+        padding: '28px 32px 36px',
+        width: 420,
+        boxShadow: '0 20px 50px rgba(0,0,0,0.15)',
+      }}
+    >
+      {/* OPCIONES */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginBottom: 28,
+        }}
+      >
+        {/* SERVICIOS */}
+        <div
+          style={{
+            flex: 1,
+            textAlign: 'center',
+            cursor: 'pointer',
+          }}
+        >
+          <div style={{ fontSize: 18, fontWeight: 600 }}>
+            Servicios
+          </div>
+
+          <div style={{ fontSize: 48, marginTop: 12 }}>
+            🚚
+          </div>
+        </div>
+
+        {/* DIVISOR */}
+        <div
+          style={{
+            width: 1,
+            height: 80,
+            background: '#ddd',
+          }}
+        />
+
+        {/* PRODUCTOS */}
+        <div
+          style={{
+            flex: 1,
+            textAlign: 'center',
+            cursor: 'pointer',
+          }}
+        >
+          <div style={{ fontSize: 18, fontWeight: 600 }}>
+            Productos
+          </div>
+
+          <div style={{ fontSize: 48, marginTop: 12 }}>
+            🔨
+          </div>
+        </div>
+      </div>
+
+      {/* CTA (UN SOLO BOTON) */}
+      <button
+        onClick={() => setOpen(true)}
+        style={{
+          width: '100%',
+          padding: '16px',
+          background: '#e1bee7',
+          border: 'none',
+          borderRadius: 16,
+          fontSize: 22,
+          fontWeight: 700,
+          letterSpacing: 6,
+          cursor: 'pointer',
+        }}
+      >
+        ¡Elegir!
+      </button>
+    </div>
+  </div>
+</section>
+   
 </div>
 
 </section>
