@@ -15,6 +15,7 @@ export default function HomePage() {
   const [loadingInmo, setLoadingInmo] = useState(false)
   const [loadingProveedor, setLoadingProveedor] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
+  const [openAccordion, setOpenAccordion] = useState<string | null>(null)
 
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -93,8 +94,57 @@ async function handleSubmit(e: any) {
     servicio_seguros: formData.get('servicio_seguros') === 'on',
     servicio_jardinero_piletero: formData.get('servicio_jardinero_piletero') === 'on',
     servicio_seguridad: formData.get('servicio_seguridad') === 'on',
-    
 
+    // SUBITEMS SERVICIOS
+servicio_mudanza_embalaje: formData.get('servicio_mudanza_embalaje') === 'on',
+servicio_mudanza_desembalaje: formData.get('servicio_mudanza_desembalaje') === 'on',
+servicio_mudanza_solo_transporte: formData.get('servicio_mudanza_solo_transporte') === 'on',
+
+servicio_guardamuebles_recogida: formData.get('servicio_guardamuebles_recogida') === 'on',
+servicio_guardamuebles_entrega: formData.get('servicio_guardamuebles_entrega') === 'on',
+servicio_guardamuebles_embalaje: formData.get('servicio_guardamuebles_embalaje') === 'on',
+servicio_guardamuebles_bauleras: formData.get('servicio_guardamuebles_bauleras') === 'on',
+
+servicio_limpieza_hogares: formData.get('servicio_limpieza_hogares') === 'on',
+servicio_limpieza_locales: formData.get('servicio_limpieza_locales') === 'on',
+servicio_limpieza_oficinas: formData.get('servicio_limpieza_oficinas') === 'on',
+servicio_limpieza_edificios: formData.get('servicio_limpieza_edificios') === 'on',
+servicio_limpieza_fin_obra: formData.get('servicio_limpieza_fin_obra') === 'on',
+servicio_limpieza_fachadas: formData.get('servicio_limpieza_fachadas') === 'on',
+servicio_limpieza_tejados: formData.get('servicio_limpieza_tejados') === 'on',
+servicio_limpieza_tapizados: formData.get('servicio_limpieza_tapizados') === 'on',
+servicio_limpieza_piletas: formData.get('servicio_limpieza_piletas') === 'on',
+servicio_limpieza_poda_arboles: formData.get('servicio_limpieza_poda_arboles') === 'on',
+
+servicio_diseno_disenos: formData.get('servicio_diseno_disenos') === 'on',
+servicio_diseno_proyectos: formData.get('servicio_diseno_proyectos') === 'on',
+servicio_diseno_planos: formData.get('servicio_diseno_planos') === 'on',
+servicio_diseno_certificaciones: formData.get('servicio_diseno_certificaciones') === 'on',
+
+servicio_mantenimiento_pintura: formData.get('servicio_mantenimiento_pintura') === 'on',
+servicio_mantenimiento_plomeria: formData.get('servicio_mantenimiento_plomeria') === 'on',
+servicio_mantenimiento_electricidad: formData.get('servicio_mantenimiento_electricidad') === 'on',
+servicio_mantenimiento_pisos: formData.get('servicio_mantenimiento_pisos') === 'on',
+servicio_mantenimiento_banos: formData.get('servicio_mantenimiento_banos') === 'on',
+servicio_mantenimiento_humedades: formData.get('servicio_mantenimiento_humedades') === 'on',
+servicio_mantenimiento_refacciones: formData.get('servicio_mantenimiento_refacciones') === 'on',
+
+servicio_juridico_civil: formData.get('servicio_juridico_civil') === 'on',
+servicio_juridico_contratos: formData.get('servicio_juridico_contratos') === 'on',
+servicio_juridico_sucesiones: formData.get('servicio_juridico_sucesiones') === 'on',
+servicio_juridico_divisiones_propiedad: formData.get('servicio_juridico_divisiones_propiedad') === 'on',
+servicio_juridico_mediaciones: formData.get('servicio_juridico_mediaciones') === 'on',
+
+servicio_seguro_hogar: formData.get('servicio_seguro_hogar') === 'on',
+servicio_seguro_comercio: formData.get('servicio_seguro_comercio') === 'on',
+servicio_seguro_autos: formData.get('servicio_seguro_autos') === 'on',
+servicio_seguro_cauciones: formData.get('servicio_seguro_cauciones') === 'on',
+servicio_seguro_proteccion_alquiler: formData.get('servicio_seguro_proteccion_alquiler') === 'on',
+
+servicio_seguridad_camaras: formData.get('servicio_seguridad_camaras') === 'on',
+servicio_seguridad_alarmas: formData.get('servicio_seguridad_alarmas') === 'on',
+
+  
     // ================= PRODUCTOS =================
     producto_materiales_obra: formData.get('producto_materiales_obra') === 'on',
     producto_pintura: formData.get('producto_pintura') === 'on',
@@ -107,6 +157,21 @@ async function handleSubmit(e: any) {
     producto_compra_venta_muebles_decoracion_usados: formData.get('producto_compra_venta_muebles_decoracion_usados') === 'on',
     producto_bienes_usados: formData.get('producto_bienes_usados') === 'on',
     producto_compra_venta_productos_usados: formData.get('producto_compra_venta_productos_usados') === 'on',
+
+    
+// SUBITEMS PRODUCTOS
+producto_termotanques: formData.get('producto_termotanques') === 'on',
+producto_calefaccion_aire: formData.get('producto_calefaccion_aire') === 'on',
+producto_piletas: formData.get('producto_piletas') === 'on',
+
+producto_usado_laptops: formData.get('producto_usado_laptops') === 'on',
+producto_usado_celulares: formData.get('producto_usado_celulares') === 'on',
+producto_usado_videoconsolas: formData.get('producto_usado_videoconsolas') === 'on',
+producto_usado_relojes: formData.get('producto_usado_relojes') === 'on',
+producto_usado_camaras_fotos: formData.get('producto_usado_camaras_fotos') === 'on',
+producto_usado_bicicletas: formData.get('producto_usado_bicicletas') === 'on',
+producto_usado_raquetas: formData.get('producto_usado_raquetas') === 'on',
+producto_usado_motos: formData.get('producto_usado_motos') === 'on',
     
   }
 
