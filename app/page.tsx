@@ -372,129 +372,91 @@ async function handleSubmitProveedor(
 </section>
 
 
-    {/* QUIÉNES SOMOS */}
+   {/* QUIENES SOMOS + POR QUE */}
 <section
-  id="quienes-somos"
   style={{
     padding: '80px 24px',
-    maxWidth: 1100,
-    margin: '0 auto',
-    textAlign: 'center'
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: 32,
   }}
 >
-  <h2
-    style={{
-      fontSize: 28,
-      marginBottom: 24
-    }}
-  >
-    ¿Quiénes somos?
-  </h2>
-
-  <p
-    style={{
-      fontSize: 16,
-      color: '#555',
-      maxWidth: 760,
-      margin: '0 auto 16px'
-    }}
-  >
-  VOARAH nace de una idea simple: los momentos importantes de la vida no deberían estar llenos de estrés ni desorden.< br/>
-    
-Creamos una infraestructura que integra soluciones que normalmente están dispersas, transformándolas en una experiencia coordinada, clara y confiable.
-Organizamos cada etapa alrededor de una operación inmobiliaria para que todo fluya de forma simple.
-  </p>
-
-  <p
-    style={{
-      fontSize: 16,
-      color: '#555',
-      maxWidth: 760,
-      margin: '0 auto'
-    }}
-  >
-    
-  </p>
-</section>
-
-
-      {/* COMO FUNCIONA */}
-<section
-  id="como-funciona"
-  style={{
-    background: '#f7f7f7',
-    padding: '80px 24px'
-  }}
->
+  {/* CARD 1 */}
   <div
     style={{
-      maxWidth: 1100,
-      margin: '0 auto',
-      textAlign: 'center'
+      width: '100%',
+      maxWidth: 720,
+      background: '#fff',
+      borderRadius: 20,
+      border: '1px solid rgba(142,36,170,0.3)',
+      padding: '28px 32px',
+      textAlign: 'center',
     }}
   >
-    <h2 style={{ fontSize: 28, marginBottom: 24 }}>
-      ¿Cómo funciona VOARAH?
+    <h2
+      style={{
+        fontSize: 20,
+        marginBottom: 12,
+        fontWeight: 600,
+      }}
+    >
+      ¿Quiénes somos?
     </h2>
 
     <p
       style={{
-        fontSize: 16,
+        fontSize: 15,
+        lineHeight: 1.6,
         color: '#555',
-        maxWidth: 720,
-        margin: '0 auto 16px'
       }}
     >
-     VOARAH organiza y coordina los servicios necesarios alrededor de una operación inmobiliaria, integrándolos en un sistema simple, claro y confiable.
-Desde un mismo entorno, las personas acceden a soluciones que antes estaban dispersas, evitando la búsqueda individual, la falta de coordinación y la incertidumbre.
-Cada servicio es brindado por especialistas seleccionados y validados por VOARAH, bajo estándares definidos de calidad y experiencia.
+      VOARAH es la forma más simple de resolver lo que necesitás,
+      sin búsquedas ni riesgos.
+      <br />
+      Trabajamos con profesionales validados para ofrecer
+      seguridad y servicios de calidad a los usuarios.
     </p>
+  </div>
 
-    <p
+  {/* CARD 2 */}
+  <div
+    style={{
+      width: '100%',
+      maxWidth: 720,
+      background: '#fff',
+      borderRadius: 20,
+      border: '1px solid rgba(142,36,170,0.3)',
+      padding: '28px 32px',
+      textAlign: 'center',
+    }}
+  >
+    <h2
       style={{
-        fontSize: 16,
-        color: '#555',
-        maxWidth: 720,
-        margin: '0 auto 16px'
-      }}
-    >
-      {/*VOARAH organiza y coordina los servicios necesarios alrededor de una operación inmobiliaria, integrándolos en un sistema simple, claro y confiable.
-Desde un mismo entorno, las personas acceden a soluciones que antes estaban dispersas, evitando la búsqueda individual, la falta de coordinación y la incertidumbre.
-Cada servicio es brindado por especialistas seleccionados y validados por VOARAH, bajo estándares definidos de calidad y experiencia.*/}
-    </p>
-
-    <p
-      style={{
-        fontSize: 16,
-        color: '#555',
-        maxWidth: 720,
-        margin: '0 auto 32px'
-      }}
-    >
-      {/* Cada servicio es brindado por especialistas seleccionados y validados por VOARAH,
-      bajo estándares definidos de calidad y experiencia,
-      para que todo funcione de manera rápida y ordenada.*/}
-    </p>
-
-    <button
-      onClick={() => setOpen(true)}
-      style={{
-        display: 'block',
-        margin: '0 auto',
-        padding: '14px 28px',
-        background: '#8E24AA',
-        color: '#fff',
-        border: 'none',
-        borderRadius: 8,
-        fontSize: 16,
+        fontSize: 20,
+        marginBottom: 12,
         fontWeight: 600,
-        cursor: 'pointer'
       }}
     >
-      Activar mis beneficios
-    </button>
+      ¿Por qué elegir VOARAH?
+    </h2>
+
+    <p
+      style={{
+        fontSize: 15,
+        lineHeight: 1.6,
+        color: '#555',
+      }}
+    >
+      En VOARAH hacemos fácil lo difícil.
+      <br />
+      Organizamos un universo de soluciones en una sola plataforma
+      para que vivas una experiencia sencilla y confiable,
+      en cualquier momento de tu vida.
+    </p>
   </div>
 </section>
+   
         {/* PARTNERS VOARAH */}
 <section
   id="partners"
