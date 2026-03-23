@@ -236,7 +236,6 @@ async function handleSubmitProveedor(
 
   return (
     <>
-        <div>
       <Header />
 
       <main
@@ -374,6 +373,7 @@ async function handleSubmitProveedor(
     </div>
   </div>
 </div>
+  </section> 
 
 
    {/* QUIENES SOMOS + POR QUE */}
