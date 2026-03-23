@@ -283,7 +283,7 @@ async function handleSubmitProveedor(
       }}
     >
       <div style={{ background: '#fff', padding: '16px 20px', borderRadius: 16, boxShadow: '0 10px 25px rgba(0,0,0,0.08)', fontSize: 14, textAlign: 'center', minWidth: 140 }}>
-        Solucioná en menos de 24hs
+        Solucioná en minutos
       </div>
 
       <div style={{ background: '#fff', padding: '16px 20px', borderRadius: 16, boxShadow: '0 14px 30px rgba(0,0,0,0.12)', fontSize: 16, fontWeight: 700, textAlign: 'center', minWidth: 160 }}>
@@ -313,7 +313,7 @@ async function handleSubmitProveedor(
           marginBottom: 32,
         }}
       >
-        ¿Qué necesitás?
+        ¿Qué buscás?
       </h1>
 
       <div
