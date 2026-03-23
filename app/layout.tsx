@@ -4,7 +4,7 @@ import CookieBanner from './components/CookieBanner'
 
 export const metadata = {
   title: 'Voarah',
-  description: 'Más confiable. Más rápido. Más simple',
+  description: 'Un sitio. Todas las soluciones',
 }
 
 export default function RootLayout({
