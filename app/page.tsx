@@ -602,8 +602,8 @@ async function handleSubmitProveedor(
 
 {/* FAQ VOARAH */}
 <section
+  id="faq"
   style={{
-    id="faq"
     padding: '80px 24px',
     display: 'flex',
     justifyContent: 'center',
