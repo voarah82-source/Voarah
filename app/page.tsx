@@ -457,117 +457,141 @@ async function handleSubmitProveedor(
   </div>
 </section>
    
-        {/* PARTNERS VOARAH */}
+  {/* TRABAJA CON NOSOTROS */}
 <section
-  id="partners"
   style={{
-    background: '#ffffff',
-    padding: '80px 24px'
+    padding: '80px 24px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   }}
 >
+  {/* SEPARADOR */}
   <div
     style={{
-      maxWidth: 1100,
-      margin: '0 auto'
+      width: '100%',
+      maxWidth: 720,
+      height: 1,
+      background: '#ddd',
+      marginBottom: 40,
+    }}
+  />
+
+  {/* TITULO */}
+  <h2
+    style={{
+      fontSize: 28,
+      letterSpacing: 4,
+      marginBottom: 40,
+      textAlign: 'center',
     }}
   >
-    <h2
-      style={{
-        fontSize: 28,
-        marginBottom: 40,
-        textAlign: 'center'
-      }}
-    >
-      Sumate como partner de VOARAH
-    </h2>
+    ¡Trabajá con nosotros!
+  </h2>
 
+  {/* CARDS */}
+  <div
+    style={{
+      display: 'flex',
+      gap: 24,
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      width: '100%',
+      maxWidth: 900,
+    }}
+  >
+    {/* INMOBILIARIA */}
     <div
       style={{
-        display: 'flex',
-        gap: 32,
-        flexWrap: 'wrap'
+        flex: 1,
+        minWidth: 260,
+        maxWidth: 340,
+        background: '#fff',
+        borderRadius: 20,
+        border: '1px solid #ddd',
+        padding: '28px 24px',
+        textAlign: 'center',
       }}
     >
-        {/* INMOBILIARIAS */}
-      <div
+      <h3 style={{ fontSize: 20, marginBottom: 12 }}>
+        Soy Inmobiliaria
+      </h3>
+
+      <p
         style={{
-          flex: 1,
-          minWidth: 280,
-          background: '#f7f7f7',
-          padding: 32,
-          borderRadius: 16
+          fontSize: 14,
+          color: '#666',
+          lineHeight: 1.5,
+          marginBottom: 20,
         }}
       >
-        <h3 style={{ fontSize: 22, marginBottom: 16 }}>
-           Inmobiliarias
-        </h3>
+        ¡Impulsá tu inmobiliaria!
+        <br />
+        Integrá VOARAH hoy
+        <br />
+        y solucionale la vida a tus clientes.
+      </p>
 
-        <p style={{ fontSize: 15, color: '#555', marginBottom: 16 }}>
-        En VOARAH ayudamos a las inmobiliarias a diferenciarse ofreciendo una experiencia más completa en cada operación.
-A través de nuestra infraestructura, tus clientes acceden a soluciones confiables y coordinadas, sin gestión adicional para tu equipo, fortaleciendo tu posicionamiento y tu capacidad de atraer y cerrar más operaciones.
-        </p>
-
-        <p style={{ fontSize: 15, color: '#555', marginBottom: 24 }}>
-          Además, al sumarte accedés a beneficios exclusivos que fortalecen tu negocio; te lo contamos al contactarte.
-
-        </p>
-
-        <button
-          onClick={() => setOpenInmoModal(true)}
-          style={{
-            padding: '14px 22px',
-            background: '#8E24AA',
-            color: '#ffffff',
-            borderRadius: 8,
-            fontWeight: 600,
-            border: 'none',
-            cursor: 'pointer'
-          }}
-        >
-          Quiero sumarme a VOARAH
-        </button>
-      </div>
-
-      {/* PROVEEDORES */}
-      <div
+      <button
+        onClick={() => setOpenInmoModal(true)}
         style={{
-          flex: 1,
-          minWidth: 280,
-          background: '#f7f7f7',
-          padding: 32,
-          borderRadius: 16
+          padding: '10px 20px',
+          background: '#e1bee7',
+          border: 'none',
+          borderRadius: 20,
+          fontWeight: 600,
+          cursor: 'pointer',
         }}
       >
-        <h3 style={{ fontSize: 22, marginBottom: 16 }}>
-           Proveedores de servicios
-        </h3>
+        ¡Me sumo!
+      </button>
+    </div>
 
-        <p style={{ fontSize: 15, color: '#555', marginBottom: 16 }}>
-          En VOARAH conectamos tu servicio con clientes que realmente lo
-          necesitan, en el momento justo: cuando entran a una nueva vivienda.
-        </p>
+    {/* PROVEEDOR */}
+    <div
+      style={{
+        flex: 1,
+        minWidth: 260,
+        maxWidth: 340,
+        background: '#fff',
+        borderRadius: 20,
+        border: '1px solid #ddd',
+        padding: '28px 24px',
+        textAlign: 'center',
+      }}
+    >
+      <h3 style={{ fontSize: 20, marginBottom: 12 }}>
+        Soy Proveedor
+      </h3>
 
-        <p style={{ fontSize: 15, color: '#555', marginBottom: 24 }}>
-          Colaboramos con profesionales de mudanzas, limpieza, mantenimiento,
-          reformas y todo tipo de servicios que quieran recibir nuevas
-          oportunidades de trabajo a través de nuestra red de inmobiliarias.
-        </p>
+      <p
+        style={{
+          fontSize: 14,
+          color: '#666',
+          lineHeight: 1.5,
+          marginBottom: 20,
+        }}
+      >
+        ¡Impulsá tu negocio!
+        <br />
+        Integrá VOARAH hoy mismo y
+        <br />
+        crecé con nosotros.
+      </p>
 
-        <button
-          onClick={() => setOpenProveedorModal(true)}
-          style={{
-            padding: '14px 22px',
-            background: '#8E24AA',
-            color: '#ffffff',
-            borderRadius: 8,
-            fontWeight: 600,
-            border: 'none',
-            cursor: 'pointer'
-          }}
-        >
-          Quiero sumarme a VOARAH
-        </button>
-      </div>
+      <button
+        onClick={() => setOpenProveedorModal(true)}
+        style={{
+          padding: '10px 20px',
+          background: '#e1bee7',
+          border: 'none',
+          borderRadius: 20,
+          fontWeight: 600,
+          cursor: 'pointer',
+        }}
+      >
+        ¡Postularme!
+      </button>
     </div>
   </div>
 </section>
