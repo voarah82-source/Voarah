@@ -3,11 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
-type HeaderProps = {
-  onOpenModal: () => void
-}
-
-export default function Header({ onOpenModal }: HeaderProps) {
+export default function Header() {
   const [isMobile, setIsMobile] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -20,7 +16,18 @@ export default function Header({ onOpenModal }: HeaderProps) {
 
   const scrollTo = (id: string) => {
     setMenuOpen(false)
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+
+    const el = document.getElementById(id)
+    if (!el) return
+
+    const yOffset = -90 // altura header (ajustá si cambia)
+    const y =
+      el.getBoundingClientRect().top + window.pageYOffset + yOffset
+
+    window.scrollTo({
+      top: y,
+      behavior: 'smooth',
+    })
   }
 
   return (
@@ -30,7 +37,7 @@ export default function Header({ onOpenModal }: HeaderProps) {
         top: 0,
         zIndex: 1000,
         background: '#fff',
-        borderBottom: '1px solid #e5e5e5'
+        borderBottom: '1px solid #e5e5e5',
       }}
     >
       <div
@@ -41,33 +48,23 @@ export default function Header({ onOpenModal }: HeaderProps) {
           minHeight: 64,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
         }}
       >
         {/* LOGO */}
         <Link href="/" style={{ textDecoration: 'none' }}>
-          <div
-            style={{
-              height: 86,
-              display: 'flex',
-              alignItems: 'center',
-              overflow: 'hidden'
-            }}
-          >
+          <div style={{ height: 86, display: 'flex', alignItems: 'center' }}>
             <img
               src="https://storage.googleapis.com/msgsndr/JXR7pttzzH9R0mOEMF3S/media/697b69f5e98b489f5b32a200.png"
               alt="Voarah"
-              style={{
-                height: '100%',
-                width: 'auto'
-              }}
+              style={{ height: '100%' }}
             />
           </div>
         </Link>
 
-        {/* DESKTOP NAV */}
+        {/* DESKTOP */}
         {!isMobile && (
-          <nav style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+          <nav style={{ display: 'flex', gap: 12 }}>
             <button
               onClick={() => scrollTo('faq')}
               style={{
@@ -76,7 +73,6 @@ export default function Header({ onOpenModal }: HeaderProps) {
                 border: 'none',
                 borderRadius: 8,
                 cursor: 'pointer',
-                fontWeight: 500
               }}
             >
               FAQ
@@ -90,7 +86,6 @@ export default function Header({ onOpenModal }: HeaderProps) {
                 border: 'none',
                 borderRadius: 8,
                 cursor: 'pointer',
-                fontWeight: 500
               }}
             >
               Contacto
@@ -98,15 +93,11 @@ export default function Header({ onOpenModal }: HeaderProps) {
           </nav>
         )}
 
-        {/* HAMBURGER */}
+        {/* MOBILE BTN */}
         {isMobile && (
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            style={{
-              fontSize: 26,
-              background: 'none',
-              border: 'none'
-            }}
+            style={{ fontSize: 26, background: 'none', border: 'none' }}
           >
             ☰
           </button>
@@ -122,7 +113,7 @@ export default function Header({ onOpenModal }: HeaderProps) {
             padding: 12,
             display: 'flex',
             flexDirection: 'column',
-            gap: 12
+            gap: 12,
           }}
         >
           <button onClick={() => scrollTo('faq')}>FAQ</button>
