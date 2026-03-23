@@ -296,80 +296,83 @@ async function handleSubmitProveedor(
     </div>
   </div>
 
-  {/* BLOQUE CTA */}
-  <div
-    style={{
-      padding: '80px 24px',
-      display: 'flex',
-      justifyContent: 'center',
-    }}
-  >
-    <div style={{ textAlign: 'center' }}>
-      
-      <h1
-        style={{
-          fontSize: 34,
-          letterSpacing: 2,
-          marginBottom: 32,
-        }}
-      >
-        ¿Qué buscás?
-      </h1>
+{/* BLOQUE CTA */}
+<div
+  style={{
+    padding: '100px 24px',
+    display: 'flex',
+    justifyContent: 'center',
+  }}
+>
+  <div style={{ textAlign: 'center', width: '100%', maxWidth: 700 }}>
+    
+    <h1
+      style={{
+        fontSize: 42,
+        letterSpacing: 2,
+        marginBottom: 40,
+      }}
+    >
+      ¿Qué buscás?
+    </h1>
 
+    <div
+      style={{
+        background: '#f5f5f5',
+        borderRadius: 48,
+        padding: '40px 48px 48px',
+        width: '100%',
+        boxShadow: '0 30px 80px rgba(0,0,0,0.18)',
+      }}
+    >
       <div
         style={{
-          background: '#f5f5f5',
-          borderRadius: 40,
-          padding: '28px 32px 36px',
-          width: 420,
-          boxShadow: '0 20px 50px rgba(0,0,0,0.15)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginBottom: 40,
+          gap: 20,
         }}
       >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginBottom: 28,
-          }}
-        >
-          <div style={{ flex: 1, textAlign: 'center' }}>
-            <div style={{ fontSize: 18, fontWeight: 600 }}>
-              Servicios
-            </div>
-            <div style={{ fontSize: 48, marginTop: 12 }}>🚚</div>
+        {/* SERVICIOS */}
+        <div style={{ flex: 1, textAlign: 'center' }}>
+          <div style={{ fontSize: 22, fontWeight: 700 }}>
+            Servicios
           </div>
-
-          <div style={{ width: 1, height: 80, background: '#ddd' }} />
-
-          <div style={{ flex: 1, textAlign: 'center' }}>
-            <div style={{ fontSize: 18, fontWeight: 600 }}>
-              Productos
-            </div>
-            <div style={{ fontSize: 48, marginTop: 12 }}>🔨</div>
-          </div>
+          <div style={{ fontSize: 64, marginTop: 16 }}>🚚</div>
         </div>
 
-        <button
-          onClick={() => setOpen(true)}
-          style={{
-            width: '100%',
-            padding: '16px',
-            background: '#e1bee7',
-            border: 'none',
-            borderRadius: 16,
-            fontSize: 22,
-            fontWeight: 700,
-            letterSpacing: 6,
-            cursor: 'pointer',
-          }}
-        >
-          ¡Elegir!
-        </button>
+        {/* DIVISOR */}
+        <div style={{ width: 1, height: 100, background: '#ddd' }} />
+
+        {/* PRODUCTOS */}
+        <div style={{ flex: 1, textAlign: 'center' }}>
+          <div style={{ fontSize: 22, fontWeight: 700 }}>
+            Productos
+          </div>
+          <div style={{ fontSize: 64, marginTop: 16 }}>🔨</div>
+        </div>
       </div>
+
+      <button
+        onClick={() => setOpen(true)}
+        style={{
+          width: '100%',
+          padding: '20px',
+          background: '#e1bee7',
+          border: 'none',
+          borderRadius: 20,
+          fontSize: 26,
+          fontWeight: 800,
+          letterSpacing: 6,
+          cursor: 'pointer',
+        }}
+      >
+        ¡ELEGIR!
+      </button>
     </div>
   </div>
-</section>
+</div>
 
 
    {/* QUIENES SOMOS + POR QUE */}
