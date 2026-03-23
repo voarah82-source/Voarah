@@ -14,7 +14,7 @@ const DATA = [
   },
   {
     titulo: 'Limpieza',
-    items: ['Hogar', 'Oficinas', 'Pileta', 'Poda']
+    items: ['Hogares', 'Oficinas', 'Pileta', 'Poda']
   },
   {
     titulo: 'Diseño interior',
@@ -27,66 +27,78 @@ const DATA = [
 ]
 
 export default function Page() {
-  const [open, setOpen] = useState(false)
-  const [active, setActive] = useState<number | null>(null)
+  const [open, setOpen] = useState(true)
+  const [active, setActive] = useState(0)
+  const [selected, setSelected] = useState<string[]>([])
+
+  const toggle = (item: string) => {
+    setSelected(prev =>
+      prev.includes(item)
+        ? prev.filter(i => i !== item)
+        : [...prev, item]
+    )
+  }
 
   return (
     <>
       <Header onOpenModal={() => setOpen(true)} />
 
-      <main style={{ padding: 60, background: '#f4f4f6' }}>
-        {/* CTA REAL */}
-        <div style={{ textAlign: 'center', marginTop: 60 }}>
-          <div
-            onClick={() => setOpen(true)}
-            style={{
-              width: 200,
-              height: 200,
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg,#9c27b0,#7b1fa2)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#fff',
-              fontSize: 18,
-              fontWeight: 600,
-              margin: '0 auto',
-              cursor: 'pointer'
-            }}
-          >
-            Activar
-          </div>
+      {/* CTA REAL */}
+      <div style={{ textAlign: 'center', marginTop: 60 }}>
+        <div
+          onClick={() => setOpen(true)}
+          style={{
+            width: 180,
+            height: 180,
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg,#9c27b0,#7b1fa2)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#fff',
+            fontWeight: 600,
+            margin: '0 auto',
+            cursor: 'pointer'
+          }}
+        >
+          Activar
         </div>
-      </main>
+      </div>
 
       {/* MODAL */}
       {open && (
         <div className="overlay" onClick={() => setOpen(false)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
+          <div className="modal" onClick={e => e.stopPropagation()}>
             <h2>¿Qué necesitás?</h2>
 
-            <div className="table">
-              {DATA.map((row, i) => (
-                <div key={i} className="row">
+            <div className="box">
+              {/* LEFT */}
+              <div className="left">
+                {DATA.map((row, i) => (
                   <div
-                    className="left"
-                    onClick={() =>
-                      setActive(active === i ? null : i)
-                    }
+                    key={i}
+                    onClick={() => setActive(i)}
+                    className={`leftItem ${active === i ? 'active' : ''}`}
                   >
                     {row.titulo}
                   </div>
+                ))}
+              </div>
 
-                  <div className="right">
-                    {active === i &&
-                      row.items.map((item) => (
-                        <div key={item} className="item">
-                          {item}
-                        </div>
-                      ))}
+              {/* RIGHT */}
+              <div className="right">
+                {DATA[active].items.map(item => (
+                  <div
+                    key={item}
+                    onClick={() => toggle(item)}
+                    className={`chip ${
+                      selected.includes(item) ? 'selected' : ''
+                    }`}
+                  >
+                    {item}
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -96,10 +108,10 @@ export default function Page() {
         .overlay {
           position: fixed;
           inset: 0;
-          background: rgba(0, 0, 0, 0.5);
+          background: rgba(0, 0, 0, 0.55);
           display: flex;
-          justify-content: center;
           align-items: center;
+          justify-content: center;
         }
 
         .modal {
@@ -114,49 +126,72 @@ export default function Page() {
           margin-bottom: 20px;
         }
 
-        .table {
-          display: flex;
-          flex-direction: column;
-          border: 1px solid #ddd;
-          border-radius: 8px;
-          overflow: hidden;
-        }
-
-        .row {
+        .box {
           display: grid;
-          grid-template-columns: 300px 1fr;
-          border-bottom: 1px solid #eee;
+          grid-template-columns: 280px 1fr;
+          border: 1px solid #ddd;
+          border-radius: 10px;
+          overflow: hidden;
         }
 
         .left {
           background: #e3f2fd;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .leftItem {
           padding: 16px;
-          font-weight: 600;
           cursor: pointer;
+          border-bottom: 1px solid #d0d0d0;
+          font-weight: 500;
+        }
+
+        .leftItem.active {
+          background: #cfe8ff;
+          font-weight: 600;
         }
 
         .right {
-          padding: 16px;
+          padding: 20px;
           display: flex;
           flex-wrap: wrap;
           gap: 10px;
+          align-content: flex-start;
         }
 
-        .item {
-          background: #f5f5f5;
-          padding: 8px 12px;
-          border-radius: 8px;
+        .chip {
+          padding: 10px 14px;
+          background: #f0f0f0;
+          border-radius: 10px;
           cursor: pointer;
+          transition: 0.2s;
         }
 
-        /* RESPONSIVE BIEN HECHO */
+        .chip:hover {
+          background: #e0e0e0;
+        }
+
+        .chip.selected {
+          background: #8e24aa;
+          color: #fff;
+        }
+
+        /* RESPONSIVE REAL */
         @media (max-width: 768px) {
-          .row {
+          .box {
             grid-template-columns: 1fr;
           }
 
           .left {
-            border-bottom: 1px solid #ddd;
+            flex-direction: row;
+            overflow-x: auto;
+          }
+
+          .leftItem {
+            white-space: nowrap;
+            border-bottom: none;
+            border-right: 1px solid #ddd;
           }
         }
       `}</style>
