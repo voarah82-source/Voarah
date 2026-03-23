@@ -263,20 +263,72 @@ async function handleSubmitProveedor(
       marginBottom: 16
     }}
   >
-    Más confiable. Más rápido. Más simple.
+    Un sitio. Todas las soluciones.
   </h1>
 
-  <p
+<div
+  style={{
+    marginTop: 24,
+    display: 'flex',
+    justifyContent: 'center',
+  }}
+>
+  <div
     style={{
-      fontSize: 18,
-      color: '#555',
-      maxWidth: 640,
-      margin: '0 auto 32px'
+      display: 'flex',
+      gap: 16,
+      padding: 12,
+      borderRadius: 20,
+      background: 'rgba(142,36,170,0.12)',
     }}
   >
-    VOARAH es un ecosistema que integra y coordina los servicios que rodean la operación inmobiliaria.<br />
-  </p>
+    {/* ITEM 1 */}
+    <div
+      style={{
+        background: '#fff',
+        padding: '16px 20px',
+        borderRadius: 16,
+        boxShadow: '0 10px 25px rgba(0,0,0,0.08)',
+        fontSize: 14,
+        textAlign: 'center',
+        minWidth: 140,
+      }}
+    >
+      Solucioná en menos de 24hs
+    </div>
 
+    {/* ITEM 2 (destacado) */}
+    <div
+      style={{
+        background: '#fff',
+        padding: '16px 20px',
+        borderRadius: 16,
+        boxShadow: '0 14px 30px rgba(0,0,0,0.12)',
+        fontSize: 16,
+        fontWeight: 700,
+        textAlign: 'center',
+        minWidth: 160,
+      }}
+    >
+      Más seguridad
+    </div>
+
+    {/* ITEM 3 */}
+    <div
+      style={{
+        background: '#fff',
+        padding: '16px 20px',
+        borderRadius: 16,
+        boxShadow: '0 10px 25px rgba(0,0,0,0.08)',
+        fontSize: 14,
+        textAlign: 'center',
+        minWidth: 140,
+      }}
+    >
+      Profesionales validados
+    </div>
+  </div>
+</div>
  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
   <span style={{ fontSize: 14, fontWeight: 500 }}>
     Soy Particular
