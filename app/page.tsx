@@ -692,24 +692,7 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
   </div>
 </section>
 
-  {/* CONTACTO */}
-<footer
-  id="contacto"
-  style={{
-    padding: '80px 24px',
-    background: '#f7f7f7',
-    textAlign: 'center',
-    marginTop: 80
-  }}
->
-  <h2 style={{ fontSize: 28, marginBottom: 16 }}>
-    Contacto
-  </h2>
 
-  <p style={{ fontSize: 18, color: '#555' }}>
-    hola@voarah.com
-  </p>
-</footer>
         
 {/* MODAL CTAs */}
 {open && (
