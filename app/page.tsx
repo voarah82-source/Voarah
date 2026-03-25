@@ -80,14 +80,14 @@ async function handleSubmit(e: any) {
   e.preventDefault()
   setLoading(true)
 
-  const formData = new FormData(e.target)
+  
 
-  const payload = {
-    nombre: formData.get('nombre'),
-    email: formData.get('email'),
-    telefono: formData.get('telefono'),
-    comentario: formData.get('comentario'),
-    origen,
+ const payload = {
+  nombre: e.target.nombre.value,
+  email: e.target.email.value,
+  telefono: e.target.telefono.value,
+  comentario: e.target.comentario?.value,
+  origen,
 
     // ================= SERVICIOS =================
     servicio_mudanza: formData.get('servicio_mudanza') === 'on',
@@ -824,7 +824,6 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
     gap: 20,
   }}
 >
-  {/* DATOS BASICOS */}
   <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
     <input
       name="nombre"
@@ -848,7 +847,6 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
     style={inputStyle}
   />
 
-  {/* SERVICIOS */}
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
     <div
       style={{
@@ -863,444 +861,229 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
       Servicios
     </div>
 
-    {/* MUDANZAS */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
-      <button
-        type="button"
-        onClick={() => setOpenAccordion(openAccordion === 'mudanzas' ? null : 'mudanzas')}
-        style={{
-          width: '100%',
-          textAlign: 'left',
-          padding: '14px 16px',
-          background: '#f8d7f0',
-          border: 'none',
-          fontSize: 16,
-          fontWeight: 600,
-          cursor: 'pointer'
-        }}
-      >
+      <button type="button" onClick={() => setOpenAccordion(openAccordion === 'mudanzas' ? null : 'mudanzas')} style={{ width: '100%', textAlign: 'left', padding: '14px 16px', background: '#f8d7f0', border: 'none', fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>
         Mudanzas
       </button>
       {openAccordion === 'mudanzas' && (
         <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <label><input type="checkbox" name="servicio_mudanza" /> Mudanza</label>
-          <label><input type="checkbox" name="servicio_mudanza_embalaje" /> Con embalaje</label>
-          <label><input type="checkbox" name="servicio_mudanza_desembalaje" /> Con desembalaje</label>
-          <label><input type="checkbox" name="servicio_mudanza_solo_transporte" /> Solo transporte</label>
+          <label><input type="checkbox" name="servicio_mudanza" checked={formState.servicio_mudanza || false} onChange={handleCheckboxChange}/> Mudanza</label>
+          <label><input type="checkbox" name="servicio_mudanza_embalaje" checked={formState.servicio_mudanza_embalaje || false} onChange={handleCheckboxChange}/> Con embalaje</label>
+          <label><input type="checkbox" name="servicio_mudanza_desembalaje" checked={formState.servicio_mudanza_desembalaje || false} onChange={handleCheckboxChange}/> Con desembalaje</label>
+          <label><input type="checkbox" name="servicio_mudanza_solo_transporte" checked={formState.servicio_mudanza_solo_transporte || false} onChange={handleCheckboxChange}/> Solo transporte</label>
         </div>
       )}
     </div>
 
-    {/* GUARDAMUEBLES */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
-      <button
-        type="button"
-        onClick={() => setOpenAccordion(openAccordion === 'guardamuebles' ? null : 'guardamuebles')}
-        style={{
-          width: '100%',
-          textAlign: 'left',
-          padding: '14px 16px',
-          background: '#f8d7f0',
-          border: 'none',
-          fontSize: 16,
-          fontWeight: 600,
-          cursor: 'pointer'
-        }}
-      >
+      <button type="button" onClick={() => setOpenAccordion(openAccordion === 'guardamuebles' ? null : 'guardamuebles')} style={{ width: '100%', textAlign: 'left', padding: '14px 16px', background: '#f8d7f0', border: 'none', fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>
         Guardamuebles y Self-Storage
       </button>
       {openAccordion === 'guardamuebles' && (
         <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <label><input type="checkbox" name="servicio_guardamuebles" /> Guardamuebles / Self-Storage</label>
-          <label><input type="checkbox" name="servicio_guardamuebles_recogida" /> Recogida en domicilio</label>
-          <label><input type="checkbox" name="servicio_guardamuebles_entrega" /> Entrega en domicilio</label>
-          <label><input type="checkbox" name="servicio_guardamuebles_embalaje" /> Embalaje</label>
-          <label><input type="checkbox" name="servicio_guardamuebles_bauleras" /> Bauleras para self-storage</label>
+          <label><input type="checkbox" name="servicio_guardamuebles" checked={formState.servicio_guardamuebles || false} onChange={handleCheckboxChange}/> Guardamuebles / Self-Storage</label>
+          <label><input type="checkbox" name="servicio_guardamuebles_recogida" checked={formState.servicio_guardamuebles_recogida || false} onChange={handleCheckboxChange}/> Recogida en domicilio</label>
+          <label><input type="checkbox" name="servicio_guardamuebles_entrega" checked={formState.servicio_guardamuebles_entrega || false} onChange={handleCheckboxChange}/> Entrega en domicilio</label>
+          <label><input type="checkbox" name="servicio_guardamuebles_embalaje" checked={formState.servicio_guardamuebles_embalaje || false} onChange={handleCheckboxChange}/> Embalaje</label>
+          <label><input type="checkbox" name="servicio_guardamuebles_bauleras" checked={formState.servicio_guardamuebles_bauleras || false} onChange={handleCheckboxChange}/> Bauleras para self-storage</label>
         </div>
       )}
     </div>
 
-    {/* LIMPIEZA */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
-      <button
-        type="button"
-        onClick={() => setOpenAccordion(openAccordion === 'limpieza' ? null : 'limpieza')}
-        style={{
-          width: '100%',
-          textAlign: 'left',
-          padding: '14px 16px',
-          background: '#f8d7f0',
-          border: 'none',
-          fontSize: 16,
-          fontWeight: 600,
-          cursor: 'pointer'
-        }}
-      >
+      <button type="button" onClick={() => setOpenAccordion(openAccordion === 'limpieza' ? null : 'limpieza')} style={{ width: '100%', textAlign: 'left', padding: '14px 16px', background: '#f8d7f0', border: 'none', fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>
         Limpieza
       </button>
       {openAccordion === 'limpieza' && (
         <div style={{ padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-          <label><input type="checkbox" name="servicio_limpieza" /> Limpieza</label>
-          <label><input type="checkbox" name="servicio_limpieza_hogares" /> Hogares</label>
-          <label><input type="checkbox" name="servicio_limpieza_locales" /> Locales</label>
-          <label><input type="checkbox" name="servicio_limpieza_oficinas" /> Oficinas</label>
-          <label><input type="checkbox" name="servicio_limpieza_edificios" /> Edificios</label>
-          <label><input type="checkbox" name="servicio_limpieza_fin_obra" /> Fin de obra</label>
-          <label><input type="checkbox" name="servicio_limpieza_fachadas" /> Fachadas</label>
-          <label><input type="checkbox" name="servicio_limpieza_tejados" /> Tejados</label>
-          <label><input type="checkbox" name="servicio_limpieza_tapizados" /> Tapizados</label>
-          <label><input type="checkbox" name="servicio_limpieza_piletas" /> Piletas</label>
-          <label><input type="checkbox" name="servicio_limpieza_poda_arboles" /> Poda de árboles</label>
+          <label><input type="checkbox" name="servicio_limpieza" checked={formState.servicio_limpieza || false} onChange={handleCheckboxChange}/> Limpieza</label>
+          <label><input type="checkbox" name="servicio_limpieza_hogares" checked={formState.servicio_limpieza_hogares || false} onChange={handleCheckboxChange}/> Hogares</label>
+          <label><input type="checkbox" name="servicio_limpieza_locales" checked={formState.servicio_limpieza_locales || false} onChange={handleCheckboxChange}/> Locales</label>
+          <label><input type="checkbox" name="servicio_limpieza_oficinas" checked={formState.servicio_limpieza_oficinas || false} onChange={handleCheckboxChange}/> Oficinas</label>
+          <label><input type="checkbox" name="servicio_limpieza_edificios" checked={formState.servicio_limpieza_edificios || false} onChange={handleCheckboxChange}/> Edificios</label>
+          <label><input type="checkbox" name="servicio_limpieza_fin_obra" checked={formState.servicio_limpieza_fin_obra || false} onChange={handleCheckboxChange}/> Fin de obra</label>
+          <label><input type="checkbox" name="servicio_limpieza_fachadas" checked={formState.servicio_limpieza_fachadas || false} onChange={handleCheckboxChange}/> Fachadas</label>
+          <label><input type="checkbox" name="servicio_limpieza_tejados" checked={formState.servicio_limpieza_tejados || false} onChange={handleCheckboxChange}/> Tejados</label>
+          <label><input type="checkbox" name="servicio_limpieza_tapizados" checked={formState.servicio_limpieza_tapizados || false} onChange={handleCheckboxChange}/> Tapizados</label>
+          <label><input type="checkbox" name="servicio_limpieza_piletas" checked={formState.servicio_limpieza_piletas || false} onChange={handleCheckboxChange}/> Piletas</label>
+          <label><input type="checkbox" name="servicio_limpieza_poda_arboles" checked={formState.servicio_limpieza_poda_arboles || false} onChange={handleCheckboxChange}/> Poda de árboles</label>
         </div>
       )}
     </div>
 
-    {/* DISEÑO INTERIOR */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
-      <button
-        type="button"
-        onClick={() => setOpenAccordion(openAccordion === 'diseno' ? null : 'diseno')}
-        style={{
-          width: '100%',
-          textAlign: 'left',
-          padding: '14px 16px',
-          background: '#f8d7f0',
-          border: 'none',
-          fontSize: 16,
-          fontWeight: 600,
-          cursor: 'pointer'
-        }}
-      >
+      <button type="button" onClick={() => setOpenAccordion(openAccordion === 'diseno' ? null : 'diseno')} style={{ width: '100%', textAlign: 'left', padding: '14px 16px', background: '#f8d7f0', border: 'none', fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>
         Diseño interior
       </button>
       {openAccordion === 'diseno' && (
         <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <label><input type="checkbox" name="servicio_diseno_interior" /> Diseño interior</label>
-          <label><input type="checkbox" name="servicio_diseno_disenos" /> Diseños</label>
-          <label><input type="checkbox" name="servicio_diseno_proyectos" /> Proyectos</label>
-          <label><input type="checkbox" name="servicio_diseno_planos" /> Planos</label>
-          <label><input type="checkbox" name="servicio_diseno_certificaciones" /> Certificaciones</label>
+          <label><input type="checkbox" name="servicio_diseno_interior" checked={formState.servicio_diseno_interior || false} onChange={handleCheckboxChange}/> Diseño interior</label>
+          <label><input type="checkbox" name="servicio_diseno_disenos" checked={formState.servicio_diseno_disenos || false} onChange={handleCheckboxChange}/> Diseños</label>
+          <label><input type="checkbox" name="servicio_diseno_proyectos" checked={formState.servicio_diseno_proyectos || false} onChange={handleCheckboxChange}/> Proyectos</label>
+          <label><input type="checkbox" name="servicio_diseno_planos" checked={formState.servicio_diseno_planos || false} onChange={handleCheckboxChange}/> Planos</label>
+          <label><input type="checkbox" name="servicio_diseno_certificaciones" checked={formState.servicio_diseno_certificaciones || false} onChange={handleCheckboxChange}/> Certificaciones</label>
         </div>
       )}
     </div>
 
-    {/* MANTENIMIENTO */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
-      <button
-        type="button"
-        onClick={() => setOpenAccordion(openAccordion === 'mantenimiento' ? null : 'mantenimiento')}
-        style={{
-          width: '100%',
-          textAlign: 'left',
-          padding: '14px 16px',
-          background: '#f8d7f0',
-          border: 'none',
-          fontSize: 16,
-          fontWeight: 600,
-          cursor: 'pointer'
-        }}
-      >
+      <button type="button" onClick={() => setOpenAccordion(openAccordion === 'mantenimiento' ? null : 'mantenimiento')} style={{ width: '100%', textAlign: 'left', padding: '14px 16px', background: '#f8d7f0', border: 'none', fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>
         Mantenimiento
       </button>
       {openAccordion === 'mantenimiento' && (
         <div style={{ padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-          <label><input type="checkbox" name="servicio_mantenimiento" /> Mantenimiento</label>
-          <label><input type="checkbox" name="servicio_mantenimiento_pintura" /> Pintura</label>
-          <label><input type="checkbox" name="servicio_mantenimiento_plomeria" /> Plomería</label>
-          <label><input type="checkbox" name="servicio_mantenimiento_electricidad" /> Electricidad</label>
-          <label><input type="checkbox" name="servicio_mantenimiento_pisos" /> Pisos</label>
-          <label><input type="checkbox" name="servicio_mantenimiento_banos" /> Baños</label>
-          <label><input type="checkbox" name="servicio_mantenimiento_humedades" /> Humedades</label>
-          <label><input type="checkbox" name="servicio_mantenimiento_refacciones" /> Refacciones</label>
+          <label><input type="checkbox" name="servicio_mantenimiento" checked={formState.servicio_mantenimiento || false} onChange={handleCheckboxChange}/> Mantenimiento</label>
+          <label><input type="checkbox" name="servicio_mantenimiento_pintura" checked={formState.servicio_mantenimiento_pintura || false} onChange={handleCheckboxChange}/> Pintura</label>
+          <label><input type="checkbox" name="servicio_mantenimiento_plomeria" checked={formState.servicio_mantenimiento_plomeria || false} onChange={handleCheckboxChange}/> Plomería</label>
+          <label><input type="checkbox" name="servicio_mantenimiento_electricidad" checked={formState.servicio_mantenimiento_electricidad || false} onChange={handleCheckboxChange}/> Electricidad</label>
+          <label><input type="checkbox" name="servicio_mantenimiento_pisos" checked={formState.servicio_mantenimiento_pisos || false} onChange={handleCheckboxChange}/> Pisos</label>
+          <label><input type="checkbox" name="servicio_mantenimiento_banos" checked={formState.servicio_mantenimiento_banos || false} onChange={handleCheckboxChange}/> Baños</label>
+          <label><input type="checkbox" name="servicio_mantenimiento_humedades" checked={formState.servicio_mantenimiento_humedades || false} onChange={handleCheckboxChange}/> Humedades</label>
+          <label><input type="checkbox" name="servicio_mantenimiento_refacciones" checked={formState.servicio_mantenimiento_refacciones || false} onChange={handleCheckboxChange}/> Refacciones</label>
         </div>
       )}
     </div>
 
-    {/* FOTOGRAFIA */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
-      <button
-        type="button"
-        onClick={() => setOpenAccordion(openAccordion === 'foto' ? null : 'foto')}
-        style={{
-          width: '100%',
-          textAlign: 'left',
-          padding: '14px 16px',
-          background: '#f8d7f0',
-          border: 'none',
-          fontSize: 16,
-          fontWeight: 600,
-          cursor: 'pointer'
-        }}
-      >
+      <button type="button" onClick={() => setOpenAccordion(openAccordion === 'foto' ? null : 'foto')} style={{ width: '100%', textAlign: 'left', padding: '14px 16px', background: '#f8d7f0', border: 'none', fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>
         Fotografía, video, grabación con dron
       </button>
       {openAccordion === 'foto' && (
         <div style={{ padding: 16 }}>
-          <label><input type="checkbox" name="servicio_fotografia_video_dron" /> Fotografía / video / dron</label>
+          <label><input type="checkbox" name="servicio_fotografia_video_dron" checked={formState.servicio_fotografia_video_dron || false} onChange={handleCheckboxChange}/> Fotografía / video / dron</label>
         </div>
       )}
     </div>
 
-    {/* JURIDICOS */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
-      <button
-        type="button"
-        onClick={() => setOpenAccordion(openAccordion === 'juridico' ? null : 'juridico')}
-        style={{
-          width: '100%',
-          textAlign: 'left',
-          padding: '14px 16px',
-          background: '#f8d7f0',
-          border: 'none',
-          fontSize: 16,
-          fontWeight: 600,
-          cursor: 'pointer'
-        }}
-      >
+      <button type="button" onClick={() => setOpenAccordion(openAccordion === 'juridico' ? null : 'juridico')} style={{ width: '100%', textAlign: 'left', padding: '14px 16px', background: '#f8d7f0', border: 'none', fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>
         Servicios jurídicos
       </button>
       {openAccordion === 'juridico' && (
         <div style={{ padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-          <label><input type="checkbox" name="servicio_juridicos" /> Servicios jurídicos</label>
-          <label><input type="checkbox" name="servicio_juridico_civil" /> Civil</label>
-          <label><input type="checkbox" name="servicio_juridico_contratos" /> Contratos</label>
-          <label><input type="checkbox" name="servicio_juridico_sucesiones" /> Sucesiones</label>
-          <label><input type="checkbox" name="servicio_juridico_divisiones_propiedad" /> Divisiones de propiedad</label>
-          <label><input type="checkbox" name="servicio_juridico_mediaciones" /> Mediaciones</label>
+          <label><input type="checkbox" name="servicio_juridicos" checked={formState.servicio_juridicos || false} onChange={handleCheckboxChange}/> Servicios jurídicos</label>
+          <label><input type="checkbox" name="servicio_juridico_civil" checked={formState.servicio_juridico_civil || false} onChange={handleCheckboxChange}/> Civil</label>
+          <label><input type="checkbox" name="servicio_juridico_contratos" checked={formState.servicio_juridico_contratos || false} onChange={handleCheckboxChange}/> Contratos</label>
+          <label><input type="checkbox" name="servicio_juridico_sucesiones" checked={formState.servicio_juridico_sucesiones || false} onChange={handleCheckboxChange}/> Sucesiones</label>
+          <label><input type="checkbox" name="servicio_juridico_divisiones_propiedad" checked={formState.servicio_juridico_divisiones_propiedad || false} onChange={handleCheckboxChange}/> Divisiones de propiedad</label>
+          <label><input type="checkbox" name="servicio_juridico_mediaciones" checked={formState.servicio_juridico_mediaciones || false} onChange={handleCheckboxChange}/> Mediaciones</label>
         </div>
       )}
     </div>
 
-    {/* SEGUROS */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
-      <button
-        type="button"
-        onClick={() => setOpenAccordion(openAccordion === 'seguros' ? null : 'seguros')}
-        style={{
-          width: '100%',
-          textAlign: 'left',
-          padding: '14px 16px',
-          background: '#f8d7f0',
-          border: 'none',
-          fontSize: 16,
-          fontWeight: 600,
-          cursor: 'pointer'
-        }}
-      >
+      <button type="button" onClick={() => setOpenAccordion(openAccordion === 'seguros' ? null : 'seguros')} style={{ width: '100%', textAlign: 'left', padding: '14px 16px', background: '#f8d7f0', border: 'none', fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>
         Seguros
       </button>
       {openAccordion === 'seguros' && (
         <div style={{ padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-          <label><input type="checkbox" name="servicio_seguros" /> Seguros</label>
-          <label><input type="checkbox" name="servicio_seguro_hogar" /> Hogar</label>
-          <label><input type="checkbox" name="servicio_seguro_comercio" /> Comercio</label>
-          <label><input type="checkbox" name="servicio_seguro_autos" /> Autos</label>
-          <label><input type="checkbox" name="servicio_seguro_cauciones" /> Cauciones</label>
-          <label><input type="checkbox" name="servicio_seguro_proteccion_alquiler" /> Protección pagos alquiler</label>
+          <label><input type="checkbox" name="servicio_seguros" checked={formState.servicio_seguros || false} onChange={handleCheckboxChange}/> Seguros</label>
+          <label><input type="checkbox" name="servicio_seguro_hogar" checked={formState.servicio_seguro_hogar || false} onChange={handleCheckboxChange}/> Hogar</label>
+          <label><input type="checkbox" name="servicio_seguro_comercio" checked={formState.servicio_seguro_comercio || false} onChange={handleCheckboxChange}/> Comercio</label>
+          <label><input type="checkbox" name="servicio_seguro_autos" checked={formState.servicio_seguro_autos || false} onChange={handleCheckboxChange}/> Autos</label>
+          <label><input type="checkbox" name="servicio_seguro_cauciones" checked={formState.servicio_seguro_cauciones || false} onChange={handleCheckboxChange}/> Cauciones</label>
+          <label><input type="checkbox" name="servicio_seguro_proteccion_alquiler" checked={formState.servicio_seguro_proteccion_alquiler || false} onChange={handleCheckboxChange}/> Protección pagos alquiler</label>
         </div>
       )}
     </div>
 
-    {/* JARDINERO */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
-      <button
-        type="button"
-        onClick={() => setOpenAccordion(openAccordion === 'jardin' ? null : 'jardin')}
-        style={{
-          width: '100%',
-          textAlign: 'left',
-          padding: '14px 16px',
-          background: '#f8d7f0',
-          border: 'none',
-          fontSize: 16,
-          fontWeight: 600,
-          cursor: 'pointer'
-        }}
-      >
+      <button type="button" onClick={() => setOpenAccordion(openAccordion === 'jardin' ? null : 'jardin')} style={{ width: '100%', textAlign: 'left', padding: '14px 16px', background: '#f8d7f0', border: 'none', fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>
         Jardinero y piletero
       </button>
       {openAccordion === 'jardin' && (
         <div style={{ padding: 16 }}>
-          <label><input type="checkbox" name="servicio_jardinero_piletero" /> Jardinero y piletero</label>
+          <label><input type="checkbox" name="servicio_jardinero_piletero" checked={formState.servicio_jardinero_piletero || false} onChange={handleCheckboxChange}/> Jardinero y piletero</label>
         </div>
       )}
     </div>
 
-    {/* SEGURIDAD */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
-      <button
-        type="button"
-        onClick={() => setOpenAccordion(openAccordion === 'seguridad' ? null : 'seguridad')}
-        style={{
-          width: '100%',
-          textAlign: 'left',
-          padding: '14px 16px',
-          background: '#f8d7f0',
-          border: 'none',
-          fontSize: 16,
-          fontWeight: 600,
-          cursor: 'pointer'
-        }}
-      >
+      <button type="button" onClick={() => setOpenAccordion(openAccordion === 'seguridad' ? null : 'seguridad')} style={{ width: '100%', textAlign: 'left', padding: '14px 16px', background: '#f8d7f0', border: 'none', fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>
         Seguridad
       </button>
       {openAccordion === 'seguridad' && (
         <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <label><input type="checkbox" name="servicio_seguridad" /> Seguridad</label>
-          <label><input type="checkbox" name="servicio_seguridad_camaras" /> Cámaras de videovigilancia</label>
-          <label><input type="checkbox" name="servicio_seguridad_alarmas" /> Alarmas</label>
+          <label><input type="checkbox" name="servicio_seguridad" checked={formState.servicio_seguridad || false} onChange={handleCheckboxChange}/> Seguridad</label>
+          <label><input type="checkbox" name="servicio_seguridad_camaras" checked={formState.servicio_seguridad_camaras || false} onChange={handleCheckboxChange}/> Cámaras de videovigilancia</label>
+          <label><input type="checkbox" name="servicio_seguridad_alarmas" checked={formState.servicio_seguridad_alarmas || false} onChange={handleCheckboxChange}/> Alarmas</label>
         </div>
       )}
     </div>
   </div>
 
-  {/* PRODUCTOS */}
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-    <div
-      style={{
-        background: '#8E24AA',
-        color: '#fff',
-        padding: '10px 14px',
-        borderRadius: 8,
-        fontWeight: 700,
-        fontSize: 16
-      }}
-    >
+    <div style={{ background: '#8E24AA', color: '#fff', padding: '10px 14px', borderRadius: 8, fontWeight: 700, fontSize: 16 }}>
       Productos
     </div>
 
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
-      <button
-        type="button"
-        onClick={() => setOpenAccordion(openAccordion === 'materiales' ? null : 'materiales')}
-        style={{
-          width: '100%',
-          textAlign: 'left',
-          padding: '14px 16px',
-          background: '#f8d7f0',
-          border: 'none',
-          fontSize: 16,
-          fontWeight: 600,
-          cursor: 'pointer'
-        }}
-      >
+      <button type="button" onClick={() => setOpenAccordion(openAccordion === 'materiales' ? null : 'materiales')} style={{ width: '100%', textAlign: 'left', padding: '14px 16px', background: '#f8d7f0', border: 'none', fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>
         Materiales para refacción
       </button>
       {openAccordion === 'materiales' && (
         <div style={{ padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-          <label><input type="checkbox" name="producto_materiales_obra" /> Materiales de obra</label>
-          <label><input type="checkbox" name="producto_pintura" /> Pintura</label>
-          <label><input type="checkbox" name="producto_pisos_revestimientos" /> Pisos y revestimientos</label>
-          <label><input type="checkbox" name="producto_electricidad_plomeria_banos" /> Electricidad, Plomería y Baños</label>
-          <label><input type="checkbox" name="producto_herramientas" /> Herramientas eléctricas y manuales</label>
-          <label><input type="checkbox" name="producto_hogar_muebles_jardin" /> Muebles de jardín</label>
-          <label><input type="checkbox" name="producto_termotanques" /> Termotanques</label>
-          <label><input type="checkbox" name="producto_calefaccion_aire" /> Calefacción / Aire acondicionado</label>
-          <label><input type="checkbox" name="producto_piletas" /> Piletas estructurales e inflables</label>
+          <label><input type="checkbox" name="producto_materiales_obra" checked={formState.producto_materiales_obra || false} onChange={handleCheckboxChange}/> Materiales de obra</label>
+          <label><input type="checkbox" name="producto_pintura" checked={formState.producto_pintura || false} onChange={handleCheckboxChange}/> Pintura</label>
+          <label><input type="checkbox" name="producto_pisos_revestimientos" checked={formState.producto_pisos_revestimientos || false} onChange={handleCheckboxChange}/> Pisos y revestimientos</label>
+          <label><input type="checkbox" name="producto_electricidad_plomeria_banos" checked={formState.producto_electricidad_plomeria_banos || false} onChange={handleCheckboxChange}/> Electricidad, Plomería y Baños</label>
+          <label><input type="checkbox" name="producto_herramientas" checked={formState.producto_herramientas || false} onChange={handleCheckboxChange}/> Herramientas eléctricas y manuales</label>
+          <label><input type="checkbox" name="producto_hogar_muebles_jardin" checked={formState.producto_hogar_muebles_jardin || false} onChange={handleCheckboxChange}/> Muebles de jardín</label>
+          <label><input type="checkbox" name="producto_termotanques" checked={formState.producto_termotanques || false} onChange={handleCheckboxChange}/> Termotanques</label>
+          <label><input type="checkbox" name="producto_calefaccion_aire" checked={formState.producto_calefaccion_aire || false} onChange={handleCheckboxChange}/> Calefacción / Aire acondicionado</label>
+          <label><input type="checkbox" name="producto_piletas" checked={formState.producto_piletas || false} onChange={handleCheckboxChange}/> Piletas estructurales e inflables</label>
         </div>
       )}
     </div>
 
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
-      <button
-        type="button"
-        onClick={() => setOpenAccordion(openAccordion === 'muebles_deco' ? null : 'muebles_deco')}
-        style={{
-          width: '100%',
-          textAlign: 'left',
-          padding: '14px 16px',
-          background: '#f8d7f0',
-          border: 'none',
-          fontSize: 16,
-          fontWeight: 600,
-          cursor: 'pointer'
-        }}
-      >
+      <button type="button" onClick={() => setOpenAccordion(openAccordion === 'muebles_deco' ? null : 'muebles_deco')} style={{ width: '100%', textAlign: 'left', padding: '14px 16px', background: '#f8d7f0', border: 'none', fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>
         Muebles y decoración
       </button>
       {openAccordion === 'muebles_deco' && (
         <div style={{ padding: 16 }}>
-          <label><input type="checkbox" name="producto_muebles_decoracion" /> Muebles y decoración</label>
+          <label><input type="checkbox" name="producto_muebles_decoracion" checked={formState.producto_muebles_decoracion || false} onChange={handleCheckboxChange}/> Muebles y decoración</label>
         </div>
       )}
     </div>
 
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
-      <button
-        type="button"
-        onClick={() => setOpenAccordion(openAccordion === 'electro' ? null : 'electro')}
-        style={{
-          width: '100%',
-          textAlign: 'left',
-          padding: '14px 16px',
-          background: '#f8d7f0',
-          border: 'none',
-          fontSize: 16,
-          fontWeight: 600,
-          cursor: 'pointer'
-        }}
-      >
+      <button type="button" onClick={() => setOpenAccordion(openAccordion === 'electro' ? null : 'electro')} style={{ width: '100%', textAlign: 'left', padding: '14px 16px', background: '#f8d7f0', border: 'none', fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>
         Electrodomésticos
       </button>
       {openAccordion === 'electro' && (
         <div style={{ padding: 16 }}>
-          <label><input type="checkbox" name="producto_electrodomesticos" /> Electrodomésticos</label>
+          <label><input type="checkbox" name="producto_electrodomesticos" checked={formState.producto_electrodomesticos || false} onChange={handleCheckboxChange}/> Electrodomésticos</label>
         </div>
       )}
     </div>
 
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
-      <button
-        type="button"
-        onClick={() => setOpenAccordion(openAccordion === 'muebles_usados' ? null : 'muebles_usados')}
-        style={{
-          width: '100%',
-          textAlign: 'left',
-          padding: '14px 16px',
-          background: '#f8d7f0',
-          border: 'none',
-          fontSize: 16,
-          fontWeight: 600,
-          cursor: 'pointer'
-        }}
-      >
+      <button type="button" onClick={() => setOpenAccordion(openAccordion === 'muebles_usados' ? null : 'muebles_usados')} style={{ width: '100%', textAlign: 'left', padding: '14px 16px', background: '#f8d7f0', border: 'none', fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>
         Compra-Venta muebles y decoración usados
       </button>
       {openAccordion === 'muebles_usados' && (
         <div style={{ padding: 16 }}>
-          <label><input type="checkbox" name="producto_compra_venta_muebles_decoracion_usados" /> Compra-Venta muebles y decoración usados</label>
+          <label><input type="checkbox" name="producto_compra_venta_muebles_decoracion_usados" checked={formState.producto_compra_venta_muebles_decoracion_usados || false} onChange={handleCheckboxChange}/> Compra-Venta muebles y decoración usados</label>
         </div>
       )}
     </div>
 
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
-      <button
-        type="button"
-        onClick={() => setOpenAccordion(openAccordion === 'productos_usados' ? null : 'productos_usados')}
-        style={{
-          width: '100%',
-          textAlign: 'left',
-          padding: '14px 16px',
-          background: '#f8d7f0',
-          border: 'none',
-          fontSize: 16,
-          fontWeight: 600,
-          cursor: 'pointer'
-        }}
-      >
+      <button type="button" onClick={() => setOpenAccordion(openAccordion === 'productos_usados' ? null : 'productos_usados')} style={{ width: '100%', textAlign: 'left', padding: '14px 16px', background: '#f8d7f0', border: 'none', fontSize: 16, fontWeight: 600, cursor: 'pointer' }}>
         Compra-Venta productos usados
       </button>
       {openAccordion === 'productos_usados' && (
         <div style={{ padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-          <label><input type="checkbox" name="producto_compra_venta_productos_usados" /> Compra-Venta productos usados</label>
-          <label><input type="checkbox" name="producto_usado_laptops" /> Laptops</label>
-          <label><input type="checkbox" name="producto_usado_celulares" /> Celulares</label>
-          <label><input type="checkbox" name="producto_usado_videoconsolas" /> Videoconsolas</label>
-          <label><input type="checkbox" name="producto_usado_relojes" /> Relojes</label>
-          <label><input type="checkbox" name="producto_usado_camaras_fotos" /> Cámaras de fotos</label>
-          <label><input type="checkbox" name="producto_usado_bicicletas" /> Bicicletas</label>
-          <label><input type="checkbox" name="producto_usado_raquetas" /> Raquetas</label>
-          <label><input type="checkbox" name="producto_usado_motos" /> Motos</label>
+          <label><input type="checkbox" name="producto_compra_venta_productos_usados" checked={formState.producto_compra_venta_productos_usados || false} onChange={handleCheckboxChange}/> Compra-Venta productos usados</label>
+          <label><input type="checkbox" name="producto_usado_laptops" checked={formState.producto_usado_laptops || false} onChange={handleCheckboxChange}/> Laptops</label>
+          <label><input type="checkbox" name="producto_usado_celulares" checked={formState.producto_usado_celulares || false} onChange={handleCheckboxChange}/> Celulares</label>
+          <label><input type="checkbox" name="producto_usado_videoconsolas" checked={formState.producto_usado_videoconsolas || false} onChange={handleCheckboxChange}/> Videoconsolas</label>
+          <label><input type="checkbox" name="producto_usado_relojes" checked={formState.producto_usado_relojes || false} onChange={handleCheckboxChange}/> Relojes</label>
+          <label><input type="checkbox" name="producto_usado_camaras_fotos" checked={formState.producto_usado_camaras_fotos || false} onChange={handleCheckboxChange}/> Cámaras de fotos</label>
+          <label><input type="checkbox" name="producto_usado_bicicletas" checked={formState.producto_usado_bicicletas || false} onChange={handleCheckboxChange}/> Bicicletas</label>
+          <label><input type="checkbox" name="producto_usado_raquetas" checked={formState.producto_usado_raquetas || false} onChange={handleCheckboxChange}/> Raquetas</label>
+          <label><input type="checkbox" name="producto_usado_motos" checked={formState.producto_usado_motos || false} onChange={handleCheckboxChange}/> Motos</label>
         </div>
       )}
     </div>
