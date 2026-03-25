@@ -16,7 +16,7 @@ export default function HomePage() {
   const [showSuccess, setShowSuccess] = useState(false)
   const [openAccordion, setOpenAccordion] = useState<string | null>(null)
 
-  const [formState, setFormState] = useState({})
+  const [formState, setFormState] = useState<Record<string, boolean>>({})
 
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target
