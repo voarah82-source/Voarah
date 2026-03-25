@@ -1,6 +1,5 @@
 'use client'
 
-
 import { useState, useEffect } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import Header from '../components/Header'
@@ -17,12 +16,21 @@ export default function HomePage() {
   const [showSuccess, setShowSuccess] = useState(false)
   const [openAccordion, setOpenAccordion] = useState<string | null>(null)
 
+  const [formState, setFormState] = useState({})
+
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target
+    setFormState((prev) => ({
+      ...prev,
+      [name]: checked,
+    }))
+  }
+
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   )
 
-  
   const inputStyle = {
     padding: '12px 14px',
     borderRadius: 10,
@@ -33,19 +41,18 @@ export default function HomePage() {
 
   const [origen, setOrigen] = useState('')
 
- useEffect(() => {
-  const params = new URLSearchParams(window.location.search)
-  const origenParam = params.get('origen') || ''
-  setOrigen(origenParam)
-}, [])
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const origenParam = params.get('origen') || ''
+    setOrigen(origenParam)
+  }, [])
 
-useEffect(() => {
-  const params = new URLSearchParams(window.location.search)
-  if (params.get('success') === '1') {
-    alert('Datos enviados correctamente. Te contactaremos pronto.')
-  }
-}, [])
-
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('success') === '1') {
+      alert('Datos enviados correctamente. Te contactaremos pronto.')
+    }
+  }, [])
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -67,6 +74,7 @@ useEffect(() => {
       }
     })
   }, [])
+
 
 async function handleSubmit(e: any) {
   e.preventDefault()
