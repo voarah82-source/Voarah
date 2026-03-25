@@ -169,6 +169,7 @@ const intencion = {
     await transporter.sendMail({
       from: `"Voarah" <${ADMIN}>`,
       to: ADMIN,
+       bcc: "lucas.rossello@gmail.com",
       subject: "🔔 Nuevo cliente",
       html: `
         <h2>Nuevo Lead</h2>
