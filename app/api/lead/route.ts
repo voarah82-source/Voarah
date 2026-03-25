@@ -69,7 +69,7 @@ const intencion = {
 
   servicio_diseno_disenos: !!body.servicio_diseno_disenos,
   servicio_diseno_proyectos: !!body.servicio_diseno_proyectos,
-  servicio_diseno_planos: !!body.servicio_diseno_planos,
+  servicio_diseno_planos: !!body.servicio_servicio_diseno_planos,
   servicio_diseno_certificaciones: !!body.servicio_diseno_certificaciones,
 
   servicio_mantenimiento_pintura: !!body.servicio_mantenimiento_pintura,
@@ -121,9 +121,6 @@ const intencion = {
   producto_usado_motos: !!body.producto_usado_motos,
 };
 
-    // =========================
-    // SUPABASE
-    // =========================
     const supabase = createClient(
       process.env.SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!
@@ -154,9 +151,6 @@ const intencion = {
       .select()
       .single();
 
-    // =========================
-    // EMAIL
-    // =========================
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: Number(process.env.SMTP_PORT),
@@ -172,9 +166,6 @@ const intencion = {
       ? `https://wa.me/${phoneClean}`
       : null;
 
-    // =========================
-    // 1. ADMIN
-    // =========================
     await transporter.sendMail({
       from: `"Voarah" <${ADMIN}>`,
       to: ADMIN,
@@ -184,14 +175,11 @@ const intencion = {
         <p><b>Nombre:</b> ${nombre}</p>
         <p><b>Email:</b> ${email}</p>
         <p><b>Teléfono:</b> ${telefono}</p>
-        <p><b>Intención:</b> ${intencion}</p>
+        <pre>${JSON.stringify(intencion, null, 2)}</pre>
         <p>${comentario || ""}</p>
       `,
     });
 
-    // =========================
-    // 2. CLIENTE
-    // =========================
     await transporter.sendMail({
       from: `"Voarah" <${ADMIN}>`,
       to: email,
@@ -199,9 +187,6 @@ const intencion = {
       html: `<p>Gracias, te contactamos pronto.</p>`,
     });
 
-    // =========================
-    // 3. PARTNERS (FIJO)
-    // =========================
     for (const partner of PARTNERS) {
       await transporter.sendMail({
         from: `"Voarah" <${ADMIN}>`,
@@ -211,7 +196,7 @@ const intencion = {
         html: `
           <p><b>${nombre}</b></p>
           <p>${telefono}</p>
-          <p>${intencion}</p>
+          <pre>${JSON.stringify(intencion, null, 2)}</pre>
           ${
             whatsappLink
               ? `<a href="${whatsappLink}">WhatsApp</a>`
@@ -223,7 +208,7 @@ const intencion = {
 
     return NextResponse.json({ ok: true, leadId: lead.id });
   } catch (err) {
-    console.error(err);
+    console.error(err); 
     return NextResponse.json({ error: "Error interno" }, { status: 500 });
   }
 }
