@@ -859,6 +859,7 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
       <button
         type="button"
+        onClick={() => setOpenAccordion(openAccordion === 'mudanzas' ? null : 'mudanzas')}
         style={{
           width: '100%',
           textAlign: 'left',
@@ -872,18 +873,21 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
       >
         Mudanzas
       </button>
-      <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
-        <label><input type="checkbox" name="servicio_mudanza" /> Mudanza</label>
-        <label><input type="checkbox" name="servicio_mudanza_embalaje" /> Con embalaje</label>
-        <label><input type="checkbox" name="servicio_mudanza_desembalaje" /> Con desembalaje</label>
-        <label><input type="checkbox" name="servicio_mudanza_solo_transporte" /> Solo transporte</label>
-      </div>
+      {openAccordion === 'mudanzas' && (
+        <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <label><input type="checkbox" name="servicio_mudanza" /> Mudanza</label>
+          <label><input type="checkbox" name="servicio_mudanza_embalaje" /> Con embalaje</label>
+          <label><input type="checkbox" name="servicio_mudanza_desembalaje" /> Con desembalaje</label>
+          <label><input type="checkbox" name="servicio_mudanza_solo_transporte" /> Solo transporte</label>
+        </div>
+      )}
     </div>
 
     {/* GUARDAMUEBLES */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
       <button
         type="button"
+        onClick={() => setOpenAccordion(openAccordion === 'guardamuebles' ? null : 'guardamuebles')}
         style={{
           width: '100%',
           textAlign: 'left',
@@ -897,19 +901,22 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
       >
         Guardamuebles y Self-Storage
       </button>
-      <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
-        <label><input type="checkbox" name="servicio_guardamuebles" /> Guardamuebles / Self-Storage</label>
-        <label><input type="checkbox" name="servicio_guardamuebles_recogida" /> Recogida en domicilio</label>
-        <label><input type="checkbox" name="servicio_guardamuebles_entrega" /> Entrega en domicilio</label>
-        <label><input type="checkbox" name="servicio_guardamuebles_embalaje" /> Embalaje</label>
-        <label><input type="checkbox" name="servicio_guardamuebles_bauleras" /> Bauleras para self-storage</label>
-      </div>
+      {openAccordion === 'guardamuebles' && (
+        <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <label><input type="checkbox" name="servicio_guardamuebles" /> Guardamuebles / Self-Storage</label>
+          <label><input type="checkbox" name="servicio_guardamuebles_recogida" /> Recogida en domicilio</label>
+          <label><input type="checkbox" name="servicio_guardamuebles_entrega" /> Entrega en domicilio</label>
+          <label><input type="checkbox" name="servicio_guardamuebles_embalaje" /> Embalaje</label>
+          <label><input type="checkbox" name="servicio_guardamuebles_bauleras" /> Bauleras para self-storage</label>
+        </div>
+      )}
     </div>
 
     {/* LIMPIEZA */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
       <button
         type="button"
+        onClick={() => setOpenAccordion(openAccordion === 'limpieza' ? null : 'limpieza')}
         style={{
           width: '100%',
           textAlign: 'left',
@@ -923,25 +930,28 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
       >
         Limpieza
       </button>
-      <div style={{ padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-        <label><input type="checkbox" name="servicio_limpieza" /> Limpieza</label>
-        <label><input type="checkbox" name="servicio_limpieza_hogares" /> Hogares</label>
-        <label><input type="checkbox" name="servicio_limpieza_locales" /> Locales</label>
-        <label><input type="checkbox" name="servicio_limpieza_oficinas" /> Oficinas</label>
-        <label><input type="checkbox" name="servicio_limpieza_edificios" /> Edificios</label>
-        <label><input type="checkbox" name="servicio_limpieza_fin_obra" /> Fin de obra</label>
-        <label><input type="checkbox" name="servicio_limpieza_fachadas" /> Fachadas</label>
-        <label><input type="checkbox" name="servicio_limpieza_tejados" /> Tejados</label>
-        <label><input type="checkbox" name="servicio_limpieza_tapizados" /> Tapizados</label>
-        <label><input type="checkbox" name="servicio_limpieza_piletas" /> Piletas</label>
-        <label><input type="checkbox" name="servicio_limpieza_poda_arboles" /> Poda de árboles</label>
-      </div>
+      {openAccordion === 'limpieza' && (
+        <div style={{ padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+          <label><input type="checkbox" name="servicio_limpieza" /> Limpieza</label>
+          <label><input type="checkbox" name="servicio_limpieza_hogares" /> Hogares</label>
+          <label><input type="checkbox" name="servicio_limpieza_locales" /> Locales</label>
+          <label><input type="checkbox" name="servicio_limpieza_oficinas" /> Oficinas</label>
+          <label><input type="checkbox" name="servicio_limpieza_edificios" /> Edificios</label>
+          <label><input type="checkbox" name="servicio_limpieza_fin_obra" /> Fin de obra</label>
+          <label><input type="checkbox" name="servicio_limpieza_fachadas" /> Fachadas</label>
+          <label><input type="checkbox" name="servicio_limpieza_tejados" /> Tejados</label>
+          <label><input type="checkbox" name="servicio_limpieza_tapizados" /> Tapizados</label>
+          <label><input type="checkbox" name="servicio_limpieza_piletas" /> Piletas</label>
+          <label><input type="checkbox" name="servicio_limpieza_poda_arboles" /> Poda de árboles</label>
+        </div>
+      )}
     </div>
 
     {/* DISEÑO INTERIOR */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
       <button
         type="button"
+        onClick={() => setOpenAccordion(openAccordion === 'diseno' ? null : 'diseno')}
         style={{
           width: '100%',
           textAlign: 'left',
@@ -955,19 +965,22 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
       >
         Diseño interior
       </button>
-      <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
-        <label><input type="checkbox" name="servicio_diseno_interior" /> Diseño interior</label>
-        <label><input type="checkbox" name="servicio_diseno_disenos" /> Diseños</label>
-        <label><input type="checkbox" name="servicio_diseno_proyectos" /> Proyectos</label>
-        <label><input type="checkbox" name="servicio_diseno_planos" /> Planos</label>
-        <label><input type="checkbox" name="servicio_diseno_certificaciones" /> Certificaciones</label>
-      </div>
+      {openAccordion === 'diseno' && (
+        <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <label><input type="checkbox" name="servicio_diseno_interior" /> Diseño interior</label>
+          <label><input type="checkbox" name="servicio_diseno_disenos" /> Diseños</label>
+          <label><input type="checkbox" name="servicio_diseno_proyectos" /> Proyectos</label>
+          <label><input type="checkbox" name="servicio_diseno_planos" /> Planos</label>
+          <label><input type="checkbox" name="servicio_diseno_certificaciones" /> Certificaciones</label>
+        </div>
+      )}
     </div>
 
     {/* MANTENIMIENTO */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
       <button
         type="button"
+        onClick={() => setOpenAccordion(openAccordion === 'mantenimiento' ? null : 'mantenimiento')}
         style={{
           width: '100%',
           textAlign: 'left',
@@ -981,22 +994,25 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
       >
         Mantenimiento
       </button>
-      <div style={{ padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-        <label><input type="checkbox" name="servicio_mantenimiento" /> Mantenimiento</label>
-        <label><input type="checkbox" name="servicio_mantenimiento_pintura" /> Pintura</label>
-        <label><input type="checkbox" name="servicio_mantenimiento_plomeria" /> Plomería</label>
-        <label><input type="checkbox" name="servicio_mantenimiento_electricidad" /> Electricidad</label>
-        <label><input type="checkbox" name="servicio_mantenimiento_pisos" /> Pisos</label>
-        <label><input type="checkbox" name="servicio_mantenimiento_banos" /> Baños</label>
-        <label><input type="checkbox" name="servicio_mantenimiento_humedades" /> Humedades</label>
-        <label><input type="checkbox" name="servicio_mantenimiento_refacciones" /> Refacciones</label>
-      </div>
+      {openAccordion === 'mantenimiento' && (
+        <div style={{ padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+          <label><input type="checkbox" name="servicio_mantenimiento" /> Mantenimiento</label>
+          <label><input type="checkbox" name="servicio_mantenimiento_pintura" /> Pintura</label>
+          <label><input type="checkbox" name="servicio_mantenimiento_plomeria" /> Plomería</label>
+          <label><input type="checkbox" name="servicio_mantenimiento_electricidad" /> Electricidad</label>
+          <label><input type="checkbox" name="servicio_mantenimiento_pisos" /> Pisos</label>
+          <label><input type="checkbox" name="servicio_mantenimiento_banos" /> Baños</label>
+          <label><input type="checkbox" name="servicio_mantenimiento_humedades" /> Humedades</label>
+          <label><input type="checkbox" name="servicio_mantenimiento_refacciones" /> Refacciones</label>
+        </div>
+      )}
     </div>
 
     {/* FOTOGRAFIA */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
       <button
         type="button"
+        onClick={() => setOpenAccordion(openAccordion === 'foto' ? null : 'foto')}
         style={{
           width: '100%',
           textAlign: 'left',
@@ -1010,15 +1026,18 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
       >
         Fotografía, video, grabación con dron
       </button>
-      <div style={{ padding: 16 }}>
-        <label><input type="checkbox" name="servicio_fotografia_video_dron" /> Fotografía / video / dron</label>
-      </div>
+      {openAccordion === 'foto' && (
+        <div style={{ padding: 16 }}>
+          <label><input type="checkbox" name="servicio_fotografia_video_dron" /> Fotografía / video / dron</label>
+        </div>
+      )}
     </div>
 
     {/* JURIDICOS */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
       <button
         type="button"
+        onClick={() => setOpenAccordion(openAccordion === 'juridico' ? null : 'juridico')}
         style={{
           width: '100%',
           textAlign: 'left',
@@ -1032,20 +1051,23 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
       >
         Servicios jurídicos
       </button>
-      <div style={{ padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-        <label><input type="checkbox" name="servicio_juridicos" /> Servicios jurídicos</label>
-        <label><input type="checkbox" name="servicio_juridico_civil" /> Civil</label>
-        <label><input type="checkbox" name="servicio_juridico_contratos" /> Contratos</label>
-        <label><input type="checkbox" name="servicio_juridico_sucesiones" /> Sucesiones</label>
-        <label><input type="checkbox" name="servicio_juridico_divisiones_propiedad" /> Divisiones de propiedad</label>
-        <label><input type="checkbox" name="servicio_juridico_mediaciones" /> Mediaciones</label>
-      </div>
+      {openAccordion === 'juridico' && (
+        <div style={{ padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+          <label><input type="checkbox" name="servicio_juridicos" /> Servicios jurídicos</label>
+          <label><input type="checkbox" name="servicio_juridico_civil" /> Civil</label>
+          <label><input type="checkbox" name="servicio_juridico_contratos" /> Contratos</label>
+          <label><input type="checkbox" name="servicio_juridico_sucesiones" /> Sucesiones</label>
+          <label><input type="checkbox" name="servicio_juridico_divisiones_propiedad" /> Divisiones de propiedad</label>
+          <label><input type="checkbox" name="servicio_juridico_mediaciones" /> Mediaciones</label>
+        </div>
+      )}
     </div>
 
     {/* SEGUROS */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
       <button
         type="button"
+        onClick={() => setOpenAccordion(openAccordion === 'seguros' ? null : 'seguros')}
         style={{
           width: '100%',
           textAlign: 'left',
@@ -1059,20 +1081,23 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
       >
         Seguros
       </button>
-      <div style={{ padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-        <label><input type="checkbox" name="servicio_seguros" /> Seguros</label>
-        <label><input type="checkbox" name="servicio_seguro_hogar" /> Hogar</label>
-        <label><input type="checkbox" name="servicio_seguro_comercio" /> Comercio</label>
-        <label><input type="checkbox" name="servicio_seguro_autos" /> Autos</label>
-        <label><input type="checkbox" name="servicio_seguro_cauciones" /> Cauciones</label>
-        <label><input type="checkbox" name="servicio_seguro_proteccion_alquiler" /> Protección pagos alquiler</label>
-      </div>
+      {openAccordion === 'seguros' && (
+        <div style={{ padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+          <label><input type="checkbox" name="servicio_seguros" /> Seguros</label>
+          <label><input type="checkbox" name="servicio_seguro_hogar" /> Hogar</label>
+          <label><input type="checkbox" name="servicio_seguro_comercio" /> Comercio</label>
+          <label><input type="checkbox" name="servicio_seguro_autos" /> Autos</label>
+          <label><input type="checkbox" name="servicio_seguro_cauciones" /> Cauciones</label>
+          <label><input type="checkbox" name="servicio_seguro_proteccion_alquiler" /> Protección pagos alquiler</label>
+        </div>
+      )}
     </div>
 
     {/* JARDINERO */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
       <button
         type="button"
+        onClick={() => setOpenAccordion(openAccordion === 'jardin' ? null : 'jardin')}
         style={{
           width: '100%',
           textAlign: 'left',
@@ -1086,15 +1111,18 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
       >
         Jardinero y piletero
       </button>
-      <div style={{ padding: 16 }}>
-        <label><input type="checkbox" name="servicio_jardinero_piletero" /> Jardinero y piletero</label>
-      </div>
+      {openAccordion === 'jardin' && (
+        <div style={{ padding: 16 }}>
+          <label><input type="checkbox" name="servicio_jardinero_piletero" /> Jardinero y piletero</label>
+        </div>
+      )}
     </div>
 
     {/* SEGURIDAD */}
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
       <button
         type="button"
+        onClick={() => setOpenAccordion(openAccordion === 'seguridad' ? null : 'seguridad')}
         style={{
           width: '100%',
           textAlign: 'left',
@@ -1108,11 +1136,13 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
       >
         Seguridad
       </button>
-      <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
-        <label><input type="checkbox" name="servicio_seguridad" /> Seguridad</label>
-        <label><input type="checkbox" name="servicio_seguridad_camaras" /> Cámaras de videovigilancia</label>
-        <label><input type="checkbox" name="servicio_seguridad_alarmas" /> Alarmas</label>
-      </div>
+      {openAccordion === 'seguridad' && (
+        <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <label><input type="checkbox" name="servicio_seguridad" /> Seguridad</label>
+          <label><input type="checkbox" name="servicio_seguridad_camaras" /> Cámaras de videovigilancia</label>
+          <label><input type="checkbox" name="servicio_seguridad_alarmas" /> Alarmas</label>
+        </div>
+      )}
     </div>
   </div>
 
@@ -1134,6 +1164,7 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
       <button
         type="button"
+        onClick={() => setOpenAccordion(openAccordion === 'materiales' ? null : 'materiales')}
         style={{
           width: '100%',
           textAlign: 'left',
@@ -1147,22 +1178,25 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
       >
         Materiales para refacción
       </button>
-      <div style={{ padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-        <label><input type="checkbox" name="producto_materiales_obra" /> Materiales de obra</label>
-        <label><input type="checkbox" name="producto_pintura" /> Pintura</label>
-        <label><input type="checkbox" name="producto_pisos_revestimientos" /> Pisos y revestimientos</label>
-        <label><input type="checkbox" name="producto_electricidad_plomeria_banos" /> Electricidad, Plomería y Baños</label>
-        <label><input type="checkbox" name="producto_herramientas" /> Herramientas eléctricas y manuales</label>
-        <label><input type="checkbox" name="producto_hogar_muebles_jardin" /> Muebles de jardín</label>
-        <label><input type="checkbox" name="producto_termotanques" /> Termotanques</label>
-        <label><input type="checkbox" name="producto_calefaccion_aire" /> Calefacción / Aire acondicionado</label>
-        <label><input type="checkbox" name="producto_piletas" /> Piletas estructurales e inflables</label>
-      </div>
+      {openAccordion === 'materiales' && (
+        <div style={{ padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+          <label><input type="checkbox" name="producto_materiales_obra" /> Materiales de obra</label>
+          <label><input type="checkbox" name="producto_pintura" /> Pintura</label>
+          <label><input type="checkbox" name="producto_pisos_revestimientos" /> Pisos y revestimientos</label>
+          <label><input type="checkbox" name="producto_electricidad_plomeria_banos" /> Electricidad, Plomería y Baños</label>
+          <label><input type="checkbox" name="producto_herramientas" /> Herramientas eléctricas y manuales</label>
+          <label><input type="checkbox" name="producto_hogar_muebles_jardin" /> Muebles de jardín</label>
+          <label><input type="checkbox" name="producto_termotanques" /> Termotanques</label>
+          <label><input type="checkbox" name="producto_calefaccion_aire" /> Calefacción / Aire acondicionado</label>
+          <label><input type="checkbox" name="producto_piletas" /> Piletas estructurales e inflables</label>
+        </div>
+      )}
     </div>
 
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
       <button
         type="button"
+        onClick={() => setOpenAccordion(openAccordion === 'muebles_deco' ? null : 'muebles_deco')}
         style={{
           width: '100%',
           textAlign: 'left',
@@ -1176,14 +1210,17 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
       >
         Muebles y decoración
       </button>
-      <div style={{ padding: 16 }}>
-        <label><input type="checkbox" name="producto_muebles_decoracion" /> Muebles y decoración</label>
-      </div>
+      {openAccordion === 'muebles_deco' && (
+        <div style={{ padding: 16 }}>
+          <label><input type="checkbox" name="producto_muebles_decoracion" /> Muebles y decoración</label>
+        </div>
+      )}
     </div>
 
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
       <button
         type="button"
+        onClick={() => setOpenAccordion(openAccordion === 'electro' ? null : 'electro')}
         style={{
           width: '100%',
           textAlign: 'left',
@@ -1197,14 +1234,17 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
       >
         Electrodomésticos
       </button>
-      <div style={{ padding: 16 }}>
-        <label><input type="checkbox" name="producto_electrodomesticos" /> Electrodomésticos</label>
-      </div>
+      {openAccordion === 'electro' && (
+        <div style={{ padding: 16 }}>
+          <label><input type="checkbox" name="producto_electrodomesticos" /> Electrodomésticos</label>
+        </div>
+      )}
     </div>
 
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
       <button
         type="button"
+        onClick={() => setOpenAccordion(openAccordion === 'muebles_usados' ? null : 'muebles_usados')}
         style={{
           width: '100%',
           textAlign: 'left',
@@ -1218,14 +1258,17 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
       >
         Compra-Venta muebles y decoración usados
       </button>
-      <div style={{ padding: 16 }}>
-        <label><input type="checkbox" name="producto_compra_venta_muebles_decoracion_usados" /> Compra-Venta muebles y decoración usados</label>
-      </div>
+      {openAccordion === 'muebles_usados' && (
+        <div style={{ padding: 16 }}>
+          <label><input type="checkbox" name="producto_compra_venta_muebles_decoracion_usados" /> Compra-Venta muebles y decoración usados</label>
+        </div>
+      )}
     </div>
 
     <div style={{ border: '1px solid #f3c4e8', borderRadius: 10, overflow: 'hidden' }}>
       <button
         type="button"
+        onClick={() => setOpenAccordion(openAccordion === 'productos_usados' ? null : 'productos_usados')}
         style={{
           width: '100%',
           textAlign: 'left',
@@ -1239,17 +1282,19 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
       >
         Compra-Venta productos usados
       </button>
-      <div style={{ padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-        <label><input type="checkbox" name="producto_compra_venta_productos_usados" /> Compra-Venta productos usados</label>
-        <label><input type="checkbox" name="producto_usado_laptops" /> Laptops</label>
-        <label><input type="checkbox" name="producto_usado_celulares" /> Celulares</label>
-        <label><input type="checkbox" name="producto_usado_videoconsolas" /> Videoconsolas</label>
-        <label><input type="checkbox" name="producto_usado_relojes" /> Relojes</label>
-        <label><input type="checkbox" name="producto_usado_camaras_fotos" /> Cámaras de fotos</label>
-        <label><input type="checkbox" name="producto_usado_bicicletas" /> Bicicletas</label>
-        <label><input type="checkbox" name="producto_usado_raquetas" /> Raquetas</label>
-        <label><input type="checkbox" name="producto_usado_motos" /> Motos</label>
-      </div>
+      {openAccordion === 'productos_usados' && (
+        <div style={{ padding: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+          <label><input type="checkbox" name="producto_compra_venta_productos_usados" /> Compra-Venta productos usados</label>
+          <label><input type="checkbox" name="producto_usado_laptops" /> Laptops</label>
+          <label><input type="checkbox" name="producto_usado_celulares" /> Celulares</label>
+          <label><input type="checkbox" name="producto_usado_videoconsolas" /> Videoconsolas</label>
+          <label><input type="checkbox" name="producto_usado_relojes" /> Relojes</label>
+          <label><input type="checkbox" name="producto_usado_camaras_fotos" /> Cámaras de fotos</label>
+          <label><input type="checkbox" name="producto_usado_bicicletas" /> Bicicletas</label>
+          <label><input type="checkbox" name="producto_usado_raquetas" /> Raquetas</label>
+          <label><input type="checkbox" name="producto_usado_motos" /> Motos</label>
+        </div>
+      )}
     </div>
   </div>
 
