@@ -264,7 +264,7 @@ async function handleSubmitProveedor(
       </div>
 
       <div style={{ background: '#fff', padding: '16px 20px', borderRadius: 16, boxShadow: '0 10px 25px rgba(0,0,0,0.08)', fontSize: 14, textAlign: 'center', minWidth: 140 }}>
-        Profesionales validados
+        Profesionales verificados
       </div>
     </div>
   </div>
@@ -391,7 +391,7 @@ async function handleSubmitProveedor(
       VOARAH es la forma más simple de resolver lo que necesitás,
       sin búsquedas ni riesgos.
       <br />
-      Trabajamos con profesionales validados para ofrecer
+      Trabajamos con profesionales verificados para ofrecer
       seguridad y servicios de calidad a los usuarios.
     </p>
   </div>
