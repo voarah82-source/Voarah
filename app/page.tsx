@@ -31,13 +31,19 @@ export default function HomePage() {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   )
 
-  const inputStyle = {
-    padding: '12px 14px',
-    borderRadius: 10,
-    border: '1px solid #ddd',
-    fontSize: 14,
-    fontFamily: 'Montserrat, system-ui, sans-serif'
-  }
+const inputStyle = {
+  padding: '12px 14px',
+  borderRadius: 10,
+  border: '1px solid #ddd',
+  fontSize: 14,
+  fontFamily: 'Montserrat, system-ui, sans-serif',
+
+  // 🔥 FIX IPHONE
+  color: '#1a1a1a',
+  backgroundColor: '#ffffff',
+  WebkitTextFillColor: '#1a1a1a',
+  WebkitAppearance: 'none'
+}
 
   const [origen, setOrigen] = useState('')
 
