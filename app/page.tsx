@@ -42,7 +42,7 @@ const inputStyle = {
   color: '#1a1a1a',
   backgroundColor: '#ffffff',
   WebkitTextFillColor: '#1a1a1a',
-  WebkitAppearance: 'none'
+  WebkitAppearance: 'none' as any
 }
 
   const [origen, setOrigen] = useState('')
