@@ -730,28 +730,31 @@ De todas formas, si hay algún incumplimiento, podés escribirnos a hola@voarah.
     gap: 20,
   }}
 >
-  <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-    <input
-      name="nombre"
-      placeholder="Nombre"
-      required
-      style={{ ...inputStyle, flex: 1, minWidth: 260 }}
-    />
-    <input
-      name="email"
-      type="email"
-      placeholder="Email"
-      required
-      style={{ ...inputStyle, flex: 1, minWidth: 260 }}
-    />
-  </div>
-
+ <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
   <input
-    name="telefono"
-    placeholder="Teléfono (ej: 5491112345678)"
+    name="nombre"
+    autoComplete="off"
+    placeholder="Nombre"
     required
-    style={inputStyle}
+    style={{ ...inputStyle, flex: 1, minWidth: 260 }}
   />
+  <input
+    name="email"
+    type="email"
+    autoComplete="off"
+    placeholder="Email"
+    required
+    style={{ ...inputStyle, flex: 1, minWidth: 260 }}
+  />
+</div>
+
+<input
+  name="telefono"
+  autoComplete="off"
+  placeholder="Teléfono (ej: 5491112345678)"
+  required
+  style={inputStyle}
+/>
 
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
     <div
